@@ -178,7 +178,8 @@
             video.preload = 'auto';
             video.autoplay = true;
             video.autoload = true;
-            video.loop = true;
+            video.loop = false;
+            video.muted = !video.muted;
             video.volume = 1;
 
             video.pause();
