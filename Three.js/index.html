@@ -1,0 +1,115 @@
+
+
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Important setup for scale on Samsung internet Browser -->
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>AR Postkarte</title>
+	<!-- include three.js library -->
+    <script src="js/three.min.js"></script>
+    <!-- include three.js library -->
+
+    <!-- include bootstrap/jquery -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+
+    <!-- include jsartookit -->
+    <script src="js/ar.js"></script>
+
+	<!-- include threex.artoolkit -->
+	<script src="threex/threex-artoolkitsource.js"></script>
+	<script src="threex/threex-artoolkitcontext.js"></script>
+	<script src="threex/threex-arbasecontrols.js"></script>
+    <script src="threex/threex-armarkercontrols.js"></script>
+    <script src="threex/threex-armarkercloak.js"></script>
+    <script src="threex/threex-armarkerhelper.js"></script>
+    <script src="threex/threex-arsmoothedcontrols.js"></script>
+    <script src="threex/threex-arvideoinwebgl.js"></script>
+    <script src="threex/threex-artoolkitprofile.js"></script>
+    <script src="threex/threex-hittesting-plane.js"></script>
+   
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+    <body>
+
+        
+
+        <!-- Modal for Apple, if Kamera access is denied-->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Ihr Kamerazugriff ist ausgeschaltet.</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p> Für eine AR-Darstellung benötigen wir Zugriff auf die Kamera ihres Mobilgeräts. Gehen sie dazu in die "Einstellungen" und aktivieren sie unter "Safari" den "Kamera- & Mikrofonzugriff":</p>
+                        <img src="./img/camera_settings_1.png" style="min-width: 300px; max-width:100%; height:auto;">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK, verstanden.</button>
+                    </div>
+                </div>
+            </div>
+        </div>   
+
+        <!-- Modal for Apple device issue -> privacy politic, Not running on Chrome on Apple device only Safari -->
+        <div class="modal fade" id="ChromeErrorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="welcomeHeader" style="text-align:center; width:100%; margin:50px;">Diese Webanwendung funktioniert leider nur auf dem Safari Browser auf iOS Geräten.</h5>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok, verstanden</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information window, hold camera on Pattern -->
+        <div id="Container">
+            <div id= "text">Richten Sie die Kamera auf diesen Marker.</div>
+            <img id="pattern" src="img/pattern-EvosparkLogoBlack_0_8_Transparent_Small.png" alt="Evospark-Pattern">          
+        </div>
+
+        <div id="logo">
+            <a href="http://kon-part.de"><img class="logo" src="img/logo.jpg" alt="KON-PART"></a>
+        </div>
+        <div id="mute" class="volume" onclick="muteAudio()">
+            <img src="img/volume-off.png" alt="Evospark Pattern">
+        </div>
+        <div id="play" class="volume" onclick="muteAudio()">
+            <img src="img/volume-high.png" alt="Evospark Pattern">
+        </div>
+
+        <div id="call">
+            <a href="tel:+49294128640"><button class="button button-right"><img src="img/phone.png" alt="Call"></button></a>       
+        </div>
+
+        <div id="email">
+            <a href="mailto:felix.graffenberg@kon-part.de"><button class="button button-left"><img src="img/email.png" alt="Email"></button></a>
+        </div>
+
+        <div id="noMarker" onclick="playWithoutMarker()">
+            Ich habe keinen Marker
+        </div>
+
+        <div id="overlay">
+			<button id="startButton">Play</button>
+        </div>
+        
+        <video id="videoIOS" playsinline muted webkit-playsinline style="display:none">
+            <source src="video/puppets_with_alpha_hevc.mov" type='video/quicktime;  codecs="hvc1"'>
+        </video>
+        
+        <script type="text/javascript" src="js/main.js"></script>  
+
+    </body>
+</html>
