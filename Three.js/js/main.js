@@ -178,7 +178,7 @@
         if(isiOSDevice == true || isSafari == true){
             video  = document.getElementById('videoIOS');
             video.autoplay = true;
-            video.loop = false;
+            video.loop = true;
             video.volume = 1;
             
             video.pause();
