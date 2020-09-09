@@ -204,7 +204,7 @@
             plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
             plane.position.set(0,1,0);
 
-            texture.needsUpdate = true;
+            videoTexture.needsUpdate = true;
             pivot = new THREE.Group();
             pivot.position.set( 0.0, 0.0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
             markerRoot1.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY, WHICH WAS THEN ADDING MESH2 IN THE WRONG PLACE
