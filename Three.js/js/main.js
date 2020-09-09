@@ -40,9 +40,9 @@
         //antialias, sortObjects and logarithmicDepthBuffer used to prevent z-fighting
         // alpha used for transparent Background
         renderer = new THREE.WebGLRenderer({
-            antialias : true,
-            logarithmicDepthBuffer: true,
-            sortObjects: true,
+            // antialias : true,
+            // logarithmicDepthBuffer: true,
+            // sortObjects: true,
             alpha: true,
             precision: 'mediump'
         });
@@ -175,10 +175,10 @@
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
             video  = document.getElementById('videoIOS');
-            video.preload = 'auto';
+            // video.preload = 'auto';
             video.autoplay = true;
-            video.autoload = true;
-            video.loop = false;
+            // video.autoload = true;
+            video.loop = true;
             video.muted = !video.muted;
             video.volume = 1;
 
@@ -196,7 +196,7 @@
             // create a global audio source
             sound = new THREE.Audio(listener);
 
-            var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
+            var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, opacity:0.3, side: THREE.DoubleSide });
             //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
             plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
             plane.position.set(0,1,0);
