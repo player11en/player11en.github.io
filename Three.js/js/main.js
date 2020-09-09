@@ -27,7 +27,8 @@
     intitMarker();
     var startButton = document.getElementById( 'startButton' );
 			startButton.addEventListener( 'click', function () {
-               
+                
+           
                 loadVideo();
               
 
@@ -183,6 +184,7 @@
             videoTexture.minFilter = THREE.LinearFilter;
             videoTexture.maxFilter = THREE.LinearFilter;
             videoTexture.format = THREE.RGBAFormat;
+
 
             var listener = new THREE.AudioListener();
             camera.add( listener );
