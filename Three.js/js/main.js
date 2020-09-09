@@ -183,7 +183,6 @@
             videoTexture.minFilter = THREE.LinearFilter;
             videoTexture.maxFilter = THREE.LinearFilter;
             videoTexture.format = THREE.RGBAFormat;
-            videoTexture.frameRate = 60;
 
             var listener = new THREE.AudioListener();
             camera.add( listener );
