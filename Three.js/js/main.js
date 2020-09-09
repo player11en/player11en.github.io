@@ -176,13 +176,17 @@
       
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
-            video  = document.getElementById('videoIOS');
+            video  = document.createElement('videoIOS');
+
+            video.volume = 1;
+            video.muted = true;
+            video.crossOrigin = 'anonymous';
+            video.setAttribute( 'webkit-playsinline', 'webkit-playsinline' );
             video.autoplay = true;
             video.loop = true;
-            video.volume = 1;
             
-            video.pause();
-            
+            video.onloadeddata = function(){
+                video.pause();
 
             videoTexture = new THREE.VideoTexture( video);
             videoTexture.minFilter = THREE.LinearFilter;
@@ -200,7 +204,7 @@
             plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
             plane.position.set(0,1,0);
 
-                
+            texture.needsUpdate = true;
             pivot = new THREE.Group();
             pivot.position.set( 0.0, 0.0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
             markerRoot1.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY, WHICH WAS THEN ADDING MESH2 IN THE WRONG PLACE
@@ -208,7 +212,7 @@
 
             markerRoot1.add(pivot);
             smoothedRoot.add(pivot);
-
+            }
           
         }
         else{
