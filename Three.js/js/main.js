@@ -14,7 +14,6 @@
     var mute = false;
     var onRenderFcts= [];
     var timer = 0;
-    var noSleep = new NoSleep();
     var plane;
     var updaterate  = 60;
     var videoIsPlaying = false;
