@@ -371,13 +371,18 @@
     // render the scene
     onRenderFcts.push(function(){
         if(ARInitRunning){
-            if ( video.readyState === video.HAVE_ENOUGH_DATA ) 
-            {
-                if ( videoTexture ) 
-                    videoTexture.needsUpdate = true;
+            if(markerRoot1.visible){
+                if ( video.readyState === video.HAVE_ENOUGH_DATA ) 
+                {
+                    if ( videoTexture ) {
+                        videoTexture.needsUpdate = true;
+                    }
                 }
+                
+            }
             renderer.render( scene, camera );
         }
+        
     });
        
 
