@@ -174,7 +174,7 @@
             video.autoplay = true;
             video.loop = true;
             video.volume = 1;
-
+           
             video.pause();
             
             document.getElementById( "noMarker" ).innerHTML = "IOS"; 
@@ -361,6 +361,8 @@
     };    
     
 
+
+
     function VideorotatetoCamera(){      
         pivot.lookAt(camera.position);
         pivot.rotation.z = 0;        
@@ -369,11 +371,13 @@
     // render the scene
     onRenderFcts.push(function(){
         if(ARInitRunning){
+            
             renderer.render( scene, camera );
         }
     });
        
 
+    
     // run the rendering loop
     var lastTimeMsec= null
     requestAnimationFrame(function animate(nowMsec){
