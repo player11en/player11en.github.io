@@ -180,8 +180,7 @@
             video.autoplay = true;
             video.loop = false;
             video.volume = 1;
-            video.currentTime = 1;
-
+            
             video.pause();
             
 
@@ -312,6 +311,8 @@
                 infoMsg.style.display = "none";
 
                 // start video
+                video.currentTime = 1;
+
                 video.play();
                 videoIsPlaying = true;
             }
@@ -375,15 +376,6 @@
     // render the scene
     onRenderFcts.push(function(){
         if(ARInitRunning){
-            if(markerRoot1.visible){
-                if ( video.readyState === video.HAVE_ENOUGH_DATA ) 
-                {
-                    if ( videoTexture ) {
-                        videoTexture.needsUpdate = true;
-                    }
-                }
-                
-            }
             renderer.render( scene, camera );
         }
         
