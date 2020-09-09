@@ -374,6 +374,16 @@
             renderer.render( scene, camera );
         }
     });
+
+    setInterval( function () {
+
+        if ( video.readyState >= video.HAVE_CURRENT_DATA ) {
+    
+            texture.needsUpdate = true;
+    
+        }
+    
+    }, 1000 / 60.08 );
        
 
     // run the rendering loop
@@ -391,7 +401,7 @@
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
-               
+                setInterval();
                 deltaTime = clock.getDelta();
             }   
         });
