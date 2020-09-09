@@ -216,7 +216,7 @@
             video.volume = 1;
             console.log("notios"); 
             document.getElementById( "noMarker" ).innerHTML = "noIOS";
-    
+            
             video.onloadeddata = function(){
                 video.pause();
                 
