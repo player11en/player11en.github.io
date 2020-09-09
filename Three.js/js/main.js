@@ -174,14 +174,14 @@
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
             video  = document.getElementById('videoIOS');
-            // video.autoplay = true;
-            // video.loop = true;
-            // video.volume = 1;
+            video.autoplay = true;
+            video.loop = true;
+            video.volume = 1;
 
-            // video.pause();
+            video.pause();
             
 
-            videoTexture = new THREE.VideoTexture( document.getElementById('videoIOS'));
+            videoTexture = new THREE.VideoTexture( video);
             videoTexture.minFilter = THREE.LinearFilter;
             videoTexture.maxFilter = THREE.LinearFilter;
             videoTexture.format = THREE.RGBAFormat;
