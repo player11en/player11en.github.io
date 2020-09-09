@@ -167,9 +167,6 @@
 
         var overlay = document.getElementById( 'overlay' );
         overlay.remove();
-       
-
-        video.pause();
       
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
