@@ -141,7 +141,7 @@
 
         //only in console --> testing loading  time 
         video = document.createElement( 'video');
-        video.playsInline = true;
+        video.playsInline =
         video.src = 'video/Tractor265.mp4';
         video.preload = 'auto';
         video.autoload = true;
@@ -165,6 +165,7 @@
         sound = new THREE.Audio(listener);
 
         var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
+        material.transparent = true;
         //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
         plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
         plane.position.set(0,1,0);
