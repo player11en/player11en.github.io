@@ -180,6 +180,7 @@
             video.autoplay = true;
             video.loop = false;
             video.volume = 1;
+            video.currentTime = 1;
 
             video.pause();
             
