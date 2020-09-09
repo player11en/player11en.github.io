@@ -199,7 +199,7 @@
             // create a global audio source
             sound = new THREE.Audio(listener);
 
-            var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
+            var material = new THREE.MeshBasicMaterial({ map : videoTexture, side: THREE.DoubleSide });
             //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
             plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
             plane.position.set(0,1,0);
