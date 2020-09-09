@@ -24,7 +24,10 @@
 
 
     initialize();
+    video  = document.getElementById('videoIOS');
+    video.pause();
     intitMarker();
+    
     var startButton = document.getElementById( 'startButton' );
 			startButton.addEventListener( 'click', function () {
                
@@ -175,7 +178,7 @@
         if(isiOSDevice == true || isSafari == true){
             video  = document.getElementById('videoIOS');
             video.autoplay = true;
-            video.loop = true;
+            video.loop = false;
             video.volume = 1;
 
             video.pause();
