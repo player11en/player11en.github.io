@@ -24,10 +24,7 @@
 
 
     initialize();
-    video  = document.getElementById('videoIOS');
-    video.pause();
     intitMarker();
-    
     var startButton = document.getElementById( 'startButton' );
 			startButton.addEventListener( 'click', function () {
                
@@ -177,16 +174,14 @@
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
             video  = document.getElementById('videoIOS');
-            // video.autoplay = true;
-            // video.loop = true;
-            // video.volume = 1;
-            // video.muted = true;
-            // video.crossOrigin = 'anonymous';
-            
+            video.autoplay = true;
+            video.loop = true;
+            video.volume = 1;
+
             video.pause();
             
 
-            videoTexture = new THREE.VideoTexture( document.getElementById('videoIOS'));
+            videoTexture = new THREE.VideoTexture( video);
             videoTexture.minFilter = THREE.LinearFilter;
             videoTexture.maxFilter = THREE.LinearFilter;
             videoTexture.format = THREE.RGBAFormat;
@@ -313,7 +308,6 @@
                 infoMsg.style.display = "none";
 
                 // start video
-
                 video.play();
                 videoIsPlaying = true;
             }
@@ -379,7 +373,6 @@
         if(ARInitRunning){
             renderer.render( scene, camera );
         }
-        
     });
        
 
