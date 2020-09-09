@@ -175,10 +175,8 @@
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
             video  = document.getElementById('videoIOS');
-            video.preload = 'auto';
-            video.autoload = true;
             video.autoplay = true;
-            video.loop = false;
+            video.loop = true;
             video.volume = 1;
 
             video.pause();
@@ -393,7 +391,6 @@
         onRenderFcts.forEach(function(onRenderFct){
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
-                if (markerRoot1.visible)
                 checkMarker();
                
                 deltaTime = clock.getDelta();
