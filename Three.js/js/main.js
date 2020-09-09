@@ -169,12 +169,11 @@
         overlay.remove();
        
 
-
+        video.pause();
       
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
             video  = document.getElementById('videoIOS');
-            video.preload = 'auto';
             video.autoplay = true;
             video.loop = true;
             video.volume = 1;
