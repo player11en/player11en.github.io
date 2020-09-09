@@ -379,7 +379,7 @@
 
         if ( video.readyState >= video.HAVE_CURRENT_DATA ) {
     
-            texture.needsUpdate = true;
+            videoTexture.needsUpdate = true;
     
         }
     
@@ -401,6 +401,7 @@
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
+                if(markerRoot1.visible)
                 setInterval();
                 deltaTime = clock.getDelta();
             }   
