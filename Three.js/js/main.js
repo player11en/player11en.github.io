@@ -391,9 +391,7 @@
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
-               if(markerRoot1.visible) {
-                requestAnimationFrame(videoTexture);
-               }
+               
                 deltaTime = clock.getDelta();
             }   
         });
