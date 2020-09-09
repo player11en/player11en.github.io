@@ -312,7 +312,8 @@
                 videoIsPlaying = true;
             }
             else {
-                
+                requestAnimationFrame( render );
+                videoTexture.needsUpdate = true;
                 // video is already playing
                 let v = new THREE.Vector3(0,0,0);
                 markerPosition = markerRoot1.position;
