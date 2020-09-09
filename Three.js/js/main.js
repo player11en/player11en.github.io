@@ -192,7 +192,7 @@
             // create a global audio source
             sound = new THREE.Audio(listener);
 
-            var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true });
+            var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
             //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
             plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
             plane.position.set(0,1,0);
@@ -374,16 +374,6 @@
             renderer.render( scene, camera );
         }
     });
-
-    setInterval( function () {
-
-        if ( video.readyState >= video.HAVE_CURRENT_DATA ) {
-    
-            videoTexture.needsUpdate = true;
-    
-        }
-    
-    }, 1000 / 60.08 );
        
 
     // run the rendering loop
@@ -401,8 +391,9 @@
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
-                if(markerRoot1.visible)
-                setInterval();
+               if(markerRoot1.visible) {
+                requestAnimationFrame(videoTexture);
+               }
                 deltaTime = clock.getDelta();
             }   
         });
