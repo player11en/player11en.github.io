@@ -170,7 +170,12 @@
       
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
-            video  = document.getElementById('videoIOS');
+            // video  = document.getElementById('videoIOS');
+           
+            video = seeThru.create(document.getElementById('videoIOS'), {
+                start: 'external'
+              });
+
             video.autoplay = true;
             video.loop = true;
             video.volume = 1;
