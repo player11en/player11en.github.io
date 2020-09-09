@@ -180,7 +180,7 @@
 
             video.pause();
             
-            document.getElementById( "noMarker" ).innerHTML = "IOS" + video.src.toString(); 
+            document.getElementById( "noMarker" ).innerHTML = "IOS" + video; 
 
             videoTexture = new THREE.VideoTexture( video);
             videoTexture.minFilter = THREE.LinearFilter;
