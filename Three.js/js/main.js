@@ -20,6 +20,7 @@
     var viewWithoutMarker = false;
     ARInitRunning = true;
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    var  time2 = 0;
 
 
 
@@ -180,12 +181,15 @@
             
             document.getElementById( "noMarker" ).innerHTML = "IOS"; 
 
-            videoTexture = new THREE.VideoTexture( video);
+            videoTexture = new THREE.VideoTexture(video);
             videoTexture.minFilter = THREE.LinearFilter;
             videoTexture.maxFilter = THREE.LinearFilter;
-            videoTexture.format = THREE.RGBAFormat;
+            videoTexture.format = THREE.RGBAIntegerFormat;
 
-            
+            var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
+            //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
+            plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
+            plane.position.set(0,1,0);
 
             var listener = new THREE.AudioListener();
             camera.add( listener );
@@ -193,10 +197,7 @@
             // create a global audio source
             sound = new THREE.Audio(listener);
 
-            var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
-            //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
-            plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
-            plane.position.set(0,1,0);
+
 
                 
             pivot = new THREE.Group();
@@ -400,7 +401,15 @@
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
-            
+                
+                if (videoIsPlaying){
+
+                  
+
+                  time =+1;
+
+                  video.currentFrame = 
+                }
                
                
                 deltaTime = clock.getDelta();
