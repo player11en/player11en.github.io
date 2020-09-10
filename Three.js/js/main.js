@@ -20,13 +20,10 @@
     var viewWithoutMarker = false;
     ARInitRunning = true;
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    var videocanvas;
-    var videocanvasctx;
 
 
 
     initialize();
-    video =  document.createElement('videoIOS');
     intitMarker();
     var startButton = document.getElementById( 'startButton' );
 			startButton.addEventListener( 'click', function () {
@@ -171,7 +168,7 @@
     function loadVideo(){
 
         var overlay = document.getElementById( 'overlay' );
-        overlay.remove();
+
       
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
@@ -183,24 +180,12 @@
             
             document.getElementById( "noMarker" ).innerHTML = "IOS"; 
 
-            // videoTexture = new THREE.VideoTexture( video);
-            // videoTexture.minFilter = THREE.LinearFilter;
-            // videoTexture.maxFilter = THREE.LinearFilter;
-            // videoTexture.format = THREE.RGBAFormat;
+            videoTexture = new THREE.VideoTexture( video);
+            videoTexture.minFilter = THREE.LinearFilter;
+            videoTexture.maxFilter = THREE.LinearFilter;
+            videoTexture.format = THREE.RGBAFormat;
 
-            var scope = this;
-
-            scope.video = video;
-            scope.ctx2d = document.createElement('canvas').getContext('2d');
-            var canvas = scope.ctx2d.canvas;
-            canvas.width = video.width;
-            canvas.height = video.height;
-
-            scope.ctx2d.drawImage(scope.video, 0, 0, scope.width, scope.height);
-            THREE.Texture.call(scope, scope.ctx2d.canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy);
-
-            scope.generateMipmaps = false;
-            var planeTexture = new THREE.Texture(scope.ctx2d);
+            
 
             var listener = new THREE.AudioListener();
             camera.add( listener );
@@ -208,7 +193,7 @@
             // create a global audio source
             sound = new THREE.Audio(listener);
 
-            var material = new THREE.MeshBasicMaterial({ map : planeTexture, transparent : true, overdraw: 0.5 , side: THREE.DoubleSide });
+            var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
             //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
             plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
             plane.position.set(0,1,0);
@@ -415,10 +400,7 @@
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
-                if(video.readyState === video.HAVE_ENOUGH_DATA){
-                    scope.ctx2d.drawImage(scope.video, 0, 0, scope.video.width, scope.video.height);
-                    scope.needsUpdate = true;
-                  }
+            
                
                
                 deltaTime = clock.getDelta();
