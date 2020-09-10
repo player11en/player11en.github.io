@@ -188,15 +188,19 @@
             // videoTexture.maxFilter = THREE.LinearFilter;
             // videoTexture.format = THREE.RGBAFormat;
 
-             videocanvas.video = video;
-             videocanvasctx = document.createElement('canvas').getContext('2d');
+            var scope = this;
 
-            videocanvas.width = video.width;
-            videocanvas.height = video.height;   
-            videocanvasctx.drawImage(scope.video, 0, 0, scope.width, scope.height);
-            // THREE.Texture.call(videocanvas, videocanvasctx.canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy);
+            scope.video = video;
+            scope.ctx2d = document.createElement('canvas').getContext('2d');
+            var canvas = scope.ctx2d.canvas;
+            canvas.width = video.width;
+            canvas.height = video.height;
 
-            var planeTexture = new THREE.Texture(videocanvas);
+            scope.ctx2d.drawImage(scope.video, 0, 0, scope.width, scope.height);
+            THREE.Texture.call(scope, scope.ctx2d.canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy);
+
+            scope.generateMipmaps = false;
+            var planeTexture = new THREE.Texture(scope.ctx2d);
 
             var listener = new THREE.AudioListener();
             camera.add( listener );
