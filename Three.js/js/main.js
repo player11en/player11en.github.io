@@ -174,7 +174,7 @@
             video  = document.getElementById('videoIOS');
             video.autoplay = true;
             video.loop = true;
-            video.volume = 1;
+          
            
             video.pause();
             
@@ -310,6 +310,9 @@
 
                 // start video
                 video.play();
+                video.currentTime = 200;
+                video.muted = !video.muted;
+                video.volume = 1;
                 videoIsPlaying = true;
             }
             else {
