@@ -317,12 +317,12 @@
             else {
                 
                 // video is already playing
-                // let v = new THREE.Vector3(0,0,0);
-                // markerPosition = markerRoot1.position;
-                // markerRoot1.add(pivot);
-                // camera.remove(pivot);
-                // VideorotatetoCamera();
-                // pivot.position.copy(v);
+                let v = new THREE.Vector3(0,0,0);
+                markerPosition = markerRoot1.position;
+                markerRoot1.add(pivot);
+                camera.remove(pivot);
+                VideorotatetoCamera();
+                pivot.position.copy(v);
             }
             
             timer = 0;
@@ -332,21 +332,21 @@
         if (videoIsPlaying && (!markerRoot1.visible || viewWithoutMarker )) {
         
             // increase timer
-            if(timer <= 120){
-                timer += 1;
-            }
+            // if(timer <= 120){
+            //     timer += 1;
+            // }
             
-            if(timer == 100 || viewWithoutMarker){
-                // move video to screen center
-                markerRoot1.remove(pivot);
-                camera.add(pivot);
-                camera.position = new THREE.Vector3(0,0,0);
-                camera.quaternion = new THREE.Vector3(0,0,0);
-                pivot.position.copy(camera.position);
-                pivot.quaternion.copy(camera.quaternion);
-                pivot.position.z = -4;
-                pivot.position.y = -1;
-            }
+            // if(timer == 100 || viewWithoutMarker){
+            //     // move video to screen center
+            //     markerRoot1.remove(pivot);
+            //     camera.add(pivot);
+            //     camera.position = new THREE.Vector3(0,0,0);
+            //     camera.quaternion = new THREE.Vector3(0,0,0);
+            //     pivot.position.copy(camera.position);
+            //     pivot.quaternion.copy(camera.quaternion);
+            //     pivot.position.z = -4;
+            //     pivot.position.y = -1;
+            // }
         }
     }
 
