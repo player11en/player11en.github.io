@@ -30,8 +30,9 @@
         
         initialize();
         intitMarker();
-        appStarted = true;
         loadVideo();
+        appStarted = true;
+       
         
 
     }, false );
