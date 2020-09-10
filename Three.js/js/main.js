@@ -31,6 +31,7 @@
            
                 loadVideo();
                 video = document.getElementById('videoIOS');
+              
                 video.play();
                 
               
@@ -310,7 +311,7 @@
                 box.style.display = "none";
                 infoMsg.style.display = "none";
                 // start video
-                
+                video.currentTime = 0.1 ;
                 video.play();
                 video.muted = !video.muted;
                 video.volume = 1;
