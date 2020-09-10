@@ -307,12 +307,11 @@
                 // hide info box
                 box.style.display = "none";
                 infoMsg.style.display = "none";
-
                 // start video
+                
+                video.play();
                 video.muted = !video.muted;
                 video.volume = 1;
-                video.play();
-               
               
                 videoIsPlaying = true;
             }
