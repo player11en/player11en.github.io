@@ -169,7 +169,7 @@
     function loadVideo(){
 
         var overlay = document.getElementById( 'overlay' );
-
+        overlay.remove();
       
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
@@ -184,7 +184,7 @@
             videoTexture = new THREE.VideoTexture(video);
             videoTexture.minFilter = THREE.LinearFilter;
             videoTexture.maxFilter = THREE.LinearFilter;
-            videoTexture.format = THREE.RGBAIntegerFormat;
+            videoTexture.format = THREE.RGBAFormat;
 
             var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
             //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
