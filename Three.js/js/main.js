@@ -181,7 +181,7 @@
            
             video.pause();
             
-            document.getElementById( "noMarker" ).innerHTML = "IOS"; 
+            // document.getElementById( "noMarker" ).innerHTML = "IOS"; 
 
             videoTexture = new THREE.VideoTexture( video);
             videoTexture.minFilter = THREE.LinearFilter;
@@ -220,7 +220,7 @@
             video.loop = false;
             video.volume = 1;
             console.log("notios"); 
-            document.getElementById( "noMarker" ).innerHTML = "noIOS";
+            // document.getElementById( "noMarker" ).innerHTML = "noIOS";
 
             video.onloadeddata = function(){
                 video.pause();
