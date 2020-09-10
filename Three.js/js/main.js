@@ -313,8 +313,6 @@
                 // start video
                 
                 video.play();
-                video.addEventListener("timeupdate", updateTexture, true);
-                setInterval(drawScene, 24);
                 video.muted = !video.muted;
                 video.volume = 1;
               
