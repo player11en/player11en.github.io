@@ -400,7 +400,8 @@
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
                 if (videoIsPlaying) {
-                    videoTexture.needsUpdate = true;
+                    videoTexture.needsUpdate = false;
+                    requestAnimationFrame(videoTexture);
                 }
                
                
