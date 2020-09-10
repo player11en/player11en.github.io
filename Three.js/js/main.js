@@ -406,7 +406,7 @@
 
                   
 
-                  time2 =+1;
+                  time2 +=1;
 
                   video.currentTime  = time2;
                 }
