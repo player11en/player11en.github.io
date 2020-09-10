@@ -19,6 +19,7 @@
     var videoIsPlaying = false;
     var viewWithoutMarker = false;
     ARInitRunning = true;
+   var VideoPlayedOnce = false;
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 
@@ -177,6 +178,8 @@
           
            
             video.pause();
+
+            VideoPlayedOnce = false;
             
             document.getElementById( "noMarker" ).innerHTML = "IOS"; 
 
@@ -308,8 +311,11 @@
                 box.style.display = "none";
                 infoMsg.style.display = "none";
                 // start video
-                
+                VideoPlayedOnce = true;
+                if(VideoPlayedOnce){
                 video.play();
+                VideoPlayedOnce = false;
+                }
                 video.muted = !video.muted;
                 video.volume = 1;
               
