@@ -175,7 +175,6 @@
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
             video  = document.getElementById('videoIOS');
-            video.autoplay = true;
             video.loop = true;
           
            
