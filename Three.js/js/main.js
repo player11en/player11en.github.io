@@ -186,7 +186,7 @@
             videoTexture = new THREE.VideoTexture( video);
             videoTexture.minFilter = THREE.LinearFilter;
             videoTexture.maxFilter = THREE.LinearFilter;
-            videoTexture.format = THREE.RGBFormat;
+            videoTexture.format = THREE.RGBAFormat;
 
 
             var listener = new THREE.AudioListener();
@@ -195,7 +195,7 @@
             // create a global audio source
             sound = new THREE.Audio(listener);
 
-            var material = new THREE.MeshBasicMaterial({ map : videoTexture, side: THREE.DoubleSide });
+            var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
             //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
             plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
             plane.position.set(0,1,0);
