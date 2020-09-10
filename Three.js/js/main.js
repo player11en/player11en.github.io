@@ -309,7 +309,6 @@
                 infoMsg.style.display = "none";
                 // start video
                 video.play();
-                requestAnimationFrame(videoTexture); 
                 video.muted = !video.muted;
                 video.volume = 1;
               
@@ -378,6 +377,7 @@
     onRenderFcts.push(function(){
         if(ARInitRunning){
             
+          
             renderer.render( scene, camera );
         }
     });
@@ -399,10 +399,10 @@
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
-
-                if (video.readyState >= 3) {
+                if (videoIsPlaying) {
                     videoTexture.needsUpdate = true;
                 }
+               
                
                 deltaTime = clock.getDelta();
             }   
