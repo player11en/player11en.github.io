@@ -20,19 +20,21 @@
     var viewWithoutMarker = false;
     ARInitRunning = true;
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    var appStarted = false;
 
 
 
-    initialize();
-    intitMarker();
+    
     var startButton = document.getElementById( 'startButton' );
-			startButton.addEventListener( 'click', function () {
-                
-           
-                loadVideo();
-              
+    startButton.addEventListener( 'click', function () {
+        
+        initialize();
+        intitMarker();
+        appStarted = true;
+        loadVideo();
+        
 
-			}, false );
+    }, false );
   
     ////init --> create Scene, Camera, Light, LoadModel
     function initialize()
@@ -376,7 +378,7 @@
 
     // render the scene
     onRenderFcts.push(function(){
-        if(ARInitRunning){
+        if(ARInitRunning && appStarted){
             
             renderer.render( scene, camera );
         }
@@ -387,20 +389,22 @@
     // run the rendering loop
     var lastTimeMsec= null
     requestAnimationFrame(function animate(nowMsec){
+        if(appStarted){
         // keep looping
-        requestAnimationFrame( animate);
-        // measure time
-        lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
-        var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
-        lastTimeMsec	= nowMsec
-        totalTime += deltaTime;
-        // call each update function
-        onRenderFcts.forEach(function(onRenderFct){
-            if(ARInitRunning){
-                onRenderFct(deltaMsec/1000, nowMsec/1000)
-                checkMarker();
-               
-                deltaTime = clock.getDelta();
-            }   
-        });
+            requestAnimationFrame( animate);
+            // measure time
+            lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
+            var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
+            lastTimeMsec	= nowMsec
+            totalTime += deltaTime;
+            // call each update function
+            onRenderFcts.forEach(function(onRenderFct){
+                if(ARInitRunning){
+                    onRenderFct(deltaMsec/1000, nowMsec/1000)
+                    checkMarker();
+                
+                    deltaTime = clock.getDelta();
+                }   
+            });
+        }
     });
