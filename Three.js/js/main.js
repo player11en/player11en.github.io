@@ -32,7 +32,6 @@
                 loadVideo();
                 video = document.getElementById('videoIOS');
                 video.play();
-                video.autoplay = true;
                 
               
 
