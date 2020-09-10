@@ -20,10 +20,13 @@
     var viewWithoutMarker = false;
     ARInitRunning = true;
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    var videocanvas;
+    var videocanvasctx;
 
 
 
     initialize();
+    video =  document.createElement('videoIOS');
     intitMarker();
     var startButton = document.getElementById( 'startButton' );
 			startButton.addEventListener( 'click', function () {
@@ -168,7 +171,7 @@
     function loadVideo(){
 
         var overlay = document.getElementById( 'overlay' );
-        overlay.remove();
+
       
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
@@ -180,11 +183,22 @@
             
             document.getElementById( "noMarker" ).innerHTML = "IOS"; 
 
-            videoTexture = new THREE.VideoTexture( video);
-            videoTexture.minFilter = THREE.LinearFilter;
-            videoTexture.maxFilter = THREE.LinearFilter;
-            videoTexture.format = THREE.RGBAFormat;
+            // videoTexture = new THREE.VideoTexture( video);
+            // videoTexture.minFilter = THREE.LinearFilter;
+            // videoTexture.maxFilter = THREE.LinearFilter;
+            // videoTexture.format = THREE.RGBAFormat;
 
+
+             videocanvas = document.createElement('canvas');
+             videocanvasctx = videocanvas.getContext('2d');
+
+            videocanvas.width = video.width;
+            videocanvas.height = video.height;   
+
+            videocanvasctx.fillStyle = "#000000";
+            videocanvasctx.fillRect(0,0,video.width,video.height);
+
+            var planeTexture = new THREE.Texture(videocanvas);
 
             var listener = new THREE.AudioListener();
             camera.add( listener );
@@ -192,7 +206,7 @@
             // create a global audio source
             sound = new THREE.Audio(listener);
 
-            var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
+            var material = new THREE.MeshBasicMaterial({ map : planeTexture, transparent : true, overdraw: 0.5 , side: THREE.DoubleSide });
             //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
             plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
             plane.position.set(0,1,0);
@@ -376,9 +390,7 @@
     // render the scene
     onRenderFcts.push(function(){
         if(ARInitRunning){
-            if (videoIsPlaying) {
-                videoTexture.needsUpdate = false;
-            }
+            
           
             renderer.render( scene, camera );
         }
@@ -401,7 +413,12 @@
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
-              
+                if(video.readyState === video.HAVE_ENOUGH_DATA){
+                    //draw video to canvas starting from upper left corner
+                    videocanvasctx.drawImage(video, 0, 0);
+                    //tell texture object it needs to be updated
+                    texture.needsUpdate = true;
+                  }
                
                
                 deltaTime = clock.getDelta();
