@@ -188,15 +188,13 @@
             // videoTexture.maxFilter = THREE.LinearFilter;
             // videoTexture.format = THREE.RGBAFormat;
 
-
-             videocanvas = document.createElement('canvas');
-             videocanvasctx = videocanvas.getContext('2d');
+             videocanvas.video = video;
+             videocanvasctx = document.createElement('canvas').getContext('2d');
 
             videocanvas.width = video.width;
             videocanvas.height = video.height;   
-
-            videocanvasctx.fillStyle = "#000000";
-            videocanvasctx.fillRect(0,0,video.width,video.height);
+            videocanvasctx.drawImage(scope.video, 0, 0, scope.width, scope.height);
+            // THREE.Texture.call(videocanvas, videocanvasctx.canvas, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy);
 
             var planeTexture = new THREE.Texture(videocanvas);
 
@@ -414,10 +412,8 @@
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
                 if(video.readyState === video.HAVE_ENOUGH_DATA){
-                    //draw video to canvas starting from upper left corner
-                    videocanvasctx.drawImage(video, 0, 0);
-                    //tell texture object it needs to be updated
-                    texture.needsUpdate = true;
+                    scope.ctx2d.drawImage(scope.video, 0, 0, scope.video.width, scope.video.height);
+                    scope.needsUpdate = true;
                   }
                
                
