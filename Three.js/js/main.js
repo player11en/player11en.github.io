@@ -309,10 +309,11 @@
                 infoMsg.style.display = "none";
 
                 // start video
-                video.play();
-                video.currentTime = 200;
                 video.muted = !video.muted;
                 video.volume = 1;
+                video.play();
+               
+              
                 videoIsPlaying = true;
             }
             else {
