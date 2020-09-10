@@ -401,15 +401,6 @@
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
-                
-                if (videoIsPlaying){
-
-                  
-
-                  time2 +=1;
-
-                  video.currentTime  = time2;
-                }
                
                
                 deltaTime = clock.getDelta();
