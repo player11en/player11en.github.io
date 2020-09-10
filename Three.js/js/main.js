@@ -317,13 +317,12 @@
             else {
                 
                 // video is already playing
-                let v = new THREE.Vector3(0,0,0);
-                markerPosition = markerRoot1.position;
-                markerRoot1.add(pivot);
-                camera.remove(pivot);
-                VideorotatetoCamera();
-                pivot.position.copy(v);
-                video.play();
+                // let v = new THREE.Vector3(0,0,0);
+                // markerPosition = markerRoot1.position;
+                // markerRoot1.add(pivot);
+                // camera.remove(pivot);
+                // VideorotatetoCamera();
+                // pivot.position.copy(v);
             }
             
             timer = 0;
@@ -347,7 +346,6 @@
                 pivot.quaternion.copy(camera.quaternion);
                 pivot.position.z = -4;
                 pivot.position.y = -1;
-                video.play();
             }
         }
     }
