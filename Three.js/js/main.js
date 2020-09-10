@@ -406,9 +406,9 @@
 
                   
 
-                  time =+1;
+                  time2 =+1;
 
-                  video.currentFrame = 
+                  video.currentTime  = time2;
                 }
                
                
