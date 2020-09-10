@@ -29,13 +29,14 @@
     startButton.addEventListener( 'click', function () {
         
         initialize();
-        intitMarker();
+        
         loadVideo();
+      
         appStarted = true;
-       
         
 
     }, false );
+    intitMarker();
   
     ////init --> create Scene, Camera, Light, LoadModel
     function initialize()
