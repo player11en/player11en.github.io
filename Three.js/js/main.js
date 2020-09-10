@@ -29,11 +29,11 @@
 			startButton.addEventListener( 'click', function () {
                 
            
-                
+                loadVideo();
                 video = document.getElementById('videoIOS');
               
-                video.pause();
-                loadVideo();
+                video.play();
+                
               
 
 			}, false );
@@ -176,12 +176,12 @@
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
             video  = document.getElementById('videoIOS');
-           // video.loop = true;
+            video.loop = true;
           
            
-            // video.pause();
+            video.pause();
             
-           // document.getElementById( "noMarker" ).innerHTML = "IOS"; 
+            document.getElementById( "noMarker" ).innerHTML = "IOS"; 
 
             videoTexture = new THREE.VideoTexture( video);
             videoTexture.minFilter = THREE.LinearFilter;
@@ -220,7 +220,7 @@
             video.loop = false;
             video.volume = 1;
             console.log("notios"); 
-            //document.getElementById( "noMarker" ).innerHTML = "noIOS";
+            document.getElementById( "noMarker" ).innerHTML = "noIOS";
 
             video.onloadeddata = function(){
                 video.pause();
