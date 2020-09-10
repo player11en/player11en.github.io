@@ -376,7 +376,9 @@
     // render the scene
     onRenderFcts.push(function(){
         if(ARInitRunning){
-            
+            if (videoIsPlaying) {
+                videoTexture.needsUpdate = false;
+            }
           
             renderer.render( scene, camera );
         }
@@ -399,10 +401,7 @@
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
-                if (videoIsPlaying) {
-                    videoTexture.needsUpdate = false;
-                    requestAnimationFrame(videoTexture);
-                }
+              
                
                
                 deltaTime = clock.getDelta();
