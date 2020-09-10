@@ -30,9 +30,10 @@
                 
            
                 loadVideo();
-                video = document.getElementById("videoIOS");
-                video.autoplay = true;
+                video = document.getElementById('videoIOS');
                 video.play();
+                video.autoplay = true;
+                
               
 
 			}, false );
