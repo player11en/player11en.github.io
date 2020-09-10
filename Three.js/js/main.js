@@ -31,8 +31,8 @@
            
                 loadVideo();
                 video = document.getElementById('videoIOS');
-              
                 video.play();
+                video.autoplay = true;
                 
               
 
@@ -181,7 +181,7 @@
            
             video.pause();
             
-            // document.getElementById( "noMarker" ).innerHTML = "IOS"; 
+            document.getElementById( "noMarker" ).innerHTML = "IOS"; 
 
             videoTexture = new THREE.VideoTexture( video);
             videoTexture.minFilter = THREE.LinearFilter;
@@ -220,7 +220,7 @@
             video.loop = false;
             video.volume = 1;
             console.log("notios"); 
-            // document.getElementById( "noMarker" ).innerHTML = "noIOS";
+            document.getElementById( "noMarker" ).innerHTML = "noIOS";
 
             video.onloadeddata = function(){
                 video.pause();
@@ -311,7 +311,7 @@
                 box.style.display = "none";
                 infoMsg.style.display = "none";
                 // start video
-                video.currentTime = 0.1 ;
+                
                 video.play();
                 video.muted = !video.muted;
                 video.volume = 1;
