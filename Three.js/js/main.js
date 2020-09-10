@@ -19,7 +19,6 @@
     var videoIsPlaying = false;
     var viewWithoutMarker = false;
     ARInitRunning = true;
-   var VideoPlayedOnce = false;
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 
@@ -178,8 +177,6 @@
           
            
             video.pause();
-
-            VideoPlayedOnce = false;
             
             document.getElementById( "noMarker" ).innerHTML = "IOS"; 
 
@@ -311,11 +308,7 @@
                 box.style.display = "none";
                 infoMsg.style.display = "none";
                 // start video
-                VideoPlayedOnce = true;
-                if(VideoPlayedOnce){
                 video.play();
-                VideoPlayedOnce = false;
-                }
                 video.muted = !video.muted;
                 video.volume = 1;
               
@@ -330,6 +323,7 @@
                 camera.remove(pivot);
                 VideorotatetoCamera();
                 pivot.position.copy(v);
+                video.play();
             }
             
             timer = 0;
@@ -353,6 +347,7 @@
                 pivot.quaternion.copy(camera.quaternion);
                 pivot.position.z = -4;
                 pivot.position.y = -1;
+                video.play();
             }
         }
     }
