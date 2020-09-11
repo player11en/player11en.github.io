@@ -177,7 +177,6 @@
             video.loop = true;
           
            
-            video.pause();
             
             document.getElementById( "noMarker" ).innerHTML = "IOS"; 
 
@@ -190,10 +189,10 @@
             // //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
 
 
-            var material = new THREEX.ChromaKeyMaterial(video.src,0xd400);
+            ChromaKeyMaterial = new THREEx.ChromaKeyMaterial('video/95mp4.mp4',0xd400);
+            ChromaKeyMaterial.stopVideo();
 
-
-            plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
+            plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), ChromaKeyMaterial);
             plane.position.set(0,1,0);
 
             var listener = new THREE.AudioListener();
@@ -217,23 +216,22 @@
         }
         else{
             video  = document.getElementById('videoIOS');
-            video.src = 'video/KundenVideo1.webm';
 
-            video.preload = 'auto';
-            video.autoload = true;
-            video.loop = false;
-            video.volume = 1;
-            console.log("notios"); 
-            document.getElementById( "noMarker" ).innerHTML = "noIOS";
-
-            video.onloadeddata = function(){
-                video.pause();
+            // video.preload = 'auto';
+            // video.autoload = true;
+            // video.loop = false;
+            // video.volume = 1;
+            // console.log("notios"); 
+            // document.getElementById( "noMarker" ).innerHTML = "noIOS";
+            
+            // video.onloadeddata = function(){
+                // video.pause();
                 
     
-                videoTexture = new THREE.VideoTexture( video);
-                videoTexture.minFilter = THREE.LinearFilter;
-                videoTexture.maxFilter = THREE.LinearFilter;
-                videoTexture.format = THREE.RGBAFormat;
+                // videoTexture = new THREE.VideoTexture( video);
+                // videoTexture.minFilter = THREE.LinearFilter;
+                // videoTexture.maxFilter = THREE.LinearFilter;
+                // videoTexture.format = THREE.RGBAFormat;
           
     
                 var listener = new THREE.AudioListener();
@@ -242,9 +240,15 @@
                 // create a global audio source
                 sound = new THREE.Audio(listener);
     
-                var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
+                // var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
                 //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
-                plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
+
+
+                ChromaKeyMaterial = new THREEx.ChromaKeyMaterial('/video/95mp4.mp4',0xd400);
+               
+                // plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
+
+                plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), ChromaKeyMaterial);
                 plane.position.set(0,1,0);
     
                     
@@ -256,7 +260,7 @@
                 markerRoot1.add(pivot);
                 smoothedRoot.add(pivot);
 
-            };
+            // };
 
         }     
     };
@@ -316,9 +320,10 @@
                 infoMsg.style.display = "none";
                 // start video
                 video.play();
-                video.muted = !video.muted;
+                // video.play();
+
+                // video.muted = !video.muted;
                 video.volume = 1;
-              
                 videoIsPlaying = true;
             }
             else {
@@ -406,8 +411,9 @@
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
                 checkMarker();
-               
-               
+               if(videoIsPlaying){
+               ChromaKeyMaterial.update();
+               }
                 deltaTime = clock.getDelta();
             }   
         });

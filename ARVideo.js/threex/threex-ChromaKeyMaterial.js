@@ -1,18 +1,28 @@
 var THREEx	= THREEx	|| {};
 
-ChromaKeyMaterial = function (url, keyColor) {
+THREEx.ChromaKeyMaterial = function (url, keyColor) {
   THREE.ShaderMaterial.call(this);
 
 	video = document.createElement('video');
 	video.loop = true;
 	video.src = url;
-	video.load();
+    video.load();
+    video.volume = 1;
 
   var keyColorObject = new THREE.Color(keyColor);
 
   var videoTexture = new THREE.Texture(video);
   videoTexture.minFilter = THREE.LinearFilter;
   videoTexture.magFilter = THREE.LinearFilter;
+
+  this.startVideo = function() {
+    video.play();
+  };
+
+  this.stopVideo = function() {
+    video.pause();
+    console.log("flup")
+  };
 
 
   this.update = function () {
