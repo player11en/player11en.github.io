@@ -310,6 +310,7 @@
                 box.style.display = "none";
                 infoMsg.style.display = "none";
                 // start video
+                video.load();
                 video.play();
                 video.muted = !video.muted;
                 video.volume = 1;

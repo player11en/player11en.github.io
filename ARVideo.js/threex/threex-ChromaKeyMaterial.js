@@ -63,7 +63,7 @@ THREEx.ChromaKeyMaterial = function (keyColor) {
     "{\n" +
     "  mediump vec3 tColor = texture2D( texture, vUv ).rgb;\n" +
     "  mediump float a = (length(tColor - color) - 0.5) * 7.0;\n" +
-    "  gl_FragColor = vec4(tColor, a);\n" +
+    "  gl_FragColor = vec4(tColor-0.1, a);\n" +
     "}",
     transparent: true,
     side: THREE.DoubleSide

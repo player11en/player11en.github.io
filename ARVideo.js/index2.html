@@ -71,9 +71,10 @@
 	{
 		vec3 tColor = texture2D( texture, vUv ).rgb;
 		float a = (length(tColor - color) - 0.5) * 7.0;
+
 		
-//		gl_FragColor = vec4(a, a, a, 1.0);
-		gl_FragColor = vec4(tColor, a);
+	//gl_FragColor = vec4(a, 0, a, 1.0);
+		gl_FragColor = vec4(tColor-0.1, a);
 	}
 </script>
 
@@ -94,16 +95,21 @@ ChromaKeyMaterial = function (url, width, height, keyColor) {
 	videoImage.height = height;
 	
 	var keyColorObject = new THREE.Color(keyColor);
+	
 
 	var videoImageContext = videoImage.getContext('2d');
 	// background color if no video present
 	videoImageContext.fillStyle = '#' + keyColorObject.getHexString();
 	videoImageContext.fillRect(0, 0, videoImage.width, videoImage.height);
 
+console.log(videoImageContext.fillStyle);
+
 	var videoTexture = new THREE.Texture(videoImage);
 	videoTexture.minFilter = THREE.LinearFilter;
 	videoTexture.magFilter = THREE.LinearFilter;
 
+	
+	
 	this.update = function () {
 		if (video.readyState === video.HAVE_ENOUGH_DATA) {
 			videoImageContext.drawImage(video, 0, 0);
@@ -162,7 +168,7 @@ ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);
 
 	var movieMaterial = new ChromaKeyMaterial('video/95mp4.mp4', 950, 540, 0xd400);
 	var movieGeometry = new THREE.PlaneGeometry(200, 100, 4, 4);
-
+	
 
 				var movie = new THREE.Mesh(movieGeometry, movieMaterial);
 				movie.position.set(-100, 153, 700);
