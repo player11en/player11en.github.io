@@ -160,12 +160,12 @@ ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);
 
 		
 
-	var movieMaterial = new ChromaKeyMaterial('video/95h265.mp4', 950, 540, 0xd400);
+	var movieMaterial = new ChromaKeyMaterial('video/95mp4.mp4', 950, 540, 0xd400);
 	var movieGeometry = new THREE.PlaneGeometry(200, 100, 4, 4);
 
 
 				var movie = new THREE.Mesh(movieGeometry, movieMaterial);
-				movie.position.set(0, 53, 0);
+				movie.position.set(-100, 153, 700);
 				scene.add(movie);
 
 
@@ -179,7 +179,7 @@ ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);
 	// resize
 	var resize = function () {
 		// notify the renderer of the size change
-		renderer.setSize(window.innerWidth, window.innerHeight);
+		renderer.setSize(window.innerWidth*2, window.innerHeight*2);
 		// update the camera
 		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();

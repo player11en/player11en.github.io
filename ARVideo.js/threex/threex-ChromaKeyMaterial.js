@@ -1,11 +1,13 @@
+
+//create  Transparent Video form Greenscreenvideo
+
 var THREEx	= THREEx	|| {};
 
-THREEx.ChromaKeyMaterial = function (url, keyColor) {
+THREEx.ChromaKeyMaterial = function (keyColor) {
   THREE.ShaderMaterial.call(this);
 
-	video = document.createElement('video');
+	video = document.getElementById('videoIOS');
 	video.loop = true;
-	video.src = url;
     video.load();
     video.volume = 1;
 
@@ -27,7 +29,6 @@ THREEx.ChromaKeyMaterial = function (url, keyColor) {
 
   this.update = function () {
     if (video.readyState === video.HAVE_ENOUGH_DATA) {
-      // videoImageContext.drawImage(video, 0, 0);
       if (videoTexture) {
         videoTexture.needsUpdate = true;
       }
@@ -64,7 +65,8 @@ THREEx.ChromaKeyMaterial = function (url, keyColor) {
     "  mediump float a = (length(tColor - color) - 0.5) * 7.0;\n" +
     "  gl_FragColor = vec4(tColor, a);\n" +
     "}",
-    transparent: true
+    transparent: true,
+    side: THREE.DoubleSide
   });
 };
 
