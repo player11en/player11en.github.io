@@ -190,7 +190,7 @@
             // //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
 
 
-            ChromaKeyMaterial(video.src,0xd400);
+            var material = new THREEX.ChromaKeyMaterial(video.src,0xd400);
 
 
             plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);

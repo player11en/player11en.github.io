@@ -3,10 +3,10 @@ var THREEx	= THREEx	|| {};
 ChromaKeyMaterial = function (url, keyColor) {
   THREE.ShaderMaterial.call(this);
 
-  video = document.createElement('video');
-  video.loop = true;
-  video.src = url;
-  video.load();
+	video = document.createElement('video');
+	video.loop = true;
+	video.src = url;
+	video.load();
 
   var keyColorObject = new THREE.Color(keyColor);
 
@@ -14,14 +14,6 @@ ChromaKeyMaterial = function (url, keyColor) {
   videoTexture.minFilter = THREE.LinearFilter;
   videoTexture.magFilter = THREE.LinearFilter;
 
-  this.startVideo = function() {
-    video.play();
-  };
-
-  this.stopVideo = function() {
-    video.pause();
-    video.src = "";
-  };
 
   this.update = function () {
     if (video.readyState === video.HAVE_ENOUGH_DATA) {
