@@ -45,7 +45,7 @@
 <script src="js/three.min.js"></script>
 <script src="js/stats.min.js"></script>
 
-<div id="demo" style="position: absolute; left:0px; top:0px"></div>
+<div id="demo" style="position: absolute; left:0px; top:0px;"  ></div>
 
 <script id="vertexShader" type="x-shader/x-vertex">
 
@@ -160,24 +160,13 @@ ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);
 
 		
 
-	var movieMaterial = new ChromaKeyMaterial('video/95mp4.mp4', 950, 540, 0xd400);
+	var movieMaterial = new ChromaKeyMaterial('video/95h265.mp4', 950, 540, 0xd400);
 	var movieGeometry = new THREE.PlaneGeometry(200, 100, 4, 4);
 
-	var girls = []
-	for (var i = 0; i < 5; i++)
-		for (var j = 0; j < 5; j++)
-			if ((i + j) % 2 == 0) {
+
 				var movie = new THREE.Mesh(movieGeometry, movieMaterial);
 				movie.position.set(0, 53, 0);
-
-				var girl = new THREE.Object3D();
-				girl.position.set(150 * (i - 2), 0, 150 * (j - 2));
-
-				girl.add(movie);
-				scene.add(girl);
-
-				girls.push(girl);
-			}
+				scene.add(movie);
 
 
 	// stats
@@ -203,8 +192,6 @@ ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);
 	var animate = function () {
 
 		movieMaterial.update();
-
-		for (var i in girls) girls[i].lookAt(camera.position);
 
 		renderer.render(scene, camera);
 
