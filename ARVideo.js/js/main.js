@@ -5,7 +5,7 @@
     var scene, camera, renderer, clock, deltaTime, totalTime;
 
     var arToolkitSource, arToolkitContext;
-
+    var ChromaKeyMaterial;
     var pivot;
     var markerRoot1,smoothedRoot;
     var ARInitRunning = false;
@@ -181,13 +181,18 @@
             
             document.getElementById( "noMarker" ).innerHTML = "IOS"; 
 
-            videoTexture = new THREE.VideoTexture(video);
-            videoTexture.minFilter = THREE.LinearFilter;
-            videoTexture.maxFilter = THREE.LinearFilter;
-            videoTexture.format = THREE.RGBAFormat;
+            // videoTexture = new THREE.VideoTexture(video);
+            // videoTexture.minFilter = THREE.LinearFilter;
+            // videoTexture.maxFilter = THREE.LinearFilter;
+            // videoTexture.format = THREE.RGBAFormat;
 
-            var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
-            //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
+            // var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
+            // //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
+
+
+            ChromaKeyMaterial(video.src,0xd400);
+
+
             plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
             plane.position.set(0,1,0);
 
