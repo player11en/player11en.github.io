@@ -44,7 +44,6 @@
 <!-- borrow stuff from original stemkoski demo for now -->
 <script src="js/three.min.js"></script>cript>
 <script src="http://stemkoski.github.io/Three.js/js/Stats.js"></script>
-<script src="http://stemkoski.github.io/Three.js/js/OrbitControls.js"></script>
 
 <div id="demo" style="position: absolute; left:0px; top:0px"></div>
 
@@ -149,7 +148,6 @@ ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);
 	renderer.setClearColor(0xffffff);
 	document.getElementById('demo').appendChild(renderer.domElement);
 
-	var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
     var startButton = document.getElementById( 'startButton' );
 			startButton.addEventListener( 'click', function () {
