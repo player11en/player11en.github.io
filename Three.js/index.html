@@ -190,7 +190,7 @@ ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);
 	// resize
 	var resize = function () {
 		// notify the renderer of the size change
-		renderer.setSize(window.innerWidth *3, window.innerHeight*3);
+		renderer.setSize(window.innerWidth, window.innerHeight);
 		// update the camera
 		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
