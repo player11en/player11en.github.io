@@ -189,31 +189,49 @@
             smoothedRoot.add(pivot);
         }
         else{
-            //video used from html <video> Tag to keep control
             video  = document.getElementById('videoIOS');
-          
-            var listener = new THREE.AudioListener();
-            camera.add( listener );
+            video.src = 'video/242A5100editVP9.webm';
 
-            // create a global audio source
-            sound = new THREE.Audio(listener);
+            video.preload = 'auto';
+            video.autoload = true;
+            video.loop = false;
+            video.volume = 1;
+            console.log("notios"); 
+            document.getElementById( "noMarker" ).innerHTML = "noIOS";
 
-            //Chromakeying skript in Threex folder 
-            ChromaKeyMaterial = new THREEx.ChromaKeyMaterial(0xd400);
-
-            //add material to plane
-            plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), ChromaKeyMaterial);
-            plane.position.set(0,1,0);
+            video.onloadeddata = function(){
+                video.pause();
                 
-            //pivot used to change plane orgin
-            pivot = new THREE.Group();
-            pivot.position.set( 0.0, 0.0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
-            markerRoot1.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY
-            pivot.add( plane );
+    
+                videoTexture = new THREE.VideoTexture( video);
+                videoTexture.minFilter = THREE.LinearFilter;
+                videoTexture.maxFilter = THREE.LinearFilter;
+                videoTexture.format = THREE.RGBAFormat;
+          
+    
+                var listener = new THREE.AudioListener();
+                camera.add( listener );
+    
+                // create a global audio source
+                sound = new THREE.Audio(listener);
+    
+                var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
+                //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
+                plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
+                plane.position.set(0,1,0);
+    
+                    
+                pivot = new THREE.Group();
+                pivot.position.set( 0.0, 0.0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
+                markerRoot1.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY, WHICH WAS THEN ADDING MESH2 IN THE WRONG PLACE
+                pivot.add( plane );
+    
+                markerRoot1.add(pivot);
+                smoothedRoot.add(pivot);
 
-            markerRoot1.add(pivot);
-            smoothedRoot.add(pivot);
-        }     
+            };
+
+        } 
     };
 
     //check if iOS device
