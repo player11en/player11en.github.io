@@ -165,7 +165,6 @@
         if(isiOSDevice == true || isSafari == true){
             //video used from html <video> Tag to keep control
 
-            console.log("hihi");
             video  = document.getElementById('videoIOS');
           
             var listener = new THREE.AudioListener();
@@ -201,7 +200,6 @@
             video.loop = false;
             video.volume = 1;
             console.log("notios"); 
-            document.getElementById( "noMarker" ).innerHTML = "no2IOS";
 
             video.onloadeddata = function(){
                 video.pause();
