@@ -47,7 +47,7 @@
             precision: 'mediump'
         });
         renderer.setClearColor(new THREE.Color('lightgrey'), 0);
-        renderer.setSize(window.innerWidth * 4, window.innerHeight * 4);
+        renderer.setSize(1920, 1080);
         renderer.domElement.style.position = 'fixed';
         renderer.domElement.style.top = '0px';
         renderer.domElement.style.left = '0px';
