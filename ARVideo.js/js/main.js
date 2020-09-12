@@ -10,6 +10,7 @@
     var markerRoot1,smoothedRoot;
     var ARInitRunning = false;
     var videoTexture;
+    var noSleep = new NoSleep();
     var video;
     var mute = false;
     var onRenderFcts= [];
@@ -28,8 +29,7 @@
     var startButton = document.getElementById( 'startButton' );
 			startButton.addEventListener( 'click', function () {
                 loadVideo();
-                //update Greenscreenkeyed after its loaded
-                videoPreloaded = true;
+
                 //keep screen on
                 noSleep.enable();
 			}, false );
@@ -47,7 +47,7 @@
             precision: 'mediump'
         });
         renderer.setClearColor(new THREE.Color('lightgrey'), 0);
-        renderer.setSize(window.innerWidth * 2, window.innerHeight * 2);
+        renderer.setSize(window.innerWidth * 4, window.innerHeight * 4);
         renderer.domElement.style.position = 'fixed';
         renderer.domElement.style.top = '0px';
         renderer.domElement.style.left = '0px';
@@ -164,6 +164,8 @@
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
             //video used from html <video> Tag to keep control
+
+            console.log("hihi");
             video  = document.getElementById('videoIOS');
           
             var listener = new THREE.AudioListener();
@@ -176,7 +178,7 @@
             ChromaKeyMaterial = new THREEx.ChromaKeyMaterial(0xd400);
 
             //add material to plane
-            plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), ChromaKeyMaterial);
+            plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 2), ChromaKeyMaterial);
             plane.position.set(0,1,0);
                 
             //pivot used to change plane orgin
@@ -187,28 +189,29 @@
 
             markerRoot1.add(pivot);
             smoothedRoot.add(pivot);
+
+            //update Greenscreenkeyed after its loaded
+            videoPreloaded = true;
         }
         else{
             video  = document.getElementById('videoIOS');
-            video.src = 'video/242A5100editVP9.webm';
+            video.src = 'video/KundenvideoWebm.webm';
 
-            video.preload = 'auto';
             video.autoload = true;
             video.loop = false;
             video.volume = 1;
             console.log("notios"); 
-            document.getElementById( "noMarker" ).innerHTML = "noIOS";
+            document.getElementById( "noMarker" ).innerHTML = "no2IOS";
 
             video.onloadeddata = function(){
                 video.pause();
                 
-    
+                //Creating Texture from video
                 videoTexture = new THREE.VideoTexture( video);
                 videoTexture.minFilter = THREE.LinearFilter;
                 videoTexture.maxFilter = THREE.LinearFilter;
                 videoTexture.format = THREE.RGBAFormat;
-          
-    
+            
                 var listener = new THREE.AudioListener();
                 camera.add( listener );
     
@@ -216,22 +219,19 @@
                 sound = new THREE.Audio(listener);
     
                 var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
-                //plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2));
-                plane = new THREE.Mesh(new THREE.PlaneGeometry(4, 2), material);
+                plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 2), material);
                 plane.position.set(0,1,0);
     
                     
                 pivot = new THREE.Group();
-                pivot.position.set( 0.0, 0.0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
+                pivot.position.set( 0, 0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
                 markerRoot1.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY, WHICH WAS THEN ADDING MESH2 IN THE WRONG PLACE
                 pivot.add( plane );
     
                 markerRoot1.add(pivot);
                 smoothedRoot.add(pivot);
-
             };
-
-        } 
+        }     
     };
 
     //check if iOS device
