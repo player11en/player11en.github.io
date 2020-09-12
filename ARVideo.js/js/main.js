@@ -195,7 +195,7 @@
         }
         else{
             video  = document.getElementById('videoIOS');
-            video.src = 'video/KundenvideoWebm.webm';
+            video.src = 'video/KundenVideoWebm5mb.webm';
 
             video.autoload = true;
             video.loop = false;
