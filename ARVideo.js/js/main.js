@@ -362,7 +362,7 @@
         plane.getWorldPosition(worldPos);
         console.log(worldPos);
 
-        pivot.rotation.y = Math.atan2( (worldPos2.x - worldPos.x ), ( worldPos2.z - worldPos.z ) );
+        plane.rotation.y = Math.atan2( (worldPos2.x - worldPos.x ), ( worldPos2.z - worldPos.z ) );
 
     };
 
