@@ -360,7 +360,10 @@
 
         plane.updateMatrixWorld();
         plane.getWorldPosition(worldPos);
-        console.log(worldPos);
+
+        camera.updateMatrixWorld();
+        camera.getWorldPosition(worldPos2);
+        // console.log(worldPos);
 
         plane.rotation.y = Math.atan2( (worldPos2.x - worldPos.x ), ( worldPos2.z - worldPos.z ) );
 
