@@ -341,8 +341,29 @@
     };    
 
     function VideorotatetoCamera(){      
-        pivot.lookAt(camera.position);
-        pivot.rotation.z = 0;        
+        // pivot.lookAt(camera.position);
+        // pivot.rotation.z = 0;   
+        
+        // vector = new THREE.Vector3();
+        // obj3.getWorldPosition( someOtherObject.position );
+        // vector.getWorldPosition(plane);
+        // console.log(vector);
+
+        
+        
+        plane.updateMatrixWorld();
+        var worldMatrix = plane.matrixWorld;
+        var worldPos  = new THREE.Vector3().setFromMatrixPosition(worldMatrix);
+        camera.updateMatrixWorld();
+        var worldMatrix2 = camera.matrixWorld;
+        var worldPos2  = new THREE.Vector3().setFromMatrixPosition(worldMatrix2);
+
+        plane.updateMatrixWorld();
+        plane.getWorldPosition(worldPos);
+        console.log(worldPos);
+
+        pivot.rotation.y = Math.atan2( (worldPos2.x - worldPos.x ), ( worldPos2.z - worldPos.z ) );
+
     };
 
     // render the scene
