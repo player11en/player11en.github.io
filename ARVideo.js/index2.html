@@ -10,42 +10,16 @@
 	{
 		margin: 0px;
 		overflow: hidden;
-    }
-    
-    #overlay {
-	position: absolute;
-	z-index: 2;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: rgba(0,0,0,0.7);
-}
-
-#overlay button {
-    background: #ffffff;
-    border: 0;
-    color: #000000;
-    padding: 16px 20px;
-    text-transform: uppercase;
-    cursor: pointer;
-}
+	}
 	</style>
 </head>
 <body>
-
-    <div id="overlay">
-        <button id="startButton">Play</button>
-    </div>
 
 <!-- borrow stuff from original stemkoski demo for now -->
 <script src="js/three.min.js"></script>
 <script src="js/stats.min.js"></script>
 
-<div id="demo" style="position: absolute; left:0px; top:0px;"  ></div>
+<div id="demo" style="position: absolute; left:0px; top:0px"></div>
 
 <script id="vertexShader" type="x-shader/x-vertex">
 
@@ -62,19 +36,27 @@
 
 <script id="fragmentShader" type="x-shader/x-fragment">
 
-	uniform sampler2D texture;
-	uniform vec3 color;
-
 	varying vec2 vUv;
-
+ 
+	uniform float thresholdSensitivity;
+	uniform float smoothing;
+	uniform vec3 colorToReplace;
+	uniform sampler2D inputImageTexture;
+	
 	void main()
 	{
-		vec3 tColor = texture2D( texture, vUv ).rgb;
-		float a = (length(tColor - color) - 0.5) * 3.0;
-
+		vec4 textureColor = texture2D(inputImageTexture, vUv);
 		
-	//gl_FragColor = vec4(a, 0, a, 1.0);
-		gl_FragColor = vec4(tColor, a);
+		float maskY = 0.2989 * colorToReplace.r + 0.5866 * colorToReplace.g + 0.1145 * colorToReplace.b;
+		float maskCr = 0.7132 * (colorToReplace.r - maskY);
+		float maskCb = 0.5647 * (colorToReplace.b - maskY);
+		
+		float Y = 0.2989 * textureColor.r + 0.5866 * textureColor.g + 0.1145 * textureColor.b;
+		float Cr = 0.7132 * (textureColor.r - Y);
+		float Cb = 0.5647 * (textureColor.b - Y);
+		
+		float blendValue = smoothstep(thresholdSensitivity, thresholdSensitivity + smoothing, distance(vec2(Cr, Cb), vec2(maskCr, maskCb)));
+		gl_FragColor = vec4(textureColor.rgb, textureColor.a * blendValue);
 	}
 </script>
 
@@ -96,20 +78,18 @@ ChromaKeyMaterial = function (url, width, height, keyColor) {
 	
 	var keyColorObject = new THREE.Color(keyColor);
 	
+	var thresholdSensitivity = 0.3;
+    var smoothing = 0.12;
 
 	var videoImageContext = videoImage.getContext('2d');
 	// background color if no video present
 	videoImageContext.fillStyle = '#' + keyColorObject.getHexString();
 	videoImageContext.fillRect(0, 0, videoImage.width, videoImage.height);
 
-console.log(videoImageContext.fillStyle);
-
 	var videoTexture = new THREE.Texture(videoImage);
 	videoTexture.minFilter = THREE.LinearFilter;
 	videoTexture.magFilter = THREE.LinearFilter;
 
-	
-	
 	this.update = function () {
 		if (video.readyState === video.HAVE_ENOUGH_DATA) {
 			videoImageContext.drawImage(video, 0, 0);
@@ -122,13 +102,21 @@ console.log(videoImageContext.fillStyle);
 	this.setValues({
 
 		uniforms: {
-			texture: {
+			inputImageTexture: {
 				type: "t",
 				value: videoTexture
 			},
-			color: {
+			colorToReplace: {
 				type: "c",
 				value: keyColorObject
+			},
+			thresholdSensitivity: {
+				type: "f",
+				value: thresholdSensitivity
+			},
+			smoothing: {
+				type: "f",
+				value: smoothing
 			}
 		},
 		vertexShader: document.getElementById('vertexShader').textContent,
@@ -155,24 +143,14 @@ ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);
 	document.getElementById('demo').appendChild(renderer.domElement);
 
 
-    var startButton = document.getElementById( 'startButton' );
-			startButton.addEventListener( 'click', function () {
-                
-            var overlay =   document.getElementById('overlay');
-           overlay.remove();
-    
-                
-              
+	var movieMaterial = new ChromaKeyMaterial('video/95mp4.mp4', 960, 960, 0xd430);
+	var movieGeometry = new THREE.PlaneGeometry(960, 960, 2, 1);
 
+
+	var movie = new THREE.Mesh(movieGeometry, movieMaterial);
+	movie.position.set(0, -180, 350);
+	scene.add(movie);
 		
-
-	var movieMaterial = new ChromaKeyMaterial('video/95mp4.mp4', 950, 540, 0xd400);
-	var movieGeometry = new THREE.PlaneGeometry(200, 100, 4, 4);
-	
-
-				var movie = new THREE.Mesh(movieGeometry, movieMaterial);
-				movie.position.set(-100, 153, 700);
-				scene.add(movie);
 
 
 	// stats
@@ -185,7 +163,7 @@ ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);
 	// resize
 	var resize = function () {
 		// notify the renderer of the size change
-		renderer.setSize(window.innerWidth*2, window.innerHeight*2);
+		renderer.setSize(window.innerWidth, window.innerHeight);
 		// update the camera
 		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
@@ -199,20 +177,18 @@ ChromaKeyMaterial.prototype = Object.create(THREE.ShaderMaterial.prototype);
 
 		movieMaterial.update();
 
+
 		renderer.render(scene, camera);
 
 		stats.update();
 		requestAnimationFrame(animate);
 	}
 
-    animate();
-    
-    }, false );
+	animate();
 
 })();
 
 </script>
-
 
 </body>
 </html>

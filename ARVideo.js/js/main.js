@@ -22,17 +22,42 @@
     ARInitRunning = true;
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     var  videoPreloaded = false;
+    var  videoIsFinished = false;
 
 
     initialize();
     intitMarker();
     var startButton = document.getElementById( 'startButton' );
-			startButton.addEventListener( 'click', function () {
-                loadVideo();
+    startButton.addEventListener( 'click', function () {
 
-                //keep screen on
-                noSleep.enable();
-			}, false );
+        // if(!videoIsFinished)
+        loadVideo();
+        // else
+        // video.play();
+
+        //keep screen on
+        noSleep.enable();
+    }, false );
+
+    // var videoEnded = document.getElementById('videoIOS');
+    // videoEnded.addEventListener('ended', function (){
+    //     console.log("videoende");
+    //     var overlay = document.createElement('div');
+    //     startButton = document.createElement('Button');
+    //     overlay.id = "overlay";
+
+    //     startButton.id = "startButton";
+    //     startButton.value = "Replay";
+
+    //     overlay.appendChild(startButton);
+    //     document.documentElement.appendChild(overlay);
+
+    //     // document.getElementById("play").style.display ="none";
+
+
+       
+    //     videoIsFinished = true;
+    // });
   
     ////init --> create Scene, Camera, Light
     function initialize()
@@ -149,7 +174,7 @@
     }
 
     function playVideo(){
-        // video.play();
+        ideo.play();
 
     };
 
@@ -158,8 +183,9 @@
     ////////////////////////////////////////////////////////////
     function loadVideo(){
 
-        var overlay = document.getElementById( 'overlay' );
+        var overlay = document.getElementById('overlay');
         overlay.remove();
+        // startButton.style.display ="none";
       
         //only in console --> testing loading  time 
         if(isiOSDevice == true || isSafari == true){
@@ -193,42 +219,74 @@
             videoPreloaded = true;
         }
         else{
+
             video  = document.getElementById('videoIOS');
-            video.src = 'video/KundenVideoWebm5mb.webm';
+          
+            var listener = new THREE.AudioListener();
+            camera.add( listener );
 
-            video.autoload = true;
-            video.loop = false;
-            video.volume = 1;
-            console.log("notios"); 
+            // create a global audio source
+            sound = new THREE.Audio(listener);
 
-            video.onloadeddata = function(){
-                video.pause();
+            //Chromakeying skript in Threex folder 
+            ChromaKeyMaterial = new THREEx.ChromaKeyMaterial(0xd400);
+
+            //add material to plane
+            plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 2), ChromaKeyMaterial);
+            plane.position.set(0,1,0);
                 
-                //Creating Texture from video
-                videoTexture = new THREE.VideoTexture( video);
-                videoTexture.minFilter = THREE.LinearFilter;
-                videoTexture.maxFilter = THREE.LinearFilter;
-                videoTexture.format = THREE.RGBAFormat;
+            //pivot used to change plane orgin
+            pivot = new THREE.Group();
+            pivot.position.set( 0.0, 0.0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
+            markerRoot1.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY
+            pivot.add( plane );
+
+            markerRoot1.add(pivot);
+            smoothedRoot.add(pivot);
+
+            //update Greenscreenkeyed after its loaded
+            videoPreloaded = true;
+
+
+
+
+
+            // video  = document.getElementById('videoIOS');
+            // video.src = 'video/KundenVideoTopWebm.webm';
+
+            // video.autoload = true;
+            // video.loop = false;
+            // video.volume = 1;
+            // console.log("notios"); 
+
+            // video.onloadeddata = function(){
+            //     video.pause();
+                
+            //     //Creating Texture from video
+            //     videoTexture = new THREE.VideoTexture( video);
+            //     videoTexture.minFilter = THREE.LinearFilter;
+            //     videoTexture.maxFilter = THREE.LinearFilter;
+            //     videoTexture.format = THREE.RGBAFormat;
             
-                var listener = new THREE.AudioListener();
-                camera.add( listener );
+            //     var listener = new THREE.AudioListener();
+            //     camera.add( listener );
     
-                // create a global audio source
-                sound = new THREE.Audio(listener);
+            //     // create a global audio source
+            //     sound = new THREE.Audio(listener);
     
-                var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
-                plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 2), material);
-                plane.position.set(0,1,0);
+            //     var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
+            //     plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 2), material);
+            //     plane.position.set(0,1,0);
     
                     
-                pivot = new THREE.Group();
-                pivot.position.set( 0, 0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
-                markerRoot1.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY, WHICH WAS THEN ADDING MESH2 IN THE WRONG PLACE
-                pivot.add( plane );
+            //     pivot = new THREE.Group();
+            //     pivot.position.set( 0, 0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
+            //     markerRoot1.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY, WHICH WAS THEN ADDING MESH2 IN THE WRONG PLACE
+            //     pivot.add( plane );
     
-                markerRoot1.add(pivot);
-                smoothedRoot.add(pivot);
-            };
+            //     markerRoot1.add(pivot);
+            //     smoothedRoot.add(pivot);
+            // };
         }     
     };
 
@@ -280,7 +338,7 @@
         // is marker currently tracked??
         if (markerRoot1.visible || viewWithoutMarker) {
             // has video already started??        
-            if (!videoIsPlaying){
+            if (!videoIsPlaying ){
                 
                 // hide info box
                 box.style.display = "none";
@@ -305,7 +363,7 @@
             timer = 0;
         }
         
-        // is video already playing and marker has been lost??
+        // // is video already playing and marker has been lost??
         if (videoIsPlaying && (!markerRoot1.visible || viewWithoutMarker )) {
         
             // increase timer
@@ -337,36 +395,42 @@
         {
             arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas);	
         }	    
-        
     };    
 
     function VideorotatetoCamera(){      
-        // pivot.lookAt(camera.position);
-        // pivot.rotation.z = 0;   
+         pivot.lookAt(camera.position);
+         pivot.rotation.z = 0;
         
         // vector = new THREE.Vector3();
         // obj3.getWorldPosition( someOtherObject.position );
         // vector.getWorldPosition(plane);
         // console.log(vector);
 
+        // console.log( plane.rotation.y);
         
-        
-        plane.updateMatrixWorld();
-        var worldMatrix = plane.matrixWorld;
-        var worldPos  = new THREE.Vector3().setFromMatrixPosition(worldMatrix);
-        camera.updateMatrixWorld();
-        var worldMatrix2 = camera.matrixWorld;
-        var worldPos2  = new THREE.Vector3().setFromMatrixPosition(worldMatrix2);
+        // plane.updateMatrixWorld();
+        // var worldMatrix = pivot.matrixWorld;
+        // var worldPos  = new THREE.Vector3().setFromMatrixPosition(worldMatrix);
+        // camera.updateMatrixWorld();
+        // var worldMatrix2 = camera.matrixWorld;
+        // var worldPos2  = new THREE.Vector3().setFromMatrixPosition(worldMatrix2);
 
-        plane.updateMatrixWorld();
-        plane.getWorldPosition(worldPos);
+        // plane.updateMatrixWorld();
+        // plane.getWorldPosition(worldPos);
 
-        camera.updateMatrixWorld();
-        camera.getWorldPosition(worldPos2);
+        // camera.updateMatrixWorld();
+        // camera.getWorldPosition(worldPos2);
+
+        // camera.position.z -= 0.01;
+        // pivot.rotation.y += 0.01;
         // console.log(worldPos);
-
-        plane.rotation.y = Math.atan2( (worldPos2.x - worldPos.x ), ( worldPos2.z - worldPos.z ) );
-
+        // console.log(worldPos2);
+        
+        // plane.updateMatrixWorld();
+        // plane.rotation.y = Math.atan2( (worldPos2.x - worldPos.x ), ( worldPos2.z -  worldPos.z ) );
+        
+        // console.log( plane.rotation.y);
+        // console.log( Math.atan2( (worldPos2.x - worldPos.x ), ( worldPos2.z -  worldPos.z )));
     };
 
     // render the scene

@@ -1,7 +1,51 @@
-
 //create  Transparent Video form Greenscreenvideo
+function vertexShader() {
+  return `
+
+	varying vec2 vUv;
+
+	void main()
+	{
+		vUv = uv;
+		vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+		gl_Position = projectionMatrix * mvPosition;
+	}
+  `
+};
+
+
+function fragmentShader() {
+  return `
+
+	varying vec2 vUv;
+ 
+	uniform float thresholdSensitivity;
+	uniform float smoothing;
+	uniform vec3 colorToReplace;
+	uniform sampler2D inputImageTexture;
+	
+	void main()
+	{
+		vec4 textureColor = texture2D(inputImageTexture, vUv);
+		
+		float maskY = 0.2989 * colorToReplace.r + 0.5866 * colorToReplace.g + 0.1145 * colorToReplace.b;
+		float maskCr = 0.7132 * (colorToReplace.r - maskY);
+		float maskCb = 0.5647 * (colorToReplace.b - maskY);
+		
+		float Y = 0.2989 * textureColor.r + 0.5866 * textureColor.g + 0.1145 * textureColor.b;
+		float Cr = 0.7132 * (textureColor.r - Y);
+		float Cb = 0.5647 * (textureColor.b - Y);
+		
+		float blendValue = smoothstep(thresholdSensitivity, thresholdSensitivity + smoothing, distance(vec2(Cr, Cb), vec2(maskCr, maskCb)));
+		gl_FragColor = vec4(textureColor.rgb, textureColor.a * blendValue);
+	}
+  `
+};
+
+
 
 var THREEx	= THREEx	|| {};
+
 
 THREEx.ChromaKeyMaterial = function (keyColor) {
   THREE.ShaderMaterial.call(this);
@@ -12,6 +56,9 @@ THREEx.ChromaKeyMaterial = function (keyColor) {
     video.volume = 1;
 
   var keyColorObject = new THREE.Color(keyColor);
+
+  var thresholdSensitivity = 0.3;
+  var smoothing = 0.12;
 
   var videoTexture = new THREE.Texture(video);
   videoTexture.minFilter = THREE.LinearFilter;
@@ -38,33 +85,25 @@ THREEx.ChromaKeyMaterial = function (keyColor) {
   this.setValues({
 
     uniforms: {
-      texture: {
+      inputImageTexture: {
         type: "t",
         value: videoTexture
       },
-      color: {
+      colorToReplace: {
         type: "c",
         value: keyColorObject
-      }
+      },
+      thresholdSensitivity: {
+				type: "f",
+				value: thresholdSensitivity
+			},
+			smoothing: {
+				type: "f",
+				value: smoothing
+			}
     },
-    vertexShader:
-    "varying mediump vec2 vUv;\n" +
-    "void main(void)\n" +
-    "{\n" +
-    "vUv = uv;\n" +
-    "mediump vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );\n" +
-    "gl_Position = projectionMatrix * mvPosition;\n" +
-    "}",
-    fragmentShader:
-    "uniform mediump sampler2D texture;\n" +
-    "uniform mediump vec3 color;\n" +
-    "varying mediump vec2 vUv;\n" +
-    "void main(void)\n" +
-    "{\n" +
-    "  mediump vec3 tColor = texture2D( texture, vUv ).rgb;\n" +
-    "  mediump float a = (length(tColor - color) - 0.5) *7.0;\n" +
-    "  gl_FragColor = vec4(tColor, a);\n" +
-    "}",
+    vertexShader: vertexShader(),
+    fragmentShader: fragmentShader(),
     transparent: true,
     side: THREE.DoubleSide
   });
