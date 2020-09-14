@@ -42,10 +42,7 @@ function fragmentShader() {
   `
 };
 
-
-
 var THREEx	= THREEx	|| {};
-
 
 THREEx.ChromaKeyMaterial = function (keyColor) {
   THREE.ShaderMaterial.call(this);
@@ -57,8 +54,8 @@ THREEx.ChromaKeyMaterial = function (keyColor) {
 
   var keyColorObject = new THREE.Color(keyColor);
 
-  var thresholdSensitivity = 0.3;
-  var smoothing = 0.12;
+  var thresholdSensitivity = 0.39;
+  var smoothing = 0.01;
 
   var videoTexture = new THREE.Texture(video);
   videoTexture.minFilter = THREE.LinearFilter;
@@ -72,7 +69,6 @@ THREEx.ChromaKeyMaterial = function (keyColor) {
     video.pause();
     console.log("flup")
   };
-
 
   this.update = function () {
     if (video.readyState === video.HAVE_ENOUGH_DATA) {
