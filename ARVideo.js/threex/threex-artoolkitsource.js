@@ -1,7 +1,7 @@
 var ARjs = ARjs || {}
 var THREEx = THREEx || {}
 var isSamsungBrowser = navigator.userAgent.match(/SamsungBrowser/i);
-var isiOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+var isiOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform) || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
 
 ARjs.Source = THREEx.ArToolkitSource = function(parameters){
 	var _this = this
