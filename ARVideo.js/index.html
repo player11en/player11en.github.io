@@ -41,7 +41,7 @@
         
 
         <!-- Modal for Apple, if Kamera access is denied-->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="Kamerazugriffnichtmöglich" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -66,7 +66,21 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="welcomeHeader" style="text-align:center; width:100%; margin:50px;">Diese Webanwendung funktioniert leider nur auf dem Safari Browser auf iOS Geräten.</h5>
+                        <h5 class="modal-title" id="welcomeHeader" style="text-align:center; width:100%; margin:50px;">Sie müssen den Kamerazugriff erlauben um diese Anwendung starten zu können. Rufen Sie die Seite erneut auf.</h5>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok, verstanden</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+           <!-- Modal for Apple device issue -> privacy politic, Not running on Chrome on Apple device only Safari -->
+        <div class="modal fade" id="KamerazugriffVerweigert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="welcomeHeader" style="text-align:center; width:100%; margin:50px;">Diese Webanwendung funktioniert nur auf dem Safari Browser auf iOS Geräten.</h5>
                     </div>
                     <div class="modal-footer text-center">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Ok, verstanden</button>

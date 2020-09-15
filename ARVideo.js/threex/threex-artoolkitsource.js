@@ -171,14 +171,12 @@ ARjs.Source.prototype._initSourceWebcam = function(onReady, onError) {
 				if (ua.indexOf('chrome') > -1) {
 					$("#ChromeErrorModal").modal();	
 				} else {
-					$("#myModal").modal();
+					$("#Kamerazugriffnichtmöglich").modal();
 				}
 			}
 		}
 		else{
-			alert('Webcam Error\nName: '+error.name + '\nMessage: '+error.message)
-			var event = new CustomEvent('camera-error', {error: error});
-			window.dispatchEvent(event);
+			$("#KamerazugriffVerweigert").modal();	
 		}
 
 
