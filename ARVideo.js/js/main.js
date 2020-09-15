@@ -22,15 +22,12 @@
     ARInitRunning = true;
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     var  videoPreloaded = false;
-    var  videoIsFinished = false;
-    
     var startButton = document.getElementById( 'startButton' );
 
 
     initialize();
     intitMarker();
     startButton.addEventListener( 'click', function () {
-        
         loadVideo();
         //keep screen on
         noSleep.enable();
@@ -50,9 +47,6 @@
 
         overlay.appendChild(startButton);
         document.documentElement.appendChild(overlay);
-
-        // document.getElementById("play").style.display ="none";
-        videoIsFinished = true;
 
         startButton.addEventListener( 'click', function () {
             playVideo();
@@ -194,11 +188,8 @@
             //video used from html <video> Tag to keep control
 
             video  = document.getElementById('videoIOS');
-            
-            video.autoload = true;
             video.loop = false;
             video.volume = 1;
-
 
             var listener = new THREE.AudioListener();
             camera.add( listener );
@@ -213,19 +204,24 @@
             plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 2), ChromaKeyMaterial);
             plane.position.set(0,1,0);
 
-            video.pause();
-                
+            var red = new THREE.MeshBasicMaterial({color: 'red'}); 
+            var plane2 = new THREE.Mesh(new THREE.PlaneGeometry(1, 4), red);
+            plane2.position.set(0,0,0);
             //pivot used to change plane orgin
             pivot = new THREE.Group();
             pivot.position.set( 0.0, 0.0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
             markerRoot1.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY
+           
+
             pivot.add( plane );
+            pivot.add( plane2 );
 
             markerRoot1.add(pivot);
             smoothedRoot.add(pivot);
 
             //update Greenscreenkeyed after its loaded
             videoPreloaded = true;
+            video.pause();
             
         }
         else{
@@ -238,7 +234,7 @@
             console.log("notios"); 
 
             video.onloadeddata = function(){
-                video.pause();
+               
                 
                 //Creating Texture from video
                 videoTexture = new THREE.VideoTexture( video);
@@ -265,6 +261,8 @@
                 markerRoot1.add(pivot);
                 smoothedRoot.add(pivot);
             };
+            videoPreloaded = true;
+            video.pause();
         }     
     };
 
@@ -375,41 +373,46 @@
         }	    
     };    
 
-    function VideorotatetoCamera(){      
-        //  pivot.lookAt(camera.position);
-        //  pivot.rotation.z = 0;
+    function VideorotatetoCamera(){   
+           
+        pivot.lookAt(camera.position);
+        pivot.rotation.z = 0;
         
+
+        console.log(pivot.rotation.y)
+
+
         // vector = new THREE.Vector3();
         // obj3.getWorldPosition( someOtherObject.position );
         // vector.getWorldPosition(plane);
         // console.log(vector);
 
-        // console.log( plane.rotation.y);
-        
-        plane.updateMatrixWorld();
-         var worldMatrix = pivot.matrixWorld;
-        var worldPos  = new THREE.Vector3().setFromMatrixPosition(worldMatrix);
-        camera.updateMatrixWorld();
-        var worldMatrix2 = camera.matrixWorld;
-        var worldPos2  = new THREE.Vector3().setFromMatrixPosition(worldMatrix2);
+        // // console.log( plane.rotation.y);
+        // scene.updateMatrixWorld();
+        //  plane.updateMatrixWorld();
+        //  markerRoot1.updateMatrixWorld();
+        // var worldMatrix = pivot.matrixWorld;
+        // var worldPos  = new THREE.Vector3().setFromMatrixPosition(worldMatrix);
+        // camera.updateMatrixWorld();
+        //  var worldMatrix2 = camera.matrixWorld;
+        //  var worldPos2  = new THREE.Vector3().setFromMatrixPosition(worldMatrix2);
 
-        plane.updateMatrixWorld();
-        plane.getWorldPosition(worldPos);
+        // plane.updateMatrixWorld();
+        // plane.getWorldPosition(worldPos);
 
-        camera.updateMatrixWorld();
-        camera.getWorldPosition(worldPos2);
+        // camera.updateMatrixWorld();
+        // camera.getWorldPosition(worldPos2);
 
 
-        console.log(worldPos);
-        console.log(worldPos2);
+        // console.log(worldPos);
+        // console.log(worldPos2);
         
         // plane.updateMatrixWorld();
-        var testvalue = Math.atan2( (worldPos2.x - worldPos.x ), ( worldPos2.z -  worldPos.z ) );
+        // pivot.rotation.y = Math.atan2( (worldPos2.x - worldPos.x), ( worldPos2.z -  worldPos.z ) );
 
-        console.log(testvalue);
         
-        // console.log( plane.rotation.y);
-        // console.log( Math.atan2( (worldPos2.x - worldPos.x ), ( worldPos2.z -  worldPos.z )));
+        //  console.log( pivot.rotation.y);
+        //  console.log( Math.atan2( (worldPos.x - worldPos2.x ), ( worldPos.z -  worldPos2.z )));
     };
 
     // render the scene
@@ -433,10 +436,11 @@
         onRenderFcts.forEach(function(onRenderFct){
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
-                checkMarker();
-
-                //updateGreenscreenmaterial
                 if(videoPreloaded){
+                checkMarker();
+                }
+                //updateGreenscreenmaterial
+                if(videoPreloaded && isiOSDevice() || videoPreloaded && isSafari){
                     ChromaKeyMaterial.update();
                 }
                 deltaTime = clock.getDelta();

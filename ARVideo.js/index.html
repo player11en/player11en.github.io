@@ -66,7 +66,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="welcomeHeader" style="text-align:center; width:100%; margin:50px;">Sie müssen den Kamerazugriff erlauben um diese Anwendung starten zu können. Rufen Sie die Seite erneut auf.</h5>
+                        <h5 class="modal-title" id="welcomeHeader" style="text-align:center; width:100%; margin:50px;">Diese Webanwendung funktioniert nur auf dem Safari Browser auf iOS Geräten.</h5>
                     </div>
                     <div class="modal-footer text-center">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Ok, verstanden</button>
@@ -80,7 +80,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="welcomeHeader" style="text-align:center; width:100%; margin:50px;">Diese Webanwendung funktioniert nur auf dem Safari Browser auf iOS Geräten.</h5>
+                        <h5 class="modal-title" id="welcomeHeader" style="text-align:center; width:100%; margin:50px;"> Sie müssen den Kamerazugriff erlauben um diese Anwendung starten zu können. Rufen Sie die Seite erneut auf.</h5>
                     </div>
                     <div class="modal-footer text-center">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Ok, verstanden</button>
@@ -88,11 +88,15 @@
                 </div>
             </div>
         </div>
-
+       
         <!-- Information window, hold camera on Pattern -->
         <div id="Container">
             <div id= "text">Richten Sie die Kamera auf diesen Marker.</div>
             <img id="pattern" src="img/pattern-EvosparkLogoBlack_0_8_Transparent_Small.png" alt="Evospark-Pattern">          
+        
+            <div id="overlay">
+                <button id="startButton">Play</button>
+            </div>
         </div>
 
         <div id="logo">
@@ -117,12 +121,10 @@
             Ich habe keinen Marker
         </div>
 
-        <div id="overlay">
-			<button id="startButton">Play</button>
-        </div>
+      
         
         <video id="videoIOS" autoplay loop muted playsinline webkit-playsinline style="display:none">
-            <source src="video/95mp4.mp4" type='video/mp4;'>
+            <source src="video/KundenVideoTopmp4.mp4" type='video/mp4;'>
         </video>
         
         <script type="text/javascript" src="js/main.js"></script>  
