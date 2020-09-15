@@ -29,12 +29,12 @@
 
     initialize();
     intitMarker();
-    startButton.addEventListener( 'click', function () {
+    // startButton.addEventListener( 'click', function () {
         
         loadVideo();
         //keep screen on
         noSleep.enable();
-    }, false );
+    // }, false );
 
 
     //replayButton when Video finished
