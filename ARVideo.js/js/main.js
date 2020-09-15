@@ -30,28 +30,23 @@
     initialize();
     intitMarker();
     startButton.addEventListener( 'click', function () {
-
-        if(!videoIsFinished)
+        
         loadVideo();
-        else{
-        playVideo();
-        console.log("heyja");
-        }
-        console.log("heyja");
         //keep screen on
         noSleep.enable();
     }, false );
 
+
+    //replayButton when Video finished
     var videoEnded = document.getElementById('videoIOS');
     videoEnded.addEventListener('ended', function (){
         console.log("videoende");
         var overlay = document.createElement('div');
-        startButton = document.createElement('Button');
         overlay.id = "overlay";
 
+        startButton = document.createElement('Button');
         startButton.id = "startButton"; 
-        startButton.textContent = 'Play';
-        // startButton.value = "Replay";
+        startButton.textContent = 'Nochmal abspielen';
 
         overlay.appendChild(startButton);
         document.documentElement.appendChild(overlay);
@@ -217,6 +212,8 @@
             //add material to plane
             plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 2), ChromaKeyMaterial);
             plane.position.set(0,1,0);
+
+            video.pause();
                 
             //pivot used to change plane orgin
             pivot = new THREE.Group();
@@ -229,7 +226,7 @@
 
             //update Greenscreenkeyed after its loaded
             videoPreloaded = true;
-            video.pause();
+            
         }
         else{
             video  = document.getElementById('videoIOS');
@@ -379,8 +376,8 @@
     };    
 
     function VideorotatetoCamera(){      
-         pivot.lookAt(camera.position);
-         pivot.rotation.z = 0;
+        //  pivot.lookAt(camera.position);
+        //  pivot.rotation.z = 0;
         
         // vector = new THREE.Vector3();
         // obj3.getWorldPosition( someOtherObject.position );
@@ -389,26 +386,27 @@
 
         // console.log( plane.rotation.y);
         
-        // plane.updateMatrixWorld();
-        // var worldMatrix = pivot.matrixWorld;
-        // var worldPos  = new THREE.Vector3().setFromMatrixPosition(worldMatrix);
-        // camera.updateMatrixWorld();
-        // var worldMatrix2 = camera.matrixWorld;
-        // var worldPos2  = new THREE.Vector3().setFromMatrixPosition(worldMatrix2);
+        plane.updateMatrixWorld();
+         var worldMatrix = pivot.matrixWorld;
+        var worldPos  = new THREE.Vector3().setFromMatrixPosition(worldMatrix);
+        camera.updateMatrixWorld();
+        var worldMatrix2 = camera.matrixWorld;
+        var worldPos2  = new THREE.Vector3().setFromMatrixPosition(worldMatrix2);
 
-        // plane.updateMatrixWorld();
-        // plane.getWorldPosition(worldPos);
+        plane.updateMatrixWorld();
+        plane.getWorldPosition(worldPos);
 
-        // camera.updateMatrixWorld();
-        // camera.getWorldPosition(worldPos2);
+        camera.updateMatrixWorld();
+        camera.getWorldPosition(worldPos2);
 
-        // camera.position.z -= 0.01;
-        // pivot.rotation.y += 0.01;
-        // console.log(worldPos);
-        // console.log(worldPos2);
+
+        console.log(worldPos);
+        console.log(worldPos2);
         
         // plane.updateMatrixWorld();
-        // plane.rotation.y = Math.atan2( (worldPos2.x - worldPos.x ), ( worldPos2.z -  worldPos.z ) );
+        var testvalue = Math.atan2( (worldPos2.x - worldPos.x ), ( worldPos2.z -  worldPos.z ) );
+
+        console.log(testvalue);
         
         // console.log( plane.rotation.y);
         // console.log( Math.atan2( (worldPos2.x - worldPos.x ), ( worldPos2.z -  worldPos.z )));
