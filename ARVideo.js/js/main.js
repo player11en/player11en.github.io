@@ -23,6 +23,8 @@
     var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     var  videoPreloaded = false;
     var startButton = document.getElementById( 'startButton' );
+    var dir = new THREE.Vector3();
+    var markerup =  new THREE.Vector3();
 
 
     initialize();
@@ -375,44 +377,52 @@
 
     function VideorotatetoCamera(){   
            
-        pivot.lookAt(camera.position);
-        pivot.rotation.z = 0;
-        
+        // pivot.lookAt(camera.position);
+        // pivot.rotation.z = 0;
+        // pivot.rotation.x = 0;
+ 
 
-        console.log(pivot.rotation.y)
+        camera.getWorldDirection( dir );
+
+        markerRoot1.getWorldDirection( markerup );
+
+        console.log(markerup);
+        console.log(dir);
+
+        //plane.position.addScaledVector( markerup, -0.01 );
+
+        var angle = THREE.Math.radToDeg(markerup.angleTo(dir));
+        console.log(angle);
+
+        if(angle > 90 ){
+            pivot.rotation.x = THREE.Math.degToRad(0);
+
+        }
+        if(angle < 90){
+            pivot.rotation.x = THREE.Math.degToRad(-90);
 
 
-        // vector = new THREE.Vector3();
-        // obj3.getWorldPosition( someOtherObject.position );
-        // vector.getWorldPosition(plane);
-        // console.log(vector);
+        }
 
-        // // console.log( plane.rotation.y);
-        // scene.updateMatrixWorld();
-        //  plane.updateMatrixWorld();
-        //  markerRoot1.updateMatrixWorld();
-        // var worldMatrix = pivot.matrixWorld;
+        // THREE.Math.radToDeg( radians );
+
+        // plane.updateMatrixWorld();
+        // var worldMatrix = plane.matrixWorld;
         // var worldPos  = new THREE.Vector3().setFromMatrixPosition(worldMatrix);
         // camera.updateMatrixWorld();
         //  var worldMatrix2 = camera.matrixWorld;
         //  var worldPos2  = new THREE.Vector3().setFromMatrixPosition(worldMatrix2);
 
-        // plane.updateMatrixWorld();
-        // plane.getWorldPosition(worldPos);
+        //  pivot.rotation.y += markerRoot1.rotation.y;
 
-        // camera.updateMatrixWorld();
-        // camera.getWorldPosition(worldPos2);
+        //  obj.rotation.y = Math.atan2( ( camera.position.x - obj.position.x ), ( camera.position.z - obj.position.z ) );
+        // console.log(pivot.rotation.y);
+        // document.getElementById("text2").innerHTML = worldPos2.x.toString() +","+ worldPos2.y.toString() +","+ worldPos2.z.toString();
+        // document.getElementById("text1").innerHTML = (Math.round(worldPos.x * 100) / 100).toFixed(2) +","+ (Math.round(worldPos.y * 100) / 100).toFixed(2) +","+ (Math.round(worldPos.z * 100) / 100).toFixed(2);
 
 
-        // console.log(worldPos);
-        // console.log(worldPos2);
-        
-        // plane.updateMatrixWorld();
-        // pivot.rotation.y = Math.atan2( (worldPos2.x - worldPos.x), ( worldPos2.z -  worldPos.z ) );
-
-        
-        //  console.log( pivot.rotation.y);
-        //  console.log( Math.atan2( (worldPos.x - worldPos2.x ), ( worldPos.z -  worldPos2.z )));
+        // document.getElementById("text4").innerHTML = camera.rotation.x.toString() +","+  camera.rotation.y.toString() +","+  camera.rotation.z.toString();
+        // document.getElementById("text3").innerHTML = (Math.round(markerRoot1.rotation.x * 100) / 100).toFixed(2) +","+ (Math.round(markerRoot1.rotation.y * 100) / 100).toFixed(2) +","+ (Math.round(markerRoot1.rotation.z * 100) / 100).toFixed(2);
     };
 
     // render the scene

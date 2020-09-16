@@ -57,6 +57,22 @@ src: url("../fonts/NittiGroteskNormal.otf")format("opentype");
     font-size:28px;
     /* font-size: 4vh; */
 }
+
+
+#text1,#text2,#text3,#text4 {
+    display: block;
+    padding-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: Black;
+    font-family: 'Nitti Grotesk';
+    font-size:28px;
+    /* font-size: 4vh; */
+}
+
+
+
 #Evospark
 {
     display: block;
