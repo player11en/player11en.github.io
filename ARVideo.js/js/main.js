@@ -26,6 +26,17 @@
     var dir = new THREE.Vector3();
     var markerup =  new THREE.Vector3();
 
+
+
+    $(document).ready(function () {
+        function reorient(e) {
+            var portrait = (window.orientation % 180 == 0);
+            $("body > div").css("-webkit-transform", !portrait ? "rotate(-90deg)" : "");
+        }
+        window.onorientationchange = reorient;
+        window.setTimeout(reorient, 0);
+        });
+
     initialize();
     intitMarker();
 
@@ -56,6 +67,8 @@
         //keep screen on
         noSleep.enable();
     }
+
+    
     
     //replayButton when Video finished
     var videoEnded = document.getElementById('videoIOS');
