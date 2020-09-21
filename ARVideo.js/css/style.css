@@ -14,15 +14,6 @@ html, body {
     touch-action: none;
 }
 
-
-@media only screen and (orientation:landscape){
-    body {
-      height: 100vw;
-      transform: rotate(90deg);
-    }
-  }
-
-
 @font-face {
 font-family: "Nitti Grotesk";
 src: url("../fonts/NittiGroteskNormal.otf")format("opentype");
