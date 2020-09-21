@@ -92,15 +92,11 @@
         <!-- Information window, hold camera on Pattern -->
         <div id="Container">
             <div id= "text">Richten Sie die Kamera auf diesen Marker.</div>
-            <img id="pattern" src="img/pattern-EvosparkLogoBlack_0_8_Transparent_Small.png" alt="Evospark-Pattern">          
-        
-            <div id="overlay">
-                <button id="startButton">Play</button>
-            </div>
+            <img id="pattern" src="img/KonPart_LogoTransparent.png" alt="Evospark-Pattern">          
         </div>
-
+        
         <div id="logo">
-            <a href="http://kon-part.de"><img width=45px height= 45px class="logo" src="img/logo.jpg" alt="KON-PART"></a>
+            <a href="http://kon-part.de"><img class="logo" src="img/logo.jpg" alt="KON-PART"></a>
         </div>
         <div id="mute" class="volume" onclick="muteAudio()">
             <img src="img/volume-off.png" alt="Evospark Pattern">
@@ -119,19 +115,7 @@
 
         <div id="noMarker" onclick="playWithoutMarker()">
             Ich habe keinen Marker
-        </div>
-
-
-        <h3 id = "text1">MarkerPos</h3>
-
-        <h3 id = "text3">MarkerRot</h3>
-        
-        <h3 id = "text2">CameraPos</h3>
-        
-        <h3 id = "text4">CameraRot</h3>
-
-
-      
+        </div>      
         
         <video id="videoIOS" autoplay loop muted playsinline webkit-playsinline style="display:none">
             <source src="video/KundenVideoTopmp4.mp4" type='video/mp4;'>

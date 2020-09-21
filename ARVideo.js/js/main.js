@@ -26,33 +26,54 @@
     var dir = new THREE.Vector3();
     var markerup =  new THREE.Vector3();
 
-
     initialize();
     intitMarker();
-    startButton.addEventListener( 'click', function () {
+
+    if(isiOSDevice() || isSafari){
+
+        var overlay = document.createElement('div');
+        overlay.id = "overlay";
+
+        startButton = document.createElement('Button');
+        startButton.id = "startButton"; 
+        startButton.textContent = 'Video Starten';
+        overlay.appendChild(startButton);
+        var container = document.getElementById('Container');
+        document.documentElement.appendChild(overlay);
+        container.appendChild(overlay);
+
+        startButton.addEventListener( 'click', function () {
+            loadVideo();
+            var overlay = document.getElementById('overlay');
+            overlay.remove();
+            //keep screen on
+            noSleep.enable();
+        }, false );
+
+    }
+    else{
         loadVideo();
         //keep screen on
         noSleep.enable();
-    }, false );
-
-
+    }
+    
     //replayButton when Video finished
     var videoEnded = document.getElementById('videoIOS');
     videoEnded.addEventListener('ended', function (){
         console.log("videoende");
         var overlay = document.createElement('div');
-        overlay.id = "overlay";
+        overlay.id = "replayButton";
 
         startButton = document.createElement('Button');
         startButton.id = "startButton"; 
         startButton.textContent = 'Nochmal abspielen';
 
         overlay.appendChild(startButton);
-        document.documentElement.appendChild(overlay);
+       
 
         startButton.addEventListener( 'click', function () {
             playVideo();
-            var overlay = document.getElementById('overlay');
+            var overlay = document.getElementById('replayButton');
             overlay.remove();
         }, false );
     });
@@ -144,7 +165,7 @@
         scene.add(markerRoot1);
         markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
             type: 'pattern',
-            patternUrl: "patt/pattern-EvosparkLogoBlack_0_8.patt",
+            patternUrl: "patt/pattern-Konpart.patt",
             smooth: true,
             // number of matrices to smooth tracking over, more = smoother but slower follow
             smoothCount:4,
@@ -154,6 +175,10 @@
             smoothThreshold: 2
         }) 
        
+        var axesHelper = new THREE.AxesHelper( 5 );
+        // scene.add( axesHelper );
+
+        markerRoot1.add (axesHelper);
 
         // build a smoothedControls
         //keeps object at last marker position even if Marker ist lost
@@ -180,9 +205,6 @@
     // setup markerRoots
     ////////////////////////////////////////////////////////////
     function loadVideo(){
-
-        var overlay = document.getElementById('overlay');
-        overlay.remove();
         // startButton.style.display ="none";
       
         //only in console --> testing loading  time 
@@ -206,9 +228,6 @@
             plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 2), ChromaKeyMaterial);
             plane.position.set(0,1,0);
 
-            var red = new THREE.MeshBasicMaterial({color: 'red'}); 
-            var plane2 = new THREE.Mesh(new THREE.PlaneGeometry(1, 4), red);
-            plane2.position.set(0,0,0);
             //pivot used to change plane orgin
             pivot = new THREE.Group();
             pivot.position.set( 0.0, 0.0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
@@ -216,7 +235,6 @@
            
 
             pivot.add( plane );
-            pivot.add( plane2 );
 
             markerRoot1.add(pivot);
             smoothedRoot.add(pivot);
@@ -251,8 +269,8 @@
                 sound = new THREE.Audio(listener);
     
                 var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
-                plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 2), material);
-                plane.position.set(0,1,0);
+                plane = new THREE.Mesh(new THREE.PlaneGeometry(2, 4), material);
+                plane.position.set(0,2,0);
     
                     
                 pivot = new THREE.Group();
@@ -263,7 +281,7 @@
                 markerRoot1.add(pivot);
                 smoothedRoot.add(pivot);
             };
-            videoPreloaded = true;
+            // videoPreloaded = true;
             video.pause();
         }     
     };
@@ -357,8 +375,8 @@
                 camera.quaternion = new THREE.Vector3(0,0,0);
                 pivot.position.copy(camera.position);
                 pivot.quaternion.copy(camera.quaternion);
-                pivot.position.z = -4;
-                pivot.position.y = -1;
+                pivot.position.z = -6;
+                pivot.position.y = -2;
             }
         }
     }
@@ -375,34 +393,48 @@
         }	    
     };    
 
+    document.addEventListener("keydown", onDocumentKeyDown, false);
+    function onDocumentKeyDown(event) {
+        var keyCode = event.which;
+        if (keyCode == 87) {
+            plane.position.addScaledVector( markerup, -0.01 );
+        }
+    };
+
     function VideorotatetoCamera(){   
-           
         // pivot.lookAt(camera.position);
-        // pivot.rotation.z = 0;
-        // pivot.rotation.x = 0;
- 
-
-        camera.getWorldDirection( dir );
-
-        markerRoot1.getWorldDirection( markerup );
-
-        console.log(markerup);
-        console.log(dir);
-
-        //plane.position.addScaledVector( markerup, -0.01 );
-
-        var angle = THREE.Math.radToDeg(markerup.angleTo(dir));
-        console.log(angle);
-
-        if(angle > 90 ){
-            pivot.rotation.x = THREE.Math.degToRad(0);
-
-        }
-        if(angle < 90){
-            pivot.rotation.x = THREE.Math.degToRad(-90);
 
 
-        }
+        // camera.getWorldDirection( dir );
+
+
+        // // markerRoot1.up.set(0,-1,0);
+        // markerRoot1.getWorldDirection( markerup );
+        
+       
+
+        // console.log(markerup);
+        // console.log(dir);
+
+        // // plane.position.addScaledVector( markerup, -0.01 );
+
+        // var newdir = new THREE.Vector3();
+
+        // var angle = THREE.Math.radToDeg(newdir.subVectors( markerup, dir ).normalize());
+
+        
+
+
+        // console.log(angle);
+
+        // if(angle > 90 ){
+        //     pivot.rotation.x = THREE.Math.degToRad(0);
+
+        // }
+        // if(angle < 90){
+        //     pivot.rotation.x = THREE.Math.degToRad(-90);
+
+        // }
 
         // THREE.Math.radToDeg( radians );
 
@@ -417,12 +449,6 @@
 
         //  obj.rotation.y = Math.atan2( ( camera.position.x - obj.position.x ), ( camera.position.z - obj.position.z ) );
         // console.log(pivot.rotation.y);
-        // document.getElementById("text2").innerHTML = worldPos2.x.toString() +","+ worldPos2.y.toString() +","+ worldPos2.z.toString();
-        // document.getElementById("text1").innerHTML = (Math.round(worldPos.x * 100) / 100).toFixed(2) +","+ (Math.round(worldPos.y * 100) / 100).toFixed(2) +","+ (Math.round(worldPos.z * 100) / 100).toFixed(2);
-
-
-        // document.getElementById("text4").innerHTML = camera.rotation.x.toString() +","+  camera.rotation.y.toString() +","+  camera.rotation.z.toString();
-        // document.getElementById("text3").innerHTML = (Math.round(markerRoot1.rotation.x * 100) / 100).toFixed(2) +","+ (Math.round(markerRoot1.rotation.y * 100) / 100).toFixed(2) +","+ (Math.round(markerRoot1.rotation.z * 100) / 100).toFixed(2);
     };
 
     // render the scene
@@ -446,10 +472,9 @@
         onRenderFcts.forEach(function(onRenderFct){
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
-                if(videoPreloaded){
                 checkMarker();
-                }
-                //updateGreenscreenmaterial
+
+               //updateGreenscreenmaterial
                 if(videoPreloaded && isiOSDevice() || videoPreloaded && isSafari){
                     ChromaKeyMaterial.update();
                 }
