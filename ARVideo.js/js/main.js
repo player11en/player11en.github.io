@@ -81,11 +81,6 @@
     ////init --> create Scene, Camera, Light
     function initialize()
     { 
-
-        document.documentElement.requestFullscreen();
-        screen.orientation.lock('portrait').then(null, function(error) {
-        document.exitFullscreen();
-        });
         //antialias, sortObjects and logarithmicDepthBuffer used to prevent z-fighting
         // alpha used for transparent Background
         renderer = new THREE.WebGLRenderer({
