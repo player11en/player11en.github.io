@@ -65,11 +65,6 @@
             overlay.remove();
         }, false );
     });
-
-
-    // window.onorientationchange = function(event) { 
-    //     onResize();    
-    // };
   
     ////init --> create Scene, Camera, Light
     function initialize()
@@ -158,7 +153,7 @@
         scene.add(markerRoot1);
         markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
             type: 'pattern',
-            patternUrl: "patt/pattern-Konpart.patt",
+            patternUrl: "patt/pattern-konpart_Marker0_8.patt",
             smooth: true,
             // number of matrices to smooth tracking over, more = smoother but slower follow
             smoothCount:4,
@@ -435,7 +430,7 @@
         //  pivot.rotation.y = Math.atan2( ( camera.position.x - obj.position.x ), ( camera.position.z - obj.position.z ));
         //  pivot.rotation.y = pivot.rotation.y - markerRoot1.rotation.y;
        
-        //  pivot.rotation.y = Math.atan2( ( camera.position.x - obj.position.x ), ( camera.position.z - obj.position.z ) );
+        pivot.rotation.y = Math.atan2( ( camera.position.x - markerRoot1.position.x ), ( camera.position.z - markerRoot1.position.z ) );
         // console.log(pivot.rotation.y);
     };
 
