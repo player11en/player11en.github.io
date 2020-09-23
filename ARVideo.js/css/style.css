@@ -185,5 +185,3 @@ src: url("../fonts/NittiGroteskNormal.otf")format("opentype");
     padding: 16px 40px;
     border-radius: 10px;
 }
-
-body > div { -webkit-transition: all 1s ease-in-out; }

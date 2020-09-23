@@ -26,20 +26,11 @@
     var dir = new THREE.Vector3();
     var markerup =  new THREE.Vector3();
 
-
-
-    $(document).ready(function () {
-        function reorient(e) {
-            var portrait = (window.orientation % 180 == 0);
-            $("body > div").css("-webkit-transform", !portrait ? "rotate(-90deg)" : "");
-        }
-        window.onorientationchange = reorient;
-        window.setTimeout(reorient, 0);
-        });
-
     initialize();
     intitMarker();
 
+    //StartButton for iOS
+    //Interaktion required for Videoplay;
     if(isiOSDevice() || isSafari){
 
         var overlay = document.createElement('div');
@@ -68,8 +59,6 @@
         noSleep.enable();
     }
 
-    
-    
     //replayButton when Video finished
     var videoEnded = document.getElementById('videoIOS');
     videoEnded.addEventListener('ended', function (){
@@ -417,15 +406,11 @@
     function VideorotatetoCamera(){   
         // pivot.lookAt(camera.position);
 
-
         // camera.getWorldDirection( dir );
-
 
         // // markerRoot1.up.set(0,-1,0);
         // markerRoot1.getWorldDirection( markerup );
         
-       
-
         // console.log(markerup);
         // console.log(dir);
 
@@ -434,9 +419,6 @@
         // var newdir = new THREE.Vector3();
 
         // var angle = THREE.Math.radToDeg(newdir.subVectors( markerup, dir ).normalize());
-
-        
-
 
         // console.log(angle);
 
@@ -459,8 +441,10 @@
         //  var worldPos2  = new THREE.Vector3().setFromMatrixPosition(worldMatrix2);
 
         //  pivot.rotation.y += markerRoot1.rotation.y;
-
-        //  obj.rotation.y = Math.atan2( ( camera.position.x - obj.position.x ), ( camera.position.z - obj.position.z ) );
+        //  pivot.rotation.y = Math.atan2( ( camera.position.x - obj.position.x ), ( camera.position.z - obj.position.z ));
+        //  pivot.rotation.y = pivot.rotation.y - markerRoot1.rotation.y;
+       
+        //  pivot.rotation.y = Math.atan2( ( camera.position.x - obj.position.x ), ( camera.position.z - obj.position.z ) );
         // console.log(pivot.rotation.y);
     };
 
