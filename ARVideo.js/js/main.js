@@ -25,11 +25,9 @@
     var startButton = document.getElementById( 'startButton' );
     var dir = new THREE.Vector3();
     var markerup =  new THREE.Vector3();
-    var alowed = window.screen.orientation.lock("portrait");
 
     initialize();
     intitMarker();
-    alowed;
     //StartButton for iOS
     //Interaktion required for Videoplay;
     if(isiOSDevice() || isSafari){
@@ -48,27 +46,30 @@
     }
 
     
-
     //replayButton when Video finished
     var videoEnded = document.getElementById('videoIOS');
     videoEnded.addEventListener('ended', function (){
-        console.log("videoende");
+       
         var overlay = document.createElement('div');
         overlay.id = "replayButton";
 
-        startButton = document.createElement('Button');
-        startButton.id = "startButton"; 
-        startButton.textContent = 'Nochmal abspielen';
+        var replayButton = document.createElement('Button');
+        replayButton.id = "startButton"; 
+        replayButton.textContent = 'Nochmal abspielen';
+        document.documentElement.appendChild(overlay);
+        overlay.appendChild(replayButton);
 
-        overlay.appendChild(startButton);
-       
-
-        startButton.addEventListener( 'click', function () {
+        replayButton.addEventListener( 'click', function () {
             playVideo();
             var overlay = document.getElementById('replayButton');
             overlay.remove();
         }, false );
     });
+
+
+    window.onorientationchange = function(event) { 
+        onResize();    
+    };
   
     ////init --> create Scene, Camera, Light
     function initialize()
