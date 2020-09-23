@@ -23,6 +23,10 @@ src: url("../fonts/NittiGroteskNormal.otf")format("opentype");
     font-family: 'Nitti Grotesk';
 }
 
+p{ 
+    text-align: center
+}
+
 #Container{
     background-color: lightgrey;
     display: block;
@@ -138,6 +142,7 @@ src: url("../fonts/NittiGroteskNormal.otf")format("opentype");
     text-decoration: none;
     display: inline-block;
     font-size: 16px;    
+
 }
 
 .button-right{

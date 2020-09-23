@@ -25,39 +25,29 @@
     var startButton = document.getElementById( 'startButton' );
     var dir = new THREE.Vector3();
     var markerup =  new THREE.Vector3();
+    var alowed = window.screen.orientation.lock("portrait");
 
     initialize();
     intitMarker();
-
+    alowed;
     //StartButton for iOS
     //Interaktion required for Videoplay;
     if(isiOSDevice() || isSafari){
 
-        var overlay = document.createElement('div');
-        overlay.id = "overlay";
-
-        startButton = document.createElement('Button');
-        startButton.id = "startButton"; 
-        startButton.textContent = 'Video Starten';
-        overlay.appendChild(startButton);
-        var container = document.getElementById('Container');
-        document.documentElement.appendChild(overlay);
-        container.appendChild(overlay);
-
+        $("#iOSInfoModal").modal();
+        startButton = document.getElementById('iOSInfoModal');
         startButton.addEventListener( 'click', function () {
             loadVideo();
-            var overlay = document.getElementById('overlay');
-            overlay.remove();
-            //keep screen on
             noSleep.enable();
         }, false );
-
     }
     else{
         loadVideo();
         //keep screen on
         noSleep.enable();
     }
+
+    
 
     //replayButton when Video finished
     var videoEnded = document.getElementById('videoIOS');
@@ -227,8 +217,8 @@
             ChromaKeyMaterial = new THREEx.ChromaKeyMaterial(0xd400);
 
             //add material to plane
-            plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 2), ChromaKeyMaterial);
-            plane.position.set(0,1,0);
+            plane = new THREE.Mesh(new THREE.PlaneGeometry(2, 4), ChromaKeyMaterial);
+            plane.position.set(0,2,0);
 
             //pivot used to change plane orgin
             pivot = new THREE.Group();
@@ -283,7 +273,7 @@
                 markerRoot1.add(pivot);
                 smoothedRoot.add(pivot);
             };
-            // videoPreloaded = true;
+            videoPreloaded = true;
             video.pause();
         }     
     };
@@ -469,8 +459,8 @@
         onRenderFcts.forEach(function(onRenderFct){
             if(ARInitRunning){
                 onRenderFct(deltaMsec/1000, nowMsec/1000)
+                if(videoPreloaded)
                 checkMarker();
-
                //updateGreenscreenmaterial
                 if(videoPreloaded && isiOSDevice() || videoPreloaded && isSafari){
                     ChromaKeyMaterial.update();

@@ -176,7 +176,7 @@ ARjs.Source.prototype._initSourceWebcam = function(onReady, onError) {
 			}
 		}
 		else{
-			$("#KamerazugriffVerweigert").modal();	
+			$("#KamerazugriffVerweigert").modal();
 		}
 
 
