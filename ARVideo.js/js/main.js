@@ -391,7 +391,8 @@
 
     function VideorotatetoCamera(){   
         // pivot.lookAt(camera.position);
-
+        // var targetPostition = new THREE.Vector3( camera.position.x, pivot.position.y, camera.position.z ) ;
+        //     pivot.lookAt( targetPostition ) ;
         // camera.getWorldDirection( dir );
 
         // // markerRoot1.up.set(0,-1,0);
@@ -430,7 +431,7 @@
         //  pivot.rotation.y = Math.atan2( ( camera.position.x - obj.position.x ), ( camera.position.z - obj.position.z ));
         //  pivot.rotation.y = pivot.rotation.y - markerRoot1.rotation.y;
        
-        pivot.rotation.y = Math.atan2( ( camera.position.x - markerRoot1.position.x ), ( camera.position.z - markerRoot1.position.z ) );
+        pivot.rotation.y = Math.atan2( ( camera.position.x - markerRoot1.position.x ), ( camera.position.z - markerRoot1.position.z ));
         // console.log(pivot.rotation.y);
     };
 
