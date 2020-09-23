@@ -67,9 +67,9 @@
     });
 
 
-    window.onorientationchange = function(event) { 
-        onResize();    
-    };
+    // window.onorientationchange = function(event) { 
+    //     onResize();    
+    // };
   
     ////init --> create Scene, Camera, Light
     function initialize()
