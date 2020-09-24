@@ -123,7 +123,7 @@
 
             detectionMode: 'mono',
             cameraParametersUrl: 'data/camera_para.dat',
-            patternRatio:0.75,
+            patternRatio:0.8,
             canvasWidth: 80*3,
             canvasHeight: 60*3,
             maxDetectionRate: updaterate,
@@ -153,7 +153,7 @@
         scene.add(markerRoot1);
         markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
             type: 'pattern',
-            patternUrl: "patt/pattern-KonPartLogoOben.patt",
+            patternUrl: "patt/pattern-konpart_Marker0_8.patt",
             smooth: true,
             // number of matrices to smooth tracking over, more = smoother but slower follow
             smoothCount:4,
