@@ -162,11 +162,6 @@
             // threshold for smoothing, will keep still unless enough matrices are over tolerance
             smoothThreshold: 2
         }) 
-       
-        var axesHelper = new THREE.AxesHelper( 5 );
-        // scene.add( axesHelper );
-
-        markerRoot1.add (axesHelper);
 
         // build a smoothedControls
         //keeps object at last marker position even if Marker ist lost
@@ -360,9 +355,9 @@
                 markerRoot1.remove(pivot);
                 camera.add(pivot);
                 camera.position = new THREE.Vector3(0,0,0);
-                camera.quaternion = new THREE.Vector3(0,0,0);
+                camera.rotation = new THREE.Vector3(0,0,0);
                 pivot.position.copy(camera.position);
-                pivot.quaternion.copy(camera.quaternion);
+                pivot.rotation.copy(camera.rotation);
                 pivot.position.z = -6;
                 pivot.position.y = -2;
             }
@@ -390,7 +385,7 @@
     };
 
     function VideorotatetoCamera(){   
-        // pivot.lookAt(camera.position);
+        pivot.lookAt(camera.position);
         // var targetPostition = new THREE.Vector3( camera.position.x, pivot.position.y, camera.position.z ) ;
         //     pivot.lookAt( targetPostition ) ;
         // camera.getWorldDirection( dir );
@@ -431,7 +426,7 @@
         //  pivot.rotation.y = Math.atan2( ( camera.position.x - obj.position.x ), ( camera.position.z - obj.position.z ));
         //  pivot.rotation.y = pivot.rotation.y - markerRoot1.rotation.y;
        
-        pivot.rotation.y = Math.atan2( ( camera.position.x - markerRoot1.position.x ), ( camera.position.z - markerRoot1.position.z ));
+        // pivot.rotation.y = Math.atan2( ( camera.position.x - markerRoot1.position.x ), ( camera.position.z - markerRoot1.position.z ));
         // console.log(pivot.rotation.y);
     };
 
