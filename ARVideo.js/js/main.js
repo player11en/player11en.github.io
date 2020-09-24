@@ -7,6 +7,7 @@
     var arToolkitSource, arToolkitContext;
     var ChromaKeyMaterial;
     var pivot;
+    var emptyonMarkerRoot1;
     var markerRoot1,smoothedRoot;
     var ARInitRunning = false;
     var videoTexture;
@@ -211,17 +212,16 @@
             plane = new THREE.Mesh(new THREE.PlaneGeometry(2, 4), ChromaKeyMaterial);
             plane.position.set(0,2,0);
 
-            //pivot used to change plane orgin
+            emptyonMarkerRoot1 = new THREE.Group();
+            emptyonMarkerRoot1.position.set( 0, 0, 0 ); 
+
             pivot = new THREE.Group();
-            pivot.position.set( 0.0, 0.0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
-            markerRoot1.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY
-           
-
+            pivot.position.set( 0, 0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
             pivot.add( plane );
+            emptyonMarkerRoot1.add(pivot);
 
-            markerRoot1.add(pivot);
-            smoothedRoot.add(pivot);
-
+            markerRoot1.add(emptyonMarkerRoot1);
+        
             //update Greenscreenkeyed after its loaded
             videoPreloaded = true;
             video.pause();
@@ -254,15 +254,16 @@
                 var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
                 plane = new THREE.Mesh(new THREE.PlaneGeometry(2, 4), material);
                 plane.position.set(0,2,0);
-    
+
+                emptyonMarkerRoot1 = new THREE.Group();
+                emptyonMarkerRoot1.position.set( 0, 0, 0 ); 
                     
                 pivot = new THREE.Group();
                 pivot.position.set( 0, 0, 0 ); // MOVE THE PIVOT BACK TO WORLD ORIGN
-                markerRoot1.add( pivot ); // THIS ADDS THE PIVOT TO THE CENTRE OF THE GEOMOETRY, WHICH WAS THEN ADDING MESH2 IN THE WRONG PLACE
                 pivot.add( plane );
+                emptyonMarkerRoot1.add(pivot);
     
-                markerRoot1.add(pivot);
-                smoothedRoot.add(pivot);
+                markerRoot1.add(emptyonMarkerRoot1);
             };
             videoPreloaded = true;
             video.pause();
@@ -386,48 +387,7 @@
 
     function VideorotatetoCamera(){   
         pivot.lookAt(camera.position);
-        // var targetPostition = new THREE.Vector3( camera.position.x, pivot.position.y, camera.position.z ) ;
-        //     pivot.lookAt( targetPostition ) ;
-        // camera.getWorldDirection( dir );
-
-        // // markerRoot1.up.set(0,-1,0);
-        // markerRoot1.getWorldDirection( markerup );
-        
-        // console.log(markerup);
-        // console.log(dir);
-
-        // // plane.position.addScaledVector( markerup, -0.01 );
-
-        // var newdir = new THREE.Vector3();
-
-        // var angle = THREE.Math.radToDeg(newdir.subVectors( markerup, dir ).normalize());
-
-        // console.log(angle);
-
-        // if(angle > 90 ){
-        //     pivot.rotation.x = THREE.Math.degToRad(0);
-
-        // }
-        // if(angle < 90){
-        //     pivot.rotation.x = THREE.Math.degToRad(-90);
-
-        // }
-
-        // THREE.Math.radToDeg( radians );
-
-        // plane.updateMatrixWorld();
-        // var worldMatrix = plane.matrixWorld;
-        // var worldPos  = new THREE.Vector3().setFromMatrixPosition(worldMatrix);
-        // camera.updateMatrixWorld();
-        //  var worldMatrix2 = camera.matrixWorld;
-        //  var worldPos2  = new THREE.Vector3().setFromMatrixPosition(worldMatrix2);
-
-        //  pivot.rotation.y += markerRoot1.rotation.y;
-        //  pivot.rotation.y = Math.atan2( ( camera.position.x - obj.position.x ), ( camera.position.z - obj.position.z ));
-        //  pivot.rotation.y = pivot.rotation.y - markerRoot1.rotation.y;
-       
-        // pivot.rotation.y = Math.atan2( ( camera.position.x - markerRoot1.position.x ), ( camera.position.z - markerRoot1.position.z ));
-        // console.log(pivot.rotation.y);
+        pivot.rotation.z = 0;
     };
 
     // render the scene
