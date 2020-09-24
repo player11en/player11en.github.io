@@ -153,7 +153,7 @@
         scene.add(markerRoot1);
         markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
             type: 'pattern',
-            patternUrl: "patt/pattern-konpart_Marker0_8.patt",
+            patternUrl: "patt/pattern-KonPart_LogoOben.patt",
             smooth: true,
             // number of matrices to smooth tracking over, more = smoother but slower follow
             smoothCount:4,
