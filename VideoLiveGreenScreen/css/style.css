@@ -1,0 +1,96 @@
+html, body {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+        
+}
+
+#renderCanvas {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+
+#canvas{
+    width:960px;
+    height: 540px;
+    margin: 0px auto;
+    border: 1px solid red;
+    
+}
+#video{
+    width:960px;
+    height: 540px;
+    
+}
+
+@font-face {
+font-family: "Nitti Grotesk";
+src: url("../fonts/NittiGroteskNormal.otf")format("opentype");
+} 
+
+#text{
+    display: block;
+    padding-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: Black;
+    font-family: 'Nitti Grotesk';
+    font-size:28px;
+    /* font-size: 4vh; */
+}
+
+#mute{
+    display: none;
+}
+
+#play{
+    display: block;
+}
+
+.volume{
+    position: fixed;
+    opacity: 0.5;
+    top: 20px;
+    right: 10px;
+    z-index: 2;
+}
+
+.button{
+    width: 84px;
+    background-color: #000;
+    border: none;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;    
+}
+
+
+#overlay {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0,0,0,0.7);
+}
+
+#overlay button {
+    background: #ffffff;
+    border: 0;
+    color: #000000;
+    padding: 16px 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
