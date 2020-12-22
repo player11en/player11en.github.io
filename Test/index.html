@@ -1,0 +1,58 @@
+
+
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Important setup for scale on Samsung internet Browser -->
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>AR Postkarte</title>
+	<!-- include three.js library -->
+    <script src="js/three.min.js"></script>
+    <!-- include three.js library -->
+
+    <!-- include bootstrap/jquery -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+
+    <!-- include jsartookit -->
+    <script src="js/ar.js"></script>
+
+	<!-- include threex.artoolkit -->
+	<script src="threex/threex-artoolkitsource.js"></script>
+	<script src="threex/threex-artoolkitcontext.js"></script>
+	<script src="threex/threex-arbasecontrols.js"></script>
+    <script src="threex/threex-armarkercontrols.js"></script>
+    <script src="threex/threex-armarkercloak.js"></script>
+    <script src="threex/threex-armarkerhelper.js"></script>
+    <script src="threex/threex-arsmoothedcontrols.js"></script>
+    <script src="threex/threex-arvideoinwebgl.js"></script>
+    <script src="threex/threex-artoolkitprofile.js"></script>
+    <script src="threex/threex-hittesting-plane.js"></script>
+    <script src="threex/threex-ChromaKeyMaterial.js"></script>
+    
+    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+    <body>
+        <!-- <canvas id="canvas"></canvas> -->
+        <video id="video" style="display:none" width="960" height="540" autoplay playsinline></video>
+        <!-- <img id="image" src="image/anna.png"  width="960" height="540" alt="anna" crossorigin='anonymous'> -->
+        
+        <div id="mute" class="volume" onclick="muteAudio()">
+            <img src="image/muteicon.png" alt="SoundOff">
+        </div>
+        <div id="play" class="volume" onclick="muteAudio()">
+            <img src="image/playicon.png" alt="SoundOn">
+        </div>
+
+        <!-- <div id="overlay">
+			<button id="startButton">Play</button>
+        </div> -->
+        
+        <script type="text/javascript" src="js/main.js"></script>  
+
+    </body>
+</html>
