@@ -79,6 +79,43 @@
                     });
                 }
             });
+
+            AFRAME.registerComponent("showtext", {
+                init: function() {
+                    // var skyEl = this.el.sceneEl.querySelector("#sky");
+                    var protoworld2 = true;
+
+                    this.el.addEventListener('click', function(){
+                        if(protoworld2 == true){
+                            protoworld2 = false;
+                            // animation
+                            skyEl.emit('fadeout');
+
+                            setTimeout(function () {
+                                skyEl.setAttribute("src", "#Halle1");
+                            }, 1000);
+                                
+                            setTimeout(function () {
+                                skyEl.emit('fadein');
+                            }, 1000);
+                        }
+                        else{   
+                            protoworld2 = true;
+                             // animation
+                            skyEl.emit('fadeout');
+
+                            setTimeout(function () {
+                                skyEl.setAttribute("src", "#prototyp");
+                            }, 1000);
+                            
+                            setTimeout(function () {
+                                skyEl.emit('fadein');
+                            }, 1000);
+                        }
+                        
+                    });
+                }
+            });
         </script>
 
         <!-- Basic A-Frame Scene with multiple images -->
@@ -97,7 +134,10 @@
 
             <!-- animation started by changescene-function in Sphere -->
             <a-sphere class="collidable" position="0 1.25 -5" radius="1.25" color="#EF2D5E" changescene shadow></a-sphere>
-            <a-sphere class="collidable" position="5 1.25 -5" radius="1.25" color="#0000FF" changescene shadow></a-sphere>
-        </a-scene>
+            <a-sphere class="collidable" position="5 1.25 -5" radius="1.25" color="#0000FF" showtext shadow></a-sphere>
+            
+            <a-entity mixin="marker" position="2.5 1 0.01"></a-entity>
+                <a-entity position="2.5 1 0" text="anchor: right; width: 1.5; color: white; value: [RIGHT ANCHOR] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam">
+            </a-entity>
     </body>
 </html>
