@@ -80,49 +80,13 @@
                 }
             });
 
-            AFRAME.registerComponent("showtext", {
-                init: function() {
-                    // var skyEl = this.el.sceneEl.querySelector("#sky");
-                    var protoworld2 = true;
-
-                    this.el.addEventListener('click', function(){
-                        if(protoworld2 == true){
-                            protoworld2 = false;
-                            // animation
-                            skyEl.emit('fadeout');
-
-                            setTimeout(function () {
-                                skyEl.setAttribute("src", "#Halle1");
-                            }, 1000);
-                                
-                            setTimeout(function () {
-                                skyEl.emit('fadein');
-                            }, 1000);
-                        }
-                        else{   
-                            protoworld2 = true;
-                             // animation
-                            skyEl.emit('fadeout');
-
-                            setTimeout(function () {
-                                skyEl.setAttribute("src", "#prototyp");
-                            }, 1000);
-                            
-                            setTimeout(function () {
-                                skyEl.emit('fadein');
-                            }, 1000);
-                        }
-                        
-                    });
-                }
-            });
         </script>
-
         <!-- Basic A-Frame Scene with multiple images -->
         <a-scene loading-screen="dotsColor: red; backgroundColor: black" background="color: #ECECEC">
             <a-assets>    
                 <img id="prototyp" src="image/prototyp.jpg">
                 <img id="Halle1" src="image/Halle1.jpg">
+                <a-mixin id="marker" geometry="primitive: plane; width: 0.02; height: 0.02" material="color: red"></a-mixin>
             </a-assets>
             <a-camera wasd-controls-enabled="false" cursor="rayOrigin: mouse"  raycaster="objects: .collidable"></a-camera>
 
@@ -135,9 +99,5 @@
             <!-- animation started by changescene-function in Sphere -->
             <a-sphere class="collidable" position="0 1.25 -5" radius="1.25" color="#EF2D5E" changescene shadow></a-sphere>
             <a-sphere class="collidable" position="5 1.25 -5" radius="1.25" color="#0000FF" showtext shadow></a-sphere>
-            
-            <a-entity mixin="marker" position="2.5 1 0.01"></a-entity>
-                <a-entity position="2.5 1 0" text="anchor: right; width: 1.5; color: white; value: [RIGHT ANCHOR] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam">
-            </a-entity>
     </body>
 </html>
