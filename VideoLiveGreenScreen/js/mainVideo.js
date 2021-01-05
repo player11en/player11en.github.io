@@ -72,6 +72,9 @@ function init() {
     mesh2.rotation.y = -1.6;
     scene.add(mesh2 );
 
+    function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
+    function onError(xhr) { console.log( 'An error happened' ); }
+
         ////////////////////////////////////////////////////////////
         var loader = new THREE.GLTFLoader();
 
