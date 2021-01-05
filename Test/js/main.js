@@ -41,6 +41,11 @@ function init() {
 
     scene.add( mesh );
 
+    //only in console --> testing loading  time 
+    function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
+    function onError(xhr) { console.log( 'An error happened' ); }
+
+
     var loader = new THREE.GLTFLoader();
 
     // Load a glTF resource
@@ -78,7 +83,7 @@ function init() {
             console.log( 'An error happened' );
         }
     );
-    
+
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( window.innerWidth, window.innerHeight );
