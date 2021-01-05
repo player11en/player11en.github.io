@@ -11,8 +11,11 @@ animate();
 
 function init() {
 
-    camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
-    camera.position.z = 20;
+    camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    camera.position.z = -7;
+    camera.position.x = -4;
+    camera.position.y = 2;
+    camera.rotation.y = -1.6;
     
 
     scene = new THREE.Scene();
@@ -26,20 +29,24 @@ function init() {
     videoTexture.format = THREE.RGBAFormat;
 
     
-
+    let ambientLight = new THREE.AmbientLight( 0xcccccc, 1.0 );
+    scene.add( ambientLight );
 
     const texture2 = new THREE.TextureLoader().load( 'https://upload.wikimedia.org/wikipedia/commons/6/62/Starsinthesky.jpg' );
     var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
-    const geometry = new THREE.PlaneBufferGeometry( 16, 9, material );
+    const geometry = new THREE.PlaneBufferGeometry( 9, 16, material );
     const m2 = new THREE.MeshBasicMaterial({color: 'red'}); 
-    geometry.scale( 1, 1, 1 );
+    geometry.scale( 0.1, 0.1, 0.1 );
     ChromaKeyMaterial = new THREEx.ChromaKeyMaterial(0xd400);
 
-    var mesh = new THREE.Mesh( geometry, ChromaKeyMaterial );
+    var mesh1 = new THREE.Mesh( geometry, ChromaKeyMaterial );
 
-    
+    mesh1.position.x = 3;
+    mesh1.position.y = 1;
+    mesh1.position.z = -7;
+    mesh1.rotation.y = -1.6;
 
-    scene.add( mesh );
+    scene.add( mesh1 );
 
     //only in console --> testing loading  time 
     function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
