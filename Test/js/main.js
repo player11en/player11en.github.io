@@ -11,11 +11,8 @@ animate();
 
 function init() {
 
-    camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 1000 );
-    camera.position.z = -7;
-    camera.position.x = -4;
-    camera.position.y = 2;
-    camera.rotation.y = -1.6;
+    camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
+    camera.position.z = 20;
     
 
     scene = new THREE.Scene();
@@ -29,28 +26,18 @@ function init() {
     videoTexture.format = THREE.RGBAFormat;
 
     
-    let ambientLight = new THREE.AmbientLight( 0xcccccc, 1.0 );
-    scene.add( ambientLight );
+
 
     const texture2 = new THREE.TextureLoader().load( 'https://upload.wikimedia.org/wikipedia/commons/6/62/Starsinthesky.jpg' );
     var material = new THREE.MeshBasicMaterial({ map : videoTexture, transparent : true, side: THREE.DoubleSide });
-    const geometry = new THREE.PlaneBufferGeometry( 9, 16, material );
+    const geometry = new THREE.PlaneBufferGeometry( 16, 9, material );
     const m2 = new THREE.MeshBasicMaterial({color: 'red'}); 
-    geometry.scale( 0.1, 0.1, 0.1 );
+    geometry.scale( 1, 1, 1 );
     ChromaKeyMaterial = new THREEx.ChromaKeyMaterial(0xd400);
 
-    var mesh1 = new THREE.Mesh( geometry, ChromaKeyMaterial );
+    var mesh = new THREE.Mesh( geometry, ChromaKeyMaterial );
 
-    mesh1.position.x = 3;
-    mesh1.position.y = 1;
-    mesh1.position.z = -7;
-    mesh1.rotation.y = -1.6;
-
-    scene.add( mesh1 );
-
-    //only in console --> testing loading  time 
-    function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
-    function onError(xhr) { console.log( 'An error happened' ); }
+    scene.add( mesh );
 
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -84,45 +71,6 @@ function init() {
         console.error( 'MediaDevices interface not available.' );
 
     }
-
-    var loader = new THREE.GLTFLoader();
-
-    // Load a glTF resource
-    loader.load(
-        // resource URL
-        'models/Room1.glb',
-        // called when the resource is loaded
-        function ( gltf ) {   
-            mesh = gltf.scene;
-            mesh.scale.set(5, 5,5 );
-            mesh.position.set(-1,-1,5);
-            mesh.castShadow = true;
-            mesh.receiveShadow = true;
-            // var animations = gltf.animations;
-            
-            scene.add(mesh);
-
-
-            // Animationmixer, loop Animaiton
-            // mixer = new THREE.AnimationMixer(mesh);
-
-            // var actions_idle = mixer.clipAction(animations[0]);
-            // actions_idle.setLoop(THREE.LoopRepeat);
-            // actions_idle.clampWhenFinished = true;
-            // actions_idle.play();
-            //  startanime = true;
-
-        },
-        // called when loading is in progresses
-        function ( xhr ) {
-            console.log( ( xhr.loaded / xhr.total *100) + '% loaded' );
-        },
-        // called when loading has errors
-        function ( error ) {
-            console.log( 'An error happened' );
-        }
-    );
-
 
 }
 
