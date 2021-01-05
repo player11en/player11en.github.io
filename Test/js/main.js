@@ -53,44 +53,6 @@ function init() {
     function onError(xhr) { console.log( 'An error happened' ); }
 
 
-    var loader = new THREE.GLTFLoader();
-
-    // Load a glTF resource
-    loader.load(
-        // resource URL
-        'models/Room1.glb',
-        // called when the resource is loaded
-        function ( gltf ) {   
-            mesh = gltf.scene;
-            mesh.scale.set(5, 5,5 );
-            mesh.position.set(-1,-1,5);
-            mesh.castShadow = true;
-            mesh.receiveShadow = true;
-            var animations = gltf.animations;
-            
-            scene.add(mesh);
-
-
-            // Animationmixer, loop Animaiton
-            // mixer = new THREE.AnimationMixer(mesh);
-
-            // var actions_idle = mixer.clipAction(animations[0]);
-            // actions_idle.setLoop(THREE.LoopRepeat);
-            // actions_idle.clampWhenFinished = true;
-            // actions_idle.play();
-            //  startanime = true;
-
-        },
-        // called when loading is in progresses
-        function ( xhr ) {
-            console.log( ( xhr.loaded / xhr.total *100) + '% loaded' );
-        },
-        // called when loading has errors
-        function ( error ) {
-            console.log( 'An error happened' );
-        }
-    );
-
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( window.innerWidth, window.innerHeight );
@@ -122,6 +84,45 @@ function init() {
         console.error( 'MediaDevices interface not available.' );
 
     }
+
+    var loader = new THREE.GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/Room1.glb',
+        // called when the resource is loaded
+        function ( gltf ) {   
+            mesh = gltf.scene;
+            mesh.scale.set(5, 5,5 );
+            mesh.position.set(-1,-1,5);
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+            // var animations = gltf.animations;
+            
+            scene.add(mesh);
+
+
+            // Animationmixer, loop Animaiton
+            // mixer = new THREE.AnimationMixer(mesh);
+
+            // var actions_idle = mixer.clipAction(animations[0]);
+            // actions_idle.setLoop(THREE.LoopRepeat);
+            // actions_idle.clampWhenFinished = true;
+            // actions_idle.play();
+            //  startanime = true;
+
+        },
+        // called when loading is in progresses
+        function ( xhr ) {
+            console.log( ( xhr.loaded / xhr.total *100) + '% loaded' );
+        },
+        // called when loading has errors
+        function ( error ) {
+            console.log( 'An error happened' );
+        }
+    );
+
 
 }
 
