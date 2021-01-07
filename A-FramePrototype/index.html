@@ -165,7 +165,7 @@
                 <img id="Room" src="image/Panamera.png">
                 <a-mixin id="marker" geometry="primitive: plane; width: 0.02; height: 0.02" material="color: red"></a-mixin>
             </a-assets>
-            <a-camera wasd-controls-enabled="false" cursor="rayOrigin: mouse"  raycaster="objects: .collidable"></a-camera>
+            <a-camera wasd-controls-enabled="false" cursor="fuseTimeout:0; rayOrigin: mouse"  raycaster="objects: .collidable"></a-camera>
 
             <!-- animation set in 360sky -->
             <a-sky id="sky" crossorigin src="#prototyp" rotation="0 -130 0"
