@@ -28,6 +28,7 @@ function init() {
     videoTexture.maxFilter = THREE.LinearFilter;
     videoTexture.format = THREE.RGBAFormat;
 
+
     
     let ambientLight = new THREE.AmbientLight( 0xcccccc, 1.0 );
     scene.add( ambientLight );
