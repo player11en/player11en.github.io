@@ -41,46 +41,118 @@
                 // var raycaster = scene.querySelector('[cursor]').components.raycaster;   
                 console.log('hallo mobile');
             }
+
+            var protoworld,protoworld2 = true;  
+            var anim = false;
             
             //On ClickFunktion to change Scene
             AFRAME.registerComponent("changescene", {
                 init: function() {
                     var skyEl = this.el.sceneEl.querySelector("#sky");
-                    var protoworld = true;
+                  
 
                     this.el.addEventListener('click', function(){
+                        if(anim == true){
+                            return;
+                        }
+
                         if(protoworld == true){
-                            protoworld = false;
+                           
+                            anim = true;
                             // animation
                             skyEl.emit('fadeout');
 
                             setTimeout(function () {
                                 skyEl.setAttribute("src", "#Halle1");
-                                return;
+                                
                             }, 1000);
                                 
                             setTimeout(function () {
                                 skyEl.emit('fadein');
-                                return;
+                                protoworld = false;
+                                anim = false;
                             }, 1000);
+                            
                         }
                         else{   
-                            protoworld = true;
+                            if(anim == true){
+                                return;
+                            }
                              // animation
                             skyEl.emit('fadeout');
-
+                            anim = true;
                             setTimeout(function () {
                                 skyEl.setAttribute("src", "#prototyp");
-                                return;
+                               
                             }, 1000);
                             
                             setTimeout(function () {
                                 skyEl.emit('fadein');
-                                return;
+                                protoworld = true;
+                                anim = false;
                             }, 1000);
                         }
                         
                     });
+                }
+            });
+
+            AFRAME.registerComponent("changescene2", {
+                init: function() {
+                    var skyEl = this.el.sceneEl.querySelector("#sky");
+                  
+
+                    this.el.addEventListener('click', function(){
+                        if(anim == true){
+                            return;
+                        }
+
+                        if(protoworld2 == true){
+                           
+                            anim = true;
+                            // animation
+                            skyEl.emit('fadeout');
+
+                            setTimeout(function () {
+                                skyEl.setAttribute("src", "#Room");
+                                
+                            }, 1000);
+                                
+                            setTimeout(function () {
+                                skyEl.emit('fadein');
+                                protoworld2 = false;
+                                anim = false;
+                            }, 1000);
+                            
+                        }
+                        else{   
+                            if(anim == true){
+                                return;
+                            }
+                             // animation
+                            skyEl.emit('fadeout');
+                            anim = true;
+                            setTimeout(function () {
+                                skyEl.setAttribute("src", "#prototyp");
+                               
+                            }, 1000);
+                            
+                            setTimeout(function () {
+                                skyEl.emit('fadein');
+                                protoworld2 = true;
+                                anim = false;
+                            }, 1000);
+                        }
+                        
+                    });
+                }
+            });
+
+            AFRAME.registerComponent("mylink", {
+                init: function() {
+                    this.el.addEventListener("click", (e)=> {
+                        window.location = this.data.href;
+                    })
                 }
             });
 
@@ -90,6 +162,7 @@
             <a-assets>    
                 <img id="prototyp" src="image/prototyp.jpg">
                 <img id="Halle1" src="image/Halle1.jpg">
+                <img id="Room" src="image/Panamera.png">
                 <a-mixin id="marker" geometry="primitive: plane; width: 0.02; height: 0.02" material="color: red"></a-mixin>
             </a-assets>
             <a-camera wasd-controls-enabled="false" cursor="rayOrigin: mouse"  raycaster="objects: .collidable"></a-camera>
@@ -102,6 +175,7 @@
 
             <!-- animation started by changescene-function in Sphere -->
             <a-sphere class="collidable" position="0 1.25 -5" radius="1.25" color="#EF2D5E" changescene shadow></a-sphere>
-            <a-sphere class="collidable" position="5 1.25 -5" radius="1.25" color="#0000FF" showtext shadow></a-sphere>
+            <a-sphere class="collidable" position="-5 1.25 -5" radius="1.25" color="#90ee90" changescene2 shadow></a-sphere>
+            <a-sphere class="collidable" position="5 1.25 -5" radius="1.25" color="#0000FF" mylink ="href:SecondPage.html" shadow></a-sphere>
     </body>
 </html>

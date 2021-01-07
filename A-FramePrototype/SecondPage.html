@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M59+)" data-expires="2017-07-28" content="ArFv1ZeTwzkhjNE00uAE+XtiQB41fwqG/TqlFMLrepd9sforQSvQE/tgfIbUMYNuNre4QR1k4/z8xp2mV3dbhwwAAABeeyJvcmlnaW4iOiJodHRwczovL2FmcmFtZS5pbzo0NDMiLCJmZWF0dXJlIjoiV2ViVlIxLjEiLCJleHBpcnkiOjE1MDEyMTcwMDIsImlzU3ViZG9tYWluIjp0cnVlfQ==">
+        <meta charset="utf-8">
+        <title>Test</title>
+        <meta name="description" content="In-VR Performance - A-Frame">
+        <script src="https://www.unpkg.com/aframe@1.1.0/dist/aframe-master.js"></script>
+        <script src="components/a-frame-touch-look-controls.js"></script>
+        <script src="components/controller.js"></script>
+        <script src="components/stats-in-vr.js"></script>
+
+        <!-- hide A-Frame AR-Button -->
+        <style>
+            body, html {
+                width: 100%;
+                height: 100%;
+            }
+
+            body {
+            background-color: #818181;
+            }
+
+            div.a-enter-ar {
+                visibility: hidden;
+            } 
+
+            a-scene {
+                height: 300px;
+                width: 600px;
+            }
+
+            .Fullscreen { 
+                position: absolute; 
+                right: 20px; 
+                height: 70px; 
+                width: 70px; 
+                background-color: rgba(51,51,51,0.7); 
+                background-image: url("./images/baseline_fullscreen_white_48dp.png"); 
+                background-size: 100%; 
+                background-repeat:no-repeat; 
+                background-position: center; 
+                border: none; 
+                outline: none; 
+                transition: 
+                transform 0.125s ease-out
+            }
+
+            .Fullscreen:hover {
+                transform: scale(1.05)
+            }
+
+            .Fullscreen:active {
+                background-color: rgba(51,51,51,1) 
+            } 
+            .Fullscreen:focus {
+                background-color: rgba(51,51,51,1) 
+            }
+            .Fullscreen.vrdisplaypresenting {
+                 display: none; 
+            }
+        </style>
+    </head>
+
+    <body>
+        <script>
+            AFRAME.registerComponent("mylink", {
+                init: function() {
+                    this.el.addEventListener("click", (e)=> {
+                        window.location = this.data.href;
+                        console.log("=");
+                    })
+                }
+            });
+        </script>
+            <div id= text> 
+            <h1>This is heading 1</h1>
+            <h2>This is heading 2</h2>
+            <h3>This is heading 3</h3>
+            <a href="index.html">This is a link</a>
+
+            <img src="w3schools.jpg" alt="W3Schools.com" width="104" height="142">
+        </div>
+        
+        <div id = "scene">
+        <button onclick ="toggleFullscreen()" class="Fullscreen" id="FullScreen"  title="Toggle Fullscreen" style="top: 20px;"></button>
+        <!-- Basic A-Frame Scene with multiple images -->
+        <a-scene id = "test" background="color: #ECECEC" embedded >
+            <!-- animation started by changescene-function in Sphere -->
+            
+            <a-sphere class="collidable" position="5 1.25 -5" radius="1.25" color="#0000FF" mylink ="href:SecondPage.html" shadow></a-sphere>
+        </a-scene >
+        </div>
+        <script>
+
+
+            function toggleFullscreen(elem) {
+                elem = document.getElementById("test");
+                if (!document.fullscreenElement && !document.mozFullScreenElement &&
+                    !document.webkitFullscreenElement && !document.msFullscreenElement) {
+                    if (elem.requestFullscreen) {
+                        elem.requestFullscreen();
+                    } else if (elem.msRequestFullscreen) {
+                        elem.msRequestFullscreen();
+                    } else if (elem.mozRequestFullScreen) {
+                        elem.mozRequestFullScreen();
+                    } else if (elem.webkitRequestFullscreen) {
+                        elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                    }
+                } 
+                else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
+                }
+            }
+
+        </script>
+    </body>
+</html>
