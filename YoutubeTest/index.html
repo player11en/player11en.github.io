@@ -12,6 +12,7 @@
     <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js"></script>
     <script src="https://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -25,7 +26,7 @@
 
         .btn-group {
             position: absolute;
-            z-index : 10000;
+            z-index: 10000;
         }
 
         .btn-group button {
@@ -51,25 +52,27 @@
 <body>
 
     <!-- html based Button -->
-
-    <div id="css"></div>
     <div id="webgl"></div>
+    <div id="css"></div>
+
 
     <div class="btn-group">
         <button type="button" style="background-color: #b11616;" id="Red">Red!</button>
         <button type="button" style="background-color: #1625b1;" id="Blue">Blue!</button>
         <button type="button" style="background-color: #1bb116;" id="Green">Green!</button>
         <button type="button" style="background-color: #e7b719;" id="Yellow">Yellow!</button>
-        <button type="button" style="background-color: #000000;" id="Play">PlayButton!</button>
-        <button type="button" style="background-color: #000000;" id="Pause">PauseButton!</button>
+        <button type="button" style="background-color: #000000;" id="Mute">Mute/Unmute!</button>
+
     </div>
 
 
     <script>
+
+        ///////////////////für CSS RESIZE notwendig CODE/////////////////////////////
         var rendererCSS;
-        
+
         /** @namespace */
-        var THREEx	= THREEx 		|| {};
+        var THREEx = THREEx || {};
 
         /**
          * Update renderer and camera when the window is resized
@@ -77,12 +80,12 @@
          * @param {Object} renderer the renderer to update
          * @param {Object} Camera the camera to update
         */
-        THREEx.WindowResize	= function(renderer, camera){
-            var callback	= function(){
+        THREEx.WindowResize = function (renderer, camera) {
+            var callback = function () {
                 // notify the renderer of the size change
-                renderer.setSize( window.innerWidth, window.innerHeight );
+                renderer.setSize(window.innerWidth, window.innerHeight);
                 // update the camera
-                camera.aspect	= window.innerWidth / window.innerHeight;
+                camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
             }
             // bind the resize event
@@ -92,17 +95,17 @@
                 /**
                  * Stop watching window resize
                 */
-                stop	: function(){
+                stop: function () {
                     window.removeEventListener('resize', callback);
                 }
             };
         }
+        ///////////////////für CSS RESIZE notwendig CODE/////////////////////////////
 
         //===================================================== canvas
         var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
-
 
 
         //Erlaubt Three.js Schatten zu verwenden
@@ -115,17 +118,11 @@
 
         //===================================================== camera
         var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
         camera.position.z = -4;
         camera.position.x = 12;
         camera.position.y = 6;
 
-        // const light = new THREE.PointLight( 0xff0000, 1, 100 );
-        // light.intensity = 0.5;
-        // light.distance = 100;
-        // light.position.set( -10, 14, 3);
-        // light.castShadow = true;
-        // scene.add( light );
+        //===================================================== ambientes Licht
         const ambientLight = new THREE.AmbientLight(0xFFF67F, 0.15);
         scene.add(ambientLight);
 
@@ -140,50 +137,49 @@
         var mixer;
         var model;
 
-        var mat1; //Augen-Material
-        var mat2; // Körper-
-        var mat3; // Körper-
-        var object;
-        var light;
-        var lightPower;
+        var mat1; //Smile-Material
+        var mat2; //Plane-Material
+        var mat3; //Player-Material
+        var object;///PlayerMesh
+        var light;///Schatten Licht
+        var lightPower;////Licht stärke
 
         color = 0xffffff;
-        // var planeGeometry = new THREE.BoxGeometry(10, 10, 0.1);
-        // var planeMaterial = new THREE.MeshLambertMaterial({
-        //     color: 0xffffff,
-        //     ambient: 0x000000,
-        //     side: THREE.DoubleSide
-        // });
-
-        var planeMaterial   = new THREE.MeshBasicMaterial({color: 0x000000, opacity: 0, side: THREE.DoubleSide });
+        ////////////////////////////////CSSRENDER FÜR YOUTUBE//////////////////////////////7
+        ////planeGeometrie als Overlay für CSS3DRenderer
+        var planeMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0, side: THREE.DoubleSide });
         var planeWidth = 4;
         var planeHeight = 2;
-        var planeGeometry = new THREE.PlaneGeometry( planeWidth, planeHeight );
-        var planeMesh= new THREE.Mesh( planeGeometry, planeMaterial );
-        planeMesh.position.y += planeHeight/2;
+        var planeGeometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+        var planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
+        planeMesh.position.y += planeHeight / 2;
         planeMesh.position.z = 5;
-        
-        // add it to the standard (WebGL) scene
+
         scene.add(planeMesh);
+
         cssScene = new THREE.Scene();
-        // create the iframe to contain webpage
-        var Element = function ( id, x, y, z, ry ) {
+        // ifFrame als CSS Container
+        ///Element umfasst den iFrame Inhalt und kann für meherer Videos aufgerufen werden.
+        var Element = function (id, x, y, z, ry) {
 
             var elementWidth = 1024;
             var aspectRatio = planeHeight / planeWidth;
             var elementHeight = elementWidth * aspectRatio;
-            var iframe = document.createElement( 'iframe' );
+            var iframe = document.createElement('iframe');
             iframe.id = "iframe";
-            iframe.style.width =  elementWidth + "px";
-            iframe.style.height = elementHeight  + "px";
+            iframe.style.width = elementWidth + "px";
+            iframe.style.height = elementHeight + "px";
             iframe.style.border = '0px';
-            iframe.src = [ 'https://www.youtube.com/embed/', id, '?rel=0&autoplay=1&mute=1' ].join( '' );
-        
-            // create a CSS3DObject to display element
-            var cssObject = new THREE.CSS3DObject( iframe );
-            // synchronize cssObject position/rotation with planeMesh position/rotation 
+            /////////Embeded youtube aufgrund von Fullscreen verwendet
+            /////////Source wird durch id vollendet (endpart der URL)
+            /////////https://www.youtube.com/embed/WhWc3b3KhnY
+            iframe.src = ['https://www.youtube.com/embed/', id, '?rel=0&autoplay=1&version=3&enablejsapi=1&mute=1'].join('');
+
+            //  CSS3DObject verwendet um Element auf der Plane darzustellen
+            var cssObject = new THREE.CSS3DObject(iframe);
+            // Position von CSS3DObject identisch mit plane setzen
             cssObject.position = planeMesh.position;
-            cssObject.position.y += planeHeight/2;
+            cssObject.position.y += planeHeight / 2;
             cssObject.position.z = 5;
             cssObject.rotation = planeMesh.rotation;
             cssObject.scale.x = -1;
@@ -193,44 +189,60 @@
             cssObject.scale.y /= (1 + percentBorder) * (elementWidth / planeWidth);
             cssScene.add(cssObject);
         }
-        // create a renderer for CSS
-        rendererCSS	= new THREE.CSS3DRenderer();
-        rendererCSS.setSize( window.innerWidth, window.innerHeight );
+        // Renderer für CSS Element
+        rendererCSS = new THREE.CSS3DRenderer();
+        rendererCSS.setSize(window.innerWidth, window.innerHeight);
         rendererCSS.domElement.style.position = 'absolute';
-        rendererCSS.domElement.style.top	  = 0;
-        rendererCSS.domElement.style.margin	  = 0;
-        rendererCSS.domElement.style.padding  = 0;
-        document.body.appendChild( rendererCSS.domElement );
+        rendererCSS.domElement.style.top = 0;
+        rendererCSS.domElement.style.margin = 0;
+        rendererCSS.domElement.style.padding = 0;
+        var container = document.getElementById('css');
+        container.appendChild(rendererCSS.domElement);
         // when window resizes, also resize this renderer
         THREEx.WindowResize(rendererCSS, camera);
 
+        ///Css wid über dem Renderer dargestellt (verhindert Clipping des Youtube Videos)
         renderer.domElement.style.position = 'absolute';
-        renderer.domElement.style.top      = 0;
-        // make sure original renderer appears on top of CSS renderer
-        renderer.domElement.style.zIndex   = 1;
-        rendererCSS.domElement.appendChild( renderer.domElement );
-	
-        var group = new THREE.Group();
-				group.add( new Element( 'WhWc3b3KhnY',  0, 0, 0, Math.PI) );
-				scene.add( group );
+        renderer.domElement.style.top = 0;
 
+        /////PROBLEM BEREICH ---> pointerEvents erlaubt Interaktion mit dem Player
+        //////Verhindert Interaktion mit Threejs Umgebung
+        //////Wenn pointerEvents entfernt, funktioniert WebGL interaktion aber keine Videointeraktion
+        //////Sorgt für Cors Probleme da keine Interaktion mit VideoElement möglich ist 
+        renderer.domElement.style.pointerEvents = 'none';
+        renderer.domElement.style.zIndex = 1;
+        rendererCSS.domElement.appendChild(renderer.domElement);
+
+        ///Multiple VideoElemente können in Gruppe hinzugefügt werden
+        var group = new THREE.Group();
+        group.add(new Element('WhWc3b3KhnY', 0, 0, 0, Math.PI));
+        scene.add(group);
+        ////////////////////////////////CSSRENDER FÜR YOUTUBE//////////////////////////////7
+
+        /////////Input für WASD Control (Diente für mich zum Testen)
         var input = { left: 0, right: 0, up: 0, down: 0 };
 
         //GLTF Smiley wird hier geladen
+        ////Gesamte Szene wird jetzt hier geladen.
         loader.load(
             "https://dl.dropbox.com/s/4tfa9cof27y9vn8/untitled.glb?dl=0", function (gltf) {
 
 
                 //materialen, werden aus derar gltf Datei gepsed und zu mat1 und mat2 zugewiesen
+                //Plan und Smile sind mit gebackenen Texturen versehen
+                //Textur enthält Schatten und Ambient Occlusion
                 gltf.parser.getDependencies('material').then((materials) => {
-
+                    ///////SmileyMaterial
                     mat1 = materials[0];
+                    ///////PlaneMaterial
                     mat2 = materials[1];
+                    ///////PlayerMaterial
                     mat3 = materials[7];
-                    console.log(mat2.color.getHexString ());
-                    console.log(mat3.color.getHexString ());
-                });
 
+                });
+                /////////////Obwohl im Threejs Editor alles eingerichtet wurde müssen Cast und Recive per Hand hinzugefügt werden
+                ///////Jedes Mesh aus der GLTF erhält Recive shadow
+                ///////Cast nur für aktive Figur (Spieler) notwendig, da alle statischen Modelle einen gebackenen Schatten besitzen
                 gltf.scene.traverse(function (node) {
                     if (node instanceof THREE.Mesh) {
                         console.log(node.name);
@@ -242,7 +254,10 @@
                         node.receiveShadow = true;
                         node.material.side = THREE.FrontSide;
                     }
+                    /////////Szene enthält zwei Lichter, zu viele Lichter sorgen für Performanz-Probleme
+                    ////////Ein Licht welches Schatten Werfen kann
                     if (node instanceof THREE.Light) {
+                        /////Intensität reduziert, da Threejs und Blender andere Lichtwerte verwenden
                         node.intensity = node.intensity / 6000;
                         if (node.name == 'Sun005_Orientation') {
                             node.color.setHex(0xFFF67F);
@@ -261,6 +276,7 @@
                 model = gltf.scene;
                 model.scale.set(.35, .35, .35);
 
+                /////////Verschiedene Zugriffe auf GLTF Modelle getestet 
                 gltf.scene.traverse(function (child) {
                     if (child.name == 'Box') {
 
@@ -276,7 +292,9 @@
             movePlayer();
             requestAnimationFrame(render);
             var delta = clock.getDelta();
-            rendererCSS.render( cssScene, camera );
+
+            ////Beide Renderer müssen akualisiert werden
+            rendererCSS.render(cssScene, camera);
             renderer.render(scene, camera);
         }
 
@@ -308,19 +326,9 @@
             mat2.color = new THREE.Color(0.896, 0.665, 0.1);
         }
 
-        var playbutton = document.getElementById('Play');
-        var pausebutton = document.getElementById('Pause');
-        
-        playbutton.onclick = function myFunctionPlay() {
-            document.getElementById('iframe').contentWindow.play();
-            // console.log(video);
-            // video.play();
-        }
-        pausebutton.onclick = function myFunctionPause() {
-           document.getElementById('iframe').contentWindow.pause();
-         
-        }
 
+
+        ///////////////////WASD CODE/////////////////////////////
         // movement - please calibrate these values
         var xSpeed = 0.1;
         var ySpeed = 0.1;
@@ -371,19 +379,24 @@
                     break;
             }
         });
+        ///////////////////WASD CODE/////////////////////////////
 
 
+
+        ///////////////DAT.GUI////////////////////////////////////////
+
+        ///////GUI elaubt echtzeitveränderung für Licht, Farbe, usw.
+        ///////Hilfreich beim Testen von Verschiedenen Lichtstärken und Farbwerten
         var controller = new function () {
             this.colorBody = 0xffffff;
             this.planeMat = 0xffffff;
             this.playerCol = 0xff0d34;
             this.lightColor = 0xFFF67F;
-            this.lightStenght =   0.533333333333;
+            this.lightStenght = 0.533333333333;
             this.ambientColor = 0xFFF67F;
             this.ambientStenght = 0.15;
             this.castShadow = true;
             this.receiveShadow = true;
-            // this.boxOpacity = 1;
         }();
 
         var gui = new dat.GUI();
@@ -422,9 +435,6 @@
         f4.addColor(controller, 'ambientColor', color).onChange(function () {
             ambientLight.color.setHex(dec2hex(controller.ambientColor));
         });
-       
-        
-        // color.setHex(0xFFF67F);
 
         function dec2hex(i) {
             var result = "0x000000";
@@ -437,11 +447,47 @@
             if (result.length == 8) { return result; }
 
         }
+        ///////////////DAT.GUI////////////////////////////////////////
 
-        // function onPlayerReady(event) {
-        //     event.target.setVolume(100);
-        //     event.target.playVideo();
-        // }
+        ///////////////Youtube API für PAUSE und PLAY //AUDIO MUTE ////////////////////////////////////////
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('iframe', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady() {
+            console.log("hey Im ready");
+            //do whatever you want here. Like, player.playVideo();
+        }
+
+        function onPlayerStateChange() {
+            console.log("my state changed");
+        }
+
+        document.getElementById("Mute").addEventListener('click', function (event) {
+            // console.log(player);
+
+            if (player.isMuted()) {
+                player.unMute();
+                player.playVideo();
+                player.setVolume(100);
+            } else {
+                player.mute();
+                player.playVideo()
+            }
+        });
+        ///////////////Youtube API für PAUSE und PLAY //AUDIO MUTE ////////////////////////////////////////
     </script>
 
 </body>
