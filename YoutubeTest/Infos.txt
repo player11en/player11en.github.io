@@ -1,0 +1,32 @@
+Szenen Darstellung einige Test durchgeführt:
+Viele Lichter im Threejs Editor hinzugefügt und importiert, viele Lichter und Schatten --> hohe Performanz Auslastung (Framerate nichtmehr stabil)
+
+Lichter und Schatten als Textur gebacken. Für statische Modelle gut.
+GUI als Hilfe für die Darstellung der Szene
+In Gui können verschiedene Lichtstärken und Farben sowie weitere Faktoren (position,rotation, material, etc.) Live geändert werden.
+Gui Eigenschaften werden per 'Hand' festgelegt.
+
+
+
+Problem Youtube
+
+Momentan CSS als Obererlayer, WebGL  über Zeile 212 (renderer.domElement.style.pointerEvents = 'none';) ausgestellt.
+
+Cors (Sicherheitsbestimmungen) verhindert Autostart mit Ton.
+
+Mute- und UnMute-Button theoretisch möglich, jedoch muss erst eine Interaktion mit dem Videoelement statt finden.
+Da unter normalen Umständen WebGL Renderer über dem CSS Renderer leigt kann keine Interaktion mit VideoElement stattfinden.
+ 
+Zwischen den beiden Renderern (CSS und WebGL) kann nur ein auf der Oberfläche liegen.
+Wenn CSS --> Youtube Interaktion möglich, jedoch keine Szenen Interaktion in WebGL möglich
+Wenn WebGL, visa verde --> keine Youtube Interaktion, jedoch Szenen Interaktion
+
+Theoretische Lösung, einen Klick im CSSRenderer erzwingen indem dieser kurz über dem WebGL Renderer gestellt wird
+und dann auf den Threejs (WebGL Renderer) wechseln und diesen als obersten Layer setzen.
+.... Sobald eine Interaktion mit dem CssVideo Element erreicht wurde kann Video und Audio über Javascript (und HTML Button)
+gestartet und pausiert werden.
+ 
+--> Umsetztbarkeit fraglich 
+
+
+Einige weitere Fehlermeldungen in der Console, welche ich mir noch anschauen muss.
