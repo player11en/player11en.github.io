@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>three.js webgl - glTF loader</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js"></script>
+    <script src="https://threejs.org/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js"></script>
+    <script src="https://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
+    <style>
+        body {
+            margin: 0;
+            background-color: #fff;
+            color: #fff;
+            font-family: Monospace;
+            font-size: 13px;
+            line-height: 24px;
+            overscroll-behavior: none;
+        }
+
+        .btn-group {
+            position: absolute;
+            z-index : 10000;
+        }
+
+        .btn-group button {
+
+            background-color: #04AA6D;
+            color: white;
+            padding: 10px 24px;
+            cursor: pointer;
+            width: 150px;
+            display: block;
+        }
+
+        .btn-group button:not(:last-child) {
+            border-bottom: none;
+        }
+
+        .btn-group button:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- html based Button -->
+
+    <div id="css"></div>
+    <div id="webgl"></div>
+
+    <div class="btn-group">
+        <button type="button" style="background-color: #b11616;" id="Red">Red!</button>
+        <button type="button" style="background-color: #1625b1;" id="Blue">Blue!</button>
+        <button type="button" style="background-color: #1bb116;" id="Green">Green!</button>
+        <button type="button" style="background-color: #e7b719;" id="Yellow">Yellow!</button>
+        <button type="button" style="background-color: #000000;" id="Play">PlayButton!</button>
+        <button type="button" style="background-color: #000000;" id="Pause">PauseButton!</button>
+    </div>
+
+
+    <script>
+        var rendererCSS;
+        
+        /** @namespace */
+        var THREEx	= THREEx 		|| {};
+
+        /**
+         * Update renderer and camera when the window is resized
+         * 
+         * @param {Object} renderer the renderer to update
+         * @param {Object} Camera the camera to update
+        */
+        THREEx.WindowResize	= function(renderer, camera){
+            var callback	= function(){
+                // notify the renderer of the size change
+                renderer.setSize( window.innerWidth, window.innerHeight );
+                // update the camera
+                camera.aspect	= window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+            }
+            // bind the resize event
+            window.addEventListener('resize', callback, false);
+            // return .stop() the function to stop watching window resize
+            return {
+                /**
+                 * Stop watching window resize
+                */
+                stop	: function(){
+                    window.removeEventListener('resize', callback);
+                }
+            };
+        }
+
+        //===================================================== canvas
+        var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+
+
+        //Erlaubt Three.js Schatten zu verwenden
+        renderer.shadowMap.enabled = true;
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        //===================================================== scene
+        var scene = new THREE.Scene();
+
+        //===================================================== camera
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        camera.position.z = -4;
+        camera.position.x = 12;
+        camera.position.y = 6;
+
+        // const light = new THREE.PointLight( 0xff0000, 1, 100 );
+        // light.intensity = 0.5;
+        // light.distance = 100;
+        // light.position.set( -10, 14, 3);
+        // light.castShadow = true;
+        // scene.add( light );
+        const ambientLight = new THREE.AmbientLight(0xFFF67F, 0.15);
+        scene.add(ambientLight);
+
+        //===================================================== orbbitControl
+        var controls = new THREE.OrbitControls(
+            camera,
+            renderer.domElement
+        );
+
+        //===================================================== model
+        var loader = new THREE.GLTFLoader();
+        var mixer;
+        var model;
+
+        var mat1; //Augen-Material
+        var mat2; // Körper-
+        var mat3; // Körper-
+        var object;
+        var light;
+        var lightPower;
+
+        color = 0xffffff;
+        // var planeGeometry = new THREE.BoxGeometry(10, 10, 0.1);
+        // var planeMaterial = new THREE.MeshLambertMaterial({
+        //     color: 0xffffff,
+        //     ambient: 0x000000,
+        //     side: THREE.DoubleSide
+        // });
+
+        var planeMaterial   = new THREE.MeshBasicMaterial({color: 0x000000, opacity: 0, side: THREE.DoubleSide });
+        var planeWidth = 4;
+        var planeHeight = 2;
+        var planeGeometry = new THREE.PlaneGeometry( planeWidth, planeHeight );
+        var planeMesh= new THREE.Mesh( planeGeometry, planeMaterial );
+        planeMesh.position.y += planeHeight/2;
+        planeMesh.position.z = 5;
+        
+        // add it to the standard (WebGL) scene
+        scene.add(planeMesh);
+        cssScene = new THREE.Scene();
+        // create the iframe to contain webpage
+        var Element = function ( id, x, y, z, ry ) {
+
+            var elementWidth = 1024;
+            var aspectRatio = planeHeight / planeWidth;
+            var elementHeight = elementWidth * aspectRatio;
+            var iframe = document.createElement( 'iframe' );
+            iframe.id = "iframe";
+            iframe.style.width =  elementWidth + "px";
+            iframe.style.height = elementHeight  + "px";
+            iframe.style.border = '0px';
+            iframe.src = [ 'https://www.youtube.com/embed/', id, '?rel=0&autoplay=1&mute=1' ].join( '' );
+        
+            // create a CSS3DObject to display element
+            var cssObject = new THREE.CSS3DObject( iframe );
+            // synchronize cssObject position/rotation with planeMesh position/rotation 
+            cssObject.position = planeMesh.position;
+            cssObject.position.y += planeHeight/2;
+            cssObject.position.z = 5;
+            cssObject.rotation = planeMesh.rotation;
+            cssObject.scale.x = -1;
+            // resize cssObject to same size as planeMesh (plus a border)
+            var percentBorder = 0.05;
+            cssObject.scale.x /= (1 + percentBorder) * (elementWidth / planeWidth);
+            cssObject.scale.y /= (1 + percentBorder) * (elementWidth / planeWidth);
+            cssScene.add(cssObject);
+        }
+        // create a renderer for CSS
+        rendererCSS	= new THREE.CSS3DRenderer();
+        rendererCSS.setSize( window.innerWidth, window.innerHeight );
+        rendererCSS.domElement.style.position = 'absolute';
+        rendererCSS.domElement.style.top	  = 0;
+        rendererCSS.domElement.style.margin	  = 0;
+        rendererCSS.domElement.style.padding  = 0;
+        document.body.appendChild( rendererCSS.domElement );
+        // when window resizes, also resize this renderer
+        THREEx.WindowResize(rendererCSS, camera);
+
+        renderer.domElement.style.position = 'absolute';
+        renderer.domElement.style.top      = 0;
+        // make sure original renderer appears on top of CSS renderer
+        renderer.domElement.style.zIndex   = 1;
+        rendererCSS.domElement.appendChild( renderer.domElement );
+	
+        var group = new THREE.Group();
+				group.add( new Element( 'WhWc3b3KhnY',  0, 0, 0, Math.PI) );
+				scene.add( group );
+
+        var input = { left: 0, right: 0, up: 0, down: 0 };
+
+        //GLTF Smiley wird hier geladen
+        loader.load(
+            "https://dl.dropbox.com/s/4tfa9cof27y9vn8/untitled.glb?dl=0", function (gltf) {
+
+
+                //materialen, werden aus derar gltf Datei gepsed und zu mat1 und mat2 zugewiesen
+                gltf.parser.getDependencies('material').then((materials) => {
+
+                    mat1 = materials[0];
+                    mat2 = materials[1];
+                    mat3 = materials[7];
+                    console.log(mat2.color.getHexString ());
+                    console.log(mat3.color.getHexString ());
+                });
+
+                gltf.scene.traverse(function (node) {
+                    if (node instanceof THREE.Mesh) {
+                        console.log(node.name);
+                        if (node.name == 'Box') {
+                            node.add(camera);
+                            node.castShadow = true;
+                            object = node;
+                        }
+                        node.receiveShadow = true;
+                        node.material.side = THREE.FrontSide;
+                    }
+                    if (node instanceof THREE.Light) {
+                        node.intensity = node.intensity / 6000;
+                        if (node.name == 'Sun005_Orientation') {
+                            node.color.setHex(0xFFF67F);
+                            node.intensity = node.intensity / 2.5;
+                            node.castShadow = true;
+                            node.shadow.radius = 40;
+                            node.shadow.normalBias = 0.01;
+                            node.shadow.bias = -0.00001;
+                            node.shadow.mapSize.hidth = 4048; // Shadow Quality
+                            node.shadow.mapSize.height = 4048; // Shadow Quality
+                            light = node;
+                        }
+
+                    }
+                });
+                model = gltf.scene;
+                model.scale.set(.35, .35, .35);
+
+                gltf.scene.traverse(function (child) {
+                    if (child.name == 'Box') {
+
+                        object = child;
+                    }
+                });
+                scene.add(model);
+            });
+
+        //===================================================== animate
+        var clock = new THREE.Clock();
+        function render() {
+            movePlayer();
+            requestAnimationFrame(render);
+            var delta = clock.getDelta();
+            rendererCSS.render( cssScene, camera );
+            renderer.render(scene, camera);
+        }
+
+        render();
+
+
+        //===================================================== colorChanger
+        var redButton = document.getElementById('Red');
+        var blueButton = document.getElementById('Blue');
+        var greenButton = document.getElementById('Green');
+        var yellowButton = document.getElementById('Yellow');
+
+        // mat2 Material für den Körper des Smileys
+        // Über id onclick() funtion
+
+        redButton.onclick = function myFunctionBlue() {
+            mat2.color = new THREE.Color(1, 0.301, 0.301);
+        }
+
+        blueButton.onclick = function myFunctionBlue() {
+            mat2.color = new THREE.Color(0, 0, 1);
+        }
+
+        greenButton.onclick = function myFunctionGreen() {
+            mat2.color = new THREE.Color(0, 1, 0);
+        }
+
+        yellowButton.onclick = function myFunctionYellow() {
+            mat2.color = new THREE.Color(0.896, 0.665, 0.1);
+        }
+
+        var playbutton = document.getElementById('Play');
+        var pausebutton = document.getElementById('Pause');
+        
+        playbutton.onclick = function myFunctionPlay() {
+            document.getElementById('iframe').contentWindow.play();
+            // console.log(video);
+            // video.play();
+        }
+        pausebutton.onclick = function myFunctionPause() {
+           document.getElementById('iframe').contentWindow.pause();
+         
+        }
+
+        // movement - please calibrate these values
+        var xSpeed = 0.1;
+        var ySpeed = 0.1;
+
+        function movePlayer() {
+            if (input.up == 1) {
+                object.position.x -= ySpeed;
+            } if (input.down == 1) {
+                object.position.x += ySpeed;
+            } if (input.left == 1) {
+                object.position.z += xSpeed;
+            } if (input.right == 1) {
+                object.position.z -= xSpeed;
+            }
+        };
+
+
+        window.addEventListener('keydown', function (e) {
+            switch (e.keyCode) {
+                case 68:
+                    input.right = 1;
+                    break;
+                case 65:
+                    input.left = 1;
+                    break;
+                case 87:
+                    input.up = 1;
+                    break;
+                case 83:
+                    input.down = 1;
+                    break;
+            }
+        });
+
+        window.addEventListener('keyup', function (e) {
+            switch (e.keyCode) {
+                case 68:
+                    input.right = 0;
+                    break;
+                case 65:
+                    input.left = 0;
+                    break;
+                case 87:
+                    input.up = 0;
+                    break;
+                case 83:
+                    input.down = 0;
+                    break;
+            }
+        });
+
+
+        var controller = new function () {
+            this.colorBody = 0xffffff;
+            this.planeMat = 0xffffff;
+            this.playerCol = 0xff0d34;
+            this.lightColor = 0xFFF67F;
+            this.lightStenght =   0.533333333333;
+            this.ambientColor = 0xFFF67F;
+            this.ambientStenght = 0.15;
+            this.castShadow = true;
+            this.receiveShadow = true;
+            // this.boxOpacity = 1;
+        }();
+
+        var gui = new dat.GUI();
+        var f1 = gui.addFolder('Meshes');
+        f1.addColor(controller, 'colorBody', color).onChange(function () {
+            mat1.color.setHex(dec2hex(controller.colorBody));
+        });
+        f1.addColor(controller, 'planeMat', color).onChange(function () {
+            mat2.color.setHex(dec2hex(controller.planeMat));
+        });
+
+        var f2 = gui.addFolder('Player');
+        f2.add(controller, 'castShadow', false).onChange(function () {
+            object.castShadow = controller.castShadow;
+        });
+        f2.add(controller, 'receiveShadow', false).onChange(function () {
+            object.receiveShadow = controller.receiveShadow;
+        });
+        f2.addColor(controller, 'playerCol', color).onChange(function () {
+            mat3.color.setHex(dec2hex(controller.playerCol));
+        });
+
+        var f4 = gui.addFolder('Light');
+        f4.add(controller, 'castShadow', false).onChange(function () {
+            light.castShadow = controller.castShadow;
+        });
+        f4.addColor(controller, 'lightColor', color).onChange(function () {
+            light.color.setHex(dec2hex(controller.lightColor));
+        });
+        f4.add(controller, 'lightStenght', 0, 1).onChange(function () {
+            light.intensity = (controller.lightStenght);
+        });
+        f4.add(controller, 'ambientStenght', 0, 1).onChange(function () {
+            ambientLight.intensity = (controller.ambientStenght);
+        });
+        f4.addColor(controller, 'ambientColor', color).onChange(function () {
+            ambientLight.color.setHex(dec2hex(controller.ambientColor));
+        });
+       
+        
+        // color.setHex(0xFFF67F);
+
+        function dec2hex(i) {
+            var result = "0x000000";
+            if (i >= 0 && i <= 15) { result = "0x00000" + i.toString(16); }
+            else if (i >= 16 && i <= 255) { result = "0x0000" + i.toString(16); }
+            else if (i >= 256 && i <= 4095) { result = "0x000" + i.toString(16); }
+            else if (i >= 4096 && i <= 65535) { result = "0x00" + i.toString(16); }
+            else if (i >= 65535 && i <= 1048575) { result = "0x0" + i.toString(16); }
+            else if (i >= 1048575) { result = '0x' + i.toString(16); }
+            if (result.length == 8) { return result; }
+
+        }
+
+        // function onPlayerReady(event) {
+        //     event.target.setVolume(100);
+        //     event.target.playVideo();
+        // }
+    </script>
+
+</body>
+
+</html>
