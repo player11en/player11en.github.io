@@ -282,8 +282,10 @@
                     if (child.name == 'Box') {
 
                         object = child;
+                         object.add(light);
                     }
                 });
+               
                 scene.add(model);
             });
 
@@ -469,7 +471,7 @@
 
         function onPlayerReady() {
             console.log("hey Im ready");
-            object.add(light);
+
             //do whatever you want here. Like, player.playVideo();
         }
 
