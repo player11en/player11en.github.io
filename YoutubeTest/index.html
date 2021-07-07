@@ -245,7 +245,7 @@
                 ///////Cast nur für aktive Figur (Spieler) notwendig, da alle statischen Modelle einen gebackenen Schatten besitzen
                 gltf.scene.traverse(function (node) {
                     if (node instanceof THREE.Mesh) {
-                        console.log(node.name);
+                        //console.log(node.name);
                         if (node.name == 'Box') {
                             node.add(camera);
                             node.castShadow = true;
@@ -259,6 +259,7 @@
                     if (node instanceof THREE.Light) {
                         /////Intensität reduziert, da Threejs und Blender andere Lichtwerte verwenden
                         node.intensity = node.intensity / 6000;
+                        console.log(node.name);
                         if (node.name == 'Sun005_Orientation') {
                             node.color.setHex(0xFFF67F);
                             node.intensity = node.intensity / 2.5;
