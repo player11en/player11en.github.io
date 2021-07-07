@@ -259,7 +259,7 @@
                     if (node instanceof THREE.Light) {
                         /////Intensität reduziert, da Threejs und Blender andere Lichtwerte verwenden
                         node.intensity = node.intensity / 6000;
-                        console.log(node.name);
+                       // console.log(node.name);
                         if (node.name == 'Sun005_Orientation') {
                             node.color.setHex(0xFFF67F);
                             node.intensity = node.intensity / 2.5;
@@ -269,7 +269,6 @@
                             node.shadow.bias = -0.00001;
                             node.shadow.mapSize.hidth = 4048; // Shadow Quality
                             node.shadow.mapSize.height = 4048; // Shadow Quality
-                            object.add(node);
                             light = node;
                         }
 
@@ -470,6 +469,7 @@
 
         function onPlayerReady() {
             console.log("hey Im ready");
+            object.add(light);
             //do whatever you want here. Like, player.playVideo();
         }
 
