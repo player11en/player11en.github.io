@@ -282,7 +282,6 @@
                     if (child.name == 'Box') {
 
                         object = child;
-                         object.add(light);
                     }
                 });
                
@@ -346,6 +345,7 @@
             } if (input.right == 1) {
                 object.position.z -= xSpeed;
             }
+            light.position = object.position;
         };
 
 
