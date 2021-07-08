@@ -260,7 +260,7 @@
                         /////Intensität reduziert, da Threejs und Blender andere Lichtwerte verwenden
                         node.intensity = node.intensity / 6000;
                        // console.log(node.name);
-                        if (node.name == 'Sun005_Orientation') {
+                        if (node.name == 'Sun006_Orientation') {
                             node.color.setHex(0xFFF67F);
                             node.intensity = node.intensity / 2.5;
                             node.castShadow = true;
@@ -345,7 +345,6 @@
             } if (input.right == 1) {
                 object.position.z -= xSpeed;
             }
-            light.position = object.position;
         };
 
 
