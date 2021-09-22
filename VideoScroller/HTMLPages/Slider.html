@@ -1,4 +1,4 @@
-!doctype html>
+<!doctype html>
 
 <html lang="en">
 
@@ -9,54 +9,112 @@
     <title>ImageSlide</title>
     
     <!-- css einbinden-->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="HTMLPages/SliderStyle.css">
     <!-- or the reference on CDN -->
   
     <!-- websitenBildimTab -->
     <link rel="icon" type="image/png" href="image/nerdface.png">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
 
 </head>
 
 <body>
 
-    <div id="splide">
-        <div class="splide__progress">
-          <div class="splide__progress__bar"></div>
-        </div> <!-- /.splide__progress -->
-        
-        <div class="splide__optional-button-container">
-          <button class="splide__play-pause" aria-controls="splide-track">Pause</button>
-         </div> <!-- /.splide__optional-button-container -->
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+  
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="https://glitch.com/favicon.ico" />
+  
+      <title>Slideshow Gallery</title>
+  
+      <link rel="stylesheet" href="/style.css" />
+  
+      <script src="/script.js" defer></script>
+    </head>
+    <body>
       
-          
-          <div class="splide__track" id="splide-track">
-              <ul class="splide__list">
-                  <li class="splide__slide">
-              <img src="https://plchldr.co/i/1280x900?bg=ff4136" alt="plchldr.co Green">
-            </li>
-            
-            <li class="splide__slide">
-              <img src="https://plchldr.co/i/1920x1080" alt="plchldr.co Orange">
-            </li>
-                  
-            <li class="splide__slide">
-              <img src="https://plchldr.co/i/1280x900?bg=2ecc40" alt="plchldr.co Black">
-            </li>
-            
-            <li class="splide__slide">
-              <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile">
-            </li>
-            
-              </ul> <!-- /.splide__list -->
-          </div> <!-- /.splide__track -->
-      </div> <!-- /.splide -->
-
-
+     <!-- Container for the image gallery -->
+      <div class="container">
+  
+        <!-- Full-width images with number text -->
+        <div class="mySlides">
+          <div class="numbertext">1 / 6</div>
+            <img src="https://cdn.glitch.com/2b9e8b6f-6183-4f6e-aa36-219db13d6a81%2Fthewoods.jpg?v=1630321320417" style="width:100%">
+        </div>
+  
+        <div class="mySlides">
+          <div class="numbertext">2 / 6</div>
+            <img src="https://cdn.glitch.com/2b9e8b6f-6183-4f6e-aa36-219db13d6a81%2Fcinqueterre.jpg?v=1630319349883" style="width:100%">
+        </div>
+  
+        <div class="mySlides">
+          <div class="numbertext">3 / 6</div>
+            <img src="https://cdn.glitch.com/2b9e8b6f-6183-4f6e-aa36-219db13d6a81%2Fmountains.jpg?v=1630319348685" style="width:100%">
+        </div>
+  
+        <div class="mySlides">
+          <div class="numbertext">4 / 6</div>
+            <img src="https://cdn.glitch.com/2b9e8b6f-6183-4f6e-aa36-219db13d6a81%2Fnorthernlights.jpg?v=1630319350980" style="width:100%">
+        </div>
+  
+        <div class="mySlides">
+          <div class="numbertext">5 / 6</div>
+            <img src="https://cdn.glitch.com/2b9e8b6f-6183-4f6e-aa36-219db13d6a81%2Fsunrise.jpg?v=1630319353116" style="width:100%">
+        </div>
+  
+        <div class="mySlides">
+          <div class="numbertext">6 / 6</div>
+            <img src="https://cdn.glitch.com/2b9e8b6f-6183-4f6e-aa36-219db13d6a81%2Fsnowymountains.jpg?v=1630319349525" style="width:100%">
+        </div>
+  
+      </div>
       
-    <script src="script/script.js"></script>
+        <!-- Next and previous buttons -->
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  
+      <!-- Image text -->
+      <div class="caption-container">
+        <p id="caption"></p>
+      </div>
+  
+      <!-- Thumbnail images -->
+      <div class="row">
+        <div class="column">
+          <img class="demo cursor" src="https://cdn.glitch.com/2b9e8b6f-6183-4f6e-aa36-219db13d6a81%2Fthewoods.jpg?v=1630321320417" style="width:100%" 
+               onclick="currentSlide(1)" alt="The Woods">
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="https://cdn.glitch.com/2b9e8b6f-6183-4f6e-aa36-219db13d6a81%2Fcinqueterre.jpg?v=1630319349883" style="width:100%" 
+               onclick="currentSlide(2)" alt="Cinque Terre">
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="https://cdn.glitch.com/2b9e8b6f-6183-4f6e-aa36-219db13d6a81%2Fmountains.jpg?v=1630319348685" style="width:100%" 
+               onclick="currentSlide(3)" alt="Mountains and fjords">
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="https://cdn.glitch.com/2b9e8b6f-6183-4f6e-aa36-219db13d6a81%2Fnorthernlights.jpg?v=1630319350980" style="width:100%" 
+               onclick="currentSlide(4)" alt="Northern Lights">
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="https://cdn.glitch.com/2b9e8b6f-6183-4f6e-aa36-219db13d6a81%2Fsunrise.jpg?v=1630319353116" style="width:100%" 
+               onclick="currentSlide(5)" alt="Nature and sunrise">
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="https://cdn.glitch.com/2b9e8b6f-6183-4f6e-aa36-219db13d6a81%2Fsnowymountains.jpg?v=1630319349525" style="width:100%" 
+               onclick="currentSlide(6)" alt="Snowy Mountains">
+        </div>
+      </div>
+      
+    </body>
+  </html>
+  
+  
+
+    <script src="HTMLPages/SliderScript.js"></script>
 </body>
 
 </html>
