@@ -20,14 +20,9 @@ registerVideo("#videobody", "#videobody video")
 
 function myFunction() {
 	window.location.href = 'HTMLPages/Slider.html'
-	// console.log(document.getElementById('videobody').clientHeight);
-	// var scrollPos = window.scrollY || window.scrollTop || document.getElementsByTagName("html")[0].scrollTop;
-	// console.log(scrollPos);
 }
 
 function myFunction2() {
-	// document.body.scrollTop = 0;
-	// document.documentElement.scrollTop = 0;
 	document.documentElement.scrollTo({
 		top: 0,
 		behavior: "smooth"
@@ -36,11 +31,12 @@ function myFunction2() {
 
 var controller = new ScrollMagic.Controller();
 
-// create a scene
+
+var comheight = document.getElementById('videobody').clientHeight
 new ScrollMagic.Scene({
 	triggerElement: "#trigger1",
 	triggerHook: 0.9, // show, when scrolled 10% into view
-	offset: -24000
+	offset: comheight/-1.1
 })
 	.setClassToggle("#reveal1", "visible") // the tween durtion can be omitted and defaults to 1
 	.addTo(controller);
@@ -49,7 +45,7 @@ new ScrollMagic.Scene({
 	triggerElement: "#trigger2",
 	triggerHook: 0.9, // show, when scrolled 10% into view
 	duration: 4000,
-	offset: -21000
+	offset: comheight/-1.25
 })
 	.setClassToggle("#reveal2", "visible") // the tween durtion can be omitted and defaults to 1
 	.addTo(controller);
@@ -59,7 +55,7 @@ new ScrollMagic.Scene({
 	triggerElement: "#trigger3",
 	triggerHook: 0.9, // show, when scrolled 10% into view
 	duration: 4000,
-	offset: -15000
+	offset: comheight/-1.75
 })
 	.setClassToggle("#reveal3", "visible") // the tween durtion can be omitted and defaults to 1
 	.addTo(controller);
@@ -68,7 +64,7 @@ new ScrollMagic.Scene({
 new ScrollMagic.Scene({
 	triggerElement: "#trigger4",
 	triggerHook: 0.9, // show, when scrolled 10% into view
-	offset: -3000
+	offset: comheight/-9
 })
 	.setClassToggle("#reveal4", "visible") // the tween durtion can be omitted and defaults to 1
 	.addTo(controller);
@@ -77,7 +73,7 @@ new ScrollMagic.Scene({
 	triggerElement: "#trigger5",
 	triggerHook: 0.9, // show, when scrolled 10% into view
 	duration: 6000,
-	offset: -12000
+	offset: comheight/-2.2
 })
 	.setClassToggle("#reveal5", "visible") // the tween durtion can be omitted and defaults to 1
 	.addTo(controller);

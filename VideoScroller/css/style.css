@@ -25,7 +25,7 @@ body {
 
 video {
     min-width: 100%;
-    min-height: 100%;
+    position: fixed;
 }
 
 .text-content {
@@ -34,7 +34,7 @@ video {
     background: rgba(0, 0, 0, 0.5);
     color: #f1f1f1;
     width: 100%;
-    padding: 20px;
+    padding: 2%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -57,6 +57,7 @@ video {
   }
   #reveal1 {
     opacity: 1;
+    z-index: 100;
     -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;
     -ms-transition: all 1s ease-in-out;
