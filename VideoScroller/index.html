@@ -1,0 +1,94 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>VideoScroll</title>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+
+    <!-- css einbinden-->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- websitenBildimTab -->
+    <link rel="icon" type="image/png" href="image/nerdface.png">
+
+</head>
+
+<body>
+    <div class="app">
+
+
+
+        <div id="videobody" class="scroll-bound">
+            <div class="content">
+                <video muted preload>
+                    <source src="video/scrollAnimation.mp4" type="video/mp4">
+                    <p>Your user agent does not support the HTML5 Video element.</p>
+                </video>
+            </div>
+        </div>
+
+        <div class="spacer s2"></div>
+        <div id="trigger1" class="spacer s0"></div>
+        <div id="reveal1" class="text-content">
+            <h3>Welcome to...</h3>
+            <h1>Nothing Special</h1>
+            <!-- Use a button to pause/play the video with JavaScript -->
+            <button id="myBtn" onclick="myFunction()">Leave for a better Site</button>
+        </div>
+        <div class="spacer s2"></div>
+
+
+        <div class="spacer s1"></div>
+        <div id="trigger2" class="spacer s1"></div>
+        <div id="reveal2" class="text-content">
+            <h3>Why are you still here?</h3>
+            <h1>this is just a Website</h1>
+            <!-- Use a button to pause/play the video with JavaScript -->
+            <!-- <button id="myBtn" onclick="myFunction()">Leave for a better Site</button> -->
+        </div>
+        <div class="spacer s2"></div>
+
+
+        <div class="spacer s1"></div>
+        <div id="trigger3" class="spacer s1"></div>
+        <div id="reveal3" class="text-content">
+            <h3>It's true the animation is lit</h3>
+            <h1>But still there are better Websites</h1>
+            <h3>So stop scrolling</h3>
+            <!-- Use a button to pause/play the video with JavaScript -->
+        </div>
+        <div class="spacer s2"></div>
+        
+
+        <div class="spacer s1"></div>
+        <div id="trigger5" class="spacer s1"></div>
+        <div id="reveal5" class="text-content">
+            <h3>Please put your focus on Nerd face</h3>
+            <img src="image/nerdface.png" alt="Nerd Face">
+        </div>
+        <div class="spacer s2"></div>
+
+        <div class="spacer s1"></div>
+        <div id="trigger4" class="spacer s1"></div>
+        <div id="reveal4" class="text-content">
+            <h3>Press the Button to get back up</h3>
+            <h1>I still think you should leave this page</h1>
+            <!-- Use a button to pause/play the video with JavaScript -->
+            <button id="myBtn" onclick="myFunction2()">Go to the Start</button>
+        </div>
+        <div class="spacer s2"></div>
+
+    </div>
+
+
+
+    <script src="script/script.js"></script>
+</body>
+
+</html>
