@@ -19,7 +19,7 @@ registerVideo("#videobody", "#videobody video")
 
 
 function myFunction() {
-	window.location.href = 'https://line25.com/articles/15-awesome-websites-that-tell-a-story-as-you-scroll'
+	window.location.href = 'HTMLPages/Slider.html'
 	// console.log(document.getElementById('videobody').clientHeight);
 	// var scrollPos = window.scrollY || window.scrollTop || document.getElementsByTagName("html")[0].scrollTop;
 	// console.log(scrollPos);
@@ -81,4 +81,9 @@ new ScrollMagic.Scene({
 })
 	.setClassToggle("#reveal5", "visible") // the tween durtion can be omitted and defaults to 1
 	.addTo(controller);
+
+
+	  
+  
+
 
