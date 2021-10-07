@@ -13,16 +13,6 @@
   <script>
     var check;
     var portalswitch = true;
-    check = navigator.userAgentData.mobile;
-
-    if (check) {
-      console.log("mobile");
-    }
-    else {
-      console.log("desktop");
-    }
-
-
 
     ///Farb und Größen änderungs Skript für Sphäre
     AFRAME.registerComponent('change-color', {
@@ -88,7 +78,6 @@
         })
         this.el.addEventListener('hitend', (e) => {
           ///Wenn das portal verlassen wird, wird alles was hier steht ausgeführt.
-          ////im moment ist es leer  
           console.log(portalswitch);
           if (portalswitch) {
             ///Kann keine Modelle von Dropbox laden, weiß auch nicht wieso genau
@@ -113,7 +102,7 @@
 </head>
 
 <body>
-  <a-scene background="color: #FAFAFA">
+  <a-scene  log="Hello, Scene!" background="color: #FAFAFA">
 
     <!-- Asset loader von Aframe, läd die Modelle und Bilder bevor die Szene geladen wird. -->
     <a-assets>
@@ -124,17 +113,21 @@
       <a-asset-item id="portal" src="https://dl.dropbox.com/s/ftryx7u20utk2ib/Portal.glb?dl=0"></a-asset-item>
     </a-assets>
 
+    <!-- licht, directionales repräsentiert sonnenlicht, ambientes ist gleichmäßige beleuchtung der ganzen Szene -->
     <a-entity light="type: directional; color: #FFF; intensity: 0.8" position="-0.5 1 1"></a-entity>
     <a-entity light="type: ambient; color: #BBB"></a-entity>
 
     <!-- Einfache Klickbare Sphere -->
-    <a-sphere class="collidable" id="sphere" position="0 1.5 -1.5" radius="0.2" color="#EF2D5E" change-color shadow></a-sphere>
+    <a-sphere class="collidable" id="sphere" position="0 1.5 -1.5" radius="0.2" color="#EF2D5E" change-color shadow>
+    </a-sphere>
 
     <!-- Gltf modell wird über #room aus dem vorgeladenen assets gelesen -->
     <a-entity id="World" gltf-model="https://dl.dropbox.com/s/9bly1l9j5u0u4m7/FinalNoTex.glb?dl=0" position="0 1 0"
       scale="0.15 0.15 0.15">
     </a-entity>
 
+
+    <!-- Multiple PortalObjekte hintereinander positioniert -->
     <a-entity gltf-model="#portal" position="0 1.1 1" scale="0.15 0.15 0.15">
     </a-entity>
     <a-entity gltf-model="#portal" position="0 1.1 1.2" scale="0.15 0.15 0.15">
@@ -148,17 +141,17 @@
     <a-entity gltf-model="#portal" position="0 1.1  1.8" scale="0.15 0.15 0.15">
     </a-entity>
 
-    <a-sphere visible="false" portalcollider position="0 1.4 1.2" radius="0.2" color="#7BC8A4"></a-sphere>
-    <!-- <a-entity geometry="primitive: box" visible="false" position="0 1.2 1.2" scale="0.5 1 0.05" portalcollider></a-entity> -->
+    <!-- sphere im portal, wenn spheren collidieren dannn soll scene ausgewechselt werden -->
+    <a-sphere visible="false" portalcollider position="0 1.4 1.2" radius="0.1" color="#7BC8A4"></a-sphere>
 
     <!-- Kamera mit Cursor und Wasd Bewegungskontrolle -->
-    <a-entity id="camera" camera look-controls wasd-controls="acceleration:30" cursor="rayOrigin: mouse" raycaster="objects: .collidable"
-      position="0 1.4 0"
+    <a-entity id="camera" camera look-controls wasd-controls="acceleration:30" cursor="rayOrigin: mouse" raycaster="objects: .collidable" position="0 1.4 0"
       animation__animateToPos="startEvents: aniamtetoPos; property: position; from: 0 0 0; to: 0 0 0; dur: 1000;">
-      <!-- <a-cursor scale="0.1 0.1" position="0 0 -0.1" color="#000"></a-cursor> -->
       <!-- objekt mit Sphere-Collider, als Kind der Kamera übernimmt es die Position des Eltern Elementes, Kamera position == Sphere position  -->
-      <a-sphere sphere-collider='' id="sphere" position="0 0 0" radius="0.01"></a-sphere>
+      <a-sphere sphere-collider='' id="sphere"  position="0 0 0" radius="0.01"></a-sphere>
     </a-entity>
+
+    
 
     <!-- Zylinder zudem teleportiert werden kann -->
     <a-cylinder class="collidable" position="1 1.1 -1" radius="0.1" color="#0000ff" height="0.05" color="white" mylink
