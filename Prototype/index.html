@@ -6,13 +6,48 @@
   <meta name="description" content="Hello, WebVR! • A-Frame">
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/aframe-aabb-collider-component@3.2.0/dist/aframe-aabb-collider-component.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aframe-aabb-collider-component@3.2.0/dist/aframe-aabb-collider-component.min.js"></script>
+ 
+  <style>
+  div.a-enter-ar {
+    visibility: hidden;
+  }
+  .Teleport {
+    position: fixed;
+    right: 20px;
+    height: 70px;
+    width: 70px;
+    z-index: 10;
+    background-color: rgba(51,51,51,0.7);
+    background-image: url("https://dl.dropbox.com/s/gdua4i2zj0by8fs/baseline_fullscreen_white_48dp.png?dl=0");
+    background-size: 100%;
+    background-repeat:no-repeat;
+    background-position: center;
+    border: none;
+    outline: none;
+    transition:
+    transform 0.125s ease-out
+  }
 
+  .Teleport:hover {
+    transform: scale(1.05)
+  }
+
+  .Teleport:active {
+    background-color: rgba(51,51,51,1)
+  }
+  .Teleport:focus {
+    background-color: rgba(51,51,51,1)
+  }
+  /* #container{
+    position:absolute;
+    height:90%;
+  } */</style>
 
   <script>
     var check;
     var portalswitch = true;
+    var portalTexture;
 
     ///Farb und Größen änderungs Skript für Sphäre
     AFRAME.registerComponent('change-color', {
@@ -74,7 +109,6 @@
     AFRAME.registerComponent('portalcollider', {
       init: function () {
         this.el.addEventListener('hit', (e) => {
-          console.log("heylo");
         })
         this.el.addEventListener('hitend', (e) => {
           ///Wenn das portal verlassen wird, wird alles was hier steht ausgeführt.
@@ -85,24 +119,58 @@
             var world = document.getElementById('World');
             var secroomAsset = document.querySelector('#room2').getAttribute('src');
             world.setAttribute('gltf-model', secroomAsset);
+            world.setAttribute('position', { x: 6, y: 1, z: 3 })
             portalswitch = false
           }
           else {
             var world = document.getElementById('World');
             var secroomAsset = document.querySelector('#room').getAttribute('src');
             world.setAttribute('gltf-model', secroomAsset);
-            portalswitch = true
+            world.setAttribute('position', { x: 0, y: 1, z: 0 })
+            portalswitch = true;
           }
         })
       }
     });
 
+    	function left() {
+        var pos = document.getElementById('pos1').getAttribute('position');
+          //Aktuelle Kamera Position
+          var CurrentCampos = document.querySelector('#camera').getAttribute('position');
+          ///Zugriff auf den Kamera Tag
+          var camera = document.querySelector('#camera');
+
+          ////Animation der Kameratransition, y wurde hier fest definiert, damit die Kamera immer auf einer höhe bleibt.
+          camera.setAttribute('animation__animateToPos', 'to', { x: pos.x, y: 1.5, z: pos.z });
+          camera.setAttribute('animation__animateToPos', 'from', { x: CurrentCampos.x, y: CurrentCampos.y, z: CurrentCampos.z });
+
+          ////Der Kamera wird die erstellete Animation zugewiesen mitgeteilt und ausgeführt.
+          camera.emit('aniamtetoPos');
+
+      }
+
+      function right() {
+        var pos = document.getElementById('pos2').getAttribute('position');
+          //Aktuelle Kamera Position
+          var CurrentCampos = document.querySelector('#camera').getAttribute('position');
+          ///Zugriff auf den Kamera Tag
+          var camera = document.querySelector('#camera');
+
+          ////Animation der Kameratransition, y wurde hier fest definiert, damit die Kamera immer auf einer höhe bleibt.
+          camera.setAttribute('animation__animateToPos', 'to', { x: pos.x, y: 1.5, z: pos.z });
+          camera.setAttribute('animation__animateToPos', 'from', { x: CurrentCampos.x, y: CurrentCampos.y, z: CurrentCampos.z });
+
+          ////Der Kamera wird die erstellete Animation zugewiesen mitgeteilt und ausgeführt.
+          camera.emit('aniamtetoPos');
+
+      }
 
   </script>
+
 </head>
 
 <body>
-  <a-scene  log="Hello, Scene!" background="color: #FAFAFA">
+  <a-scene background="color: #FAFAFA">
 
     <!-- Asset loader von Aframe, läd die Modelle und Bilder bevor die Szene geladen wird. -->
     <a-assets>
@@ -128,44 +196,42 @@
 
 
     <!-- Multiple PortalObjekte hintereinander positioniert -->
-    <a-entity gltf-model="#portal" position="0 1.1 1" scale="0.15 0.15 0.15">
-    </a-entity>
-    <a-entity gltf-model="#portal" position="0 1.1 1.2" scale="0.15 0.15 0.15">
-    </a-entity>
-    <a-entity gltf-model="#portal" position="0 1.1  1.4" scale="0.15 0.15 0.15">
-    </a-entity>
-    <a-entity gltf-model="#portal" position="0 1.1 1.6" scale="0.15 0.15 0.15">
-    </a-entity>
-    <a-entity gltf-model="#portal" position="0 1.1 0.8" scale="0.15 0.15 0.15">
-    </a-entity>
-    <a-entity gltf-model="#portal" position="0 1.1  1.8" scale="0.15 0.15 0.15">
-    </a-entity>
+    <a-entity gltf-model="#portal" position="0 1.1 0.8" scale="0.15 0.15 0.15"></a-entity>
+    <a-entity gltf-model="#portal" position="0 1.1 1.0" scale="0.15 0.15 0.15"></a-entity>
+    <a-entity gltf-model="#portal" position="0 1.1 1.2" scale="0.15 0.15 0.15"></a-entity>
+    <a-entity gltf-model="#portal" position="0 1.1 1.4" scale="0.15 0.15 0.15"></a-entity>
+    <a-entity gltf-model="#portal" position="0 1.1 1.6" scale="0.15 0.15 0.15"></a-entity>
+    <a-entity gltf-model="#portal" position="0 1.1 1.8" scale="0.15 0.15 0.15"></a-entity>
 
     <!-- sphere im portal, wenn spheren collidieren dannn soll scene ausgewechselt werden -->
     <a-sphere visible="false" portalcollider position="0 1.4 1.2" radius="0.1" color="#7BC8A4"></a-sphere>
 
     <!-- Kamera mit Cursor und Wasd Bewegungskontrolle -->
-    <a-entity id="camera" camera look-controls wasd-controls="acceleration:30" cursor="rayOrigin: mouse" raycaster="objects: .collidable" position="0 1.4 0"
+    <a-entity id="camera" camera look-controls wasd-controls="acceleration:30" cursor="rayOrigin: mouse"
+      raycaster="objects: .collidable" position="0 1.4 0"
       animation__animateToPos="startEvents: aniamtetoPos; property: position; from: 0 0 0; to: 0 0 0; dur: 1000;">
       <!-- objekt mit Sphere-Collider, als Kind der Kamera übernimmt es die Position des Eltern Elementes, Kamera position == Sphere position  -->
-      <a-sphere sphere-collider='' id="sphere"  position="0 0 0" radius="0.01"></a-sphere>
+      <a-sphere sphere-collider='' id="sphere" position="0 0 0" radius="0.01"></a-sphere>
     </a-entity>
 
-    
+
 
     <!-- Zylinder zudem teleportiert werden kann -->
-    <a-cylinder class="collidable" position="1 1.1 -1" radius="0.1" color="#0000ff" height="0.05" color="white" mylink
+    <a-cylinder class="collidable" id="pos1" position="1 1.1 -1" radius="0.1" color="#0000ff" height="0.05" color="white" mylink
       animation__scale_up_down="property: scale; from: 1 1 1; to: 2 1 2; dur: 2000; dir: alternate ; easing: easeInOutCirc; loop:true">
       >
     </a-cylinder>
 
-    <a-cylinder rotation="0 0 0" class="collidable" position="1 1.1 1" radius="0.1" color="#0000ff" height="0.05"
+    <a-cylinder rotation="0 0 0" class="collidable" id="pos2" position="1 1.1 1" radius="0.1" color="#0000ff" height="0.05"
       color="white" mylink
       animation__scale_up_down="property: scale; from: 1 1 1; to: 2 1 2; dur: 2000; dir: alternate ; easing: easeInOutCirc; loop:true"
-      animation__lightup="property: material.color; from: #0000ff; to: #add8e6 ; dur: 2000; dir: alternate ; easing: easeInOutCirc; loop:true">
+      animation__changeColor="property: material.color; from: #0000ff; to: #add8e6 ; dur: 2000; dir: alternate ; easing: easeInOutCirc; loop:true">
     </a-cylinder>
 
   </a-scene>
+
+  <button onclick ="left()"  class="Teleport" id="Teleport" style="bottom: 80px; left: 40px"></button>
+  <button onclick ="right()"  class="Teleport" id="Teleport" style="bottom: 80px; right: 40px"></button>
 </body>
 
 </html>
