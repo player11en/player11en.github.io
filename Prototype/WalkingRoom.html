@@ -148,12 +148,13 @@
     <a-entity gltf-model="#portal" position="0 1.1  1.8" scale="0.15 0.15 0.15">
     </a-entity>
 
-    <a-sphere class="collidable" visible="false" portalcollider position="0 1.4 1.2" radius="0.2" color="#7BC8A4"></a-sphere>
+    <a-sphere class="collidable" visible="false" portalcollider position="0 1.4 1.2" radius="0.2" color="#7BC8A4">
+    </a-sphere>
     <!-- <a-entity geometry="primitive: box" visible="false" position="0 1.2 1.2" scale="0.5 1 0.05" portalcollider></a-entity> -->
 
     <!-- Kamera mit Cursor und Wasd Bewegungskontrolle -->
-    <a-entity id="camera" camera look-controls wasd-controls="acceleration:30" cursor="rayOrigin: mouse" raycaster="objects: .collidable"
-      position="0 1.4 0"
+    <a-entity id="camera" camera look-controls wasd-controls="acceleration:30" cursor="rayOrigin: mouse"
+      raycaster="objects: .collidable" position="0 1.4 0"
       animation__animateToPos="startEvents: aniamtetoPos; property: position; from: 0 0 0; to: 0 0 0; dur: 1000;">
       <!-- <a-cursor scale="0.1 0.1" position="0 0 -0.1" color="#000"></a-cursor> -->
       <!-- objekt mit Sphere-Collider, als Kind der Kamera übernimmt es die Position des Eltern Elementes, Kamera position == Sphere position  -->
