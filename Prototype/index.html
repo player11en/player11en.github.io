@@ -128,7 +128,7 @@
     <a-entity light="type: ambient; color: #BBB"></a-entity>
 
     <!-- Einfache Klickbare Sphere -->
-    <a-sphere id="sphere" position="0 1.5 -1.5" radius="0.2" color="#EF2D5E" change-color shadow></a-sphere>
+    <a-sphere class="collidable id="sphere" position="0 1.5 -1.5" radius="0.2" color="#EF2D5E" change-color shadow></a-sphere>
 
     <!-- Gltf modell wird über #room aus dem vorgeladenen assets gelesen -->
     <a-entity id="World" gltf-model="https://dl.dropbox.com/s/9bly1l9j5u0u4m7/FinalNoTex.glb?dl=0" position="0 1 0"
@@ -148,7 +148,7 @@
     <a-entity gltf-model="#portal" position="0 1.1  1.8" scale="0.15 0.15 0.15">
     </a-entity>
 
-    <a-sphere class="collidable" visible="false" portalcollider position="0 1.4 1.2" radius="0.2" color="#7BC8A4"></a-sphere>
+    <a-sphere visible="false" portalcollider position="0 1.4 1.2" radius="0.2" color="#7BC8A4"></a-sphere>
     <!-- <a-entity geometry="primitive: box" visible="false" position="0 1.2 1.2" scale="0.5 1 0.05" portalcollider></a-entity> -->
 
     <!-- Kamera mit Cursor und Wasd Bewegungskontrolle -->
