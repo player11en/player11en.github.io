@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>My first three.js app</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <!-- einbingung von Bibliotheken
+    Threejs
+    OrbitControls
+    GLTF/GLBloaders
+    Tween -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.101.1/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
+    <script type='text/javascript' src='js/tween.js'></script>
+    <style>
+        html,
+        body {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .Button {
+            position: fixed;
+            right: 20px;
+            height: 70px;
+            width: 70px;
+            z-index: 10;
+            background-color: rgba(51, 51, 51, 0.7);
+            background-image: url("https://dl.dropbox.com/s/gdua4i2zj0by8fs/baseline_fullscreen_white_48dp.png?dl=0");
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: none;
+            outline: none;
+            transition:
+                transform 0.125s ease-out
+        }
+        .Button:hover {
+            transform: scale(1.05)
+        }
+        .Button:active {
+            background-color: rgba(51, 51, 51, 1)
+        }
+        .Button:focus {
+            background-color: rgba(51, 51, 51, 1)
+        }
+    </style>
+</head>
+<body>
+    <!-- Button Rechts unten ändert Modelle -->
+    <button onclick="changeWorld()" class="Button" id="Button" style="bottom: 80px; right: 40px"></button>
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
