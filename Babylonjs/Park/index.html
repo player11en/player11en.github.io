@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <title>Babylon.js sample code</title>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <!-- Babylon.js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
-        <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
-        <script src="https://preview.babylonjs.com/ammo.js"></script>
-        <script src="https://preview.babylonjs.com/cannon.js"></script>
-        <script src="https://preview.babylonjs.com/Oimo.js"></script>
-        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
-        <script src="https://preview.babylonjs.com/babylon.js"></script>
-        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
-        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
-        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
-        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
-        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
-        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
-        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+    <title>Babylon.js sample code</title>
 
-        <style>
-            html, body {
-                overflow: hidden;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
+    <!-- Babylon.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+    <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
+    <script src="https://preview.babylonjs.com/ammo.js"></script>
+    <script src="https://preview.babylonjs.com/cannon.js"></script>
+    <script src="https://preview.babylonjs.com/Oimo.js"></script>
+    <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+    <script src="https://preview.babylonjs.com/babylon.js"></script>
+    <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+    <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+    <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+    <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+    <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
 
-            #renderCanvas {
-                width: 100%;
-                height: 100%;
-                touch-action: none;
-            }
-        </style>
-    </head>
+    <style>
+        html,
+        body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+    </style>
+</head>
+
 <body>
     <canvas id="renderCanvas"></canvas>
     <script>
@@ -53,348 +56,364 @@
         var engine = null;
         var scene = null;
         var sceneToRender = null;
-        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
+        var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); };
         var camera, camera2;
-var run = false;
-var back = false;
-var left = false;
-var right = false;
+        var run = false;
+        var back = false;
+        var left = false;
+        var right = false;
 
-var moveController;
-var timer = 0;
+        var moveController;
+        var timer = 0;
 
-var createScene = async function () {
-    var scene = new BABYLON.Scene(engine);
+        var createScene = async function () {
+            var scene = new BABYLON.Scene(engine);
 
-    const lights = {};
-    const env = {};
-    const shadows = {};
-    const camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(0), BABYLON.Tools.ToRadians(70), 0.5, new BABYLON.Vector3(0.0, 0.1, 0.0), scene);
-    camera.minZ = 0.01;
-    camera.upperRadiusLimit = 200;
-    camera.lowerRadiusLimit = 45;
-    camera.upperBetaLimit = 1.25;
-    camera.lowerBetaLimit = 0;
-    camera.attachControl(canvas, true);
-
-    var camera2 = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(66,8, 0.1), scene);
-    camera2.setTarget(new BABYLON.Vector3(-2.5,8,0));
-
-    camera2.attachControl(canvas, true);
-    camera2.inertia *= 0.95;
-    camera2.ellipsoid = new BABYLON.Vector3(1,4,1);
-    camera2.speed = 0.5;
-    camera2.invertRotation = false;
-
-    camera2.keysUp = [87]; // W
-    camera2.keysDown = [83]; // S
-    camera2.keysLeft = [65]; // Q
-    camera2.keysRight = [68]; // D
-
-    // var dome2 = new BABYLON.PhotoDome(
-    // "testdome",
-    // "./textures/equirectangular.jpg",
-    //     {
-    //         resolution: 32,
-    //         size: 1000
-    //     },
-    //     scene
-    // );
-    // dome2.position = new BABYLON.Vector3(0,0,0);
-
-    //     // Fog
-    scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-    //BABYLON.Scene.FOGMODE_NONE;
-    //BABYLON.Scene.FOGMODE_EXP;
-    //BABYLON.Scene.FOGMODE_EXP2;
-    //BABYLON.Scene.FOGMODE_LINEAR;
-
-    scene.fogColor = new BABYLON.Color3(0.9, 0.9, 0.85);
-    scene.fogDensity = 0.005;
-    scene.fogEnabled = false;
-
-    env.lighting = BABYLON.CubeTexture.CreateFromPrefilteredData("https://patrickryanms.github.io/BabylonJStextures/Demos/sodaBottle/assets/env/hamburg_hbf.env", scene);
-    env.lighting.name = "hamburg_hbf";
-    env.lighting.environmentIntensity = 0;
-    env.lighting.gammaSpace = false;
-    env.lighting.rotationY = BABYLON.Tools.ToRadians(0);
-    scene.environmentTexture = env.lighting;
-
-    env.skybox = BABYLON.MeshBuilder.CreateSphere("Dome", {slice: 1, diameter: 1024}, scene);
-    env.skyboxMaterial = new BABYLON.PBRMaterial("skyBox", scene);
-    env.skyboxMaterial.backFaceCulling = false;
-    env.skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("https://patrickryanms.github.io/BabylonJStextures/Demos/sodaBottle/assets/skybox/hamburg", scene);
-    env.skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-    env.skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
-    env.skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-    env.skyboxMaterial.microSurface = 0.35;
-    env.skybox.material = env.skyboxMaterial;
-
-    // //     This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-    // // var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
-
-    // // Default intensity is 1. Let's dim the light a small amount
-    // // light.intensity = 0.5;
-
-	var light = new BABYLON.DirectionalLight("dir01", new BABYLON.Vector3(-1, -1, 1), scene);
-	light.position = new BABYLON.Vector3(20, 30, -20);
-
-    // Default intensity is 1. Let's dim the light a small amount
-    light.intensity = 3;
-	var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
-	
-	shadowGenerator.useBlurExponentialShadowMap = true;
-    //  shadowGenerator.useKernelBlur = true;
-    //  shadowGenerator.blurKernel = 2;
-    // shadowGenerator.blurScale = 1;
-    // shadowGenerator.blurBoxOffset = 0.4;
-    // shadowGenerator.depthScale = 0;
-    shadowGenerator.enableSoftTransparentShadow = true;
-    shadowGenerator.transparencyShadow = true;
-    shadowGenerator.darkness = 0.1;
-
-    var myGround = BABYLON.MeshBuilder.CreateGround("myGround", { width: 200, height: 200, subdivisions: 8 }, scene);
-    myGround.position = new BABYLON.Vector3(0,0,0);
-    myGround.visibility = false;
-
-    const [topLine, bottomLine] = createUI();
-
-    // "https://dl.dropbox.com/s/c0ywi6qhzu4deyr/Sofa.glb?dl=0", "Sofa.glb"
-
-    // https://www.dropbox.com/s/bb8z4tg5c273zgy/Park_NoText.glb?dl=0
-
-    BABYLON.SceneLoader.OnPluginActivatedObservable.addOnce(function (loader) {
-        // This is just a precaution as this isn't strictly necessary since
-        // the only loader in use is the glTF one.
-        if (loader.name !== "gltf") return;
-
-        // See what the loader is doing in the console.
-        // loader.loggingEnabled = true;
-
-        // Use HTTP range requests to load the glTF binary (GLB) in parts.
-        loader.useRangeRequests = true;
-
-        // Register for when extension are loaded.
-        loader.onExtensionLoadedObservable.add(function (extension) {
-            // Ignore extensions except MSFT_lod.
-            if (extension.name !== "MSFT_lod") return;
-
-            // Extensions are loaded after glTF has been parsed and
-            // thus it is now loading the first LOD.
-            lodNext = 0;
-
-            // Update the status text and next LOD index when each set
-            // of LODs are loaded.
-            extension.onMaterialLODsLoadedObservable.add(function (index) {
-                topLine.text = "Viewing '" + lodNames[index] + "' LOD";
-                lodNext = index + 1;
-            });
-
-            // Uncomment the following line to stop at the specified LOD.
-            //extension.maxLODsToLoad = 1;
-        });
-
-        // Update the status text when loading is complete, i.e. when
-        // all the LODs are loaded.
-        loader.onCompleteObservable.add(function () {
-            bottomLine.text = "Loading Complete";
-            for (var i = 0; i < scene.meshes.length; i++) {
-                if(scene.meshes[i].name.includes("Plane") || scene.meshes[i].name == "Cylinder.002" || scene.meshes[i].name == "Circle"){
-                    scene.meshes[i].receiveShadows = true;  
-                    scene.meshes[i].material.environmentIntensity = 0.25;
-                }
-                if(scene.meshes[i].name.includes("Cube") || scene.meshes[i].name.includes("Cylinder") && scene.meshes[i].name != "Cylinder.002" || scene.meshes[i].name.includes("Circle") && scene.meshes[i].name != "Circle"){
-                    shadowGenerator.addShadowCaster(scene.meshes[i]);  
-                    scene.meshes[i].checkCollisions =  true;
-                    scene.meshes[i].material.environmentIntensity = 0.25;
-                }
-            }   
-             setTimeout(function () {
-                topLine.text = "";
-                bottomLine.text = "Light and Shadows Updated"; 
-            }, 2000);
-            setTimeout(function () {
-                topLine.text = "";
-                bottomLine.text = ""; 
-            }, 5000);
-        });
-    });
-
-
-   BABYLON.SceneLoader.AppendAsync("https://dl.dropbox.com/s/wn9dmi5d1v3p5iu/Park.glb", 
-    "Park.glb",
-    scene,
-    function (meshes) {  
-        if (meshes.lengthComputable) {                 
-            bottomLine.text = "Loading, please wait..." + (meshes.loaded * 100 / meshes.total).toFixed() + "%";                
-        }
-        else {                    
-            var dlCount = meshes.loaded / (1024 * 1024);     
-            bottomLine.text = "Loading, please wait..." + Math.floor(dlCount * 100.0) / 100.0 + " MB already loaded.";                
-        }                                            
-    });
-
-    scene.gravity = new BABYLON.Vector3(0,-0.9,0);
-    
-    scene.collisionsEnabled = true;
-    camera2.applyGravity = true;
-    camera2._needMoveForGravity = true;
-    camera2.checkCollisions = true;
-    myGround.checkCollisions =  true;
-
-    var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
-    var button2 = BABYLON.GUI.Button.CreateSimpleButton("but2", "Walking");
-    button2.width = "150px"
-    button2.height = "40px";
-    button2.color = "Black";
-    button2.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-    button2.left = "-50px";
-    button2.cornerRadius = 5;
-    button2.background = "white";
-    button2.onPointerUpObservable.add(function() {
-        if (scene.activeCamera == camera2) {
-            camera2.detachControl(canvas);
-            scene.activeCamera = camera;
+            const lights = {};
+            const env = {};
+            const shadows = {};
+            const camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(0), BABYLON.Tools.ToRadians(70), 0.5, new BABYLON.Vector3(0.0, 0.1, 0.0), scene);
+            camera.minZ = 0.01;
+            camera.upperRadiusLimit = 200;
+            camera.lowerRadiusLimit = 45;
+            camera.upperBetaLimit = 1.25;
+            camera.lowerBetaLimit = 0;
             camera.attachControl(canvas, true);
-            button2.textBlock.text = "Arc Rot"
-            scene.fogEnabled = false;
-        } else {
-            camera.detachControl(canvas);
-            scene.activeCamera = camera2;
+
+            var camera2 = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(60, 8, 0.1), scene);
+            camera2.setTarget(new BABYLON.Vector3(-2.5, 8, 0));
+
             camera2.attachControl(canvas, true);
-            button2.textBlock.text = "Walking"
-            scene.fogEnabled = true;
-        }
-    });
-    advancedTexture.addControl(button2); 
-
-    scene.onBeforeRenderObservable.add(function(){
-        var cameraForwardRayPosition = camera2.getForwardRay().direction;
-        //camera2.cameraRotation = direction ;
-        if(run == true){
-            //camera2.position.z-=0.1
-            var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0, 0, 0.1), BABYLON.Matrix.RotationY(camera2.rotation.y));
-            camera2.position.addInPlace(v2);
-            // camera2.checkCollisions = true;
-            // camera2.position = direction+ 0.1;
-        } 
-        if(back == true){
-            // camera2.position.z+=0.1
-
-            var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0, 0, -0.1), BABYLON.Matrix.RotationY(camera2.rotation.y));
-            camera2.position.addInPlace(v2);
-
-        } 
-        if(left == true){
-            var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(-0.1, 0, 0), BABYLON.Matrix.RotationY(camera2.rotation.y));
-            camera2.position.addInPlace(v2);
-        } 
-        if(right == true){
-            // camera2.position.x-=0.1
-            var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0.1, 0, 0), BABYLON.Matrix.RotationY(camera2.rotation.y));
-            camera2.position.addInPlace(v2);
-        }   
-    })      
-
-    var energy = 50, shiftPressed = false;
-    scene.onBeforeRenderObservable.add(function(){
-        // console.log(camera2.position);
-        if (shiftPressed && scene.activeCamera == camera2) {
-            if(energy > 0){
-                camera2.speed = 1.5;
-                energy--;
-            }
-            else{
-                camera2.speed = 0.5;
-                if(energy < 50 && !shiftPressed){
-                    energy += 0.5;
-                }
-            }                   
-        } else {
+            camera2.inertia *= 0.95;
+            camera2.ellipsoid = new BABYLON.Vector3(1, 4, 1);
             camera2.speed = 0.5;
-            if(energy < 50){
-                energy += 0.5;
-            }
-        }
-         console.log("Energy " + energy);
-    });
-    scene.onKeyboardObservable.add((kbInfo) => {
-        switch (kbInfo.type) {
-        case BABYLON.KeyboardEventTypes.KEYDOWN:
-            switch (kbInfo.event.key) {  
-            case "Shift":
-                shiftPressed = true;
-                break;
-            }                
-            break;
-
-        case BABYLON.KeyboardEventTypes.KEYUP:
-            switch (kbInfo.event.key) {   
-            case "Shift":
-                shiftPressed = false;
-                break;
-            }                
-        }
-    });
-
-    var glowLayer = new BABYLON.GlowLayer("glow", scene, {
-        mainTextureFixedSize: 256,
-        blurKernelSize: 128
-    });
-    glowLayer.intensity = 2;
+            camera2.invertRotation = false;
+            camera2.detachControl(canvas);
 
 
-    return scene;
-};
+            camera2.keysUp = [87]; // W
+            camera2.keysDown = [83]; // S
+            camera2.keysLeft = [65]; // Q
+            camera2.keysRight = [68]; // D
 
+            // var dome2 = new BABYLON.PhotoDome(
+            // "testdome",
+            // "./textures/equirectangular.jpg",
+            //     {
+            //         resolution: 32,
+            //         size: 1000
+            //     },
+            //     scene
+            // );
+            // dome2.position = new BABYLON.Vector3(0,0,0);
 
-function createUI() {
-    // Create full screen UI.
-    const uiTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+            //     // Fog
+            scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
+            //BABYLON.Scene.FOGMODE_NONE;
+            //BABYLON.Scene.FOGMODE_EXP;
+            //BABYLON.Scene.FOGMODE_EXP2;
+            //BABYLON.Scene.FOGMODE_LINEAR;
 
-    // Create attribution line of text.
-    const attributionLine = new BABYLON.GUI.TextBlock();
-    attributionLine.color = "lightgray";
-    attributionLine.fontSize = 12;
-    attributionLine.top = "-45%";
-    attributionLine.text = " Asset created by player11en";
-    uiTexture.addControl(attributionLine);
+            scene.fogColor = new BABYLON.Color3(0.9, 0.9, 0.85);
+            scene.fogDensity = 0.005;
+            scene.fogEnabled = false;
 
-    // Create top line of text.
-    const topLine = new BABYLON.GUI.TextBlock();
-    topLine.color = "white";
-    topLine.fontSize = 24;
-    topLine.top = "-38%";
-    uiTexture.addControl(topLine);
+            env.lighting = BABYLON.CubeTexture.CreateFromPrefilteredData("https://patrickryanms.github.io/BabylonJStextures/Demos/sodaBottle/assets/env/hamburg_hbf.env", scene);
+            env.lighting.name = "hamburg_hbf";
+            env.lighting.environmentIntensity = 0;
+            env.lighting.gammaSpace = false;
+            env.lighting.rotationY = BABYLON.Tools.ToRadians(0);
+            scene.environmentTexture = env.lighting;
 
-    // Create bottom line of text.
-    const bottomLine = new BABYLON.GUI.TextBlock();
-    bottomLine.color = "white";
-    bottomLine.fontSize = 24;
-    bottomLine.top = "45%";
-    uiTexture.addControl(bottomLine);
+            env.skybox = BABYLON.MeshBuilder.CreateSphere("Dome", { slice: 1, diameter: 1024 }, scene);
+            env.skyboxMaterial = new BABYLON.PBRMaterial("skyBox", scene);
+            env.skyboxMaterial.backFaceCulling = false;
+            env.skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("https://patrickryanms.github.io/BabylonJStextures/Demos/sodaBottle/assets/skybox/hamburg", scene);
+            env.skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+            env.skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+            env.skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+            env.skyboxMaterial.microSurface = 0.35;
+            env.skybox.material = env.skyboxMaterial;
 
-    return [topLine, bottomLine];
-}
+            // //     This creates a light, aiming 0,1,0 - to the sky (non-mesh)
+            // // var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
 
-                window.initFunction = async function() {
-                    
-                    
-                    var asyncEngineCreation = async function() {
-                        try {
-                        return createDefaultEngine();
-                        } catch(e) {
-                        console.log("the available createEngine function failed. Creating the default engine instead");
-                        return createDefaultEngine();
+            // // Default intensity is 1. Let's dim the light a small amount
+            // // light.intensity = 0.5;
+
+            var light = new BABYLON.DirectionalLight("dir01", new BABYLON.Vector3(-1, -1, 1), scene);
+            light.position = new BABYLON.Vector3(20, 30, -20);
+
+            // Default intensity is 1. Let's dim the light a small amount
+            light.intensity = 3;
+            var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
+
+            shadowGenerator.useBlurExponentialShadowMap = true;
+            //  shadowGenerator.useKernelBlur = true;
+            //  shadowGenerator.blurKernel = 2;
+            // shadowGenerator.blurScale = 1;
+            // shadowGenerator.blurBoxOffset = 0.4;
+            // shadowGenerator.depthScale = 0;
+            shadowGenerator.enableSoftTransparentShadow = true;
+            shadowGenerator.transparencyShadow = true;
+            shadowGenerator.darkness = 0.1;
+
+            var myGround = BABYLON.MeshBuilder.CreateGround("myGround", { width: 200, height: 200, subdivisions: 8 }, scene);
+            myGround.position = new BABYLON.Vector3(0, 0, 0);
+            myGround.visibility = false;
+
+            const [topLine, bottomLine, progressBar] = createUI();
+
+            BABYLON.SceneLoader.ShowLoadingScreen = false;
+
+            BABYLON.SceneLoader.OnPluginActivatedObservable.addOnce(function (loader) {
+                // This is just a precaution as this isn't strictly necessary since
+                // the only loader in use is the glTF one.
+                if (loader.name !== "gltf") return;
+
+                // See what the loader is doing in the console.
+                // loader.loggingEnabled = true;
+
+                // Use HTTP range requests to load the glTF binary (GLB) in parts.
+                loader.useRangeRequests = true;
+
+                // Register for when extension are loaded.
+                loader.onExtensionLoadedObservable.add(function (extension) {
+                    // Ignore extensions except MSFT_lod.
+                    if (extension.name !== "MSFT_lod") return;
+
+                    // Extensions are loaded after glTF has been parsed and
+                    // thus it is now loading the first LOD.
+                    lodNext = 0;
+
+                    // Update the status text and next LOD index when each set
+                    // of LODs are loaded.
+                    extension.onMaterialLODsLoadedObservable.add(function (index) {
+                        topLine.text = "Viewing '" + lodNames[index] + "' LOD";
+                        lodNext = index + 1;
+                    });
+
+                    // Uncomment the following line to stop at the specified LOD.
+                    //extension.maxLODsToLoad = 1;
+                });
+
+                // Update the status text when loading is complete, i.e. when
+                // all the LODs are loaded.
+                loader.onCompleteObservable.add(function () {
+                    bottomLine.text = "Loading Complete";
+                    for (var i = 0; i < scene.meshes.length; i++) {
+                        if (scene.meshes[i].name.includes("Plane") || scene.meshes[i].name == "Cylinder.002" || scene.meshes[i].name == "Circle") {
+                            scene.meshes[i].receiveShadows = true;
+                            scene.meshes[i].material.environmentIntensity = 0.25;
+                        }
+                        if (scene.meshes[i].name.includes("Cube") || scene.meshes[i].name.includes("Cylinder") && scene.meshes[i].name != "Cylinder.002" || scene.meshes[i].name.includes("Circle") && scene.meshes[i].name != "Circle") {
+                            shadowGenerator.addShadowCaster(scene.meshes[i]);
+                            scene.meshes[i].checkCollisions = true;
+                            scene.meshes[i].material.environmentIntensity = 0.25;
                         }
                     }
+                    setTimeout(function () {
+                        topLine.text = "";
+                        bottomLine.text = "Light and Shadows Updated";
+                    }, 2000);
+                    setTimeout(function () {
+                        topLine.text = "";
+                        bottomLine.text = "";
+                    }, 5000);
+                });
+            });
 
-                    window.engine = await asyncEngineCreation();
-        if (!engine) throw 'engine should not be null.';
-        startRenderLoop(engine, canvas);
-        window.scene = createScene();};
-        initFunction().then(() => {scene.then(returnedScene => { sceneToRender = returnedScene; });
-                            
+
+            BABYLON.SceneLoader.AppendAsync("https://dl.dropbox.com/s/mb3d3gw7ibpkfqm/ParkFin.glb?dl=0", "ParkFin.glb",
+                scene,
+                function (meshes) {
+                    if (meshes.lengthComputable) {
+                        bottomLine.text = "Loading, please wait..." + (meshes.loaded * 100 / meshes.total).toFixed() + "%";
+                    }
+                    else {
+                        var dlCount = meshes.loaded / (1024 * 1024);
+                        bottomLine.text = "Loading, please wait..." + Math.floor(dlCount * 100.0) / 100.0 + " MB already loaded.";
+                    }
+                });
+
+            scene.gravity = new BABYLON.Vector3(0, -0.9, 0);
+
+            scene.collisionsEnabled = true;
+            camera2.applyGravity = true;
+            camera2._needMoveForGravity = true;
+            camera2.checkCollisions = true;
+            myGround.checkCollisions = true;
+
+            var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+            var button2 = BABYLON.GUI.Button.CreateSimpleButton("but2", "Walking");
+            button2.width = "150px"
+            button2.height = "40px";
+            button2.color = "Black";
+            button2.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+            button2.left = "-50px";
+            button2.cornerRadius = 5;
+            button2.background = "white";
+            button2.onPointerUpObservable.add(function () {
+                if (scene.activeCamera == camera2) {
+                    camera2.detachControl(canvas);
+                    scene.activeCamera = camera;
+                    camera.attachControl(canvas, true);
+                    button2.textBlock.text = "Walking"
+                    scene.fogEnabled = false;
+                    progressBar.isVisible = false;
+                } else {
+                    camera.detachControl(canvas);
+                    scene.activeCamera = camera2;
+                    camera2.attachControl(canvas, true);
+                    button2.textBlock.text = "Arc Rot"
+                    scene.fogEnabled = true;
+                    progressBar.isVisible = true;
+                }
+            });
+            advancedTexture.addControl(button2);
+
+            scene.onBeforeRenderObservable.add(function () {
+                var cameraForwardRayPosition = camera2.getForwardRay().direction;
+                //camera2.cameraRotation = direction ;
+                if (run == true) {
+                    //camera2.position.z-=0.1
+                    var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0, 0, 0.1), BABYLON.Matrix.RotationY(camera2.rotation.y));
+                    camera2.position.addInPlace(v2);
+                    // camera2.checkCollisions = true;
+                    // camera2.position = direction+ 0.1;
+                }
+                if (back == true) {
+                    // camera2.position.z+=0.1
+
+                    var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0, 0, -0.1), BABYLON.Matrix.RotationY(camera2.rotation.y));
+                    camera2.position.addInPlace(v2);
+
+                }
+                if (left == true) {
+                    var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(-0.1, 0, 0), BABYLON.Matrix.RotationY(camera2.rotation.y));
+                    camera2.position.addInPlace(v2);
+                }
+                if (right == true) {
+                    // camera2.position.x-=0.1
+                    var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0.1, 0, 0), BABYLON.Matrix.RotationY(camera2.rotation.y));
+                    camera2.position.addInPlace(v2);
+                }
+            })
+
+            var energy = 50, shiftPressed = false;
+            scene.onBeforeRenderObservable.add(function () {
+                // console.log(camera2.position);
+                if (shiftPressed && scene.activeCamera == camera2) {
+                    if (energy > 0) {
+                        camera2.speed = 1.5;
+                        energy--;
+                        progressBar.width = energy / 1 / 100;
+                    }
+                    else {
+                        camera2.speed = 0.5;
+                        if (energy < 50 && !shiftPressed) {
+                            energy += 0.5;
+                            progressBar.width = energy / 1 / 100;
+                        }
+                    }
+                } else {
+                    camera2.speed = 0.5;
+                    if (energy < 50) {
+                        energy += 0.5;
+                        progressBar.width = energy / 1 / 100;
+                    }
+                }
+                console.log("Energy " + energy);
+            });
+            scene.onKeyboardObservable.add((kbInfo) => {
+                switch (kbInfo.type) {
+                    case BABYLON.KeyboardEventTypes.KEYDOWN:
+                        switch (kbInfo.event.key) {
+                            case "Shift":
+                                shiftPressed = true;
+                                break;
+                        }
+                        break;
+
+                    case BABYLON.KeyboardEventTypes.KEYUP:
+                        switch (kbInfo.event.key) {
+                            case "Shift":
+                                shiftPressed = false;
+                                break;
+                        }
+                }
+            });
+
+            var glowLayer = new BABYLON.GlowLayer("glow", scene, {
+                mainTextureFixedSize: 256,
+                blurKernelSize: 128
+            });
+            glowLayer.intensity = 0.75;
+
+
+            return scene;
+        };
+
+
+        function createUI() {
+            // Create full screen UI.
+            const uiTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+
+            // Create attribution line of text.
+            const attributionLine = new BABYLON.GUI.TextBlock();
+            attributionLine.color = "lightgray";
+            attributionLine.fontSize = 12;
+            attributionLine.top = "-45%";
+            attributionLine.text = " Asset created by player11en";
+            uiTexture.addControl(attributionLine);
+
+            // Create top line of text.
+            const topLine = new BABYLON.GUI.TextBlock();
+            topLine.color = "white";
+            topLine.fontSize = 24;
+            topLine.top = "-38%";
+            uiTexture.addControl(topLine);
+
+            // Create bottom line of text.
+            const bottomLine = new BABYLON.GUI.TextBlock();
+            bottomLine.color = "white";
+            bottomLine.fontSize = 24;
+            bottomLine.top = "45%";
+            uiTexture.addControl(bottomLine);
+
+            const progressBar = new BABYLON.GUI.Rectangle();
+            progressBar.width = 0.5;
+            progressBar.height = "15px";
+            progressBar.outlineWidth = "2px";
+            progressBar.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            progressBar.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            progressBar.top = "10px";
+            progressBar.left = "5px";
+            progressBar.isVisible = false;
+            progressBar.background = BABYLON.Color3.FromHexString("#99EE99").toHexString();
+            uiTexture.addControl(progressBar);
+
+            return [topLine, bottomLine, progressBar];
+        }
+
+        window.initFunction = async function () {
+            var asyncEngineCreation = async function () {
+                try {
+                    return createDefaultEngine();
+                } catch (e) {
+                    console.log("the available createEngine function failed. Creating the default engine instead");
+                    return createDefaultEngine();
+                }
+            }
+
+            window.engine = await asyncEngineCreation();
+            if (!engine) throw 'engine should not be null.';
+            startRenderLoop(engine, canvas);
+            window.scene = createScene();
+        };
+        initFunction().then(() => {
+            scene.then(returnedScene => { sceneToRender = returnedScene; });
+
         });
 
         // Resize
@@ -403,4 +422,5 @@ function createUI() {
         });
     </script>
 </body>
+
 </html>
