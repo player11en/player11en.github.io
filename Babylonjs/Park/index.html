@@ -219,6 +219,7 @@
                     setTimeout(function () {
                         topLine.text = "";
                         bottomLine.text = "";
+                        button2.isVisible = true;
                     }, 5000);
                 });
             });
@@ -270,6 +271,7 @@
                     progressBar.isVisible = true;
                 }
             });
+            button2.isVisible = false;
             advancedTexture.addControl(button2);
 
             scene.onBeforeRenderObservable.add(function () {
