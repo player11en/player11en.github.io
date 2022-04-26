@@ -162,6 +162,103 @@
             myGround.position = new BABYLON.Vector3(0, 0, 0);
             myGround.visibility = false;
 
+            var mat = new BABYLON.StandardMaterial("mat1", scene);
+            mat.diffuseColor = new BABYLON.Color3(1, 1, 0);
+            mat.emissiveColor = new BABYLON.Color3(1, 1, 0);
+           
+            var Paper1 =  BABYLON.MeshBuilder.CreateBox("Box", {height: 1, width: 0.75, depth: 0.1});
+            Paper1.position = new BABYLON.Vector3(0, 5, 0);
+            Paper1.rotation.x = -Math.PI/8;
+            Paper1.visibility = true;
+            Paper1.material = mat;
+            
+            
+            camera2.onCollide = function (colMesh) {
+                // if(colMesh.name === "energyPack"){
+                //     console.log("Energy pack acquired");
+                //     // Remove the energy pack from the scene and restore 20% energy to the player
+                //     colMesh.dispose();
+                            
+                // } 
+                
+                if(colMesh.name === "Box"){
+                    console.log("Page 1 Info");
+                    bottomLine.text = "Page 1 acquired";
+                    // Remove the health pack from the scene and restore 10% health to the player
+                    colMesh.dispose();
+
+                    setTimeout(function () {
+                        topLine.text = "";
+                        bottomLine.text = "";
+                    }, 3000);
+                }       
+               
+            }
+
+
+            let isLocked = false;        
+            scene.onPointerDown = function (evt) {   
+                if(rectangle.isVisible){
+                    rectangle.isVisible = false;
+                }
+                
+                if(scene.activeCamera == camera2){    
+                    if (document.pointerLockElement !== canvas ) {
+                        console.log("Was Already locked: ", document.pointerLockElement === canvas);
+            
+                        if (!isLocked) {
+                            canvas.requestPointerLock = canvas.requestPointerLock || canvas.msRequestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock || false;
+                            
+                            if (canvas.requestPointerLock) {
+                                canvas.requestPointerLock();
+                            }
+                        }
+                    }
+
+                    // evt === 0 (left mouse click)          
+                    if(evt.button == 0 && scene.activeCamera == camera2){ 
+                        // Shoot at camera's ray target 
+                        let ray = camera2.getForwardRay();
+                        let hit = scene.pickWithRay(ray);
+                        let model = hit.pickedMesh;
+                        // Exempt ground mesh from being shot at
+                        if(model.name == "Box" && model != null){
+                            // Destroy target mesh
+                            model.dispose();
+                            console.log("Page 1 Info");
+                            bottomLine.text = "Page 1 acquired";
+
+                            setTimeout(function () {
+                                topLine.text = "";
+                                bottomLine.text = "";
+                            }, 3000);
+                        }                        
+                    }
+
+                        // Event listener when the pointerlock is updated (or removed by pressing ESC for example).
+                    var pointerlockchange = function () {
+                        var controlEnabled = document.pointerLockElement || document.mozPointerLockElement || document.webkitPointerLockElement || document.msPointerLockElement || false;
+                        
+                        // If the user is already locked
+                        if (!controlEnabled) {
+                            camera2.detachControl(canvas);                
+                            isLocked = false;
+                            
+                        } else {
+                            camera2.attachControl(canvas);                
+                            isLocked = true;
+                            this.active = true;
+                        }
+                    };    
+                    // Attach events to the document
+                    document.addEventListener("pointerlockchange", pointerlockchange, false);
+                    document.addEventListener("mspointerlockchange", pointerlockchange, false);
+                    document.addEventListener("mozpointerlockchange", pointerlockchange, false);
+                    document.addEventListener("webkitpointerlockchange", pointerlockchange, false);
+                } 
+            }
+
+
             const [topLine, bottomLine, progressBar] = createUI();
 
             BABYLON.SceneLoader.ShowLoadingScreen = false;
@@ -206,7 +303,7 @@
                             scene.meshes[i].receiveShadows = true;
                             scene.meshes[i].material.environmentIntensity = 0.25;
                         }
-                        if (scene.meshes[i].name.includes("Cube") || scene.meshes[i].name.includes("Cylinder") && scene.meshes[i].name != "Cylinder.002" || scene.meshes[i].name.includes("Circle") && scene.meshes[i].name != "Circle") {
+                        if (scene.meshes[i].name.includes("Cube")) {
                             shadowGenerator.addShadowCaster(scene.meshes[i]);
                             scene.meshes[i].checkCollisions = true;
                             scene.meshes[i].material.environmentIntensity = 0.25;
@@ -220,12 +317,12 @@
                         topLine.text = "";
                         bottomLine.text = "";
                         button2.isVisible = true;
-                    }, 5000);
+                    }, 4000);
                 });
             });
 
 
-            BABYLON.SceneLoader.AppendAsync("https://dl.dropbox.com/s/mb3d3gw7ibpkfqm/ParkFin.glb?dl=0", "ParkFin.glb",
+            BABYLON.SceneLoader.AppendAsync("https://dl.dropbox.com/s/wn9dmi5d1v3p5iu/Park.glb?dl=0", "Park.glb",
                 scene,
                 function (meshes) {
                     if (meshes.lengthComputable) {
@@ -244,8 +341,45 @@
             camera2._needMoveForGravity = true;
             camera2.checkCollisions = true;
             myGround.checkCollisions = true;
+            Paper1.checkCollisions = true;
 
             var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+
+            var target = BABYLON.Mesh.CreatePlane("targetViewVR");
+            var circle = new BABYLON.GUI.Ellipse();
+            circle.width = "20px";
+            circle.height = "20px";
+            circle.color = "white";
+            circle.thickness = 3;
+            advancedTexture.addControl(circle);
+            target.isPickable = false;  
+            circle.isVisible = false; 
+
+            var rectangle = new BABYLON.GUI.Rectangle("rect");
+            rectangle.background = "gray";
+            rectangle.width = "50%";
+            rectangle.height = "75%";
+            rectangle.alpha = 0.85;
+            advancedTexture.addControl(rectangle);
+            
+            // textblock.text = " \n \n In Walking Mode: \n Use WASD for WALK \n Use Shift to SPRINT \n Walk over or left click to collect the Pages";
+            
+            
+            var tb= new MixedTextBlock();
+            tb.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            tb.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            tb.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            tb.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            //tb.resizeToFit = true;
+            tb.multiTextArgs = [
+                {text: "\n In Arc Rotate Mode:", fillStyle: "white", font: "bold 35px Helvetica"},
+                {text: "\n \n Have a look at the park in Arc Rotate Mode", fillStyle: "white", font: "bold 25px Helvetica"},
+                {text: `\n \n \n In Walking Mode:`, fillStyle: "white", font: "bold 35px Helvetica"},
+                {text: "\n \n Use WASD for WALK \n Use Shift to SPRINT \n Walk over or left click to collect the Pages", fillStyle: "white", font: "bold 25px Helvetica"}
+                ];
+            tb.text="hi"
+            rectangle.addControl(tb);
+
             var button2 = BABYLON.GUI.Button.CreateSimpleButton("but2", "Walking");
             button2.width = "150px"
             button2.height = "40px";
@@ -262,6 +396,7 @@
                     button2.textBlock.text = "Walking"
                     scene.fogEnabled = false;
                     progressBar.isVisible = false;
+                    circle.isVisible = false;
                 } else {
                     camera.detachControl(canvas);
                     scene.activeCamera = camera2;
@@ -269,6 +404,7 @@
                     button2.textBlock.text = "Arc Rot"
                     scene.fogEnabled = true;
                     progressBar.isVisible = true;
+                    circle.isVisible = true;
                 }
             });
             button2.isVisible = false;
@@ -300,7 +436,9 @@
                     var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0.1, 0, 0), BABYLON.Matrix.RotationY(camera2.rotation.y));
                     camera2.position.addInPlace(v2);
                 }
-            })
+
+                Paper1.rotation.y += 0.05;
+            });
 
             var energy = 50, shiftPressed = false;
             scene.onBeforeRenderObservable.add(function () {
@@ -325,7 +463,7 @@
                         progressBar.width = energy / 1 / 100;
                     }
                 }
-                console.log("Energy " + energy);
+                // console.log("Energy " + energy);
             });
             scene.onKeyboardObservable.add((kbInfo) => {
                 switch (kbInfo.type) {
@@ -422,6 +560,125 @@
         window.addEventListener("resize", function () {
             engine.resize();
         });
+
+
+        var __extends = (this && this.__extends) || (function () {
+            var extendStatics = function (d, b) {
+                extendStatics = Object.setPrototypeOf ||
+                    ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+                    function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+                return extendStatics(d, b);
+            };
+            return function (d, b) {
+                extendStatics(d, b);
+                function __() { this.constructor = d; }
+                d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+            };
+        })();
+        var MixedTextBlock = /** @class */ (function (_super) {
+            __extends(MixedTextBlock, _super);
+            function MixedTextBlock() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            Object.defineProperty(MixedTextBlock.prototype, "multiTextArgs", {
+                set: function (value) {
+                    this._multiTextArgs = value;
+                },
+                enumerable: false,
+                configurable: true
+            });
+            MixedTextBlock.prototype._drawText = function (text, textWidth, y, context) {
+                var width = this._currentMeasure.width;
+                var x = 0;
+                switch (this._textHorizontalAlignment) {
+                    case BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT:
+                        x = 10;
+                        break;
+                    case BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT:
+                        x = width - textWidth;
+                        break;
+                    case BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER:
+                        x = (width - textWidth) / 2;
+                        break;
+                }
+                if (this.shadowBlur || this.shadowOffsetX || this.shadowOffsetY) {
+                    context.shadowColor = this.shadowColor;
+                    context.shadowBlur = this.shadowBlur;
+                    context.shadowOffsetX = this.shadowOffsetX;
+                    context.shadowOffsetY = this.shadowOffsetY;
+                }
+                if (this.outlineWidth) {
+                    context.strokeText(text, this._currentMeasure.left + x, y);
+                }
+                var Y=y-this._fontOffset.height
+                try{
+                    Y=Y+parseInt(this._multiTextArgs[0].font.split(" ")[1].replace("px",""))
+                }
+                catch(e){
+                    Y=this._fontOffset.height
+                }
+                this._fillMixedText(context, this._multiTextArgs, this._currentMeasure.left + x,Y);
+            };
+            MixedTextBlock.prototype._fillMixedText = function (context, args, x, y) {
+                var defaultFillStyle = context.fillStyle;
+                var defaultFont = context.font;
+                var defaultOffset=this._fontOffset.height
+                var lineStart=x
+                var lineBreak=this._currentMeasure.top
+                var windowWidth=this._currentMeasure.width-30
+                context.save();
+                args.forEach(function (_a) {
+                    var text = _a.text, fillStyle = _a.fillStyle, font = _a.font;
+                    var splittedText=text.split(" ")
+                    var height=0
+                    try{
+                        height=parseInt(_a.font.split(" ")[1].replace("px",""))
+                    } 
+                    catch(e){
+                        height=defaultOffset
+                    }
+                    context.fillStyle = fillStyle || defaultFillStyle;
+                    context.font = font || defaultFont;
+                    splittedText.forEach(function (word){
+                    var finalText=word.split("\n")
+                    if(finalText.length>1){
+                        for(var i=0;i<finalText.length;i++){
+                            finalText[i]=" "+finalText[i]
+                            if(x-lineStart+context.measureText(finalText[i]).width>windowWidth){
+                            x=lineStart
+                            y+=height
+                            finalText[i]=finalText[i].replace(" ","")
+                            }
+                            if(x==lineStart)
+                            finalText[i]=finalText[i].replace(" ","")
+                            context.fillText(finalText[i], x, y);
+                            x += context.measureText(finalText[i]).width;
+                            if(i!=finalText.length-1){
+                                y+=height
+                                x=lineStart
+                            }
+                        }
+                    }
+                    else{
+                        word=" "+word                   
+                        if(x-lineStart+context.measureText(word).width>windowWidth){
+                            x=lineStart
+                            y+=height
+                            word=word.replace(" ","")
+                        }
+                        if(x==lineStart)
+                            word=word.replace(" ","")
+                        context.fillText(word, x, y);
+                        x += context.measureText(word).width;
+                    }
+                    })
+
+                });
+                context.restore();
+            };
+            return MixedTextBlock;
+        }(BABYLON.GUI.TextBlock)); //end MixedTextBlock-class
+
     </script>
 </body>
 
