@@ -1,10 +1,19 @@
+<!-- VERSION: 0.1 -->
+<!-- Date: 2022-04-28 -->
+<!-- Author: player11en -->
+<!-- Assets made by: player11en -->
+<!-- Social: @player11en -->
+
+
+
+
+
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <title>Babylon.js sample code</title>
+    <title>Small ART Gallery</title>
 
     <!-- Babylon.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
@@ -263,6 +272,9 @@
                                 scene.meshes[i].material = mirrorMaterial;
                             }
                         }
+                        if (scene.meshes[i].name.includes("Image")) {
+                            scene.meshes[i].material.environmentIntensity = 0.5;
+                        }
 
                     }
                     setTimeout(function () {
@@ -337,7 +349,9 @@
             var rectangle = new BABYLON.GUI.Rectangle("rect");
             rectangle.background = "gray";
             rectangle.width = "55%";
-            rectangle.height = "35%";
+            rectangle.height = "500px";
+            rectangle.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+            rectangle.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
             rectangle.alpha = 0.85;
             advancedTexture.addControl(rectangle);
 
@@ -345,17 +359,32 @@
 
 
             var tb = new MixedTextBlock();
-            tb.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            tb.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
             tb.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
             tb.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
             tb.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
-            //tb.resizeToFit = true;
-            tb.multiTextArgs = [
-                { text: "\n In Arc Rotate Mode:", fillStyle: "white", font: "bold 35px Helvetica" },
-                { text: "\n \n Have a look at the park in Arc Rotate Mode", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: `\n \n \n In Walking Mode:`, fillStyle: "white", font: "bold 35px Helvetica" },
-                { text: "\n \n Use WASD for WALK \n Use Shift to SPRINT \n Walk over or left click to collect the Pages", fillStyle: "white", font: "bold 25px Helvetica" }
-            ];
+
+            if(isMobile){
+                tb.multiTextArgs = [
+                    { text: "\n Welcome to the Gallery", fillStyle: "white", font: "bold 35px Helvetica" },
+                    { text: `\n \n \n !!! Work Still in Progress !!!`, fillStyle: "yellow", font: "bold 25px Helvetica" },
+                    { text: "\n \n Use the Touch-Screen to Look-around in the Scene", fillStyle: "white", font: "bold 25px Helvetica" },
+                    { text: "\n \n Use the Walk Button to walk in the direction your Looking", fillStyle: "white", font: "bold 35px Helvetica" },
+                    { text: "\n \n Click on the Artworks to get Information \n", fillStyle: "white", font: "bold 25px Helvetica" },
+                    { text: "\n \n by player11en \n", fillStyle: "white", font: "bold 15px Helvetica" }
+                ];
+            }
+            else{       
+                tb.multiTextArgs = [
+                    { text: "\n Welcome to the Gallery", fillStyle: "white", font: "bold 45px Helvetica" },
+                    { text: `\n \n \n !!! Work Still in Progress !!!`, fillStyle: "yellow", font: "bold 25px Helvetica" },
+                    { text: `\n \n  In Walking Mode:`, fillStyle: "white", font: "bold 35px Helvetica" },
+                    { text: "\n \n Use WASD for WALK \n \n Use Shift to Sprint \n", fillStyle: "white", font: "bold 25px Helvetica" },
+                    { text: "\n Green Bar shows Sprinting-Energy", fillStyle: "white", font: "bold 15px Helvetica" },
+                    { text: "\n \n Click on the Artworks to get Information", fillStyle: "white", font: "bold 25px Helvetica" },
+                    { text: "\n \n by player11en \n", fillStyle: "white", font: "bold 15px Helvetica" }
+                ];
+            }
             tb.text = "hi"
             rectangle.addControl(tb);
 
@@ -451,7 +480,7 @@
             attributionLine.color = "lightgray";
             attributionLine.fontSize = 12;
             attributionLine.top = "-45%";
-            attributionLine.text = " Asset created by player11en";
+            attributionLine.text = "Asset created by player11en";
             uiTexture.addControl(attributionLine);
 
             // Create top line of text.
@@ -628,7 +657,7 @@
                 context.restore();
             };
             return MixedTextBlock;
-        }(BABYLON.GUI.TextBlock)); //end MixedTextBlock-class
+        }(BABYLON.GUI.TextBlock));
 
     </script>
 </body>
