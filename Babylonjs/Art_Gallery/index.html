@@ -87,12 +87,14 @@
             const shadows = {};
 
             if (isMobile) {
-                camera = new BABYLON.DeviceOrientationCamera("DeviceCamera", new BABYLON.Vector3(60, 8, 0.1), scene);
-                camera.enableHorizontalDragging(-0.001);
+                camera = new BABYLON.FreeCamera("DeviceCamera", new BABYLON.Vector3(60, 8, 0.1), scene);
                 camera.setTarget(new BABYLON.Vector3(-2.5, 8, 0));
                 camera.inertia *= 0.95;
                 camera.ellipsoid = new BABYLON.Vector3(1, 4, 1);
                 camera.speed = 1;
+                camera.upperBetaLimit = Math.PI / 2;  
+                camera.lowerBetaLimit = Math.PI / 2;  
+                camera.panningAxis=new BABYLON.Vector3(1,1,0);
                 camera.attachControl(canvas, true);
                 console.log("mobile");
                 scene.activeCamera = camera;
