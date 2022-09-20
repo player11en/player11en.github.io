@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    </head>
+
+    <!-- Einbidung von Bibliotheken für A-Frame & Ar.js -->
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.0.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+
+    <body style='margin : 0px; overflow: hidden;'>
+        
+        <!-- Markererkennungs Skript -->
+
+        <a-scene id="scene" 
+        embedded arjs='trackingMethod: best; debugUIEnabled:false;' vr-mode-ui="enabled: false"
+        renderer ="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;">
+            <!-- Marker erstellen, verknüpfung mit Markererkennungsskript, Einbindung von Marker-pattern -->
+            <!-- pattern creater Link: https://jeromeetienne.github.io/AR.js/three.js/examples/marker-training/examples/generator.html-->
+            <a-marker markerhandler cursor="rayOrigin: mouse" emitevents="true" preset='hiro' type='pattern'>
+                <!-- 3dModel Import und Text-->
+                <!-- Dropbox Link www durch dl ersetzten -->
+                <a-entity gltf-model="url(https://dl.dropbox.com/s/c6dhtpuckmbs083/babyJ.glb?dl=0)" scale="0.2 0.2 0.2" rotation="0 0 0" animation-mixer></a-entity>
+            </a-marker>            
+            <a-entity camera></a-entity>
+           
+        </a-scene>
+    </body>
+</html>
