@@ -263,15 +263,15 @@
                             scene.meshes[i].receiveShadows = true;
                             scene.meshes[i].material.environmentIntensity = 0.25;
                         }
-
-                        shadowGenerator.addShadowCaster(scene.meshes[i]);
-                        scene.meshes[i].checkCollisions = true;
-                        scene.meshes[i].material.environmentIntensity = 0.25;
-                        mirrorMaterial.reflectionTexture.renderList.push(scene.meshes[i]);
-                        if (scene.meshes[i].material.name.toString() == "Ground") {
-                            scene.meshes[i].material = mirrorMaterial;
+                        if (scene.meshes[i].name.includes("Plane") || scene.meshes[i].name.includes("Image") || scene.meshes[i].name.includes("Cube")) {
+                            shadowGenerator.addShadowCaster(scene.meshes[i]);
+                            scene.meshes[i].checkCollisions = true;
+                            scene.meshes[i].material.environmentIntensity = 0.25;
+                            mirrorMaterial.reflectionTexture.renderList.push(scene.meshes[i]);
+                            if (scene.meshes[i].material.name.toString() == "Ground") {
+                                scene.meshes[i].material = mirrorMaterial;
+                            }
                         }
-
                         if (scene.meshes[i].name.includes("Image")) {
                             scene.meshes[i].material.environmentIntensity = 0.5;
                         }
@@ -289,7 +289,7 @@
             });
 
 
-            BABYLON.SceneLoader.AppendAsync("https://dl.dropbox.com/s/50ncrs9nha495kp/Art_Hall.glb?dl=0", "Art_Hall.glb",
+            BABYLON.SceneLoader.AppendAsync("https://dl.dropbox.com/s/lc6iijh3pw87xeu/Art_Hall.glb?dl=0", "Art_Hall.glb",
                 scene,
                 function (meshes) {
                     if (meshes.lengthComputable) {
