@@ -21,13 +21,13 @@ function createElements() {
         console.log(n);
 
         for (var i = 2; i <= 48; i++) {
-          createImages("", 'player11en.github.io/WebPagePrototype/HTML_CSS_Basics/image/3D/Image (' + i + ').png', "test", "ipsumdipsum")
+          createImages("", 'image/3D/Image (' + i + ').png', "test", "ipsumdipsum")
         }
       }
     }
   };
 
-  xmlhttp.open("GET", "player11en.github.io/WebPagePrototype/HTML_CSS_Basics/image/3D/", true);
+  xmlhttp.open("GET", "image/3D/", true);
   xmlhttp.send();
 
 }
