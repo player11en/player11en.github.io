@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
 html,
 body {
   margin: 0;
@@ -14,23 +16,12 @@ body {
   display: flex;
   padding-top: .5em;
   padding-bottom: .5em;
-  border: 1px solid #a2a2a2;
   background-color: skyblue;
   border-radius: 5px;
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
   text-decoration: none;
-}
-
-footer {
-  background: steelblue;
-  flex: 0 0 auto;
-  font: bold 1.5em Tahoma;
-  height: 1.2em;
-  padding: 1em;
-  text-align: center;
-  margin-top: 20px;
 }
 
 .videoWrapper {
@@ -109,6 +100,7 @@ ul {
 .logo {
   margin: 0;
   font-size: 1.45em;
+  z-index: 990;
 }
 
 .main-nav {
@@ -336,7 +328,8 @@ button:hover {
   object-fit: contain;
 
 }
-#video01{
+
+#video01 {
   display: none;
   margin: auto;
   margin-top: 50px;
@@ -396,7 +389,7 @@ button:hover {
   color: #ccc;
   padding: 50px 0;
   /* height: 100px; */
-  font-size: 25px;  
+  font-size: 25px;
   overflow: hidden;
 }
 
@@ -420,62 +413,449 @@ button:hover {
   border-radius: 40px;
 }
 
-  /* Next & previous buttons */
-  .prev,
-  .next {
-    cursor: pointer;
-    position: absolute;
-    top: 40%;
-    width: auto;
-    padding: 16px;
-    margin-top: -50px;
-    color: rgb(86, 86, 86);
-    font-weight: bold;
-    font-size: 60px;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-  
-  /* Position the "next button" to the right */
-  .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-  }
-  
-  /* On hover, add a black background color with a little bit see-through */
-  .prev:hover,
-  .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: rgb(255, 255, 255);
-  }
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: rgb(86, 86, 86);
+  font-weight: bold;
+  font-size: 60px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
 
-  .row {
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: rgb(255, 255, 255);
+}
+
+.row {
+  display: flex;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column {
+  flex: 33.33%;
+}
+
+.column img {
+  min-height: 160px;
+  max-height: 200px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+footer {
+  background: steelblue;
+  flex: 0 0 auto;
+  font: bold 1.5em Tahoma;
+  min-height: 300px;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer p {
+  color: #fff;
+  margin: 15px 0 10px 0;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.footer h3 {
+  width: fit-content;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.social-icon,
+.menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+
+.social-icon__item,
+.menu__item {
+  list-style: none;
+}
+
+.social-icon__link {
+  font-size: 2rem;
+  color: #fff;
+  margin: 0 10px;
+  display: inline-block;
+  transition: 0.5s;
+}
+
+.social-icon__link:hover {
+  transform: translateY(-10px);
+}
+
+.menu__link {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0 10px;
+  display: inline-block;
+  transition: 0.5s;
+  text-decoration: none;
+  opacity: 0.75;
+  font-weight: 300;
+}
+
+.menu__link:hover {
+  opacity: 1;
+}
+
+textarea {
+  resize: none;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.footerText p {
+  color: #fff;
+  margin: 15px 0 10px 0;
+  font-size: 18px;
+  font-weight: 300;
+  display: inline-block;
+  line-height: 0.005px;
+  opacity: 0.75;
+}
+
+.footer h3 {
+  color: #fff;
+  display: inline-block;
+  line-height: 0.005px;
+  margin-top: 12px;
+}
+
+.footerText li {
+  height: 0.8em;
+}
+
+footer .rights {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgb(255, 255, 255);
+  display: inline-block;
+  line-height: 0.05px;
+  opacity: 0.75;
+}
+
+.rounded-social-buttons {
+  text-align: center;
+}
+
+.rounded-social-buttons .social-button {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  width: 3.125rem;
+  height: 3.125rem;
+  /* border: 0.125rem solid transparent; */
+  padding: 0;
+  text-decoration: none;
+  text-align: center;
+  color: #fefefe;
+  font-size: 1.5625rem;
+  font-weight: normal;
+  line-height: 2em;
+  border-radius: 1.6875rem;
+  transition: all 0.5s ease;
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.rounded-social-buttons .social-button:hover,
+.rounded-social-buttons .social-button:focus {
+  -webkit-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+/* .rounded-social-buttons .fa-twitter,
+.fa-facebook-f,
+.fa-linkedin,
+.fa-youtube,
+.fa-instagram {
+  font-size: 25px;
+} */
+
+.rounded-social-buttons .social-button.github {
+  background: #333;
+}
+
+.rounded-social-buttons .social-button.github:hover,
+.rounded-social-buttons .social-button.github:focus {
+  color: #333;
+  background: #fefefe;
+  border-color: #333;
+}
+
+.rounded-social-buttons .social-button.renderhub {
+  line-height: 2em;
+  border-radius: 1.6875rem;
+  transition: all 0.5s ease;
+  margin-top: 1rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
+  background: #292929;
+}
+
+.leftRenderhub {
+  fill: #a3a3a3;
+}
+
+.rightRenderhub {
+  fill: #fff;
+}
+
+.rounded-social-buttons .social-button.renderhub:hover,
+.rounded-social-buttons .social-button.renderhub:focus {
+  background: #fefefe;
+}
+
+.rounded-social-buttons .social-button.renderhub:hover .leftRenderhub,
+.rounded-social-buttons .social-button.renderhub:focus .leftRenderhub {
+  background: #fefefe;
+  fill: #a3a3a3;
+}
+
+.rounded-social-buttons .social-button.renderhub:hover .rightRenderhub,
+.rounded-social-buttons .social-button.renderhub:focus .rightRenderhub {
+  background: #fefefe;
+  fill: #2e2e2e;
+}
+
+.rounded-social-buttons .social-button.linkedin {
+  background: #007bb5;
+}
+
+.rounded-social-buttons .social-button.linkedin:hover,
+.rounded-social-buttons .social-button.linkedin:focus {
+  color: #007bb5;
+  background: #fefefe;
+  border-color: #007bb5;
+}
+
+.rounded-social-buttons .social-button.youtube {
+  background: #bb0000;
+}
+
+.rounded-social-buttons .social-button.youtube:hover,
+.rounded-social-buttons .social-button.youtube:focus {
+  color: #bb0000;
+  background: #fefefe;
+  border-color: #bb0000;
+}
+
+.rounded-social-buttons .social-button.instagram {
+  background: linear-gradient(-45deg, #ed1c94, #ffec17);
+}
+
+.rounded-social-buttons .social-button.instagram:hover,
+.rounded-social-buttons .social-button.instagram:focus {
+  color: #ed1c94;
+  background: #fefefe;
+  border-color: #bb0000;
+}
+
+
+header>img {
+  width: 100px;
+  padding-left: 40px;
+
+}
+
+header>a {
+  padding-right: 40px;
+}
+
+.navBar {
+  position: absolute;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+  right: 10px;
+  top: 35px;
+}
+
+.navBar img {
+  height: 48px;
+  right: 0;
+  margin: 5px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#closebtn {
+  height: 48px;
+  display: none;
+  right: 0;
+  margin: 5px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 60px;
+  right: 0;
+  line-height: 2em;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+#mySidebar {
+  transition: 0s;
+  background-color: skyblue;
+  transition: 1s;
+}
+
+.sidebar a {
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #34495e;
+  font-size: .99em;
+  display: block;
+  right: 0;
+  transition: 0.3s;
+  margin-top: 5px;
+  margin-left: 50px;
+}
+
+.sidebar a:hover {
+  color: #777777;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.transin {
+  left: 5%;
+  transition: 0.5s;
+}
+
+.transout {
+  left: -65%;
+  transition: 0.5s;
+}
+
+#menu {
+  height: 22px;
+  padding-left: 5px;
+}
+
+#toTop {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #D64F2A;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 60px;
+  border-radius: 60px;
+  width: 96px;
+  height: 96px;
+}
+
+#toTop img {
+  color: white;
+  height: 48px;
+}
+
+
+.hide {
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+
+.show {
+  opacity: 1;
+  transition: opacity 1.5s;
+}
+
+@media only screen and (max-width: 844px) {
+  .navBar {
     display: flex;
   }
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
+
+  .main-nav {
+    display: none;
   }
-  
-  .column {
-    flex: 33.33%;
+
+  #toTop {
+    width: 60px;
+    height: 60px;
+    bottom: 50px;
+    right: 30px;
   }
-  
-  .column img{
-    min-height: 160px;
-    max-height: 200px;
-    max-width: 100%;
-    object-fit: contain;
+
+  #toTop img {
+    height: 36px;
   }
-  
-  /* Add a transparency effect for thumnbail images */
-  .demo {
-    opacity: 0.6;
-  }
-  
-  .active,
-  .demo:hover {
-    opacity: 1;
-  }
+}

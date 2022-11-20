@@ -1,41 +1,25 @@
+var numbers = []; // new empty array
+
 var modal = document.getElementById('myModal');
 var modalImg = document.getElementById('img01');
 var modalVideo = document.getElementById("video01");
 var captionTitle = document.getElementById("title");
 var captionText = document.getElementById("caption");
 
-
 document.addEventListener('mouseover', changeImages);
 modal.addEventListener('click', overlayToggle);
-document.addEventListener('DOMContentLoaded', createElements);
+document.addEventListener('DOMContentLoaded', randomNumber(2, 48, 46));
+
 const observer = lozad();
 observer.observe();
 
 function createElements() {
-  var xmlhttp = new XMLHttpRequest();
-
-  xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-      if (xmlhttp.status == 200) {
-        var n = (xmlhttp.responseText.match(/png/g) || []).length;
-        console.log(n);
-
-        for (var i = 2; i <= 48; i++) {
-          createImages("", 'image/3D/Image (' + i + ').png', "test", "ipsumdipsum")
-        }
-      }
-    }
-  };
-
-  xmlhttp.open("GET", "image/3D/", true);
-  xmlhttp.send();
-
+  for (var i = 0; i <= 45; i++) {
+    createImages("", 'image/3D/Image (' + numbers[i] + ').png', "test", "ipsumdipsum")
+  }
 }
 
-
 function changeImages(e) {
-
-  console.log(e.target.id)
   //alle elemente die img Tags sind
   var imgs = document.getElementsByTagName("img");
   var videos = document.getElementsByTagName("video");
@@ -67,7 +51,6 @@ function changeImages(e) {
         var frontpart = this.firstElementChild.src.substr(0, this.firstElementChild.src.lastIndexOf("/") + 1);
         var newName = "Large" + this.firstElementChild.src.split("/").pop();
         var newsrc = frontpart + newName;
-        console.log(newsrc);
         modalVideo.src = newsrc;
         modalVideo.alt = this.firstElementChild.src;
         captionTitle.innerHTML = this.children[1].children[0].innerHTML;
@@ -92,6 +75,22 @@ function overlayToggle(e) {
     captionText.innerHTML = "";
     showSlides(1);
   }
+}
+
+function randomNumber(min, max, r) {
+  var n, p;
+
+  for (let i = 0; i < r; i++) {
+    do {
+      n = Math.floor(Math.random() * (max - min + 1)) + min;
+      p = numbers.includes(n);
+      if (!p) {
+        numbers.push(n);
+      }
+    }
+    while (p);
+  }
+  createElements();
 }
 
 
@@ -158,13 +157,11 @@ function currentSlide(n) {
 function showSlides(n) {
   var slides = document.getElementsByClassName("gallery");
   var currentOne = slides[0].childElementCount;
-  if(n == 59 ){ n = 1}
-  if(n == 0 ){ n = 59}
-  console.log(currentOne);
+  if (n == 59) { n = 1 }
+  if (n == 0) { n = 59 }
   var urlslides = slides[0].children[n].children[0];
   modalImg.src = urlslides.src;
   modalImg.alt = urlslides.src;
   captionTitle.innerHTML = slides[0].children[n].children[1].children[0].children[0].innerHTML;
   captionText.innerHTML = slides[0].children[n].children[1].children[0].children[1].innerHTML;
-  console.log(n);
 }
