@@ -16,8 +16,8 @@ observer.observe();
 function createElements() {
   for (var i = 0; i <= 45; i++) {
     createImages("", 'image/3D/Image (' + numbers[i] + ').png', "test", "ipsumdipsum")
-        }
-      }
+  }
+}
 
 function changeImages(e) {
   //alle elemente die img Tags sind
