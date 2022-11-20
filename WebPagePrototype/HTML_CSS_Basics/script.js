@@ -12,24 +12,9 @@ const observer = lozad();
 observer.observe();
 
 function createElements() {
-  var xmlhttp = new XMLHttpRequest();
-
-  xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-      if (xmlhttp.status == 200) {
-        var n = (xmlhttp.responseText.match(/png/g) || []).length;
-        console.log(n);
-
-        for (var i = 2; i <= 48; i++) {
-          createImages("", 'image/3D/Image (' + i + ').png', "test", "ipsumdipsum")
-        }
-      }
-    }
-  };
-
-  xmlhttp.open("GET", "image/3D/", true);
-  xmlhttp.send();
-
+  for (var i = 2; i <= 48; i++) {
+    createImages("", 'image/3D/Image (' + i + ').png', "test", "ipsumdipsum")
+  }
 }
 
 
