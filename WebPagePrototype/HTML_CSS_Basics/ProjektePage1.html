@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Ein Artikel</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"
+        integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe"
+        crossorigin="anonymous"></script>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <button id="toTop" class="hide" title="Go to top"><img src="image/icons/toTop.png" id="" alt=""></button>
+
+    <header class="header">
+        <h1 class="logo"><a href="index.html">P1ayerE1even Studios</a></h1>
+        <div class="navBar">
+            <img src="image/icons/navbar.png" id="navbar" alt="">
+            <img src="image/icons/close.png" id="closebtn" class="closebtn" alt="">
+        </div>
+        <ul class="main-nav">
+            <li><a href="WorkPage.html">Works</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="index.html">Artworks</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+    </header>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="WorkPage.html">Works</a>
+        <a href="#">About</a>
+        <a href="index.html">Artworks</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <h2>"Park Memories -- A visual storytelling experince"</h2>
+
+    <div id="background">
+        <main class="content">
+            <p>"Park Memories -- A visual storytelling experince" <br> is a small webbased storytelling narrative.
+                The WebApplication tells a story about an incident that happend in the park a long time ago. Through
+                notes and other clues the story
+                of the park and the incident is told. The user should be motivated to explore the area. <br>
+                The narrative is still in develeopment.
+                This is a prototypical concept where the key is to test features and create a bigger and more complex
+                world where the user can experience a full story with more interactions and decisions.<br>
+                <br>Test it yourself <br>
+                <a target=”_blank”
+                    href="https://player11en.github.io/Babylonjs/Park/">player11en.github.io/Babylonjs/Park/</a>
+            </p>
+
+
+        </main>
+    </div>
+
+    <div class="container">
+        <div class="gallery">
+            <div class="gallery__item gallery__item--lghor">
+                <img src="projekte/images/WebGLPark.png" href="" alt="">
+                <div class="transparent-box">
+                    <div class="caption">
+                        <p>Player11en Studios</p>
+                        <p class="opacity-low">Park Memories -- A visual storytelling experince</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="background">
+        <main class="content">
+            <p>For "Park Memories" we have used the WebGL framework Babylon.js. Babylon.js is a powerful web rendering engine that is developed by microsoft.
+            <br> it has powerful features and a clean and orgaized documentation. Babylon.js is fully Javascript based. <br>
+             The park was created with Blender, before using the model it was been cleaned up and the mesh and polygon count has also been reduced.
+            Using different postprocessing and a self written walking and sprinting script helps the user to freely move and enjoy the small atmosphere</p>
+        </main>
+    </div>
+    <br>
+    <br>
+
+    <footer id="footer">
+        <script>
+            $("#footer").load("footer.html"); 
+        </script>
+    </footer>
+    <script src="universal.js" charset="utf-8"></script>
+</body>
+
+</html>

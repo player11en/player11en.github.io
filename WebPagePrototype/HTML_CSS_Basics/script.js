@@ -10,12 +10,14 @@ document.addEventListener('mouseover', changeImages);
 modal.addEventListener('click', overlayToggle);
 document.addEventListener('DOMContentLoaded', randomNumber(2, 48, 46));
 
+var currentOne;
+
 const observer = lozad();
 observer.observe();
 
 function createElements() {
   for (var i = 0; i <= 45; i++) {
-    createImages("", 'image/3D/Image (' + numbers[i] + ').png', "test", "ipsumdipsum")
+    createImages(28 + i, "", 'image/3D/Image (' + numbers[i] + ').png', "test", "ipsumdipsum")
   }
 }
 
@@ -38,6 +40,13 @@ function changeImages(e) {
         modalImg.alt = this.src;
         captionTitle.innerHTML = this.nextElementSibling.children[0].children[0].innerHTML;
         captionText.innerHTML = this.nextElementSibling.children[0].children[1].innerHTML;
+        currentOne = parseInt($(e.target).attr('class'));
+        document.querySelectorAll('.prev').forEach(function(el) {
+          el.style.display = 'block';
+       });
+       document.querySelectorAll('.next').forEach(function(el) {
+        el.style.display = 'block';
+     });
       }
     }
   }
@@ -55,6 +64,13 @@ function changeImages(e) {
         modalVideo.alt = this.firstElementChild.src;
         captionTitle.innerHTML = this.children[1].children[0].innerHTML;
         captionText.innerHTML = this.children[1].children[1].innerHTML;
+        currentOne = parseInt($(e.target).attr('class'));
+        document.querySelectorAll('.prev').forEach(function(el) {
+          el.style.display = 'none';
+       });
+       document.querySelectorAll('.next').forEach(function(el) {
+        el.style.display = 'none';
+     });
       }
     }
   }
@@ -73,7 +89,7 @@ function overlayToggle(e) {
     modalVideo.alt = "";
     captionTitle.innerHTML = "";
     captionText.innerHTML = "";
-    showSlides(1);
+    // showSlides(1);
   }
 }
 
@@ -94,7 +110,7 @@ function randomNumber(min, max, r) {
 }
 
 
-function createImages(secondClass, imgSrc, title, caption) {
+function createImages(firstclass, secondClass, imgSrc, title, caption) {
   var div = document.createElement("div");
   div.setAttribute('class', 'gallery__item');
 
@@ -113,7 +129,7 @@ function createImages(secondClass, imgSrc, title, caption) {
     div.setAttribute('class', secondClass);
   }
   var img = document.createElement("img");
-  img.setAttribute('class', "lozad");
+  img.setAttribute('class', firstclass);
   img.setAttribute('id', "images");
   img.setAttribute('src', imgSrc);
 
@@ -143,25 +159,52 @@ function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-var slideIndex = 1;
-
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+  slideIndex = currentOne += n;
+  showSlides(slideIndex);
 }
 
 // Thumbnail image controls
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+  slideIndex = currentOne = n;
+  showSlides(slideIndex);
 }
 
 function showSlides(n) {
   var slides = document.getElementsByClassName("gallery");
-  var currentOne = slides[0].childElementCount;
-  if (n == 59) { n = 1 }
-  if (n == 0) { n = 59 }
-  var urlslides = slides[0].children[n].children[0];
+  console.log(currentOne);
+  if (currentOne == 16) { currentOne = 73 }
+  if (currentOne == 74) { currentOne = 17 }
+  console.log(currentOne);
+  var urlslides = slides[0].children[currentOne - 17].children[0];
   modalImg.src = urlslides.src;
   modalImg.alt = urlslides.src;
-  captionTitle.innerHTML = slides[0].children[n].children[1].children[0].children[0].innerHTML;
-  captionText.innerHTML = slides[0].children[n].children[1].children[0].children[1].innerHTML;
+  captionTitle.innerHTML = slides[0].children[currentOne - 17].children[1].children[0].children[0].innerHTML;
+  captionText.innerHTML = slides[0].children[currentOne - 17].children[1].children[0].children[1].innerHTML;
 }
+
+// function showSlides(n) {
+//   console.log(currentOne);
+//   if (currentOne == 0) { currentOne = 73 }
+//   if (currentOne == 74) { currentOne = 1 }
+//   var urlslides = document.getElementsByClassName(currentOne.toString());
+//   console.log(urlslides[0]);
+//   if (urlslides[0].id == "images") {
+//     console.log("imagesOnly");
+//     modalImg.src = urlslides[0].src;
+//     modalImg.alt = urlslides[0].src;
+//     captionTitle.innerHTML = urlslides[0].parentNode.children[1].children[0].children[0].innerHTML;
+//     captionText.innerHTML = urlslides[0].parentNode.children[1].children[0].children[1].innerHTML;
+//   }
+//   if (urlslides[0].id == "anima") {
+//     console.log("animaOnly");
+//     var frontpart = urlslides[0].parentNode.children[1].children[0].src.substr(0, urlslides[0].parentNode.children[1].children[0].src.lastIndexOf("/") + 1);
+//     var newName = "Large" + urlslides[0].parentNode.children[1].children[0].src.split("/").pop();
+//     var newsrc = frontpart + newName;
+//     modalVideo.src = newsrc;
+//     console.log(newsrc);
+//     modalVideo.alt = urlslides[0].parentNode.children[1].children[0].src;
+//     captionTitle.innerHTML = urlslides[0].parentNode.children[1].children[1].children[0].innerHTML;
+//     captionText.innerHTML = urlslides[0].parentNode.children[1].children[1].children[1].innerHTML;
+//   }
+// }
