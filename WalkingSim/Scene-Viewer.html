@@ -5,9 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style.css">
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script>
-    <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
     <!-- using type="module" to ignore IE11 -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <script type="module" src="script.js" defer></script>
   </head>  
     
@@ -34,13 +33,13 @@
 
     <!-- Glb Model für Android geräte und USDZ für iOS -->
     <model-viewer src="https://dl.dropbox.com/s/cmkab1qjhei5jde/RoomSceneViewerFinal.glb"
+      shadow-intensity="1"
+      camera-controls touch-action="pan-y"
       ar 
       ar-scale="auto" 
-      camera-controls 
       alt="RoomModel" 
       background-color="#455A64"
       ios-src="https://dl.dropbox.com/s/jnfjkpubiq92wnk/Room2.usdz?dl=0">
-    </model-viewer>
     
   </body>
 </html>
