@@ -6,6 +6,7 @@ var modalVideo = document.getElementById("video01");
 var captionTitle = document.getElementById("title");
 var captionText = document.getElementById("caption");
 
+
 document.addEventListener('mouseover', changeImages);
 modal.addEventListener('click', overlayToggle);
 document.addEventListener('DOMContentLoaded', randomNumber(2, 48, 46));
@@ -75,6 +76,8 @@ function changeImages(e) {
     }
   }
 }
+
+
 
 function overlayToggle(e) {
   if (e.target.id != "back") {

@@ -5,6 +5,11 @@ document.getElementById("navbar").addEventListener("click", openNav);
 document.getElementById("closebtn").addEventListener("click", closeNav);
 document.getElementById("toTop").addEventListener("click", scrollTop);
 
+
+var logoVideo = document.getElementById("LogoVideo");
+logoVideo.defaultPlaybackRate = 0.25;
+logoVideo.play();
+
 document.addEventListener('scroll', function () {
     const pixels = window.pageYOffset;
 
@@ -25,6 +30,7 @@ document.addEventListener('scroll', function () {
         toTop.classList.remove('show');
         toTop.classList.add('hide');
     }
+    console.log(percentage);
 });
 
 

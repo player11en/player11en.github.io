@@ -13,7 +13,15 @@
         crossorigin="anonymous"></script>
 
     <style>
-
+        .videoWrapper iframe,
+        video {
+            width: 65%;
+            height: 50%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 
@@ -21,7 +29,12 @@
     <button id="toTop" class="hide" title="Go to top"><img src="image/icons/toTop.png" id="" alt=""></button>
 
     <header class="header">
-        <h1 class="logo"><a href="index.html">P1ayerE1even Studios</a></h1>
+        <div class="videoWrapperProj">
+            <video class="projectVid" id="LogoVideo" width="500" height="250" loop autoplay muted playsinline>
+                <source src="projekte/videos/Logo.mp4" type="video/mp4">
+                P1ayerE1even Studios
+            </video>
+        </div>
         <div class="navBar">
             <img src="image/icons/navbar.png" id="navbar" alt="">
             <img src="image/icons/close.png" id="closebtn" class="closebtn" alt="">
@@ -54,8 +67,7 @@
                 This is a prototypical concept where the key is to test features and create a bigger and more complex
                 world where the user can experience a full story with more interactions and decisions.<br>
                 <br>Test it yourself <br>
-                <a target=”_blank”
-                    href="https://player11en.github.io/Babylonjs/Park/">player11en.github.io/Babylonjs/Park/</a>
+                <a target=”_blank” href="https://player11en.github.io/Babylonjs/Park/">Link to Park</a>
             </p>
 
 
@@ -66,26 +78,33 @@
         <div class="gallery">
             <div class="gallery__item gallery__item--lghor">
                 <img src="projekte/images/WebGLPark.png" href="" alt="">
-                <div class="transparent-box">
-                    <div class="caption">
-                        <p>Player11en Studios</p>
-                        <p class="opacity-low">Park Memories -- A visual storytelling experince</p>
-                    </div>
-                </div>
+
+            </div>
+            <div class="gallery__item gallery__item--lghor">
+                <img src="projekte/images/ParkAway.png" href="" alt="">
+
             </div>
         </div>
     </div>
-
+    <div class="videoWrapperProj">
+        <video class="project" id="" width="503" height="1280" controls>
+            <source src="projekte/videos/ParkVideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
     <div id="background">
         <main class="content">
-            <p>For "Park Memories" we have used the WebGL framework Babylon.js. Babylon.js is a powerful web rendering engine that is developed by microsoft.
-            <br> it has powerful features and a clean and orgaized documentation. Babylon.js is fully Javascript based. <br>
-             The park was created with Blender, before using the model it was been cleaned up and the mesh and polygon count has also been reduced.
-            Using different postprocessing and a self written walking and sprinting script helps the user to freely move and enjoy the small atmosphere</p>
+            <p>For "Park Memories" we have used the WebGL framework Babylon.js. Babylon.js is a powerful web rendering
+                engine that is developed by microsoft.
+                <br> it has powerful features and a clean and orgaized documentation. Babylon.js is fully Javascript
+                based. <br>
+                The park was created with Blender, before using the model it was been cleaned up and the mesh and
+                polygon count has also been reduced.
+                Using different postprocessing and a self written walking and sprinting script helps the user to freely
+                move and enjoy the small atmosphere
+            </p>
         </main>
     </div>
-    <br>
-    <br>
 
     <footer id="footer">
         <script>
