@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Ein Artikel</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
@@ -13,20 +13,25 @@
         crossorigin="anonymous"></script>
 </head>
 
-<style>   </style>
+<style> </style>
+
 <body>
-    <button id="toTop" class="hide" title="Go to top"><img src="image/icons/toTop.png" id="" alt=""></button>
+    <button id="toTop" class="hide" title="Go to top"><img src="projekte/icons/toTop.png" id="" alt=""></button>
 
     <header class="header">
+
         <div class="videoWrapperProj">
-            <video class="projectVide" id="LogoVideo" width="500" height="250" loop autoplay muted playsinline>
-                <source src="projekte/videos/Logo.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <a href="WorkPage.html">
+                <video class="projectVide" id="LogoVideo" width="500" height="250" loop autoplay muted playsinline>
+                    <source src="projekte/videos/Logo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </a>
         </div>
+
         <div class="navBar">
-            <img src="image/icons/navbar.png" id="navbar" alt="">
-            <img src="image/icons/close.png" id="closebtn" class="closebtn" alt="">
+            <img src="projekte/icons/navbar.png" id="navbar" alt="">
+            <img src="projekte/icons/close.png" id="closebtn" class="closebtn" alt="">
         </div>
         <ul class="main-nav">
             <li><a href="WorkPage.html">Works</a></li>
@@ -55,7 +60,11 @@
                 <br>
                 Some of the tools we utilize every day includes AI-based denoising, video-based real-time motion
                 capture, and advanced physics computations.
-                Here are a few illustrations of artwork: A little animation first, then some renders.
+                <br>
+                <br>
+                Here are a few illustrations: 
+                <br>
+                Some animations first, then some renderings.
                 <br>
                 The first eleven photos and the visible animations are constant, and the images below are generated with
                 random sizes and order.
@@ -97,8 +106,6 @@
                 <p class="opacity-low">Workshop made with Blender and Substance Painter</p>
             </div>
         </video>
-    </div>
-    <div class="videoWrapper">
         <video class="5" id="anima" width="853" height="480" loop autoplay muted>
             <source src="Video/CarChase.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -131,8 +138,6 @@
                 <p class="opacity-low">Short digital Frame for frame animation</p>
             </div>
         </video>
-    </div>
-    <div class="videoWrapper">
         <video class="9" id="anima" width="853" height="480" loop autoplay muted>
             <source src="Video/Zombie.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -166,8 +171,6 @@
                 <p class="opacity-low">procedural shaded safe animation containing something special</p>
             </div>
         </video>
-    </div>
-    <div class="videoWrapper">
         <video class="13" id="anima" width="853" height="480" loop autoplay muted>
             <source src="Video/AnimCharacter.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -200,7 +203,8 @@
                 <p>Little Art Gallery</p>
                 <p class="opacity-low">
                     Visit my virtual art gallery <br> try for yourself <br>
-                    <a target=”_blank” href="https://player11en.github.io/Babylonjs/Art_Gallery/">player11en.github.io/Babylonjs/Art_Gallery/</a>
+                    <a target=”_blank”
+                        href="https://player11en.github.io/Babylonjs/Art_Gallery/">player11en.github.io/Babylonjs/Art_Gallery/</a>
                 </p>
             </div>
         </video>
@@ -227,7 +231,7 @@
                     </div>
                 </div>
             </div>
-            <div  class="gallery__item">
+            <div class="gallery__item">
                 <img class="19" id="images" src="image/Image (26).png" alt="">
                 <div class="transparent-box">
                     <div class="caption">
@@ -332,8 +336,8 @@
             $("#footer").load("footer.html"); 
         </script>
     </footer>
-    <script src="universal.js" charset="utf-8"></script>
-    <script src="script.js" charset="utf-8"></script>
+    <script src="script/universal.js" charset="utf-8"></script>
+    <script src="script/script.js" charset="utf-8"></script>
 </body>
 
 </html>

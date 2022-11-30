@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Ein Artikel</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
@@ -15,8 +15,9 @@
     <style>
         .videoWrapper iframe,
         video {
-            width: 65%;
+            width: 100%;
             height: 50%;
+            max-width: 1800px;
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -26,32 +27,34 @@
 </head>
 
 <body>
-    <button id="toTop" class="hide" title="Go to top"><img src="image/icons/toTop.png" id="" alt=""></button>
+    <button id="toTop" class="hide" title="Go to top"><img src="../projekte/icons/toTop.png" id="" alt=""></button>
 
     <header class="header">
         <div class="videoWrapperProj">
-            <video class="projectVid" id="LogoVideo" width="500" height="250" loop autoplay muted playsinline>
-                <source src="projekte/videos/Logo.mp4" type="video/mp4">
-                P1ayerE1even Studios
-            </video>
+            <a href="../WorkPage.html">
+                <video class="projectVide" id="LogoVideo" width="500" height="250" loop autoplay muted playsinline>
+                    <source src="../projekte/videos/Logo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </a>
         </div>
         <div class="navBar">
-            <img src="image/icons/navbar.png" id="navbar" alt="">
-            <img src="image/icons/close.png" id="closebtn" class="closebtn" alt="">
+            <img src="../projekte/icons/navbar.png" id="navbar" alt="">
+            <img src="../projekte/icons/close.png" id="closebtn" class="closebtn" alt="">
         </div>
         <ul class="main-nav">
-            <li><a href="WorkPage.html">Works</a></li>
+            <li><a href="../WorkPage.html">Works</a></li>
             <li><a href="#">About</a></li>
-            <li><a href="index.html">Artworks</a></li>
+            <li><a href="../index.html">Artworks</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
 
     </header>
 
     <div id="mySidebar" class="sidebar">
-        <a href="WorkPage.html">Works</a>
+        <a href="../WorkPage.html">Works</a>
         <a href="#">About</a>
-        <a href="index.html">Artworks</a>
+        <a href="../index.html">Artworks</a>
         <a href="#">Contact</a>
     </div>
 
@@ -67,30 +70,29 @@
                 This is a prototypical concept where the key is to test features and create a bigger and more complex
                 world where the user can experience a full story with more interactions and decisions.<br>
                 <br>Test it yourself <br>
-                <a target=”_blank” href="https://player11en.github.io/Babylonjs/Park/">Link to Park</a>
+                <a target=”_blank” href="https://collaboratory-lenbachhaus.de/de">Link to Collaboratory</a>
             </p>
-
-
         </main>
     </div>
 
     <div class="container">
         <div class="gallery">
             <div class="gallery__item gallery__item--lghor">
-                <img src="projekte/images/WebGLPark.png" href="" alt="">
+                <img src="../projekte/images/Screenshot (34).png" href="" alt="">
 
             </div>
             <div class="gallery__item gallery__item--lghor">
-                <img src="projekte/images/ParkAway.png" href="" alt="">
+                <img src="../projekte/images/Collab2.png" href="" alt="">
 
             </div>
         </div>
     </div>
     <div class="videoWrapperProj">
-        <video class="project" id="" width="503" height="1280" controls>
-            <source src="projekte/videos/ParkVideo.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <iframe class="project" width="1280" height="1280"
+         src="https://www.youtube.com/embed/itGuQDSo9Rc?start=1569&end=1700;" 
+         title="Launch von 'Digital Crèmbach' im Collaboratory: Spielerische Interaktionen des Kollektiv Crèmbach"
+         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+         gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div id="background">
         <main class="content">
@@ -108,10 +110,10 @@
 
     <footer id="footer">
         <script>
-            $("#footer").load("footer.html"); 
+            $("#footer").load("../footer.html"); 
         </script>
     </footer>
-    <script src="universal.js" charset="utf-8"></script>
+    <script src="../script/universal.js" charset="utf-8"></script>
 </body>
 
 </html>

@@ -6,24 +6,29 @@
   --lighterblue: #6096BA;
   --skyblue: #A3CEF1;
   --browngrey: #8B8C89;
-  --blackblueish :#34495e;
+  --blackblueish: #34495e;
   --dark: #373349;
   --shadow: rgba(0, 0, 0, .2);
 }
 
 @font-face {
   font-family: "Arctica";
-  src: url(projekte/fonts/ArcticFF/Arctic.otf) format("opentype");
+  src: url(fonts/ArcticFF/Arctic.otf) format("opentype");
 }
 
 @font-face {
   font-family: "Comfortaa";
-  src: url(projekte/fonts/Comfortaa/Comfortaa-Regular.ttf) format("truetype");
+  src: url(fonts/Comfortaa/Comfortaa-Regular.ttf) format("truetype");
 }
 
 @font-face {
   font-family: "Bauhaus";
-  src: url(projekte/fonts/Bauhaus/BauhausStd-Medium.ttf) format("truetype");
+  src: url(fonts/Bauhaus/BauhausStd-Medium.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "TheSans";
+  src: url(fonts/Tonnelier/Tonnelier-Medium.ttf) format("truetype");
 }
 
 html,
@@ -31,12 +36,13 @@ body {
   margin: 0;
   font-size: 20px;
   height: 100%;
-  font-family: 'Bauhaus', sans-serif;
+  font-family: 'TheSans', sans-serif;
   /* font-family: 'Montserrat', sans-serif; */
   line-height: 1.6;
   margin: 0;
   min-height: 100vh;
   background-color: var(--greywhite);
+  color: var(--greywhite);
 }
 
 .header {
@@ -54,20 +60,41 @@ body {
 .videoWrapper {
   position: relative;
   display: grid;
-  grid-gap: 15px;
-  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-  grid-auto-rows: 200px;
-  grid-auto-flow: dense;
-  max-width: 1600px;
-  height: 300px;
+  grid-gap: 25px;
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-auto-flow: dense; */
+  max-width: 1800px;
   margin: 15px auto;
   padding: 0 10px;
 }
 
-.videoWrapper video {
-  height: 150%;
+.videoWrapperProj .project{
+  display: block;
+  position: relative;
+  /* width: 100%; */
+  max-width: 1800px;
+  max-height: 800px;
+  margin: 15px auto;
+  padding: 0 10px;
+}
+
+.videoWrapper video{
   object-fit: cover;
   width: 100%;
+  height:25vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  box-sizing: content-box;
+  overflow: hidden;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.videoWrapper iframe{
+  object-fit: cover;
+  width: unset;
+  height: 45vh;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -79,9 +106,9 @@ body {
 
 #background {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1800px;
   display: flex;
-  background-color:  var(--browngrey);
+  background-color: var(--browngrey);
   margin: auto;
 }
 
@@ -145,7 +172,7 @@ ul {
 }
 
 .main-nav a:hover {
-  color:var(--lighterblue);
+  color: var(--lighterblue);
 }
 
 #audio {
@@ -177,9 +204,9 @@ ul {
   width: 350px;
   overflow: hidden;
   display: inline-block;
-  color:var(--greywhite);
+  color: var(--greywhite);
   position: relative;
-  background-color:var(--greywhite);
+  background-color: var(--greywhite);
 }
 
 .caption {
@@ -232,7 +259,7 @@ button:hover {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: 200px;
   grid-auto-flow: dense;
-  max-width: 1600px;
+  max-width: 1800px;
   margin: 10px auto;
   padding: 0 10px;
 }
@@ -282,6 +309,12 @@ button:hover {
   transform: scale(1.1);
 }
 
+.gallery__item img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
 .gallery__item:hover .transparent-box {
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -303,14 +336,14 @@ button:hover {
   opacity: 0.5;
 }
 
-#caption a{
-  text-decoration:underline;
-  color:var(--greywhite);
+#caption a {
+  text-decoration: underline;
+  color: var(--greywhite);
 }
 
-.content a{
-text-decoration:underline;
-color: var(--greywhite);
+.content a {
+  text-decoration: underline;
+  color: var(--greywhite);
 }
 
 
@@ -512,7 +545,7 @@ color: var(--greywhite);
 footer {
   background: var(--lighterblue);
   flex: 0 0 auto;
-  font: bold 1.5em Tahoma;
+  font: bold 1.5em;
   min-height: 300px;
   display: flex;
   justify-content: center;
@@ -523,7 +556,7 @@ footer {
 }
 
 .footer p {
-  color:var(--greywhite);
+  color: var(--greywhite);
   margin: 15px 0 10px 0;
   font-size: 1rem;
   font-weight: 300;
@@ -552,7 +585,7 @@ footer {
 
 .social-icon__link {
   font-size: 2rem;
-  color:var(--greywhite);
+  color: var(--greywhite);
   margin: 0 10px;
   display: inline-block;
   transition: 0.5s;
@@ -610,7 +643,7 @@ textarea {
 }
 
 .footerText li {
-  height: 0.6em;
+  height: 1.2em;
 }
 
 footer .rights {
@@ -619,7 +652,7 @@ footer .rights {
   color: var(--greywhite);
   display: inline-block;
   line-height: 0.05px;
-  padding-bottom:2.5px;
+  padding-bottom: 2.5px;
   opacity: 0.75;
 }
 
@@ -669,7 +702,7 @@ footer .rights {
 .rounded-social-buttons .social-button.github:hover,
 .rounded-social-buttons .social-button.github:focus {
   color: #333;
-  background:var(--greywhite);
+  background: var(--greywhite);
   border-color: #333;
 }
 
@@ -698,7 +731,7 @@ footer .rights {
 
 .rounded-social-buttons .social-button.renderhub:hover .leftRenderhub,
 .rounded-social-buttons .social-button.renderhub:focus .leftRenderhub {
-  background:var(--greywhite);
+  background: var(--greywhite);
   fill: #a3a3a3;
 }
 
@@ -859,7 +892,7 @@ header>a {
 }
 
 #toTop img {
-  color:var(--browngrey);
+  color: var(--browngrey);
   height: 48px;
 }
 
@@ -874,19 +907,19 @@ header>a {
   transition: opacity 1.5s;
 }
 
-#LogoVideo{
+#LogoVideo {
   width: 80%;
-  height:50%;
-  mix-blend-mode:screen;
+  height: 50%;
+  mix-blend-mode: screen;
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 15px;
 }
 
-.projectVid{
+.projectVid {
   width: 80%;
-  height:60%;
+  height: 60%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -896,11 +929,13 @@ header>a {
 
 @media only screen and (max-width: 844px) {
 
-  footer .rights{
+  footer .rights {
     width: fit-content;
     font-size: 10px;
     font-weight: 300;
-  };
+  }
+
+  ;
 
 
 
@@ -949,16 +984,16 @@ header>a {
     text-align: center;
     color: var(--greywhite);
     margin-top: 15px;
-    font-size:75px;
-    font-size : 14vw;
+    font-size: 75px;
+    font-size: 14vw;
   }
 
 
   #img01 {
     display: none;
     max-height: 300px;
-    max-width:100%;
-    max-height:100%;
+    max-width: 100%;
+    max-height: 100%;
     min-height: 450px;
     margin-top: 25px;
 
@@ -967,7 +1002,7 @@ header>a {
   #video01 {
     display: none;
     max-height: 300px;
-    max-width:100%;
+    max-width: 100%;
     /* max-height:100%; */
     min-height: 450px;
     margin-top: 25px;
@@ -999,8 +1034,8 @@ header>a {
     height: 36px;
   }
 
-  .project{
-        margin-left: auto;
+  .project {
+    margin-left: auto;
     margin-right: auto;
     width: 95%;
     height: 60%;

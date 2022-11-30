@@ -8,8 +8,11 @@ var captionText = document.getElementById("caption");
 
 
 document.addEventListener('mouseover', changeImages);
+
+var newData;
+
 modal.addEventListener('click', overlayToggle);
-document.addEventListener('DOMContentLoaded', randomNumber(2, 48, 46));
+document.addEventListener('DOMContentLoaded', randomNumber(2, 50, 49));
 
 var currentOne;
 
@@ -17,9 +20,20 @@ const observer = lozad();
 observer.observe();
 
 function createElements() {
-  for (var i = 0; i <= 45; i++) {
-    createImages(28 + i, "", 'image/3D/Image (' + numbers[i] + ').png', "test", "ipsumdipsum")
-  }
+
+  $.getJSON("data.json", function (json) {
+    data = json;
+    newData = data.artworks;
+    console.log(numbers);
+
+    console.log(newData[6].name);
+
+    for (var i = 0; i <= 47; i++) {
+      var currentnumb = numbers[i];
+      createImages(28 + i, "", 'image/3D/Image (' + numbers[i] + ').png', newData[currentnumb-2].name, newData[currentnumb-2].description)
+    }
+
+  });
 }
 
 function changeImages(e) {
@@ -42,12 +56,12 @@ function changeImages(e) {
         captionTitle.innerHTML = this.nextElementSibling.children[0].children[0].innerHTML;
         captionText.innerHTML = this.nextElementSibling.children[0].children[1].innerHTML;
         currentOne = parseInt($(e.target).attr('class'));
-        document.querySelectorAll('.prev').forEach(function(el) {
+        document.querySelectorAll('.prev').forEach(function (el) {
           el.style.display = 'block';
-       });
-       document.querySelectorAll('.next').forEach(function(el) {
-        el.style.display = 'block';
-     });
+        });
+        document.querySelectorAll('.next').forEach(function (el) {
+          el.style.display = 'block';
+        });
       }
     }
   }
@@ -66,12 +80,12 @@ function changeImages(e) {
         captionTitle.innerHTML = this.children[1].children[0].innerHTML;
         captionText.innerHTML = this.children[1].children[1].innerHTML;
         currentOne = parseInt($(e.target).attr('class'));
-        document.querySelectorAll('.prev').forEach(function(el) {
+        document.querySelectorAll('.prev').forEach(function (el) {
           el.style.display = 'none';
-       });
-       document.querySelectorAll('.next').forEach(function(el) {
-        el.style.display = 'none';
-     });
+        });
+        document.querySelectorAll('.next').forEach(function (el) {
+          el.style.display = 'none';
+        });
       }
     }
   }
