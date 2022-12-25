@@ -103,7 +103,7 @@
                 camera.ellipsoid = new BABYLON.Vector3(1, 4, 1);
                 camera.speed = 2;
                 camera.attachControl(canvas, true);
-                console.log("mobile");
+                // console.log("mobile");
                 scene.activeCamera = camera;
             }
             else {
@@ -120,7 +120,7 @@
                 camera2.keysDown = [83]; // S
                 camera2.keysLeft = [65]; // Q
                 camera2.keysRight = [68]; // D
-                console.log("NotMobile");
+                // console.log("NotMobile");
                 scene.activeCamera = camera2;
             }
 
@@ -190,14 +190,14 @@
                                 }, 3000);
                             }
                             else {
-                                console.log("Nothing");
+                                // console.log("Nothing");
                             }
                         }
                     }
                 }
                 else {
                     if (document.pointerLockElement !== canvas) {
-                        console.log("Was Already locked: ", document.pointerLockElement === canvas);
+                        // console.log("Was Already locked: ", document.pointerLockElement === canvas);
 
                         if (!isLocked) {
                             canvas.requestPointerLock = canvas.requestPointerLock || canvas.msRequestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock || false;
@@ -214,7 +214,7 @@
                         ray.length = 55;
                         let hit = scene.pickWithRay(ray);
                         let model = hit.pickedMesh;
-                        console.log(hit);
+                        // console.log(hit);
                         // Exempt ground mesh from being shot at
                         if (hit.pickedMesh != null) {
                             if (model.name.includes("Image") && model != null) {
@@ -229,7 +229,7 @@
                                 }, 3000);
                             }
                             else {
-                                console.log("Nothing");
+                                // console.log("Nothing");
                             }
                         }
                     }
