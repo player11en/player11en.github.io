@@ -225,3 +225,13 @@ function showSlides(n) {
 //     captionText.innerHTML = urlslides[0].parentNode.children[1].children[1].children[1].innerHTML;
 //   }
 // }
+
+let files;
+try{
+    const response = await fetch("/");
+    files = await response.json();
+    console.log(files);
+    // files is now an array of file names, do what you want with that (create <img> tags, etc.)
+} catch(err){
+    console.error(err)
+}
