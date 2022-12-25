@@ -10,6 +10,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -177,14 +178,15 @@
                         let hit = scene.pickWithRay(ray);
                         let model = hit.pickedMesh;
                         // Exempt ground mesh from being shot at
-                        if(hit.pickedMesh != null){
+                        if (hit.pickedMesh != null) {
                             if (model.name.includes("Image") && model != null) {
-                            // Destroy target mesh
-                                bottomLine.text = model.name.toString();
-
+                                // Destroy target mesh
+                                bottomLine.text = model.name.toString().replace('Image_', '').replace('_primitive0', '').replace('_primitive1', '').replace('_primitive2', '').replace('_primitive1', '').replace('_primitive3', '');
+                                rectangleBottom.isVisible = true;
                                 setTimeout(function () {
                                     topLine.text = "";
                                     bottomLine.text = "";
+                                    rectangleBottom.isVisible = false;
                                 }, 3000);
                             }
                             else {
@@ -209,22 +211,24 @@
                     if (evt.button == 0) {
                         // Shoot at camera's ray target 
                         let ray = camera2.getForwardRay();
+                        ray.length = 55;
                         let hit = scene.pickWithRay(ray);
                         let model = hit.pickedMesh;
                         console.log(hit);
                         // Exempt ground mesh from being shot at
-                        if(hit.pickedMesh != null){
+                        if (hit.pickedMesh != null) {
                             if (model.name.includes("Image") && model != null) {
                                 // Destroy target mesh
-                               
-                                bottomLine.text = model.name.toString();
 
+                                bottomLine.text = model.name.toString().replace('Image_', '').replace('_primitive0', '').replace('_primitive1', '').replace('_primitive2', '').replace('_primitive1', '').replace('_primitive3', '');
+                                rectangleBottom.isVisible = true;
                                 setTimeout(function () {
                                     topLine.text = "";
                                     bottomLine.text = "";
+                                    rectangleBottom.isVisible = false;
                                 }, 3000);
                             }
-                            else{
+                            else {
                                 console.log("Nothing");
                             }
                         }
@@ -253,7 +257,7 @@
                 }
             }
 
-            const [topLine, bottomLine, progressBar] = createUI();
+            const [topLine, bottomLine, progressBar, rectangleBottom] = createUI();
 
             BABYLON.SceneLoader.OnPluginActivatedObservable.addOnce(function (loader) {
                 loader.onCompleteObservable.add(function () {
@@ -284,6 +288,7 @@
                     setTimeout(function () {
                         topLine.text = "";
                         bottomLine.text = "";
+                        rectangleBottom.isVisible = false;
                     }, 4000);
                 });
             });
@@ -299,7 +304,16 @@
                         var dlCount = meshes.loaded / (1024 * 1024);
                         bottomLine.text = "Loading, please wait..." + Math.floor(dlCount * 100.0) / 100.0 + " MB already loaded.";
                     }
+
                 });
+            BABYLON.SceneLoader.Append("https://dl.dropbox.com/s/12ac7ekt664en4i/warrior.glb?dl=0", "warrior.glb", scene, function (newMeshes) {
+
+                const sambaAnim = scene.getAnimationGroupByName("boxing");
+
+                //Play the Samba animation  
+                sambaAnim.start(true, 1.0, sambaAnim.from, sambaAnim.to, false);
+
+            });
 
             scene.gravity = new BABYLON.Vector3(0, -0.9, 0);
 
@@ -320,13 +334,13 @@
                 button2.cornerRadius = 5;
                 button2.background = "white";
                 button2.alpha = 0.75;
-                button2.onPointerDownObservable.add(function() {
+                button2.onPointerDownObservable.add(function () {
                     run = true;
                 });
-                button2.onPointerUpObservable.add(function() {
+                button2.onPointerUpObservable.add(function () {
                     run = false;
                 });
-                advancedTexture.addControl(button2); 
+                advancedTexture.addControl(button2);
             }
             else {
                 camera2.applyGravity = true;
@@ -352,7 +366,9 @@
             rectangle.height = "500px";
             rectangle.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
             rectangle.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
-            rectangle.alpha = 0.85;
+            rectangle.alpha = 0.75;
+            rectangle.outlineWidth  =  0;
+            rectangle.cornerRadius  =  5;
             advancedTexture.addControl(rectangle);
 
             // textblock.text = " \n \n In Walking Mode: \n Use WASD for WALK \n Use Shift to SPRINT \n Walk over or left click to collect the Pages";
@@ -364,7 +380,7 @@
             tb.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
             tb.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
 
-            if(isMobile){
+            if (isMobile) {
                 tb.multiTextArgs = [
                     { text: "\n Welcome to the Gallery", fillStyle: "white", font: "bold 35px Helvetica" },
                     { text: `\n \n \n !!! Work Still in Progress !!!`, fillStyle: "yellow", font: "bold 25px Helvetica" },
@@ -374,7 +390,7 @@
                     { text: "\n \n by player11en \n", fillStyle: "white", font: "bold 15px Helvetica" }
                 ];
             }
-            else{       
+            else {
                 tb.multiTextArgs = [
                     { text: "\n Welcome to the Gallery", fillStyle: "white", font: "bold 45px Helvetica" },
                     { text: `\n \n \n !!! Work Still in Progress !!!`, fillStyle: "yellow", font: "bold 25px Helvetica" },
@@ -392,12 +408,16 @@
             scene.onBeforeRenderObservable.add(function () {
                 if (isMobile) {
                     var cameraForwardRayPosition = camera.getForwardRay().direction;
-                    if (run == true) {
+                    let ray = camera.getForwardRay();
+                    ray.length = 300;
+                    let hit = scene.pickWithRay(ray);
+                    if (run == true && hit.distance >= 10) {
+                       
                         //camera2.position.z-=0.1
                         var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0, 0, 2), BABYLON.Matrix.RotationY(camera.rotation.y));
                         camera.position.addInPlace(v2);
                         // camera2.checkCollisions = true;
-                        // camera2.position = direction+ 0.1;
+                        // camera2.position = direction+ 0.1;sss
                     }
                 }
                 else {
@@ -490,6 +510,17 @@
             topLine.top = "-38%";
             uiTexture.addControl(topLine);
 
+            const rectangleBottom = new BABYLON.GUI.Rectangle();
+            rectangleBottom.background = "gray";
+            rectangleBottom.width = "35%";
+            rectangleBottom.height = "100px";
+            rectangleBottom.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+            rectangleBottom.alpha = 0.35;
+            rectangleBottom.top = "45%";
+            rectangleBottom.outlineWidth  =  0;
+            rectangleBottom.cornerRadius  =  5;
+            uiTexture.addControl(rectangleBottom);
+
             // Create bottom line of text.
             const bottomLine = new BABYLON.GUI.TextBlock();
             bottomLine.color = "white";
@@ -513,7 +544,7 @@
             progressBar.background = BABYLON.Color3.FromHexString("#99EE99").toHexString();
             uiTexture.addControl(progressBar);
 
-            return [topLine, bottomLine, progressBar];
+            return [topLine, bottomLine, progressBar, rectangleBottom];
         }
 
         window.initFunction = async function () {
