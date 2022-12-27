@@ -260,7 +260,7 @@ var createScene = async function () {
     });
 
 
-    BABYLON.SceneLoader.AppendAsync("", "Art_Hall.glb",
+    BABYLON.SceneLoader.AppendAsync("https://raw.githubusercontent.com/player11en/player11en.github.io/master/Babylonjs/Art_Gallery/3DFiles/", "Art_Hall.glb",
         scene,
         function (meshes) {
             if (meshes.lengthComputable) {
@@ -274,7 +274,7 @@ var createScene = async function () {
             }
 
     });
-    BABYLON.SceneLoader.Append("", "Warrior.glb", 
+    BABYLON.SceneLoader.Append("https://raw.githubusercontent.com/player11en/player11en.github.io/master/Babylonjs/Art_Gallery/3DFiles/", "Warrior.glb", 
         scene,
          function (newMeshes) {
 
