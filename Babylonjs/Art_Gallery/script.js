@@ -48,6 +48,7 @@ var createScene = async function () {
         camera.ellipsoid = new BABYLON.Vector3(1, 4, 1);
         camera.speed = 2;
         camera.attachControl(canvas, true);
+        camera.invertRotation = true;
         // console.log("mobile");
         scene.activeCamera = camera;
     }
