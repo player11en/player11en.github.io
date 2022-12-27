@@ -35,6 +35,7 @@ var timer = 0;
 
 var createScene = async function () {
     var scene = new BABYLON.Scene(engine);
+    scene.clearColor = new BABYLON.Color3(0.93, 0.93, 0.93);
 
     const lights = {};
     const env = {};
@@ -70,9 +71,9 @@ var createScene = async function () {
 
     env.lighting = BABYLON.CubeTexture.CreateFromPrefilteredData("https://patrickryanms.github.io/BabylonJStextures/Demos/sodaBottle/assets/env/hamburg_hbf.env", scene);
     env.lighting.name = "hamburg_hbf";
-    env.lighting.environmentIntensity = 0;
     env.lighting.gammaSpace = false;
     env.lighting.rotationY = BABYLON.Tools.ToRadians(0);
+    env.lighting.environmentIntensity = 0.25;
     scene.environmentTexture = env.lighting;
 
     env.skybox = BABYLON.MeshBuilder.CreateSphere("Dome", { slice: 1, diameter: 1024 }, scene);
@@ -83,34 +84,50 @@ var createScene = async function () {
     env.skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
     env.skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
     env.skyboxMaterial.microSurface = 0.35;
+    env.skybox.visibility = 0.25;
     env.skybox.material = env.skyboxMaterial;
 
-    var light = new BABYLON.DirectionalLight("dir01", new BABYLON.Vector3(0, -1, 0), scene);
+    var light = new BABYLON.DirectionalLight("dir01", new BABYLON.Vector3(0, -1,0), scene);
     light.position = new BABYLON.Vector3(20, 30, -20);
 
     // Default intensity is 1. Let's dim the light a small amount
-    light.intensity = 3;
-    var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
+    light.intensity =0;
 
-    shadowGenerator.useBlurExponentialShadowMap = true;
-    shadowGenerator.enableSoftTransparentShadow = true;
-    shadowGenerator.transparencyShadow = true;
-    shadowGenerator.darkness = 0.1;
+    var shadowGenerator = new BABYLON.ShadowGenerator(1024,light);
+	shadowGenerator.useBlurExponentialShadowMap = true;
+    shadowGenerator.useKernelBlur = true;
+    shadowGenerator.blurKernel = 12;
+    shadowGenerator.blurScale = 2;
+    shadowGenerator.setDarkness(0.95);
 
-    var myGround = BABYLON.MeshBuilder.CreateGround("myGround", { width: 200, height: 200, subdivisions: 8 }, scene);
-    myGround.position = new BABYLON.Vector3(0, -10, 0);
-    myGround.visibility = false;
+    var myGround = BABYLON.MeshBuilder.CreateGround("Ground", { width: 300, height: 200, subdivisions: 8 }, scene);
+    myGround.position = new BABYLON.Vector3(-6.2, -11.6, 0);
+    myGround.visibility = true;
+    myGround.receiveShadows = true
+    myGround.checkCollisions = true;
 
-    var mirrorMaterial = new BABYLON.StandardMaterial("texture4", scene);
-    mirrorMaterial.reflectionTexture = new BABYLON.MirrorTexture("mirror", 1024, scene, true);
+    var myGroundShadow = BABYLON.MeshBuilder.CreateGround("Ground", { width: 300, height: 200, subdivisions: 8 }, scene);
+    myGroundShadow.position = new BABYLON.Vector3(-6.2, -11.59, 0);
+    myGroundShadow.material = new BABYLON.ShadowOnlyMaterial('mat', scene)
+    myGroundShadow.material.environmentIntensity = 0.35;
+    myGroundShadow.receiveShadows = true
+    myGroundShadow.visibility = 0.5;
+
+
+    var mirrorMaterial = new BABYLON.PBRMaterial("texture4", scene);
+    mirrorMaterial.reflectionTexture = new BABYLON.MirrorTexture("mirror", 512, scene, true);
     mirrorMaterial.reflectionTexture.mirrorPlane = new BABYLON.Plane(0, -1.0, 0, -10.0);
-    mirrorMaterial.reflectionTexture.level = 1;
-    mirrorMaterial.reflectionTexture.samples = 8;
+    mirrorMaterial.reflectionTexture.level = 2;
+    // mirrorMaterial.reflectionTexture.samples = 8;
     mirrorMaterial.reflectionTexture.blurKernel = 64;
+    mirrorMaterial.environmentIntensity = 0.35;
+    myGround.material = mirrorMaterial;
 
 
     let isLocked = false;
     scene.onPointerDown = function (evt) {
+
+
         if (rectangle.isVisible) {
             rectangle.isVisible = false;
         }
@@ -207,27 +224,32 @@ var createScene = async function () {
         loader.onCompleteObservable.add(function () {
             bottomLine.text = "Loading Complete";
             for (var i = 0; i < scene.meshes.length; i++) {
-                if (scene.meshes[i].name.includes("Cube")) {
-                    scene.meshes[i].receiveShadows = true;
-                    scene.meshes[i].material.environmentIntensity = 0.25;
-                }
                 if (scene.meshes[i].name.includes("Plane") || scene.meshes[i].name.includes("Image") || scene.meshes[i].name.includes("Cube")) {
-                    shadowGenerator.addShadowCaster(scene.meshes[i]);
+                    // shadowGenerator.getShadowMap().renderList.push(scene.meshes[i])
+                    // shadowGenerator.addShadowCaster(scene.meshes[i]);
+                    scene.meshes[i].receiveShadows = true;
                     scene.meshes[i].checkCollisions = true;
-                    scene.meshes[i].material.environmentIntensity = 0.25;
+                    scene.meshes[i].material.environmentIntensity = 0.45;
                     mirrorMaterial.reflectionTexture.renderList.push(scene.meshes[i]);
                     if (scene.meshes[i].material.name.toString() == "Ground") {
                         scene.meshes[i].material = mirrorMaterial;
                     }
+
+                    shadowGenerator.getShadowMap().renderList.push(scene.meshes[i]);
+                    
                 }
                 if (scene.meshes[i].name.includes("Image")) {
-                    scene.meshes[i].material.environmentIntensity = 0.5;
+                    scene.meshes[i].material.environmentIntensity = 0.45;
+                    if(scene.meshes[i].material.name.toString() == "Material.003"){
+                        scene.meshes[i].material.environmentIntensity = 0.3;
+                    }
                 }
 
             }
             setTimeout(function () {
                 topLine.text = "";
                 bottomLine.text = "Light and Shadows Updated";
+                console.log(bottomLine.text);
             }, 2000);
             setTimeout(function () {
                 topLine.text = "";
@@ -238,7 +260,7 @@ var createScene = async function () {
     });
 
 
-    BABYLON.SceneLoader.AppendAsync("/3dFiles/", "Art_Hall.glb",
+    BABYLON.SceneLoader.AppendAsync("3dFiles/", "Art_Hall.glb",
         scene,
         function (meshes) {
             if (meshes.lengthComputable) {
@@ -252,7 +274,7 @@ var createScene = async function () {
             }
 
     });
-    BABYLON.SceneLoader.Append("/3dFiles/", "Warrior.glb", 
+    BABYLON.SceneLoader.Append("3dFiles/", "Warrior.glb", 
         scene,
          function (newMeshes) {
 
