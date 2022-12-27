@@ -30,6 +30,14 @@
             height: 100%;
             margin: 0;
             padding: 0;
+            touch-action: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            outline: none;
         }
 
         #renderCanvas {
@@ -95,21 +103,39 @@
             camera.lowerBetaLimit = 0;
             camera.attachControl(canvas, true);
 
-            var camera2 = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(60, 8, 0.1), scene);
-            camera2.setTarget(new BABYLON.Vector3(-2.5, 8, 0));
 
-            camera2.attachControl(canvas, true);
-            camera2.inertia *= 0.95;
-            camera2.ellipsoid = new BABYLON.Vector3(1, 4, 1);
-            camera2.speed = 2;
-            camera2.invertRotation = false;
-            camera2.detachControl(canvas);
-            camera2.touchAngularSensibility = 50000;
+            if(isMobile){
+                camera2 = new BABYLON.FreeCamera("DeviceCamera", new BABYLON.Vector3(60, 8, 0.1), scene);
+                camera2.setTarget(new BABYLON.Vector3(-2.5, 8, 0));
+                camera2.inertia *= 0.95;
+                camera2.ellipsoid = new BABYLON.Vector3(1, 4, 1);
+                camera2.speed = 2;
+                camera2.detachControl(canvas, true);
+                camera2.invertRotation = true;
+            }
+            else{
+                camera2 = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(60, 8, 0.1), scene);
+                camera2.setTarget(new BABYLON.Vector3(-2.5, 8, 0));
 
+                camera2.attachControl(canvas, true);
+                camera2.inertia *= 0.95;
+                camera2.ellipsoid = new BABYLON.Vector3(1, 4, 1);
+                camera2.speed = 2;
+                camera2.invertRotation = false;
+                camera2.detachControl(canvas);
+                camera2.touchAngularSensibility = 50000;
+
+                
             camera2.keysUp = [87]; // W
             camera2.keysDown = [83]; // S
             camera2.keysLeft = [65]; // Q
             camera2.keysRight = [68]; // D
+
+            }
+
+
+
+
 
             // var dome2 = new BABYLON.PhotoDome(
             // "testdome",
@@ -208,7 +234,6 @@
             Paper3.visibility = false;
             Paper3.material = mat3;
 
-
             camera2.onCollide = function (colMesh) {
                 // if(colMesh.name === "energyPack"){
                 //     console.log("Energy pack acquired");
@@ -286,11 +311,14 @@
                         }
                     }
 
+                    
+
                     // evt === 0 (left mouse click)          
                     if (evt.button == 0 && scene.activeCamera == camera2) {
                         // console.log(camera2.position);
                         // Shoot at camera's ray target 
                         let ray = camera2.getForwardRay();
+                        ray.length = 25;
                         let hit = scene.pickWithRay(ray);
                         let model = hit.pickedMesh;
                         // Exempt ground mesh from being shot at
@@ -303,6 +331,8 @@
                                 rectangle.isVisible = true;
                                 tb2.isVisible = true;
                                 Paper2.visibility = true;
+                                inventBut1.image.source = "images/Page1.png";
+
 
                                 setTimeout(function () {
                                     topLine.text = "";
@@ -318,6 +348,7 @@
                                 rectangle.isVisible = true;
                                 tb3.isVisible = true;
                                 Paper3.visibility = true;
+                                inventBut2.image.source = "images/Page2.png";
 
                                 setTimeout(function () {
                                     topLine.text = "";
@@ -332,6 +363,7 @@
                                 tb3.isVisible = false;
                                 rectangle.isVisible = true;
                                 tb4.isVisible = true;
+                                inventBut3.image.source = "images/Page3.png";
 
                                 setTimeout(function () {
                                     topLine.text = "";
@@ -415,9 +447,35 @@
             scene.gravity = new BABYLON.Vector3(0, -0.9, 0);
 
             scene.collisionsEnabled = true;
-            camera2.applyGravity = true;
-            camera2._needMoveForGravity = true;
-            camera2.checkCollisions = true;
+            if (isMobile) {
+                camera2.applyGravity = true;
+                camera2._needMoveForGravity = true;
+                camera2.checkCollisions = true;
+                var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+                var button3 = BABYLON.GUI.Button.CreateSimpleButton("but3", "Walking");
+                button3.width = "220px"
+                button3.height = "120px";
+                button3.color = "Black";
+                button3.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+                button3.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+                button3.top = "-150px";
+                button3.cornerRadius = 5;
+                button3.background = "white";
+                button3.alpha = 0.75;
+                button3.onPointerDownObservable.add(function () {
+                    run = true;
+                });
+                button3.onPointerUpObservable.add(function () {
+                    run = false;
+                });
+                button3.isVisible = false;
+                advancedTexture.addControl(button3);
+            }
+            else {
+                camera2.applyGravity = true;
+                camera2._needMoveForGravity = true;
+                camera2.checkCollisions = true;
+            }
             myGround.checkCollisions = true;
             Paper1.checkCollisions = true;
             Paper2.checkCollisions = true;
@@ -435,12 +493,66 @@
             target.isPickable = false;
             circle.isVisible = false;
 
+            var inventory = new BABYLON.GUI.Rectangle("invent");
+            inventory.background = "gray";
+            inventory.width = "50%";
+            inventory.height = "27%";
+            inventory.alpha = 0.85;
+            inventory.isVisible = false;
+            advancedTexture.addControl(inventory);
+
+            var inventBut1 = BABYLON.GUI.Button.CreateImageOnlyButton("Page1", "");
+            inventBut1.width = "33%";
+            inventBut1.height = "100%";
+            inventBut1.background = "white";
+            inventBut1.horizontalAlignment =  BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            inventBut1.onPointerDownObservable.add(function () {
+                if(inventBut1.image.source != ""){
+                    rectangle.isVisible =  !rectangle.isVisible;
+                    tb2.isVisible = true;
+                    tb4.isVisible = false;
+                    tb3.isVisible = false;
+                }
+            });
+            inventory.addControl(inventBut1);    
+            var inventBut2 = BABYLON.GUI.Button.CreateImageOnlyButton("Page2", "");
+            inventBut2.width = "33%";
+            inventBut2.height = "100%";
+            inventBut2.background = "white";
+            inventBut2.onPointerDownObservable.add(function () {
+                if(inventBut2.image.source != ""){
+                    rectangle.isVisible =  !rectangle.isVisible;
+                    tb3.isVisible = true;
+                    tb2.isVisible = false;
+                    tb4.isVisible = false;
+                }
+            });
+            inventBut2.horizontalAlignment =  BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+            inventory.addControl(inventBut2);    
+            var inventBut3 = BABYLON.GUI.Button.CreateImageOnlyButton("Page3", "");
+            inventBut3.width = "33%";
+            inventBut3.height = "100%";
+            inventBut3.background = "white";
+            inventBut3.onPointerDownObservable.add(function () {
+                if(inventBut3.image.source != ""){
+                    rectangle.isVisible =  !rectangle.isVisible;
+                    tb4.isVisible = true;
+                    tb2.isVisible = false;
+                    tb3.isVisible = false;
+                }
+            });
+            inventBut3.horizontalAlignment =  BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+            inventory.addControl(inventBut3);    
+
+
             var rectangle = new BABYLON.GUI.Rectangle("rect");
             rectangle.background = "gray";
             rectangle.width = "50%";
             rectangle.height = "75%";
             rectangle.alpha = 0.85;
             advancedTexture.addControl(rectangle);
+
+
 
             // textblock.text = " \n \n In Walking Mode: \n Use WASD for WALK \n Use Shift to SPRINT \n Walk over or left click to collect the Pages";
 
@@ -454,7 +566,8 @@
                 { text: "\n In Arc Rotate Mode:", fillStyle: "white", font: "bold 35px Helvetica" },
                 { text: "\n \n Have a look at the park in Arc Rotate Mode", fillStyle: "white", font: "bold 25px Helvetica" },
                 { text: `\n \n \n In Walking Mode:`, fillStyle: "white", font: "bold 35px Helvetica" },
-                { text: "\n \n Use WASD for WALK \n Use Shift to SPRINT \n Walk over or left click to collect the Pages", fillStyle: "white", font: "bold 25px Helvetica" }
+                { text: "\n \n Use WASD for WALK \n Use Shift to SPRINT \n Walk over or left click to collect the Pages", fillStyle: "white", font: "bold 25px Helvetica" },
+                { text: "\n \n Press I Key to open Inventory", fillStyle: "white", font: "bold 25px Helvetica" }
             ];
             tb.text = "hi";
             rectangle.addControl(tb);
@@ -530,6 +643,9 @@
                     scene.fogEnabled = false;
                     progressBar.isVisible = false;
                     circle.isVisible = false;
+                    if (isMobile) {
+                        button3.isVisible = false;
+                    }
                 } else {
                     camera.detachControl(canvas);
                     scene.activeCamera = camera2;
@@ -538,44 +654,100 @@
                     scene.fogEnabled = true;
                     progressBar.isVisible = true;
                     circle.isVisible = true;
+                    if (isMobile) {
+                        button3.isVisible = true;
+                    }
                 }
             });
-            button2.isVisible = false;
-            advancedTexture.addControl(button2);
+            // buttonInv.isVisible = false;
+            // advancedTexture.addControl(buttonInv);
+
+            // var buttonInv = BABYLON.GUI.Button.CreateSimpleButton("but2", "Walking");
+            // buttonInv.width = "150px"
+            // buttonInv.height = "40px";
+            // buttonInv.color = "Black";
+            // buttonInv.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+            // buttonInv.left = "-50px";
+            // buttonInv.cornerRadius = 5;
+            // buttonInv.background = "white";
+            // buttonInv.onPointerUpObservable.add(function () {
+            //     if (scene.activeCamera == camera2) {
+            //         camera2.detachControl(canvas);
+            //         scene.activeCamera = camera;
+            //         camera.attachControl(canvas, true);
+            //         button2.textBlock.text = "Walking"
+            //         scene.fogEnabled = false;
+            //         progressBar.isVisible = false;
+            //         circle.isVisible = false;
+            //         if (isMobile) {
+            //             button3.isVisible = false;
+            //         }
+            //     } else {
+            //         camera.detachControl(canvas);
+            //         scene.activeCamera = camera2;
+            //         camera2.attachControl(canvas, true);
+            //         button2.textBlock.text = "Arc Rot"
+            //         scene.fogEnabled = true;
+            //         progressBar.isVisible = true;
+            //         circle.isVisible = true;
+            //         if (isMobile) {
+            //             button3.isVisible = true;
+            //         }
+            //     }
+            // });
+            // button2.isVisible = false;
+            // advancedTexture.addControl(button2);
+ 
+
 
             scene.onBeforeRenderObservable.add(function () {
                 var cameraForwardRayPosition = camera2.getForwardRay().direction;
-                //camera2.cameraRotation = direction ;
-                if (run == true) {
-                    //camera2.position.z-=0.1
-                    var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0, 0, 0.1), BABYLON.Matrix.RotationY(camera2.rotation.y));
-                    camera2.position.addInPlace(v2);
-                    // camera2.checkCollisions = true;
-                    // camera2.position = direction+ 0.1;
+                if (isMobile && button3.isVisible) {
+                    var cameraForwardRayPosition = camera2.getForwardRay().direction;
+                    let ray = camera2.getForwardRay();
+                    ray.length = 25;
+                    let hit = scene.pickWithRay(ray);
+                    console.log(hit.pickedMesh + "O:O" +hit.distance);
+                    if (run == true && hit.distance <= 0 || run == true && hit.distance >= 10 ) {
+                        //camera2.position.z-=0.1
+                        var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0, 0, 2), BABYLON.Matrix.RotationY(camera2.rotation.y));
+                        camera2.position.addInPlace(v2);
+                        // camera2.checkCollisions = true;
+                        // camera2.position = direction+ 0.1;sss
+                    }
                 }
-                if (back == true) {
-                    // camera2.position.z+=0.1
+                else {
+                    //camera2.cameraRotation = direction ;
+                    if (run == true) {
+                        //camera2.position.z-=0.1
+                        var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0, 0, 0.1), BABYLON.Matrix.RotationY(camera2.rotation.y));
+                        camera2.position.addInPlace(v2);
+                        // camera2.checkCollisions = true;
+                        // camera2.position = direction+ 0.1;
+                    }
+                    if (back == true) {
+                        // camera2.position.z+=0.1
 
-                    var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0, 0, -0.1), BABYLON.Matrix.RotationY(camera2.rotation.y));
-                    camera2.position.addInPlace(v2);
+                        var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0, 0, -0.1), BABYLON.Matrix.RotationY(camera2.rotation.y));
+                        camera2.position.addInPlace(v2);
 
+                    }
+                    if (left == true) {
+                        var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(-0.1, 0, 0), BABYLON.Matrix.RotationY(camera2.rotation.y));
+                        camera2.position.addInPlace(v2);
+                    }
+                    if (right == true) {
+                        // camera2.position.x-=0.1
+                        var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0.1, 0, 0), BABYLON.Matrix.RotationY(camera2.rotation.y));
+                        camera2.position.addInPlace(v2);
+                    }
                 }
-                if (left == true) {
-                    var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(-0.1, 0, 0), BABYLON.Matrix.RotationY(camera2.rotation.y));
-                    camera2.position.addInPlace(v2);
-                }
-                if (right == true) {
-                    // camera2.position.x-=0.1
-                    var v2 = BABYLON.Vector3.TransformCoordinates(new BABYLON.Vector3(0.1, 0, 0), BABYLON.Matrix.RotationY(camera2.rotation.y));
-                    camera2.position.addInPlace(v2);
-                }
-
                 Paper1.rotation.y += 0.05;
                 Paper2.rotation.y += 0.05;
                 Paper3.rotation.y += 0.05;
             });
 
-            var energy = 50, shiftPressed = false;
+            var energy = 50, shiftPressed = false , ipressed = false;
             scene.onBeforeRenderObservable.add(function () {
                 // console.log(camera2.position);
                 if (shiftPressed && scene.activeCamera == camera2) {
@@ -598,6 +770,18 @@
                         progressBar.width = energy / 1 / 100;
                     }
                 }
+                if(ipressed){
+                    inventory.isVisible = true;
+                    if(isPC){
+                        document.exitPointerLock = document.exitPointerLock ||
+                        document.mozExitPointerLock ||
+                        document.webkitExitPointerLock;
+                        document.exitPointerLock();
+                    }
+                }
+                else{
+                    inventory.isVisible = false;
+                }
                 // console.log("Energy " + energy);
             });
             scene.onKeyboardObservable.add((kbInfo) => {
@@ -606,7 +790,10 @@
                         switch (kbInfo.event.key) {
                             case "Shift":
                                 shiftPressed = true;
-                                break;
+                            break;
+                            case "i":
+                                ipressed = !ipressed;
+                            break
                         }
                         break;
 
@@ -614,7 +801,7 @@
                         switch (kbInfo.event.key) {
                             case "Shift":
                                 shiftPressed = false;
-                                break;
+                            break;
                         }
                 }
             });

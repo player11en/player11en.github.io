@@ -119,8 +119,8 @@ var createScene = async function () {
     mirrorMaterial.reflectionTexture = new BABYLON.MirrorTexture("mirror", 512, scene, true);
     mirrorMaterial.reflectionTexture.mirrorPlane = new BABYLON.Plane(0, -1.0, 0, -10.0);
     mirrorMaterial.reflectionTexture.level = 2;
-    // mirrorMaterial.reflectionTexture.samples = 8;
-    mirrorMaterial.reflectionTexture.blurKernel = 64;
+    mirrorMaterial.reflectionTexture.samples = 8;
+    mirrorMaterial.reflectionTexture.blurKernel = 32;
     mirrorMaterial.environmentIntensity = 0.35;
     myGround.material = mirrorMaterial;
 
