@@ -260,7 +260,7 @@ var createScene = async function () {
     });
 
 
-    BABYLON.SceneLoader.AppendAsync("3dFiles/", "Art_Hall.glb",
+    BABYLON.SceneLoader.AppendAsync("", "Art_Hall.glb",
         scene,
         function (meshes) {
             if (meshes.lengthComputable) {
@@ -274,7 +274,7 @@ var createScene = async function () {
             }
 
     });
-    BABYLON.SceneLoader.Append("3dFiles/", "Warrior.glb", 
+    BABYLON.SceneLoader.Append("", "Warrior.glb", 
         scene,
          function (newMeshes) {
 
