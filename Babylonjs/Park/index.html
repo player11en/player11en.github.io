@@ -426,6 +426,7 @@
                         topLine.text = "";
                         bottomLine.text = "";
                         button2.isVisible = true;
+                        ButtonInv.isVisible = true;
                         Paper1.visibility = true;
                     }, 4000);
                 });
@@ -497,6 +498,9 @@
             inventory.background = "gray";
             inventory.width = "50%";
             inventory.height = "27%";
+            if(isMobile){
+                inventory.height = "10%";
+            }
             inventory.alpha = 0.85;
             inventory.isVisible = false;
             advancedTexture.addControl(inventory);
@@ -514,7 +518,8 @@
                     tb3.isVisible = false;
                 }
             });
-            inventory.addControl(inventBut1);    
+            inventory.addControl(inventBut1);   
+
             var inventBut2 = BABYLON.GUI.Button.CreateImageOnlyButton("Page2", "");
             inventBut2.width = "33%";
             inventBut2.height = "100%";
@@ -529,6 +534,7 @@
             });
             inventBut2.horizontalAlignment =  BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
             inventory.addControl(inventBut2);    
+
             var inventBut3 = BABYLON.GUI.Button.CreateImageOnlyButton("Page3", "");
             inventBut3.width = "33%";
             inventBut3.height = "100%";
@@ -567,7 +573,8 @@
                 { text: "\n \n Have a look at the park in Arc Rotate Mode", fillStyle: "white", font: "bold 25px Helvetica" },
                 { text: `\n \n \n In Walking Mode:`, fillStyle: "white", font: "bold 35px Helvetica" },
                 { text: "\n \n Use WASD for WALK \n Use Shift to SPRINT \n Walk over or left click to collect the Pages", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: "\n \n Press I Key to open Inventory", fillStyle: "white", font: "bold 25px Helvetica" }
+                { text: "\n \n Press I Key to open Inventory or \n Click the Inventory Button", fillStyle: "white", font: "bold 25px Helvetica" },
+                { text: "\n \n \n When you collect the single pages they are added into your Inventory \n Each page reveals a part of an story that occurred in this park \n Collect all pieces and reveal the story", fillStyle: "white", font: "bold 30px Helvetica" }
             ];
             tb.text = "hi";
             rectangle.addControl(tb);
@@ -659,44 +666,27 @@
                     }
                 }
             });
-            // buttonInv.isVisible = false;
-            // advancedTexture.addControl(buttonInv);
+            button2.isVisible = false;
+            advancedTexture.addControl(button2);
 
-            // var buttonInv = BABYLON.GUI.Button.CreateSimpleButton("but2", "Walking");
-            // buttonInv.width = "150px"
-            // buttonInv.height = "40px";
-            // buttonInv.color = "Black";
-            // buttonInv.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-            // buttonInv.left = "-50px";
-            // buttonInv.cornerRadius = 5;
-            // buttonInv.background = "white";
-            // buttonInv.onPointerUpObservable.add(function () {
-            //     if (scene.activeCamera == camera2) {
-            //         camera2.detachControl(canvas);
-            //         scene.activeCamera = camera;
-            //         camera.attachControl(canvas, true);
-            //         button2.textBlock.text = "Walking"
-            //         scene.fogEnabled = false;
-            //         progressBar.isVisible = false;
-            //         circle.isVisible = false;
-            //         if (isMobile) {
-            //             button3.isVisible = false;
-            //         }
-            //     } else {
-            //         camera.detachControl(canvas);
-            //         scene.activeCamera = camera2;
-            //         camera2.attachControl(canvas, true);
-            //         button2.textBlock.text = "Arc Rot"
-            //         scene.fogEnabled = true;
-            //         progressBar.isVisible = true;
-            //         circle.isVisible = true;
-            //         if (isMobile) {
-            //             button3.isVisible = true;
-            //         }
-            //     }
-            // });
-            // button2.isVisible = false;
-            // advancedTexture.addControl(button2);
+            
+            var ButtonInv = BABYLON.GUI.Button.CreateSimpleButton("butt", "Inventory");
+            ButtonInv.width = "150px"
+            ButtonInv.height = "40px";
+            ButtonInv.color = "Black";
+            ButtonInv.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+            ButtonInv.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            ButtonInv.left = "-50px";
+            ButtonInv.top = "50px";
+            ButtonInv.cornerRadius = 5;
+            ButtonInv.textBlock.text = "Inventory"
+            ButtonInv.background = "white";
+            ButtonInv.onPointerUpObservable.add(function () {
+                ipressed = !ipressed;
+                
+            });
+            ButtonInv.isVisible = false;
+            advancedTexture.addControl(ButtonInv);
  
 
 
