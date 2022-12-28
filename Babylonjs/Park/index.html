@@ -207,7 +207,7 @@
 
             // Default intensity is 1. Let's dim the light a small amount
             light.intensity = 3;
-            var shadowGenerator = new BABYLON.ShadowGenerator(1024, light);
+            var shadowGenerator = new BABYLON.ShadowGenerator(512, light);
 
             shadowGenerator.useBlurExponentialShadowMap = true;
             //  shadowGenerator.useKernelBlur = true;
@@ -217,7 +217,7 @@
             // shadowGenerator.depthScale = 0;
             shadowGenerator.enableSoftTransparentShadow = true;
             shadowGenerator.transparencyShadow = true;
-            shadowGenerator.darkness = 0.1;
+            shadowGenerator.darkness = 0.01;
 
             var myGround = BABYLON.MeshBuilder.CreateGround("myGround", { width: 200, height: 200, subdivisions: 8 }, scene);
             myGround.position = new BABYLON.Vector3(0, 0, 0);
@@ -280,7 +280,14 @@
                     bottomLine.text = "Page 1 acquired";
                     rectangle.isVisible = true;
                     tb2.isVisible = true;
+                    tb4.isVisible = false;
+                    tb.isVisible = false;
+                    tb3.isVisible = false;
+                    tb5.isVisible = false;
+                    Button1.isVisible = false;
                     Paper2.visibility = true;
+
+                    inventBut1.image.source = "images/Page1.png";
                     // Remove the health pack from the scene and restore 10% health to the player
                     colMesh.dispose();
 
@@ -293,9 +300,14 @@
                     console.log("Page 2 Info");
                     bottomLine.text = "Page 2 acquired";
                     tb2.isVisible = false;
+                    tb.isVisible = false;
+                    tb4.isVisible = false;
+                    tb5.isVisible = false;
+                    Button1.isVisible = false;
                     rectangle.isVisible = true;
                     tb3.isVisible = true;
                     Paper3.visibility = true;
+                    inventBut2.image.source = "images/Page2.png";
                     // Remove the health pack from the scene and restore 10% health to the player
                     colMesh.dispose();
 
@@ -307,9 +319,14 @@
                 if (colMesh.name === "Box3") {
                     console.log("Page 3 Info");
                     bottomLine.text = "Page 3 acquired";
+                    tb2.isVisible = false;
+                    tb.isVisible = false;
                     tb3.isVisible = false;
+                    tb5.isVisible = false;
+                    Button1.isVisible = false;
                     rectangle.isVisible = true;
                     tb4.isVisible = true;
+                    inventBut3.image.source = "images/Page3.png";
                     // Remove the health pack from the scene and restore 10% health to the player
                     colMesh.dispose();
 
@@ -321,22 +338,22 @@
 
             }
 
-
+            var count = 0;
             let isLocked = false;
             scene.onPointerDown = function (evt) {
-                // console.log(camera2.angularSensibility);
-                console.log(wasInInv);
-                // console.log(scene.activeCamera);
-
                 if (rectangle.isVisible) {
                     rectangle.isVisible = false;
                     tb.isVisible = false;
                     if(wasInInv){
                         setTimeout(function () {
                             ipressed = true;
-                        },120);
-
+                        },80);
                     }
+                    if(count == 0){
+                    music.play();
+                    count += 1;
+                    console.log(count);
+                }
                 }
 
                 if (scene.activeCamera == camera2) {
@@ -372,6 +389,11 @@
                                 bottomLine.text = "Page 1 acquired";
                                 rectangle.isVisible = true;
                                 tb2.isVisible = true;
+                                tb4.isVisible = false;
+                                tb.isVisible = false;
+                                tb3.isVisible = false;
+                                tb5.isVisible = false;
+                                Button1.isVisible = false;
                                 Paper2.visibility = true;
                                 inventBut1.image.source = "images/Page1.png";
 
@@ -386,9 +408,14 @@
                                 console.log("Page 2 Info");
                                 bottomLine.text = "Page 2 acquired";
                                 tb2.isVisible = false;
+                                tb.isVisible = false;
+                                tb4.isVisible = false;
+                                tb5.isVisible = false;
+                                Button1.isVisible = false;
                                 rectangle.isVisible = true;
                                 tb3.isVisible = true;
                                 Paper3.visibility = true;
+        
                                 inventBut2.image.source = "images/Page2.png";
 
                                 setTimeout(function () {
@@ -401,7 +428,11 @@
                                 model.dispose();
                                 console.log("Page 3 Info");
                                 bottomLine.text = "Page 3 acquired";
+                                tb2.isVisible = false;
+                                tb.isVisible = false;
                                 tb3.isVisible = false;
+                                tb5.isVisible = false;
+                                Button1.isVisible = false;
                                 rectangle.isVisible = true;
                                 tb4.isVisible = true;
                                 inventBut3.image.source = "images/Page3.png";
@@ -445,7 +476,8 @@
                         topLine.text = "";
                         bottomLine.text = "";
                         button2.isVisible = true;
-                        ButtonInv.isVisible = true;
+                        if(isMobile)
+                            ButtonInv.isVisible = true;
                         Paper1.visibility = true;
                     }, 4000);
                 });
@@ -536,9 +568,8 @@
                     tb2.isVisible = true;
                     tb4.isVisible = false;
                     tb3.isVisible = false;
-                    console.log("test");
-                }else{
-                    console.log("test2");
+                    tb5.isVisible = false;
+                    Button1.isVisible = false;
                 }
             });
             inventory.addControl(inventBut1);
@@ -554,6 +585,8 @@
                     tb3.isVisible = true;
                     tb2.isVisible = false;
                     tb4.isVisible = false;
+                    tb5.isVisible = false;
+                    Button1.isVisible = false;
                 }
             });
             inventBut2.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
@@ -570,6 +603,8 @@
                     tb4.isVisible = true;
                     tb2.isVisible = false;
                     tb3.isVisible = false;
+                    tb5.isVisible = false;
+                    Button1.isVisible = false;
                 }
             });
             inventBut3.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
@@ -583,8 +618,6 @@
             rectangle.alpha = 0.85;
             advancedTexture.addControl(rectangle);
 
-            scene.debugLayer.show();
-
             // textblock.text = " \n \n In Walking Mode: \n Use WASD for WALK \n Use Shift to SPRINT \n Walk over or left click to collect the Pages";
 
             var tb = new MixedTextBlock();
@@ -595,8 +628,9 @@
             //tb.resizeToFit = true;
             tb.multiTextArgs = [
                 { text: "\n In Arc Rotate Mode:", fillStyle: "white", font: "bold 35px Helvetica" },
+                { text: "\n \n There is Audio playing", fillStyle: "white", font: "bold 25px Helvetica" },
                 { text: "\n \n Have a look at the park in Arc Rotate Mode", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: `\n \n \n In Walking Mode:`, fillStyle: "white", font: "bold 35px Helvetica" },
+                { text: `\n \n In Walking Mode:`, fillStyle: "white", font: "bold 35px Helvetica" },
                 { text: "\n \n Use WASD for WALK \n Use Shift to SPRINT \n Walk over or left click to collect the Pages", fillStyle: "white", font: "bold 25px Helvetica" },
                 { text: "\n \n Press I Key to open Inventory or \n Click the Inventory Button", fillStyle: "white", font: "bold 25px Helvetica" },
                 { text: "\n \n \n When you collect the single pages they are added into your Inventory \n Each page reveals a part of an story that occurred in this park \n Collect all pieces and reveal the story", fillStyle: "white", font: "bold 30px Helvetica" }
@@ -657,7 +691,196 @@
             tb4.isVisible = false;
             rectangle.addControl(tb4);
 
+            
+            var tb5 = new MixedTextBlock();
+            tb5.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            tb5.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            tb5.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            tb5.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            //tb.resizeToFit = true;
+            tb5.multiTextArgs = [
+                { text: "\n Options", fillStyle: "white", font: "bold 35px Helvetica" },
+                { text: "\n \n This is a small ineteractive story", fillStyle: "white", font: "bold 30px Helvetica" },
+                { text: "\n \n We collect pages of an old chase to find out what happend in this park.", fillStyle: "white", font: "bold 25px Helvetica" },
+                { text: "\n Collect all pages and unveil the mystery that took place here", fillStyle: "white", font: "bold 25px Helvetica" }    
+            ];
+            tb5.text = "hi";
+            tb5.isVisible = false;
+            rectangle.addControl(tb5);
 
+            const music = new BABYLON.Sound("Music", "ambient.mp3", scene, null, {
+                loop: true,
+                volume: 0.25,
+            });
+
+
+            
+            var Button1 = new BABYLON.GUI.Rectangle("recet");
+            Button1.color = "blue";
+            Button1.width = "300px";
+            Button1.height = "300px";
+            Button1.thickness = 0;
+            Button1.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+            Button1.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            Button1.top = 350;
+            Button1.left = 0;
+            Button1.isVisible = false;
+            rectangle.addControl(Button1);
+
+            // Create the first CheckBox
+            let cb1 = new BABYLON.GUI.Checkbox("music");
+            cb1.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            cb1.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            cb1.heightInPixels = 20;
+            cb1.widthInPixels = 20;
+            cb1.top = 90;
+            cb1.left = 50;
+            cb1.isChecked = true;
+            cb1.color = "#FFFFFF";
+            cb1.onIsCheckedChangedObservable.add(function(value) {
+                if(music.isPlaying){
+                    music.pause();
+                }
+                else{
+                    music.play();
+                }
+            });
+            Button1.addControl(cb1);
+
+            // Create the second CheckBox
+            let cb2 = new BABYLON.GUI.Checkbox("glow");
+            cb2.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            cb2.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            cb2.heightInPixels = 20;
+            cb2.widthInPixels = 20;
+            cb2.top = 50;
+            cb2.left = 50
+            cb2.isChecked = true;
+            cb2.color = "#FFFFFF";
+            cb2.onIsCheckedChangedObservable.add(function(value) {
+                glowLayer.isEnabled = value;
+            });
+            Button1.addControl(cb2);
+            
+            let cb3 = new BABYLON.GUI.Checkbox("fog");
+            cb3.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            cb3.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            cb3.heightInPixels = 20;
+            cb3.widthInPixels = 20;
+            cb3.top = 10;
+            cb3.left = 50;
+            cb3.isChecked = true;
+            cb3.color = "#FFFFFF";
+            cb3.onIsCheckedChangedObservable.add(function(value) {
+                scene.fogEnabled = value;
+            });
+            Button1.addControl(cb3);
+
+            // TextBlock for the first CheckBox
+            let tb1 = new BABYLON.GUI.TextBlock("tb1", "Music ON/OFF");
+            tb1.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            tb1.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            tb1.top = 90;
+            tb1.left = 86;
+            tb1.fontSize = 25;
+            tb1.color = "white";
+            tb1.fontStyle = "bold";
+            tb1.fontFamily = "Helvetica";
+            Button1.addControl(tb1);
+
+            // TextBlock for the second CheckBox
+            let tb6 = new BABYLON.GUI.TextBlock("tb6", "Glow ON/OFF");
+            tb6.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            tb6.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            tb6.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            tb6.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            tb6.top = 50;
+            tb6.left = 86;
+            tb6.fontSize = 25;
+            tb6.color = "white";
+            tb6.fontStyle = "bold";
+            tb6.fontFamily = "Helvetica";
+            Button1.addControl(tb6);
+
+
+            // TextBlock for the first CheckBox
+            let tb7 = new BABYLON.GUI.TextBlock("tb7", "Fog On/OFF");
+            tb7.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            tb7.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            tb7.top = 10;
+            tb7.left = 86;
+            tb7.fontSize = 25;
+            tb7.color = "white";
+            tb7.fontStyle = "bold";
+            tb7.fontFamily = "Helvetica";
+            Button1.addControl(tb7);
+
+            var header = new BABYLON.GUI.TextBlock();
+            header.text = "Volume";
+            header.height = "30px";
+            header.color = "white";
+            header.fontSize = 25;
+            header.color = "white";
+            header.fontStyle = "bold";
+            header.fontFamily = "Helvetica";
+            header.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            header.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            header.top = 130;
+            header.left = -15;
+            Button1.addControl(header); 
+
+            var slider = new BABYLON.GUI.Slider();
+            slider.minimum = 0;
+            slider.maximum = 1;
+            slider.value = 0.25;
+            slider.height = "20px";
+            slider.width = "200px";
+            slider.color = "white";
+            slider.background = "#A9A9A9";
+            slider.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+            slider.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+            slider.top = 180;
+            slider.left = 43;
+            slider.onValueChangedObservable.add(function(value) {
+                if (music.isPlaying) {
+                    music.setVolume(value);
+                }
+            });
+            Button1.addControl(slider);    
+
+    
+
+            var fogOn = function (isChecked) {
+                if (isChecked) {
+                    scene.fogEnabled = true;
+                }
+                else {
+                    scene.fogEnabled = false;
+                }
+            }
+
+            var toPlace = function (isChecked) {
+                if (isChecked) {
+                    box.position.y = 1.5;
+                }
+                else {
+                    box.position.y = 0.5;
+                }
+            }
+
+            var setColor = function (but) {
+                switch (but) {
+                    case 0:
+                        box.material = blueMat;
+                        break
+                    case 1:
+                        box.material = redMat;
+                        break
+                }
+            }
+
+
+            
             var button2 = BABYLON.GUI.Button.CreateSimpleButton("but2", "Walking");
             button2.width = "150px"
             button2.height = "40px";
@@ -671,8 +894,10 @@
                     camera2.detachControl(canvas);
                     scene.activeCamera = camera;
                     camera.attachControl(canvas, true);
-                    button2.textBlock.text = "Walking"
+                    button2.textBlock.text = "Walking";
                     scene.fogEnabled = false;
+                    glowLayer.isEnabled = false;
+                    OptButton.isVisible = false;
                     progressBar.isVisible = false;
                     circle.isVisible = false;
                     if (isMobile) {
@@ -682,8 +907,10 @@
                     camera.detachControl(canvas);
                     scene.activeCamera = camera2;
                     camera2.attachControl(canvas, true);
-                    button2.textBlock.text = "Arc Rot"
+                    button2.textBlock.text = "Arc Rot";
+                    OptButton.isVisible = true;
                     scene.fogEnabled = true;
+                    glowLayer.isEnabled  = true;
                     if(isPC){
                         progressBar.isVisible = true;
                     }
@@ -703,9 +930,9 @@
                 ButtonInv.height = "40px";
                 ButtonInv.color = "Black";
                 ButtonInv.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-                ButtonInv.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+                ButtonInv.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
                 ButtonInv.left = "-50px";
-                ButtonInv.top = "50px";
+                ButtonInv.top = "-50px";
                 ButtonInv.cornerRadius = 5;
                 ButtonInv.textBlock.text = "Inventory"
                 ButtonInv.background = "white";
@@ -714,9 +941,36 @@
                     wasInInv = !wasInInv;
 
                 });
-                ButtonInv.isVisible = false;
+                ButtonInv.isVisible = true;
                 advancedTexture.addControl(ButtonInv);
             }
+
+
+
+            var OptButton = BABYLON.GUI.Button.CreateSimpleButton("buttt", "Options");
+                OptButton.width = "150px"
+                OptButton.height = "40px";
+                OptButton.color = "Black";
+                OptButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+                OptButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+                OptButton.left = "-50px";
+                OptButton.top = "50px";
+                OptButton.cornerRadius = 5;
+                OptButton.textBlock.text = "Options";
+                OptButton.background = "white";
+                OptButton.onPointerUpObservable.add(function () {
+                    rectangle.isVisible = !rectangle.isVisible;
+                    tb5.isVisible =  true;
+                    Button1.isVisible = true;
+                    inventory.isVisible = false;
+                    tb.isVisible = false;
+                    tb2.isVisible = false;
+                    tb3.isVisible = false;
+                    tb4.isVisible = false;
+
+                });
+                OptButton.isVisible = false;
+                advancedTexture.addControl(OptButton);
 
 
             scene.onBeforeRenderObservable.add(function () {
@@ -812,6 +1066,7 @@
                                 break;
                             case "i":
                                 ipressed = !ipressed;
+                                wasInInv = !wasInInv;
                                 break
                         }
                         break;
@@ -827,9 +1082,10 @@
 
             var glowLayer = new BABYLON.GlowLayer("glow", scene, {
                 mainTextureFixedSize: 256,
-                blurKernelSize: 128
+                blurKernelSize: 32
             });
-            glowLayer.intensity = 0.75;
+            glowLayer.intensity = 0.45;
+            glowLayer.isEnabled = false;
 
 
             return scene;
@@ -845,7 +1101,7 @@
             attributionLine.color = "lightgray";
             attributionLine.fontSize = 12;
             attributionLine.top = "-45%";
-            attributionLine.text = " Asset created by player11en";
+            attributionLine.text = " Asset created by player11en \n \n Music by Guilherme Bernardes William";
             uiTexture.addControl(attributionLine);
 
             // Create top line of text.
