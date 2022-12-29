@@ -334,6 +334,10 @@
                         topLine.text = "";
                         bottomLine.text = "";
                     }, 3000);
+
+                    setTimeout(function () {
+                        music2.play();
+                    }, 8000);
                 }
 
             }
@@ -440,7 +444,12 @@
                                 setTimeout(function () {
                                     topLine.text = "";
                                     bottomLine.text = "";
+                                    music2.play();
                                 }, 3000);
+
+                                setTimeout(function () {
+                                    music2.play();
+                                }, 8000);
                             }
                         }
                     }
@@ -637,6 +646,7 @@
                 { text: "\n \n This story is complete AI generated with some promts and inspiration from me", fillStyle: "yellow", font: "bold 28px Helvetica" },
             ];
             tb.text = "hi";
+            tb.isVisible = true;
             rectangle.addControl(tb);
 
             var tb2 = new MixedTextBlock();
@@ -667,7 +677,7 @@
             tb3.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
             //tb.resizeToFit = true;
             tb3.multiTextArgs = [
-                { text: "\n Mysterious case of Jack Thompson", fillStyle: "white", font: "bold 35px Helvetica" },
+                { text: "\n Mysterious case of Timmy Parker", fillStyle: "white", font: "bold 35px Helvetica" },
                 { text: "\n \n Part 2 of 3", fillStyle: "white", font: "bold 30px Helvetica" },
                 { text: "\n \n The search for Timmy continued into the night and the entire community joined in, determined to find the missing boy. Just when all hope seemed lost, Timmy was found the next morning, lying lifeless in the small lake near the park.", fillStyle: "white", font: "bold 20px Helvetica" },
                 { text: "\n \n The police were baffled by Timmy's death, as there were no signs of foul play or injury. They conducted a thorough investigation, but were unable to find any leads or suspects. The case remained a mystery and the community was left to mourn the loss of the young boy.", fillStyle: "white", font: "bold 20px Helvetica" },
@@ -688,7 +698,7 @@
             tb4.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
             //tb.resizeToFit = true;
             tb4.multiTextArgs = [
-            { text: "\n Mysterious case of Jack Thompson", fillStyle: "white", font: "bold 35px Helvetica" },
+                { text: "\n Mysterious case of Timmy Parker", fillStyle: "white", font: "bold 35px Helvetica" },
                 { text: "\n \n Part 3 of 3", fillStyle: "white", font: "bold 30px Helvetica" },
                 { text: "\n \n Sara's parents were at a loss as to what to do. They were worried about Sara's well-being and decided to bring her to a therapist for help.", fillStyle: "white", font: "bold 20px Helvetica" },
                 { text: "\n \n During her sessions with the therapist, Sara revealed that Emily was not a real person. She was a ghost that only Sara could see and communicate with. Sara claimed that Emily had been her imaginary friend since she was a child, and that she had always been there for her.", fillStyle: "white", font: "bold 20px Helvetica" },
@@ -723,6 +733,12 @@
                 volume: 0.25,
             });
 
+            const music2 = new BABYLON.Sound("girl", "girlgiggle.mp3", scene, null, {
+                loop: false,
+                volume: 0.25,
+            });
+
+
 
             
             var Button1 = new BABYLON.GUI.Rectangle("recet");
@@ -741,10 +757,17 @@
             let cb1 = new BABYLON.GUI.Checkbox("music");
             cb1.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
             cb1.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
-            cb1.heightInPixels = 20;
-            cb1.widthInPixels = 20;
-            cb1.top = 90;
-            cb1.left = 50;
+            if(isMobile){
+                cb1.heightInPixels =35;
+                cb1.widthInPixels = 35;
+                cb1.top = 85;
+                cb1.left = 30;
+            }else{
+                cb1.heightInPixels = 20;
+                cb1.widthInPixels = 20;  
+                cb1.top = 90;
+                cb1.left = 50;
+            }
             cb1.isChecked = true;
             cb1.color = "#FFFFFF";
             cb1.onIsCheckedChangedObservable.add(function(value) {
@@ -761,10 +784,17 @@
             let cb2 = new BABYLON.GUI.Checkbox("glow");
             cb2.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
             cb2.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
-            cb2.heightInPixels = 20;
-            cb2.widthInPixels = 20;
-            cb2.top = 50;
-            cb2.left = 50
+              if(isMobile){
+                cb2.heightInPixels = 35;
+                cb2.widthInPixels = 35;
+                cb2.top = 45;
+                cb2.left = 30;
+            }else{
+                cb2.heightInPixels = 20;
+                cb2.widthInPixels = 20;  
+                cb2.top = 50;
+                cb2.left = 50;
+            }
             cb2.isChecked = true;
             cb2.color = "#FFFFFF";
             cb2.onIsCheckedChangedObservable.add(function(value) {
@@ -775,10 +805,18 @@
             let cb3 = new BABYLON.GUI.Checkbox("fog");
             cb3.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
             cb3.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
-            cb3.heightInPixels = 20;
-            cb3.widthInPixels = 20;
-            cb3.top = 10;
-            cb3.left = 50;
+            if(isMobile){
+                cb3.heightInPixels = 35;
+                cb3.widthInPixels = 35;
+                cb3.top = 5;
+                cb3.left = 30;
+            }else{
+                cb3.heightInPixels = 20;
+                cb3.widthInPixels = 20;  
+                cb3.top = 10;
+                cb3.left = 50;
+            }
+
             cb3.isChecked = true;
             cb3.color = "#FFFFFF";
             cb3.onIsCheckedChangedObservable.add(function(value) {
