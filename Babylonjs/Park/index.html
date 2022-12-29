@@ -613,7 +613,7 @@
 
             var rectangle = new BABYLON.GUI.Rectangle("rect");
             rectangle.background = "gray";
-            rectangle.width = "50%";
+            rectangle.width = "55%";
             rectangle.height = "75%";
             rectangle.alpha = 0.85;
             advancedTexture.addControl(rectangle);
@@ -627,13 +627,14 @@
             tb.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
             //tb.resizeToFit = true;
             tb.multiTextArgs = [
-                { text: "\n In Arc Rotate Mode:", fillStyle: "white", font: "bold 35px Helvetica" },
-                { text: "\n \n There is Audio playing", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: "\n \n Have a look at the park in Arc Rotate Mode", fillStyle: "white", font: "bold 25px Helvetica" },
+                { text: "\n In Arc Rotate Mode:", fillStyle: "white", font: "bold 32px Helvetica" },
+                { text: "\n \n Have a look at the park in Arc Rotate Mode", fillStyle: "white", font: "bold 22px Helvetica" },
                 { text: `\n \n In Walking Mode:`, fillStyle: "white", font: "bold 35px Helvetica" },
-                { text: "\n \n Use WASD for WALK \n Use Shift to SPRINT \n Walk over or left click to collect the Pages", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: "\n \n Press I Key to open Inventory or \n Click the Inventory Button", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: "\n \n \n When you collect the single pages they are added into your Inventory \n Each page reveals a part of an story that occurred in this park \n Collect all pieces and reveal the story", fillStyle: "white", font: "bold 30px Helvetica" }
+                { text: "\n \n Desktop Mode: Use WASD for WALK \n Mobile Mode: Press the Walk Button \n \n  Use Shift to SPRINT \n Walk over or left click to collect the Pages", fillStyle: "white", font: "bold 22px Helvetica" },
+                { text: "\n \n Press I Key to open Inventory or Click the Inventory Button", fillStyle: "white", font: "bold 22px Helvetica" },
+                { text: "\n \n  When you collect the single pages they are added into your Inventory \n Each page reveals a part of an story that occurred in this park \n Collect all pieces and reveal the story", fillStyle: "white", font: "bold 25px Helvetica" },
+                { text: "\n \n There is Audio playing. It can be turned of in options.", fillStyle: "yellow", font: "bold 22px Helvetica" },
+                { text: "\n \n This story is complete AI generated with some promts and inspiration from me", fillStyle: "yellow", font: "bold 28px Helvetica" },
             ];
             tb.text = "hi";
             rectangle.addControl(tb);
@@ -645,12 +646,15 @@
             tb2.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
             //tb.resizeToFit = true;
             tb2.multiTextArgs = [
-                { text: "\n Mysterious case of Jack Thompson", fillStyle: "white", font: "bold 35px Helvetica" },
+                { text: "\n Mysterious case of Timmy Parker", fillStyle: "white", font: "bold 35px Helvetica" },
                 { text: "\n \n Part 1 of 3", fillStyle: "white", font: "bold 30px Helvetica" },
-                { text: "\n \n \n It was a dark and stormy night when the body of young Jack Thompson was found in the park. He was just 15 years old and had been reported missing by his parents the night before. When the police arrived on the scene, they found Jack's body lying in a pond, with no visible injuries.", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: "\n \n The case quickly became a mystery, as there were no witnesses and no leads. The police searched the park for clues, but they were unable to find anything that could help them solve the case.", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: "\n \n As the days passed, the community was in a state of panic. People were afraid to go out at night, and parents were keeping their children indoors.", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: "\n \n ...", fillStyle: "white", font: "bold 25px Helvetica" }
+                { text: "\n \n \n It was a hot summer day in the small town of Millfield when eight-year-old Timmy Parker went missing in the park. His parents, Mary and John, had taken him and his younger sister, Sara, to the park for a picnic at the pavilion, and they had all been enjoying the day together.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n Timmy was an active and adventurous boy, always eager to explore and try new things. He loved spending time in the park, playing sports, riding his bike, and practicing his skateboarding skills.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n On this particular day, Timmy was particularly excited to go to the skate park and show off his new tricks. He had been practicing hard and was eager to impress his sister and their friend, Emily, who had also joined them at the park.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n Timmy was last seen playing at the skate park with Sara and Emily, where he had been practicing his skateboarding skills. His parents noticed he was missing when they went to pack up their picnic basket and Timmy was nowhere to be found.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n Panicked, Mary and John searched the park for Timmy, but he was nowhere to be found. They called the police, who quickly arrived on the scene and began a search for the missing boy.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n As the hours passed, the search for Timmy intensified. The police scoured the park and interviewed witnesses, but no one had seen Timmy since he was at the skate park.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n \n ...", fillStyle: "white", font: "bold 18px Helvetica" }
             ];
             tb2.text = "hi";
             tb2.isVisible = false;
@@ -665,10 +669,13 @@
             tb3.multiTextArgs = [
                 { text: "\n Mysterious case of Jack Thompson", fillStyle: "white", font: "bold 35px Helvetica" },
                 { text: "\n \n Part 2 of 3", fillStyle: "white", font: "bold 30px Helvetica" },
-                { text: "\n \n \n The police were under a lot of pressure to solve the case and determine the cause of Jack's death.", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: "\n \n After conducting an autopsy, the medical examiner determined that Jack had drowned. It was discovered that he had been playing near the pond when he accidentally fell in and was unable to swim to safety.", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: "\n \n Just when the case seemed to be solved, a shocking revelation came to light. One of Jack's classmates, a girl named Emily, came forward and confessed to being with Jack at the pond when he fell in. She claimed that it was an accident and that she had tried to save him, but was unable to do so.", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: "\n \n ...", fillStyle: "white", font: "bold 25px Helvetica" }
+                { text: "\n \n The search for Timmy continued into the night and the entire community joined in, determined to find the missing boy. Just when all hope seemed lost, Timmy was found the next morning, lying lifeless in the small lake near the park.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n The police were baffled by Timmy's death, as there were no signs of foul play or injury. They conducted a thorough investigation, but were unable to find any leads or suspects. The case remained a mystery and the community was left to mourn the loss of the young boy.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n As the weeks passed, Sara began to have vivid nightmares about the day Timmy went missing. She claimed that the three of them had been playing together at the skate park, but that Emily had suddenly pushed Timmy into the lake and he had drowned.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n Sara's parents were skeptical of her story, as they had never seen or met Emily before. Sara had always talked about her as her imaginary friend, and Mary and John had just assumed she was a figment of Sara's imagination.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n However, Sara insisted that Emily was real and that she had always been there for them at the park. She claimed that Emily was the one who had taught Timmy how to skateboard and that they had always played together at the skate park.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n The police were intrigued by Sara's story and decided to investigate further. They searched for any information about Emily and her family, but they were unable to find any records or evidence of her existence. It was as if she had simply vanished into thin air.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n ...", fillStyle: "white", font: "bold 18px Helvetica" }
             ];
             tb3.text = "hi";
             tb3.isVisible = false;
@@ -681,11 +688,14 @@
             tb4.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
             //tb.resizeToFit = true;
             tb4.multiTextArgs = [
-                { text: "\n Mysterious case of Jack Thompson", fillStyle: "white", font: "bold 35px Helvetica" },
+            { text: "\n Mysterious case of Jack Thompson", fillStyle: "white", font: "bold 35px Helvetica" },
                 { text: "\n \n Part 3 of 3", fillStyle: "white", font: "bold 30px Helvetica" },
-                { text: "\n \n \n The police were sympathetic to Emily's story and, after investigating further, determined that her confession was truthful. She was not charged with any crime and the case was finally closed.", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: "\n \n The community was relieved to know that Jack's death was a tragic accident and not a murder. They were grateful to Emily for coming forward and helping to bring closure to the case.", fillStyle: "white", font: "bold 25px Helvetica" },
-                { text: "\n \n The mysterious death of Jack Thompson remained a topic of conversation for years to come, as people tried to understand how such a tragedy could have occurred in their small town.", fillStyle: "white", font: "bold 25px Helvetica" }
+                { text: "\n \n Sara's parents were at a loss as to what to do. They were worried about Sara's well-being and decided to bring her to a therapist for help.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n During her sessions with the therapist, Sara revealed that Emily was not a real person. She was a ghost that only Sara could see and communicate with. Sara claimed that Emily had been her imaginary friend since she was a child, and that she had always been there for her.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n The therapist listened to Sara's story with an open mind, and eventually came to the conclusion that Emily was a manifestation of Sara's subconscious mind. She believed that Sara was projecting her feelings of guilt and grief onto the ghostly figure of Emily.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n Sara's parents were shocked by this revelation, but they were relieved to finally have an explanation for Sara's behavior. With the help of the therapist, they were able to work through their grief and help Sara come to terms with Timmy's death.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n As for Emily, she was never seen or heard from again. The mysterious ghostly figure remained a mystery, but Sara was able to find peace and move on from the tragedy that had befallen her and her family. The police closed the case, unable to solve the mystery of Timmy's death. But for Sara and her family, the memory of Emily and the tragedy at the park would always linger in their minds.", fillStyle: "white", font: "bold 20px Helvetica" },
+                { text: "\n \n However, even as the years passed, there were still some strange occurrences in the park that seemed to be linked to Emily. Some people claimed to hear the sound of a little girl playing at night, even though there was no one there. Others reported seeing a ghostly figure resembling a young girl in the park, although no one was able to confirm these sightings.", fillStyle: "white", font: "bold 20px Helvetica" },
             ];
             tb4.text = "hi";
             tb4.isVisible = false;
