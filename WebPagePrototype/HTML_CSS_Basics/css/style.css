@@ -908,6 +908,16 @@ header>a {
 }
 
 #LogoVideo {
+  display: none;
+  width: 80%;
+  height: 50%;
+  mix-blend-mode: screen;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+}
+
+.placeholder{
   width: 80%;
   height: 50%;
   mix-blend-mode: screen;
@@ -916,16 +926,6 @@ header>a {
   margin-right: auto;
   margin-bottom: 15px;
 }
-
-.projectVid {
-  width: 80%;
-  height: 60%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 15px;
-}
-
 
 @media only screen and (max-width: 844px) {
 

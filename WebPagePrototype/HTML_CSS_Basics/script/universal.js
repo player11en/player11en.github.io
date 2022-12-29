@@ -6,9 +6,17 @@ document.getElementById("closebtn").addEventListener("click", closeNav);
 document.getElementById("toTop").addEventListener("click", scrollTop);
 
 
+const placeholder = document.querySelector('.placeholder');
+
 var logoVideo = document.getElementById("LogoVideo");
 logoVideo.defaultPlaybackRate = 0.25;
 logoVideo.play();
+
+
+logoVideo.addEventListener('canplaythrough', () => {
+    logoVideo.style.display = 'block';
+    placeholder.style.display = 'none';
+  });
 
 document.addEventListener('scroll', function () {
     const pixels = window.pageYOffset;

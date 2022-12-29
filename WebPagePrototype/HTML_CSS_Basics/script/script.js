@@ -226,12 +226,12 @@ function showSlides(n) {
 //   }
 // }
 
-let files;
-try{
-    const response = await fetch("/");
-    files = await response.json();
-    console.log(files);
-    // files is now an array of file names, do what you want with that (create <img> tags, etc.)
-} catch(err){
-    console.error(err)
-}
+// let files;
+// try{
+//     const response = await fetch("/");
+//     files = await response.json();
+//     console.log(files);
+//     // files is now an array of file names, do what you want with that (create <img> tags, etc.)
+// } catch(err){
+//     console.error(err)
+// }
