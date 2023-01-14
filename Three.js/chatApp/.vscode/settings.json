@@ -1,4 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/1f0c4a5a-9ec3-46ef-9034-8d70e562eb04/AppServices/subscriptions/1f0c4a5a-9ec3-46ef-9034-8d70e562eb04/resourceGroups/ChatAppNodejs/providers/Microsoft.Web/sites/ChatAppNodejs",
-    "appService.deploySubpath": "."
-}

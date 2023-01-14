@@ -28,16 +28,18 @@
 
 <body>
     <button id="toTop" class="hide" title="Go to top"><img src="../projekte/icons/toTop.png" id="" alt=""></button>
-
+    
     <header class="header">
         <div class="videoWrapperProj">
             <a href="../WorkPage.html">
-                <video class="projectVide" id="LogoVideo" width="500" height="250" loop autoplay muted playsinline>
+                <img src="../projekte/images/LogoImage.png" class="placeholder" alt="Video placeholder">
+                <video class="projectVide" alt="player11en Studios" id="LogoVideo" width="500" height="250" loop autoplay muted playsinline>
                     <source src="../projekte/videos/Logo.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </a>
         </div>
+
         <div class="navBar">
             <img src="../projekte/icons/navbar.png" id="navbar" alt="">
             <img src="../projekte/icons/close.png" id="closebtn" class="closebtn" alt="">
@@ -45,10 +47,9 @@
         <ul class="main-nav">
             <li><a href="../WorkPage.html">Works</a></li>
             <li><a href="#">About</a></li>
-            <li><a href="../index.html">Artworks</a></li>
+            <li><a href="#">Artworks</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
-
     </header>
 
     <div id="mySidebar" class="sidebar">
@@ -58,53 +59,49 @@
         <a href="#">Contact</a>
     </div>
 
-    <h2>"Park Memories -- A visual storytelling experince"</h2>
+    <h2>"Art Gallery -- Exhibition erverywhere"</h2>
 
     <div id="background">
         <main class="content">
-            <p>"Park Memories -- A visual storytelling experince" <br> is a small webbased storytelling narrative.
-                The WebApplication tells a story about an incident that happend in the park a long time ago. Through
-                notes and other clues the story
-                of the park and the incident is told. The user should be motivated to explore the area. <br>
-                The narrative is still in develeopment.
-                This is a prototypical concept where the key is to test features and create a bigger and more complex
-                world where the user can experience a full story with more interactions and decisions.<br>
+            <p>
+                "Art Gallery -- Exhibition erverywhere" <br> is a 3D art gallery where images and 3D models can be displayed. <br> The gallery is a WebGL
+                application created with Babylon.js. The models are created using Blender.
+                The user can look around the gallery, move around and view the images or models. By clicking on the
+                viewed image, information about the particular artwork can be displayed.
+                <br>
                 <br>Test it yourself <br>
-                <a target=”_blank” href="https://player11en.github.io/Babylonjs/Park/">Link to Park</a>
+                <a target=”_blank” href="https://player11en.github.io/Babylonjs/Art_Gallery/">Link to Gallery</a>
             </p>
-
-
         </main>
     </div>
 
     <div class="container">
         <div class="gallery">
             <div class="gallery__item gallery__item--lghor">
-                <img src="../projekte/images/WebGLPark.png" href="" alt="">
+                <img src="../projekte/images/ArtGallery.png" href="" alt="">
 
             </div>
             <div class="gallery__item gallery__item--lghor">
-                <img src="../projekte/images/ParkAway.png" href="" alt="">
+                <img src="../projekte/images/ArtGallery2.png" href="" alt="">
 
             </div>
         </div>
     </div>
     <div class="videoWrapperProj">
         <video class="project" id="" width="503" height="1280" controls>
-            <source src="../projekte/videos/ParkVideo.mp4" type="video/mp4">
+            <source src="../projekte/videos/GalleryVideo.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
     <div id="background">
         <main class="content">
-            <p>For "Park Memories" we have used the WebGL framework Babylon.js. Babylon.js is a powerful web rendering
-                engine that is developed by microsoft.
-                <br> it has powerful features and a clean and orgaized documentation. Babylon.js is fully Javascript
-                based. <br>
-                The park was created with Blender, before using the model it was been cleaned up and the mesh and
-                polygon count has also been reduced.
-                Using different postprocessing and a self written walking and sprinting script helps the user to freely
-                move and enjoy the small atmosphere
+            <p>
+                Work in progress! <br>
+                Future implementations could also include a simple exhibition management system that allows
+                administrators to add, remove and organize images and models.
+                <br>
+                The project has many possibilities and it can vary according to requirements and may require close
+                collaboration with artists to ensure that the works presented are well presented.
             </p>
         </main>
     </div>

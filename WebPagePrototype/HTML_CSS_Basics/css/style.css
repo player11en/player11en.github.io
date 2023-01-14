@@ -71,7 +71,7 @@ body {
 .videoWrapperProj .project{
   display: block;
   position: relative;
-  /* width: 100%; */
+  width: 100%;
   max-width: 1800px;
   max-height: 800px;
   margin: 15px auto;
@@ -375,7 +375,7 @@ button:hover {
 
 /* Modal Content (image) */
 .modal-content {
-  margin-top: 8%;
+  margin-top: 2%;
   display: block;
   width: 100%;
   min-height: 150px;
