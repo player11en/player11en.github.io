@@ -27,7 +27,7 @@
         a-scene {
             position: relative;
             margin-top: 0px;
-            z-index: -1;
+            z-index: 5;
             margin-bottom: 20px;
             height: 110vh;
             width: 100%;
@@ -57,20 +57,17 @@
         }
 
         .buttonOne:hover {
+            border-radius: 50%;
+            background-color: rgba(148, 72, 72, 0.621);
             transform: scale(1.05);
             outline: none;
         }
 
         .buttonOne:active {
-            background-color: rgba(153, 51, 51, 0.0);
+            border-radius: 50%;
+            background-color: rgb(120, 15, 15);
             outline: none;
         }
-
-        .buttonOne:focus {
-            background-color: rgba(153, 51, 51, 0.0);
-            outline: none;
-        }
-
         .a-canvas {
             height: 100%;
             top: -8%;
@@ -361,29 +358,20 @@
                 });
             }
         });
-
     </script>
 </head>
-
 <body>
-
     <div id="content" class="site-content">
         <div class="container">
-
             <div id="test" class="d-flex justify-content-center">
 
-                <div class="imprint">
-                    <a style="position: absolute; color:#993333; bottom: 20px; left: 20px"
-                        href="https://www.endpraese.de/countdown-impressum/">IMPRESSUM</a>
-                </div>
-
                 <button class="buttonOne"></button>
-
                 <a-scene renderer="antialias: true" id="scene" vr-mode-ui="enabled: false"
                     loading-screen="dotsColor: red; backgroundColor: black" background="color: #ECECEC"
                     log="Hello, Scene!" embedded>
                     <a-assets>
-                        <a-asset-item id="landing" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/3dModel/Visionen.glb"></a-asset-item>
+                        <a-asset-item id="landing" shadow
+                            src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/3dModel/Visionen.glb"></a-asset-item>
                     </a-assets>
                     <a-entity light="type: ambient; color: #ECECEC; intensity: 0.75"></a-entity>
                     <a-light type="hemisphere" color="#d4584e" groundColor="#ff766b" position="-1 -15 -5"
@@ -411,16 +399,23 @@
                     </a-entity>
 
                     <a-assets>
-                        <a-asset-item id="room" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/3dModel/RoomTest.glb"></a-asset-item>
-                        <a-asset-item id="frame1" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame1.glb"></a-asset-item>
-                        <a-asset-item id="frame2" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame2.glb"></a-asset-item>
-                        <a-asset-item id="frame3" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame3.glb"></a-asset-item>
-                        <a-asset-item id="frame4" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame4.glb"></a-asset-item>
-                        <a-asset-item id="frame5" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame5.glb"></a-asset-item>
+                        <a-asset-item id="room" shadow
+                            src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/3dModel/RoomTest.glb"></a-asset-item>
+                        <a-asset-item id="frame1" shadow
+                            src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame1.glb"></a-asset-item>
+                        <a-asset-item id="frame2" shadow
+                            src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame2.glb"></a-asset-item>
+                        <a-asset-item id="frame3" shadow
+                            src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame3.glb"></a-asset-item>
+                        <a-asset-item id="frame4" shadow
+                            src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame4.glb"></a-asset-item>
+                        <a-asset-item id="frame5" shadow
+                            src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame5.glb"></a-asset-item>
 
                         <video id="my-video2" muted autoplay="true" preload="auto" loop crossorigin="anonymous"
                             playsinline webkit-playsinline style="display:none">
-                            <source src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/video/myGradient.mp4"
+                            <source
+                                src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/video/myGradient.mp4"
                                 type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                         </video>
                     </a-assets>
