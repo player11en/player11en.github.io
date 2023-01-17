@@ -49,7 +49,7 @@
             width: 50px;
             z-index: 10;
             background-color: rgba(153, 51, 51, 0.0);
-            background-image: url("/assets/Img/infoR.png");
+            background-image: url("https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Img/infoR.png");
             background-repeat: no-repeat;
             background-position: center;
             border: none;
@@ -218,7 +218,7 @@
 
                 myplane.setAttribute('width', "2");
                 myplane.setAttribute("id", "myplane");
-                myplane.setAttribute('material', 'shader: flat; color: #fff; src:/assets/Img/rahmen.png; opacity: 1; transparent: false');
+                myplane.setAttribute('material', 'shader: flat; color: #fff; src:https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Img/rahmen.png; opacity: 1; transparent: false');
 
                 myText.setAttribute('position', { x: 0, y: 0.25, z: 0.25 });
                 myText.setAttribute('rotation', { x: 0, y: 0, z: 0 });
@@ -383,7 +383,7 @@
                     loading-screen="dotsColor: red; backgroundColor: black" background="color: #ECECEC"
                     log="Hello, Scene!" embedded>
                     <a-assets>
-                        <a-asset-item id="landing" shadow src="/assets/3dModel/Visionen.glb"></a-asset-item>
+                        <a-asset-item id="landing" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/3dModel/Visionen.glb"></a-asset-item>
                     </a-assets>
                     <a-entity light="type: ambient; color: #ECECEC; intensity: 0.75"></a-entity>
                     <a-light type="hemisphere" color="#d4584e" groundColor="#ff766b" position="-1 -15 -5"
@@ -411,16 +411,16 @@
                     </a-entity>
 
                     <a-assets>
-                        <a-asset-item id="room" shadow src="/assets/3dModel/RoomTest.glb"></a-asset-item>
-                        <a-asset-item id="frame1" shadow src="/assets/Frames/Frame1.glb"></a-asset-item>
-                        <a-asset-item id="frame2" shadow src="/assets/Frames/Frame2.glb"></a-asset-item>
-                        <a-asset-item id="frame3" shadow src="/assets/Frames/Frame3.glb"></a-asset-item>
-                        <a-asset-item id="frame4" shadow src="/assets/Frames/Frame4.glb"></a-asset-item>
-                        <a-asset-item id="frame5" shadow src="/assets/Frames/Frame5.glb"></a-asset-item>
+                        <a-asset-item id="room" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/3dModel/RoomTest.glb"></a-asset-item>
+                        <a-asset-item id="frame1" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame1.glb"></a-asset-item>
+                        <a-asset-item id="frame2" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame2.glb"></a-asset-item>
+                        <a-asset-item id="frame3" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame3.glb"></a-asset-item>
+                        <a-asset-item id="frame4" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame4.glb"></a-asset-item>
+                        <a-asset-item id="frame5" shadow src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Frames/Frame5.glb"></a-asset-item>
 
                         <video id="my-video2" muted autoplay="true" preload="auto" loop crossorigin="anonymous"
                             playsinline webkit-playsinline style="display:none">
-                            <source src="/assets/video/myGradient.mp4"
+                            <source src="https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/video/myGradient.mp4"
                                 type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                         </video>
                     </a-assets>
@@ -517,7 +517,7 @@
                         newtext1.setAttribute('color', '#993333');
                         newtext1.setAttribute('align', 'left');
                         newtext1.setAttribute('font-size', '0.035');
-                        newtext1.setAttribute('font', '/assets/fonts/FilsonProRegular.otf');
+                        newtext1.setAttribute('font', 'https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/fonts/FilsonProRegular.otf');
                         newtext1.setAttribute('anchor', 'top');
                         newtext1.setAttribute('baseline', 'center');
                         background.setAttribute('id', 'ModalBg');
@@ -525,7 +525,7 @@
                         if (mobileAndTabletCheck() == true) {
                             background.setAttribute('position', { x: 0, y: 0, z: -1.35 });
                             background.setAttribute('geometry', 'primitive: plane; width: 1; height: 0.6');
-                            background.setAttribute('material', 'shader: flat; color: #fff; src: /assets/Img/rahmen.png; opacity: 1; transparent: false');
+                            background.setAttribute('material', 'shader: flat; color: #fff; src: https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Img/rahmen.png; opacity: 1; transparent: false');
                             headerbackground.setAttribute('position', { x: 0, y: 0.35, z: 0 });
                             headerbackground.setAttribute('geometry', 'primitive: plane; width: 1; height: 0.25');
                             headerbackground.setAttribute('material', 'shader: flat; color: #993333; opacity: 1; transparent: false');
@@ -534,7 +534,7 @@
                         else {
                             background.setAttribute('position', { x: 0, y: 0, z: -1 });
                             background.setAttribute('geometry', 'primitive: plane; width: 1; height: 0.6');
-                            background.setAttribute('material', 'shader: flat; color: #fff; src: /assets/Img/rahmen.png; opacity: 1; transparent: false');
+                            background.setAttribute('material', 'shader: flat; color: #fff; src: https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Img/rahmen.png; opacity: 1; transparent: false');
                             headerbackground.setAttribute('position', { x: 0, y: 0.35, z: 0 });
                             headerbackground.setAttribute('geometry', 'primitive: plane; width: 1; height: 0.25');
                             headerbackground.setAttribute('material', 'shader: flat; color: #993333; opacity: 1; transparent: false');
@@ -547,7 +547,7 @@
                         header.setAttribute('color', '#ffffff');
                         header.setAttribute('align', 'center');
                         header.setAttribute('font-size', '0.06');
-                        header.setAttribute('font', '/assets/fonts/FilsonProBold.otf');
+                        header.setAttribute('font', 'https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/fonts/FilsonProBold.otf');
                         header.setAttribute('anchor', 'center');
                         header.setAttribute('baseline', 'bottom');
 
@@ -613,7 +613,7 @@
 
                             background[i].setAttribute('id', 'Background' + numbers[i].toString());
                             background[i].setAttribute('geometry', 'primitive: plane; width: 0.285; height: 0.125');
-                            background[i].setAttribute('material', 'shader: flat; color: #fff; src: /assets/Img/rahmen.png; opacity: 1; transparent: false');
+                            background[i].setAttribute('material', 'shader: flat; color: #fff; src: https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/Img/rahmen.png; opacity: 1; transparent: false');
                             background[i].setAttribute('visible', 'false');
                             background[i].setAttribute('position', { x: 0, y: -0.12, z: 0.05 });
                             background[i].setAttribute('class', 'collidable');
@@ -628,7 +628,7 @@
                             textes[i].setAttribute('baseline', 'top');
                             textes[i].setAttribute('anchor', 'center');
                             textes[i].setAttribute('font-size', '0.01');
-                            textes[i].setAttribute('font', '/assets/fonts/FilsonProRegular.otf');
+                            textes[i].setAttribute('font', 'https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/fonts/FilsonProRegular.otf');
                             textes[i].setAttribute('position', { x: 0.005, y: 0.0525, z: 0.01 });
 
                             names[i].setAttribute('id', 'Name' + i.toString());
@@ -639,7 +639,7 @@
                             names[i].setAttribute('align', 'left');
                             names[i].setAttribute('anchor', 'left');
                             names[i].setAttribute('font-size', '0.0115');
-                            names[i].setAttribute('font', '/assets/fonts/FilsonProBold.otf');
+                            names[i].setAttribute('font', 'https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2022/assets/fonts/FilsonProBold.otf');
                             names[i].setAttribute('position', { x: -0.125, y: -0.035, z: 0.01 });
 
                             buttons[i].setAttribute('id', 'Button' + numbers[i].toString());
