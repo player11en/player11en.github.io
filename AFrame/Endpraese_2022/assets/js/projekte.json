@@ -1,0 +1,316 @@
+{
+  "projekt": [
+    {
+      "id": 1,
+      "name": "Anna-Lena Hampel",
+      "projektName": "Kaleidos Hex",
+      "imgPath": "2022/02/Kaleidos_Hex_Character_Design_1_Teaser-300x200.jpg",
+      "url": "https://endpraese.de/projekte/kaleidos-hex/",
+      "vision": "Meine Vision ist es, der Isolation der Pandemie entgegenzuwirken, indem ich die Vorstellungen und Fantasien von Spieler*innen des Spiels Dungeons & Dragons visualisiere und die räumliche Trennung dadurch minimiere."
+    },
+    {
+      "id": 2,
+      "name": "Carl Voigt",
+      "projektName": "Virtual Campus Explorer",
+      "imgPath": "/2022/02/carl-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/virtual-campus-explorer/",
+      "vision": "Meine Vision ist, dass wir unsere neuen Technologien für sinnvolle Zwecke nutzen, um so die Welt auf nachhaltigen Wegen zu einem besseren und lebenswerteren Ort für alle Menschen machen zu können."
+    },
+    {
+      "id": 3,
+      "name": "Felix Diedecke",
+      "projektName": "LUMINOS",
+      "imgPath": "/2022/02/felix-300x200.jpg",
+      "url": "https://endpraese.de/projekte/luminos/",
+      "vision": "Meine Vision ist es, neue Sichtweisen zu entdecken und Emotionen kreativen Ausdruck zu verleihen."
+    },
+    {
+      "id": 4,
+      "name": "Antonella Brandt",
+      "projektName": "wollbande",
+      "imgPath": "/2022/02/antonella-300x200.jpg",
+      "url": "https://endpraese.de/projekte/wollbande/",
+      "vision": "Meine Vision als zukünftige Mediendesignerin ist es, abwechslungsreich und kreativ mit verschiedensten Trends, Medienformen und Techniken zu gestalten. Ich möchte in meinen Arbeiten das Analoge wieder näherbringen, denn digital ist nicht immer gleich besser."
+    },
+    {
+      "id": 5,
+      "name": "Merit Brennecke",
+      "projektName": "MERAKI Sneaker Designs",
+      "imgPath": "/2022/02/merit-300x200.jpg",
+      "url": "https://endpraese.de/projekte/meraki-sneaker-designs/",
+      "vision": "Meine Vision ist es den Custom Sneaker-Trend in Deutschland attraktiver zu machen und die Menschen mit ausgefallenen Designs zu überzeugen, sodass sie ihre Individualität und Kreativität auch über Sneakers ausleben können."
+    },
+    {
+      "id": 6,
+      "name": "Louisa Leesemann",
+      "projektName": "DAWG",
+      "imgPath": "/2022/02/louisa-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/dawg/",
+      "vision": "Meine Vision als Designerin ist es, zu inspirieren und inspiriert zu werden. Ich möchte mich in einem permanenten Stadium der Weiterentwicklung befinden und auf meiner Reise immer ich selbst bleiben. Life won’t sparkle unless you do!"
+    },
+    {
+      "id": 7,
+      "name": "Julian Hegner",
+      "projektName": "Auditory Travel",
+      "imgPath": "/2022/02/julian-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/auditory-travel/",
+      "vision": "Meine Vision ist es, in Zeiten der Pandemie und der Klimakrise eine alternative, grüne Art des Reisens aufzuzeigen."
+    },
+    {
+      "id": 8,
+      "name": "Justin Elsen",
+      "projektName": "Lost Reality",
+      "imgPath": "/2022/02/justin-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/lost-reality/",
+      "vision": "Meine Vision ist es mit dem Film zu zeigen, wie abhängig wir Menschen von Anerkennung und Zuspruch sind und wie wir dadurch unbewusst unser Verhalten und unseren Charakter komplett verändern."
+    },
+    {
+      "id": 9,
+      "name": "Alina Schulz, Inken Tolksdorf",
+      "projektName": "VIERFALT - Möbel fürs Leben",
+      "imgPath": "/2022/02/alina-inken-300x200.jpg",
+      "url": "https://endpraese.de/projekte/vierfalt-moebel-fuers-leben/",
+      "vision": "Unsere Vision als angehende Designerinnen ist es, den grauen Alltag vieler Menschen zu verschönern und zu vereinfachen. Wir möchten Probleme lösen und durch eine gelungene Gestaltung Menschen für Kreativität zu begeistern."
+    },
+    {
+      "id": 10,
+      "name": "Adrian John",
+      "projektName": "Dalla Natura",
+      "imgPath": "/2022/02/adrian-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/dalla-natura/ ",
+      "vision": "Meine Vision ist es mit diesem Projekt ein Bewusstsein für die heimische Pflanzenwelt zu schaffen, diese vorzustellen und näher zu bringen, sowie die Leser*innen dazu anzuregen mal neue, ungewöhnliche Gerichte und Getränke auszuprobieren."
+    },
+    {
+      "id": 11,
+      "name": "Annelie Feder",
+      "projektName": "Vocal",
+      "imgPath": "/2022/02/annelie-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/vocal/",
+      "vision": "Meine Vision ist es durch Vocal, ein ganz neues und außergewöhnliches musikalisches Gefühl zu schaffen. Es bietet Musikliebhaber*innen die Möglichkeit sich noch intensiver mit Musik auseinanderzusetzen."
+    },
+    {
+      "id": 12,
+      "name": "Carolin Baaske",
+      "projektName": "Allyship",
+      "imgPath": "/2022/02/caro-300x200.jpg",
+      "url": "https://endpraese.de/projekte/allyship/",
+      "vision": "Meine Vision in Bezug auf meine Bachelorarbeit ist, dass das eigene Bewusstsein für Rassismus nicht nur kurzweilig als Trend besteht, sondern fester Bestandteil in der eigenen, alltäglichen Wahrnehmung wird."
+    },
+    {
+      "id": 13,
+      "name": "Hansheng Roland",
+      "projektName": "Tiny Teams",
+      "imgPath": "/2022/02/hansheng-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/tiny-teams/ ",
+      "vision": "Meine Vision ist es jeden Tag was Neues zu lernen und was anderes zu machen."
+    },
+    {
+      "id": 14,
+      "name": "Juliane Katja Schumann",
+      "projektName": "walkies - dogwear that lasts",
+      "imgPath": "/2022/02/juliane-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/walkies-dogwear-that-lasts/",
+      "vision": "Meine Vision als Designerin ist es immer neue Ideen zu entwickeln und Wege zu finden, um diese wahr werden zu lassen. Fantasien visualisieren und kreativ umsetzen."
+    },
+    {
+      "id": 15,
+      "name": "Kimberley Reschetzke",
+      "projektName": "Sam und Nino",
+      "imgPath": "/2022/02/kimberley-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/sam-and-nino/",
+      "vision": "Meine Vision ist es, ausdrucksstarke Illustrationen zu schaffen, welche Menschen begeistern, emotional berühren und zum Nachdenken anregen sollen."
+    },
+    {
+      "id": 16,
+      "name": "Klaudia Reczek",
+      "projektName": "Multidimensional Museum",
+      "imgPath": "/2022/02/klaudia-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/multidimensional-museum/",
+      "vision": "Meine Vision ist es, Menschen für den Umweltschutz zu begeistern, so dass sie sich intensiv Gedanken über ihr eigenes Verhalten machen und wie es ihre Umwelt beeinflusst. "
+    },
+    {
+      "id": 17,
+      "name": "Lisa Marie Spottke",
+      "projektName": "Faun's Escape",
+      "imgPath": "/2022/02/lisa-300x200.jpg",
+      "url": "https://endpraese.de/projekte/fauns-escape/",
+      "vision": "Meine Vision ist, Menschen in die Welten zu befördern, die sonst nur in ihren Träumen existieren."
+    },
+    {
+      "id": 18,
+      "name": "Lissy Pook",
+      "projektName": "New Enemy",
+      "imgPath": "/2022/02/lissy-300x200.jpg",
+      "url": "https://endpraese.de/projekte/new-enemy/",
+      "vision": "Meine Vision ist es 2D Animation wieder populärer zu machen."
+    },
+    {
+      "id": 19,
+      "name": "Lucas-Marvin Lachmund, Malte Großmann",
+      "projektName": "BLEACHED",
+      "imgPath": "/2022/02/lucas-malte-300x200.jpg",
+      "url": "https://endpraese.de/projekte/bleached/",
+      "vision": "Unsere Vision für die Designerwelt ist es, ein Statement in der Modeindustrie zu setzen, indem wir Secondhand-Klamotten  auf nachhaltige Weise neues Leben einhauchen."
+    },
+    {
+      "id": 20,
+      "name": "Mercedeh Jahanshahi",
+      "projektName": "Gnaden Rennen",
+      "imgPath": "/2022/02/mercedeh-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/gnaden-rennen/",
+      "vision": "Meine Vision ist es Welten und Charakteren ein Leben zu schenken, in Form von Animationen und Storytelling. Ob fiktional oder reale Personen, jeder hat eine Story, welche erzählt werden kann."
+    },
+    {
+      "id": 21,
+      "name": "Renée Florence Geburzky",
+      "projektName": "LIMBUS",
+      "imgPath": "/2022/02/renee-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/limbus/",
+      "vision": "Meine Vision ist, durch Animationen Geschichten zu visualisieren, die bei den Zuschauer*innen einen bleibenden Eindruck hinterlassen, sie für eine gewisse Zeit aus ihrem Alltag holen und ihnen dabei neue Welten aufzeigen."
+    },
+    {
+      "id": 22,
+      "name": "Timo Tscherkassow",
+      "projektName": "Godlike Sketches",
+      "imgPath": "/2022/02/timo-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/godlike-sketches/",
+      "vision": "Meine Vision ist, das Interesse für die alten mythologischen Geschichten bei der jungen Generation zu erwecken."
+    },
+    {
+      "id": 23,
+      "name": "Danny Seggelke",
+      "projektName": "She's gone",
+      "imgPath": "/2022/02/danny-300x200.jpg",
+      "url": "https://endpraese.de/projekte/shes-gone/",
+      "vision": "Meine Vision ist es, Menschen näher zu bringen, nicht zu schnell zu urteilen und in ihren Meinungen nicht festgefahren zu sein."
+    },
+    {
+      "id": 24,
+      "name": "Sarah Ricarda Bräunlich",
+      "projektName": "Soabubble",
+      "imgPath": "/2022/02/sarah-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/soabubble/",
+      "vision": "Meine Vision ist es nachhaltige Produkte herzustellen, welche vor allem Kinder begeistern und motivieren, sich schon früh mit umweltbewusstem Konsum auseinanderzusetzen."
+    },
+    {
+      "id": 25,
+      "name": "Newina Sophie Fritzsche",
+      "projektName": "[en] [ve] [en] [a] – Wear it, like you feel it.",
+      "imgPath": "/2022/02/newina-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/en-ve-en-a-wear-it-like-you-feel-it/",
+      "vision": "Meine Vision als Designerin ist es niemals müde zu werden. Ich möchte mich ständig verändern, weiterentwickeln, strebsam bleiben, mich neu herausfordern lassen und niemals aufgeben. Dabei möchte ich meinem Motto „Disco & Pommes“ weiterhin treu bleiben."
+    },
+    {
+      "id": 26,
+      "name": "Connor Martin Lindhorst",
+      "projektName": "Familiars",
+      "imgPath": "/2022/02/connor-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/familiars/",
+      "vision": "Meine Vision ist es animierte Filme zu machen, die für andere bedeutungsvoll sind. "
+    },
+    {
+      "id": 27,
+      "name": "Anna-Lena Hampel",
+      "projektName": "feelix",
+      "imgPath": "/2022/02/anna-lena-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/feelix/",
+      "vision": "Meine Vision ist es, Studierenden einen Alltagshelfer an die Seite zu stellen, mit dem sie sich mit einem klareren Durchblick und gestärkter, mentaler Gesundheit durch die Pandemie und den Studienalltag navigieren können."
+    },
+    {
+      "id": 28,
+      "name": "Maria Künne",
+      "projektName": "Purple Hour",
+      "imgPath": "/2022/02/maria-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/3072/",
+      "vision": "Meine Vision ist es Projekte zu entwickeln, die Menschen auf unterschiedlichste Arten helfen können. Selbst wenn es nur kleine alltägliche Dinge sind… "
+    },
+    {
+      "id": 29,
+      "name": "Estella Chiara Boog",
+      "projektName": "Vor deinen Augen",
+      "imgPath": "/2022/02/estella-300x200.jpg",
+      "url": "https://endpraese.de/projekte/vor-deinen-augen/",
+      "vision": "Meine Vision ist es, Menschen auf den Plastikkonsum aufmerksam zu machen und dazu anzuregen, das eigene Verhalten zu überdenken und zu handeln."
+    },
+    {
+      "id": 30,
+      "name": "Katharina Boekhoff",
+      "projektName": "Kopfkino",
+      "imgPath": "/2022/02/katharina-300x200.jpg",
+      "url": "https://endpraese.de/projekte/kopfkino/",
+      "vision": "Meine Vision ist, die grenzenlose Fantasie in den Köpfen der Betrachter*innen anzuregen und sie zum Träumen ihrer Geschichten zu motivieren. Hierbei sollen Filme als eigenständige, subjektive Schöpfungen der künstlerischen Freiheit gesehen werden."
+    },
+    {
+      "id": 31,
+      "name": "Jana Holland",
+      "projektName": "Webseite B12-Touch – Ein UX/UI-Konzept",
+      "imgPath": "/2022/02/jana_-300x200.jpg",
+      "url": "https://endpraese.de/projekte/webseite-b12-touch/",
+      "vision": "Meine Vision ist mit Design genau das zu erfüllen, wofür Design erfunden wurde: Funktion. "
+    },
+    {
+      "id": 32,
+      "name": "Nahrin Ehrenpfordt",
+      "projektName": "Elsa und ihre Träume",
+      "imgPath": "/2022/02/nahrin-2-300x200.jpg",
+      "url": "https://endpraese.de/projekte/elsa-und-ihre-traeume/",
+      "vision": "Meine Vision ist es, Erwachsenen Mut zu machen über ihre Geschichten zu sprechen und sich damit auseinander zu setzen."
+    },
+    {
+      "id": 33,
+      "name": "Astrid Ostara Heßelmann",
+      "projektName": "Unperfekt",
+      "imgPath": "/2022/02/astrid-300x200.jpg",
+      "url": "https://endpraese.de/projekte/unperfekt/",
+      "vision": "Meine Vision als Designerin ist, der Welt ein Lächeln ins Gesicht zu zaubern."
+    },
+    {
+      "id": 34,
+      "name": "Laura Polzin",
+      "projektName": "Artenvielfalt des Lebens im Meer - was unser Müll zerstört",
+      "imgPath": "/2022/02/laura-300x200.jpg",
+      "url": "https://endpraese.de/projekte/artenvielfalt-des-lebens-im-meer-was-unser-muell-zerstoert/",
+      "vision": "Meine Vision ist es, mit diesem Projekt auf die Verschmutzung der Meere durch Plastikmüll aufmerksam zu machen und eine Möglichkeit zu bieten, selbst tätig zu werden und sich für die Artenvielfalt in den Gewässern einzusetzen. Die Einzigartigkeit und Schönheit der Meere ist zu schützen."
+    },
+    {
+      "id": 35,
+      "name": "Tina Böse",
+      "projektName": "YOUR RARE EMOTIONS",
+      "imgPath": "/2022/02/tina-2-300x200.jpg",
+      "url": "https://endpraese.de/projekte/your-rare-emotions/",
+      "vision": "Meine Vision ist es, die Menschen dort draußen mit meinen Arbeiten zu motivieren, zum Nachdenken anzuregen, zu faszinieren und ihnen einen neuen Funken Inspiration mit auf den Weg zu geben."
+    },
+    {
+      "id": 36,
+      "name": "Celina Klassen",
+      "projektName": "Lost Destiny",
+      "imgPath": "/2022/02/celina-1-300x200.jpg",
+      "url": "https://endpraese.de/projekte/lost-destiny/",
+      "vision": "Meine Vision ist es, individuelle Kleidung mit einzigartigen Mustern zu entwerfen und zu nähen, und so meine eigenen Ideen in die Modewelt zu bringen."
+    },
+    {
+      "id": 37,
+      "name": "Laurids Raue",
+      "projektName": "don't judge me!",
+      "imgPath": "/2022/02/lauridsraue_1_teaser-300x200.jpg",
+      "url": "https://endpraese.de/projekte/dont-judge-me/",
+      "vision": "Meine Vision als angehender Designer ist es die Welt etwas abwechslungsreicher und bunter zu gestalten. Mit meinen Arbeiten möchte ich es schaffen Menschen durch Kunst und Design für bestimmte Themen zu sensibilisieren und sie zu begeistern."
+    },
+    {
+      "id": 38,
+      "name": "Celine Ajmone Berisha",
+      "projektName": "von hier nach da",
+      "imgPath": "/2022/02/celineajmone_1_teaser-300x200.jpg",
+      "url": "https://endpraese.de/projekte/von-hier-nach-da/",
+      "vision": "Meine Vision ist es, mir meiner Verantwortung als Designerin bewusst zu sein und dahingehend jeden Tag alles daran zu setzen, die Welt mit meinen Arbeiten ein kleines Stück aufmerksamer, toleranter und künstlerischer zu gestalten."
+    }
+  ],
+  "welcomeHeader": "Willkommen zur Endpräse",
+  "welcomeText": "",
+  "Current": [
+    {
+      "pos": "0, 0, 0",
+      "rot": "0, 0, 0"
+    }
+  ]
+}

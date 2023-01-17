@@ -1,0 +1,643 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Endpräse 2021</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+
+    <meta name="description" content="In-VR Performance - A-Frame">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.1.2/dist/aframe-event-set-component.min.js"></script>
+
+    <style>
+        body {
+            background-color: #232323;
+            background-color: #232323;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        a-scene {
+            position: absolute;
+            margin-top: 0px;
+            margin-bottom: 20px;
+            height: 100vh;
+            width: 100%;
+        }
+
+        div.a-enter-ar {
+            visibility: hidden;
+        }
+
+        div.a-enter-vr {
+            visibility: hidden;
+        }
+
+        div.a-enter-ar {
+            visibility: hidden;
+        }
+
+        .buttonOne {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            height: 50px;
+            width: 50px;
+            z-index: 10;
+            background-color: rgba(70, 70, 70, 0.25);
+            background-image: url("/assets/images/Texture.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            border: none;
+            outline: none;
+        }
+
+        .buttonOne:hover {
+            transform: scale(1.05);
+            outline: none;
+        }
+
+        .buttonOne:active {
+            background-color: rgba(153, 51, 51, 0.0);
+            outline: none;
+        }
+
+        .buttonOne:focus {
+            background-color: rgba(153, 51, 51, 0.0);
+            outline: none;
+        }
+    </style>
+
+    <script>
+        var timer = 0;
+        var timerChangeColor = false;
+        var accepted = false;
+        var myplane = document.createElement('a-plane');
+        var myText = document.createElement('a-text');
+        var myTextYes = document.createElement('a-text');
+        var myTextNo = document.createElement('a-text');
+        var myButtonYes = document.createElement('a-plane');
+        var myButtonNo = document.createElement('a-plane');
+        var currentlink;
+        //Mobile or PC Browser
+        if (AFRAME.utils.device.isMobile() === false) {
+            console.log('hallo browser');
+        } else {
+            console.log('hallo mobile');
+        }
+
+        AFRAME.registerComponent("mylink", {
+            init: function () {
+                this.el.addEventListener("click", (e) => {
+                    var skyEl = this.el.sceneEl.querySelector("#sky");
+                    var ballpos = this.el.getAttribute('position');
+
+                    var secondCameraEl = document.querySelector('#camera');
+                    secondCameraEl.setAttribute('camera', 'active', true);
+
+                    var pos = document.querySelector('#rig').getAttribute('position');
+                    var camera = document.querySelector('#rig');
+                    var pos1 = document.querySelector('#camera').getAttribute('position');
+                    var camera1 = document.querySelector('#camera');
+
+                    camera.setAttribute('animation__animateToPos', 'to', { x: ballpos.x, y: 0, z: ballpos.z });
+                    camera.setAttribute('animation__animateToPos', 'from', { x: pos.x, y: pos.y, z: pos.z });
+                    camera1.setAttribute('animation__animateToPos', 'to', { x: 0, y: 5, z: 0 });
+                    camera1.setAttribute('animation__animateToPos', 'from', { x: pos1.x, y: pos1.y, z: pos1.z });
+
+                    camera1.emit('aniamtetoPos');
+                    window.sessionStorage.clear();
+                    var setsession = window.sessionStorage.setItem("camerax", ballpos.x);
+                    var setsession = window.sessionStorage.setItem("cameray", ballpos.y);
+                    var setsession = window.sessionStorage.setItem("cameraz", ballpos.z);
+                    savePos();
+                });
+            }
+        });
+
+        function savePos() {
+            var camera1 = document.querySelector('#camera');
+            var camera = document.querySelector('#rig');
+            var setsession = window.sessionStorage.setItem("camerary", camera1.object3D.rotation.y);
+            var setsession = window.sessionStorage.setItem("rigy", camera.object3D.rotation.y);
+        }
+
+        AFRAME.registerComponent('alpha-color', {
+            dependencies: ['material'],
+            init: function () {
+                this.el.getObject3D('mesh').material.alphaTest = 0.5;
+                this.el.getObject3D('mesh').material.opacity = 0.7;
+
+                this.el.addEventListener('mouseenter', (e) => {
+                    this.el.getObject3D('mesh').material.opacity = 1;
+                });
+
+                this.el.addEventListener('mouseleave', (e) => {
+                    this.el.getObject3D('mesh').material.opacity = 0.7;
+                });
+            }
+        });
+
+        AFRAME.registerComponent("testinen", {
+            init: function () {
+                this.el.addEventListener("click", (e) => {
+                    if (myplane.getAttribute("visible") == false) {
+                        myplane.setAttribute("visible", "true");
+                        myButtonNo.setAttribute("class", "collidable");
+                        myButtonYes.setAttribute("class", "collidable");
+                        currentlink = this.data.href;
+                    }
+                    else {
+                        myplane.setAttribute("visible", "false");
+                        myButtonNo.removeAttribute("class", "collidable");
+                        myButtonYes.removeAttribute("class", "collidable");
+                    }
+                    savePos();
+                    myText.setAttribute('value', "Wollen Sie zu " + "" + this.el.id + "" + " weitergeleitet werden ?");
+
+                    if (this.el.id == "jes") {
+                        window.location = currentlink;
+                    }
+                    else {
+                        return;
+                    }
+                });
+            }
+        });
+
+        AFRAME.registerComponent('log', {
+            schema: { type: 'string' },
+            init: function () {
+                var stringToLog = this.data;
+                var secondCameraEl = document.querySelector('#camera');
+                secondCameraEl.setAttribute('camera', 'active', true);
+                console.log(stringToLog);
+
+                var sceneEl = document.querySelector("#scene");
+                var cameraEl = document.querySelector('#camera');
+
+                myplane.setAttribute('position', { x: 0, y: 0, z: -2 });
+                myplane.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+                myplane.setAttribute('color', "black");
+                myplane.setAttribute('width', "2");
+                myplane.setAttribute("id", "myplane");
+                myplane.setAttribute('material', 'side:double');
+
+                myText.setAttribute('position', { x: 0, y: 0.25, z: 0.25 });
+                myText.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+                myText.setAttribute('color', "white");
+                myText.setAttribute('width', "1.5");
+                myText.setAttribute('height', "0.5");
+                myText.setAttribute("align", "center");
+
+                myButtonYes.setAttribute('position', { x: -0.5, y: -0.25, z: 0.1 });
+                myButtonYes.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+                myButtonYes.setAttribute('color', "white");
+                myButtonYes.setAttribute('width', "0.4");
+                myButtonYes.setAttribute('height', "0.15");
+                myButtonYes.setAttribute("testinen", "");
+                myButtonYes.setAttribute("id", "jes");
+
+                myTextYes.setAttribute('position', { x: 0, y: 0.025, z: 0.1 });
+                myTextYes.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+                myTextYes.setAttribute('color', "black");
+                myTextYes.setAttribute('width', "1.5");
+                myTextYes.setAttribute('height', "0.5");
+                myTextYes.setAttribute("testinen", "");
+                myTextYes.setAttribute('value', "Ja");
+                myTextYes.setAttribute("align", "center");
+                myTextYes.setAttribute("id", "jes");
+
+                myButtonNo.setAttribute('position', { x: 0.5, y: -0.25, z: 0.1 });
+                myButtonNo.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+                myButtonNo.setAttribute('color', "white");
+                myButtonNo.setAttribute('width', "0.4");
+                myButtonNo.setAttribute('height', "0.15");
+                myButtonNo.setAttribute("testinen", "");
+                myButtonNo.setAttribute("id", "noe");
+
+                myTextNo.setAttribute('position', { x: 0, y: 0.025, z: 0.1 });
+                myTextNo.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+                myTextNo.setAttribute('color', "black");
+                myTextNo.setAttribute('width', "1.5");
+                myTextNo.setAttribute('height', "0.5");
+                myTextNo.setAttribute("testinen", "");
+                myTextNo.setAttribute('value', "Nein");
+                myTextNo.setAttribute("align", "center");
+                myTextNo.setAttribute("id", "noe");
+
+                myplane.appendChild(myText);
+                myButtonYes.appendChild(myTextYes);
+                myButtonNo.appendChild(myTextNo);
+                myplane.appendChild(myButtonYes);
+                myplane.appendChild(myButtonNo);
+                cameraEl.appendChild(myplane);
+                myplane.setAttribute("visible", "false");
+                myplane
+
+                var posX = window.sessionStorage.getItem("camerax");
+                var posY = window.sessionStorage.getItem("cameray");
+                var posZ = window.sessionStorage.getItem("cameraz");
+                var rotY = window.sessionStorage.getItem("camerary");
+                var rigRotY = window.sessionStorage.getItem("rigy");
+
+                var camera = document.querySelector('#rig');
+                var camera1 = document.querySelector('#camera');
+                if (window.sessionStorage.getItem("camerary") != null) {
+                    camera.setAttribute('position', { x: posX, y: posY, z: posZ });
+                    camera.object3D.rotation.y = parseFloat(window.sessionStorage.getItem("rigy")) + parseFloat(window.sessionStorage.getItem("camerary"));
+                }
+                else {
+                    camera.setAttribute('position', { x: 0, y: 0, z: 0 });
+                    camera.setAttribute('rotation', { x: 0, y: -55, z: 0 });
+                }
+            }
+        });
+
+        AFRAME.registerComponent('play-pause', {
+            init: function () {
+                var myVideo = document.querySelector('#surfer');
+                var videoControls = document.querySelector('#video_controls');
+                this.el.addEventListener('click', function () {
+                    if (myVideo.muted) {
+                        myVideo.play();
+                        myVideo.volume = 1;
+                        myVideo.muted = false;
+                        videoControls.setAttribute('src', '#pause');
+                    } else {
+                        myVideo.pause();
+                        myVideo.muted = true;
+                        videoControls.setAttribute('src', '#play');
+                    }
+                });
+            }
+        });
+
+        AFRAME.registerComponent('collider-check', {
+            dependencies: ['raycaster'],
+
+            init: function () {
+                this.el.addEventListener('raycaster-intersection', function () {
+                    console.log('Player hit something!');
+                });
+            }
+        });
+
+        AFRAME.registerComponent('random-image', {
+            dependencies: ['material'],
+
+            tick: function () {
+                var Text = document.querySelector('#medienpreisText');
+
+                Delaytimer(12);
+                if (timerChangeColor == true) {
+                    Text.setAttribute('material', 'color', getRandomColor());
+                }
+                else
+                    return;
+            }
+        });
+
+        AFRAME.registerComponent('rotate-light', {
+            dependencies: ['rotation'],
+
+            tick: function () {
+                var lightparent = document.querySelector('#lightparent');
+                lightparent.object3D.rotation.y += 0.05;
+            }
+        });
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        };
+
+        function Delaytimer(delay) {
+            timer += 1;
+
+            if (timer <= delay) {
+                timerChangeColor = false;
+            }
+            else {
+                timerChangeColor = true;
+                timer = 0;
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <button class="buttonOne" id="buttonOne"></button>
+    <a-scene renderer="antialias: true; colorManagement: true" id="scene"
+        loading-screen="dotsColor: red; backgroundColor: black" background="color: #ECECEC" log="Hello, Scene!"
+        embedded>
+        <a-assets id="RoomImg">
+            <a-asset-item id="room" shadow src="/assets/3dModel/FinalNoTex.glb"></a-asset-item>
+            <a-asset-item id="room2" shadow src="/assets/3dModel/FinalWithTex_small.glb"></a-asset-item>
+            <a-asset-item id="balloon" shadow src="/assets/3dModel/Balloon.glb"></a-asset-item>
+            <img id="circle" src="/assets/images/circle.png">
+            <img id="rasterSky" src="/assets/images/raster_skybox.jpg">
+
+            <a-mixin id="text2" text="align: left; width: 6;"
+                material=" emissive: #FFFFFF ;emissiveIntensity:1"></a-mixin>
+            <a-mixin id="text3" text="align: center; width: 6;"
+                material=" emissive: #FFFFFF ;emissiveIntensity:1"></a-mixin>
+            <a-mixin id="text4" text="align: center; width: 6;"></a-mixin>
+
+            <video id="surfer" autoplay loop="true" muted="true" src="/assets/video/Endpraese_Video1.mp4"
+                crossorigin="anonymous"></video>
+
+            <img id="play" src="https://cdn.glitch.com/c6ca3b70-5457-42c7-841b-41aa82dfc341%2Fplay.png?v=1605694669885"
+                crossorigin="anonymous"></img>
+            <img id="pause"
+                src="https://cdn.glitch.com/c6ca3b70-5457-42c7-841b-41aa82dfc341%2Fpause.png?v=1605694675040"
+                crossorigin="anonymous"> </img>
+
+            <img id="anleitung" src="/assets/images/TextPNG/anleitung.png" crossorigin="anonymous"> </img>
+            <img id="willkommenstext" src="/assets/images/TextPNG/willkommenstext.png" crossorigin="anonymous"> </img>
+            <img id="termine" src="/assets/images/TextPNG/termine.png" crossorigin="anonymous"> </img>
+            <img id="kinosaal" src="/assets/images/TextPNG/kinosaal.png" crossorigin="anonymous"> </img>
+            <img id="medienpreis_tuer" src="/assets/images/TextPNG/medienpreis_tuer.png" crossorigin="anonymous"> </img>
+            <img id="projekte" src="/assets/images/TextPNG/projekte.png" crossorigin="anonymous"> </img>
+            <img id="podcast" src="/assets/images/TextPNG/podcast.png" crossorigin="anonymous"> </img>
+
+            <!--Platzalter Preis--><!--Platzalter Preis--><!--Platzalter Preis--><!--Platzalter Preis--><!--Platzalter Preis--><!--Platzalter Preis--><!--Platzalter Preis-->
+            <img id="K1Z7" src="/assets/2021/02/Foto_Wachsmut_Soeren_Bachelor_2.png" crossorigin="anonymous"></img>
+            <img id="K1FtM" src="/assets/2021/02/Foto_Hauser_Martin_Bachelor_1.png" crossorigin="anonymous"></img>
+            <img id="K2EyB" src="/assets/2021/02/Foto_Seggelke_Danny_Bachelor_01.jpg" crossorigin="anonymous"></img>
+            <img id="K2CD" src="/assets/2021/02/Foto_ChalkDream_WPF_1.jpg" crossorigin="anonymous"></img>
+            <img id="K3FA" src="/assets/2021/02/1-2.png" crossorigin="anonymous"></img>
+            <img id="K3N" src="/assets/2021/02/Foto_Henne_Alina_WPF_3.jpg" crossorigin="anonymous"></img>
+            <img id="Publikumspreis" src="/assets/2021/02/05.jpg" crossorigin="anonymous"></img>
+        </a-assets>
+
+        <a-entity id="rig" position="0 0 0" wasd-controls-enabled="true"
+            animation__animateToPos="startEvents: aniamtetoPos; property: position; from: 0 0 0; to: 0 0 0; dur: 1000;">
+            <a-camera rotation="0 -55 0" id="camera" wasd-controls-enabled="true" look-controls="reverseMouseDrag: true"
+                position="0 5 0" cursor="fuseTimeout:0; rayOrigin: mouse" raycaster="objects: .collidable"
+                animation__animateToPos="startEvents: aniamtetoPos; property: position; from: 0 0 0; to: 0 0 0; dur: 1000;">
+                <a-entity id="shadowlight" light="type: point; 
+                        color: #FFF; 
+                        intensity: 1.5; 
+                        castShadow: true; 
+                        shadowCameraFar: 500;
+                        shadowCameraVisible: false;
+                        decay: 2;
+                        distance: 50;
+                        shadowBias: -0.001;
+                        shadowMapHeight: 1024; 
+                        shadowMapWidth: 1024;" position="0 2 0">
+                </a-entity>
+            </a-camera>
+        </a-entity>
+
+        <a-light type="ambient" intensity="1.2" color="#555555"></a-light>
+        <a-entity id="lightparent" rotate-light position=" 58 1 0">
+            <a-light type="spot" penumbra="0.8" position=" 0 5 0" rotation="-75 90 -75" intensity="1"
+                color="#7986FF"></a-light>
+            <a-light type="spot" penumbra="0.8" position=" 0 5 5" rotation="-70 -180 180" intensity="1"
+                color="#FF585C"></a-light>
+            <a-light type="spot" penumbra="0.8" position=" 0 5 -5" rotation="-70 0 0" intensity="1"
+                color="#73FF50"></a-light>
+        </a-entity>
+        <!-- animation set in 360sky -->
+        <a-sky id="sky" crossorigin src="#rasterSky" rotation="0 -130 0"
+            animation__fadein="startEvents: fadein; property: material.opacity; from: 0; to: 1; dur: 1000;"
+            animation__fadeout="startEvents: fadeout; property: material.opacity; from: 1; to: 0; dur: 1000;">
+        </a-sky>
+
+        <a-entity id="threedModel" visible="true" gltf-model="#room" shadow="receive: true" shadow="cast: true"
+            position="0 0 0" scale="1 1 1">
+        </a-entity>
+        <a-entity id="threedModel2" visible="false" gltf-model="#room2" shadow="receive: true" shadow="cast: true"
+            position="0 0 0" scale="1 1 1">
+        </a-entity>
+        <a-entity id="Ballon" gltf-model="#balloon" shadow="cast: true" position="8.7 0.5 0" scale="1 1 1">
+        </a-entity>
+        <!-- Animated GroundCircle and Zylinder --><!-- Animated GroundCircle and Zylinder --><!-- Animated GroundCircle and Zylinder --><!-- Animated GroundCircle and Zylinder --><!-- Animated GroundCircle and Zylinder -->
+        <a-entity id="parent" position="0 0 0">
+
+            <a-cylinder position="0 0.75 0" radius="0.8" height="0.1" color="white">
+            </a-cylinder>
+            <a-cylinder position="0 0.75 -12.2" radius="0.8" height="0.1" color="white">
+            </a-cylinder>
+            <a-cylinder position="5.2 0.75 12.2" radius="0.8" height="0.1" color="white">
+            </a-cylinder>
+            <a-cylinder position="-25.4 0.75 0" radius="0.8" height="0.1" color="white">
+            </a-cylinder>
+            <a-cylinder position="25 0.75 0" radius="0.8" height="0.1" color="white">
+            </a-cylinder>
+            <a-cylinder position="-55.2 0.75 0" radius="0.8" height="0.1" color="white">
+            </a-cylinder>
+            <a-cylinder position="44 0.75 0" radius="0.8" height="0.1" color="white">
+            </a-cylinder>
+
+            <a-image id="sphere" class="collidable" rotation="-90 0 0" position="0 0.75 0" width="2" height="2"
+                src="#circle" material="side: double" mylink
+                animation__scale_up_down="property: scale; from: 1 1 1; to: 2 2 2; dur: 2000; dir: alternate ; easing: easeInOutCirc; loop:true">
+            </a-image>
+            <a-image id="sphere" class="collidable" rotation="-90 0 0" position="0 0.75 -12.2" width="2" height="2"
+                src="#circle" material="side: double" mylink
+                animation__scale_up_down="property: scale; from: 1 1 1; to: 2 2 2; dur: 2000; dir: alternate ; easing: easeInOutCirc; loop:true">
+            </a-image>
+            <a-image id="sphere" class="collidable" rotation="-90 0 0" position="5.2 0.75 12.2" width="2" height="2"
+                src="#circle" material="side: double" transparent="true" alpha-color="0.5" mylink
+                animation__scale_up_down="property: scale; from: 1 1 1; to: 2 2 2; dur: 2000; dir: alternate ; easing: easeInOutCirc; loop:true">
+            </a-image>
+            <a-image id="sphere" class="collidable" rotation="-90 0 0" position="-25.4 0.75 0" width="2" height="2"
+                src="#circle" material="side: double" transparent="true" alpha-color="0.5" mylink
+                animation__scale_up_down="property: scale; from: 1 1 1; to: 2 2 2; dur: 2000; dir: alternate ; easing: easeInOutCirc; loop:true">
+            </a-image>
+            <a-image id="sphere" class="collidable" rotation="-90 0 0" position="25 0.75 0" width="2" height="2"
+                src="#circle" material="side: double" transparent="true" alpha-color="0.5" mylink
+                animation__scale_up_down="property: scale; from: 1 1 1; to: 2 2 2; dur: 2000; dir: alternate ; easing: easeInOutCirc; loop:true">
+            </a-image>
+            <a-image id="sphere" class="collidable" rotation="-90 0 0" position="-55.2 0.75 0" width="2" height="2"
+                src="#circle" material="side: double" transparent="true" alpha-color="0.5" mylink
+                animation__scale_up_down="property: scale; from: 1 1 1; to: 2 2 2; dur: 2000; dir: alternate ; easing: easeInOutCirc; loop:true">
+            </a-image>
+            <a-image id="sphere" class="collidable" rotation="-90 0 0" position="44 0.75 0" width="2" height="2"
+                src="#circle" material="side: double" transparent="true" alpha-color="0.5" mylink
+                animation__scale_up_down="property: scale; from: 1 1 1; to: 2 2 2; dur: 2000; dir: alternate ; easing: easeInOutCirc; loop:true">
+            </a-image>
+            <!-- Animated GroundCircle and Zylinder --><!-- Animated GroundCircle and Zylinder --><!-- Animated GroundCircle and Zylinder --><!-- Animated GroundCircle and Zylinder --><!-- Animated GroundCircle and Zylinder -->
+
+            <!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs -->
+            <a-image position="3 6 17" scale="2 2 2" rotation="0 180 0" width="6.4" height="4" src="#willkommenstext">
+            </a-image>
+
+            <a-image position="11 6 -12" scale="2 2 2" rotation="0 -90 0" width="6.4" height="4" src="#termine"
+                material="side: double">
+            </a-image>
+
+            <a-text mixin="text4" class="collidable" value="Austausch zum Ausklang:
+						Spatial Chat bei Wonder.me" font="kelsonsans" position="11 1.5 -12" scale="3 3 3" align="center"
+                geometry="primitive: plane; width: 4;" material="color: #7AACE7"
+                testinen="href:https://www.wonder.me/r?id=89017205-bb14-434f-93dd-47ad9f16f880" rotation="0 -90 0"
+                wrap-count="50">
+                <a-text position="0 0 -0.15" geometry="primitive: plane; width: 4" material="color: #7AACE7">
+                </a-text>
+            </a-text>
+
+
+            <a-image id="Podcast" position="-11 6 -10" class="collidable" scale="2 2 2" rotation="0 90 0" width="6.4"
+                height="4" src="#podcast" material="side: double"
+                testinen="href:https://open.spotify.com/show/4GihlLLhX7ueFGVGtHQcHl">
+            </a-image>
+
+            <a-image position="-11 6 10" scale="2 2 2" rotation="0 90 0" width="6.4" height="4" src="#anleitung"
+                material="side: double">
+            </a-image>
+
+            <a-image id="medienpreisText" position="11 9 0" scale="3 3 3" rotation="0 -90 0" width="8" height="4"
+                src="#medienpreis_tuer" random-image>
+            </a-image>
+
+            <a-image position="-11 9 0" scale="3 3 3" rotation="0 90 0" width="8" height="4" src="#kinosaal"
+                material="color:white">
+            </a-image>
+
+            <a-image id="Projekte" class="collidable" rotation="0 180 0" scale="-2 2 2" position="5 7 -23.75"
+                width="6.4" height="4" src="#projekte" testinen="href:https://endpraese.de/projekte">
+            </a-image>
+
+            <!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise -->
+            <a-text mixin="text4" value="Film/Video/Audiovisuelle Medien" font="kelsonsans" position="58 12 -7.5"
+                scale="2 2 2" rotation="0 -90 0" wrap-count="50">
+            </a-text>
+
+            <a-image id="Preis1" class="collidable" rotation="0 -90 0" scale="0.75 0.75 0.75" position="60 9 -7.5"
+                width="6.4" height="4" src="#K1Z7" event-set__enter="_event: mouseenter; _target: #Text1; visible: true"
+                event-set__leave="_event: mouseleave; _target: #Text1; visible: false">
+            </a-image>
+
+            <a-text id="Text1" value="Soeren Wachsmuth | Zimmer 7" align="center" color="#FFF" visible="false"
+                rotation="0 -90 0" position="56 5 0" width="10">
+                <a-text position="0 0 -0.15" geometry="primitive: plane; width: 8; height: 4" material="color: #333">
+                </a-text>
+            </a-text>
+
+            <a-image id="Preis2" class="collidable" rotation="0 -90 0" scale="0.75 0.75 0.75" position="60 5 -7.5"
+                width="6.4" height="4" src="#K1FtM"
+                event-set__enter="_event: mouseenter; _target: #Text2; visible: true"
+                event-set__leave="_event: mouseleave; _target: #Text2; visible: false">
+            </a-image>
+
+            <a-text id="Text2" value="Martin Hauser | Feel the movie" align="center" color="#FFF" visible="false"
+                rotation="0 -90 0" position="56 5 0" width="10">
+                <a-text position="0 0 -0.15" geometry="primitive: plane; width: 8; height: 4" material="color: #333">
+                </a-text>
+            </a-text>
+
+            <a-text mixin="text4" value="Animation/Interaktive Medien" font="kelsonsans" position="58 12 0"
+                scale="2 2 2" rotation="0 -90 0" wrap-count="50">
+            </a-text>
+
+            <a-image id="Preis3" class="collidable" rotation="0 -90 0" scale="0.75 0.75 0.75" position="60 7 0"
+                width="6.4" height="4" src="#K2EyB"
+                event-set__enter="_event: mouseenter; _target: #Text3; visible: true"
+                event-set__leave="_event: mouseleave; _target: #Text3; visible: false">
+            </a-image>
+
+            <a-text id="Text3" value="Danny Seggelke | Enjoy your breakfast!" align="center" color="#FFF"
+                visible="false" rotation="0 -90 0" position="56 5 0" width="10">
+                <a-text position="0 0 -0.15" geometry="primitive: plane; width: 8; height:4" material="color: #333">
+                </a-text>
+            </a-text>
+
+            <a-text mixin="text4" value="Kommunikationsdesign/Print" font="kelsonsans" position="58 12 7.5"
+                scale="2 2 2" rotation="0 -90 0" wrap-count="50">
+            </a-text>
+
+            <a-image id="Preis5" class="collidable" rotation="0 -90 0" scale="0.75 0.75 0.75" position="60 9 7.5"
+                width="6.4" height="4" src="#K3FA" event-set__enter="_event: mouseenter; _target: #Text5; visible: true"
+                event-set__leave="_event: mouseleave; _target: #Text5; visible: false">
+            </a-image>
+
+            <a-text id="Text5" value="Merit Brennecke | Female Athletes" align="center" color="#FFF" visible="false"
+                rotation="0 -90 0" position="56 5 0" width="10">
+                <a-text position="0 0 -0.15" geometry="primitive: plane; width: 8; height: 4" material="color: #333">
+                </a-text>
+            </a-text>
+
+            <a-image id="Preis6" class="collidable" rotation="0 -90 0" scale="0.75 0.75 0.75" position="60 5 7.5"
+                width="6.4" height="4" src="#K3N" event-set__enter="_event: mouseenter; _target: #Text6; visible: true"
+                event-set__leave="_event: mouseleave; _target: #Text6; visible: false">
+            </a-image>
+
+            <a-text id="Text6" value="Alina Henne | Namaka" align="center" color="#FFF" visible="false"
+                rotation="0 -90 0" position="56 5 0" width="10">
+                <a-text position="0 0 -0.15" geometry="primitive: plane; width: 8; height: 4" material="color: #333">
+                </a-text>
+            </a-text>
+
+            <!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise --><!-- MedienPreise -->
+            <a-text mixin="text4" value="Publikumspreis" font="kelsonsans" position="39 12 -15" scale="2 2 2"
+                rotation="0 0 0" wrap-count="50">
+            </a-text>
+
+            <a-box position="39 2 -15" scale="4 4 4" rotation="0 0 0" color="#333"></a-box>
+
+            <a-image id="Preis6" class="collidable" rotation="0 0 0" scale="0.75 0.75 0.75" position="39 7 -15"
+                width="6.4" height="4" src="#Publikumspreis"
+                event-set__enter="_event: mouseenter; _target: #Text7; visible: true"
+                event-set__leave="_event: mouseleave; _target: #Text7; visible: false">
+            </a-image>
+
+            <a-text id="Text7" value="Amalia Ring | Stuecknatur" align="center" color="#FFF" visible="false"
+                rotation="0 0 0" position="39 4 -12" width="10">
+                <a-text position="0 0 -0.15" geometry="primitive: plane; width: 8; height: 4" material="color: #333">
+                </a-text>
+            </a-text>
+            <!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs --><!-- Svgs -->
+
+            <!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video -->
+
+            <a-video id="Video" class="collidable" src="#surfer" width="16" height="9" scale="-0.9 0.9 0.9"
+                rotation="0 270 0" position="-66.8 5 0" play="true" testinen="href:https://endpraese.de/filmrolle">
+            </a-video>
+            <a-image id="video_controls" class="collidable" src="#play" scale="-0.9 0.9 0.9" rotation="0 270 0"
+                position="-66.8 0.25 0" play-pause>
+            </a-image>
+
+            <a-text mixin="text3" value="Auf das Video klicken um zur Filmrolle zu gelangen" font="kelsonsans"
+                position="-66.8 12 0" scale="3 3 3" rotation="0 90 0" wrap-count="50"></a-text>
+            <!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video --><!-- Video -->
+
+            <a-entity>
+    </a-scene>
+    </div>
+
+    <script>
+        var btn = document.querySelector(".buttonOne").addEventListener("click", function () {
+            var threedModel = document.querySelector('#threedModel');
+            var threedModel2 = document.querySelector('#threedModel2');
+            var light = document.querySelector('#shadowlight');
+            if (threedModel.getAttribute("visible")) {
+                threedModel.setAttribute("visible", false);
+                threedModel2.setAttribute("visible", true);
+                light.setAttribute("light", "intensity", "1.5");
+                light.setAttribute("light", "decay", "2");
+                light.setAttribute("light", "distance", "50");
+
+
+            } else {
+                threedModel.setAttribute("visible", true);
+                threedModel2.setAttribute("visible", false);
+                light.setAttribute("light", "intensity", "5");
+                light.setAttribute("light", "decay", "120");
+                light.setAttribute("light", "distance", "300");
+            }
+        });
+    </script>
+</body>
+
+</html>
