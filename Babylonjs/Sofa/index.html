@@ -1,43 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <title>Babylon.js sample code</title>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <!-- Babylon.js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
-        <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
-        <script src="https://preview.babylonjs.com/ammo.js"></script>
-        <script src="https://preview.babylonjs.com/cannon.js"></script>
-        <script src="https://preview.babylonjs.com/Oimo.js"></script>
-        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
-        <script src="https://preview.babylonjs.com/babylon.js"></script>
-        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
-        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
-        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
-        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
-        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
-        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
-        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+    <title>Babylon.js sample code</title>
 
-        <style>
-            html, body {
-                overflow: hidden;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
+    <!-- Babylon.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+    <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
+    <script src="https://preview.babylonjs.com/ammo.js"></script>
+    <script src="https://preview.babylonjs.com/cannon.js"></script>
+    <script src="https://preview.babylonjs.com/Oimo.js"></script>
+    <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+    <script src="https://preview.babylonjs.com/babylon.js"></script>
+    <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+    <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+    <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+    <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+    <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+    <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <style>
+        html,
+        body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
-            #renderCanvas {
-                width: 100%;
-                height: 100%;
-                touch-action: none;
-            }
-        </style>
-    </head>
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+
+        .buttonOne {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            height: 50px;
+            width: 50px;
+            z-index: 10;
+            background-color: rgba(70, 70, 70, 0.25);
+            background-image: url("https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2021/assets/images/Texture.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            border: none;
+            outline: none;
+        }
+
+        .buttonOne:hover {
+            transform: scale(1.05);
+            outline: none;
+        }
+
+        .buttonOne:active {
+            background-color: rgba(153, 51, 51, 0.0);
+            outline: none;
+        }
+
+        .buttonOne:focus {
+            background-color: rgba(153, 51, 51, 0.0);
+            outline: none;
+        }
+    </style>
+</head>
+
 <body>
+    <button class="buttonOne" id="buttonOne"></button>
     <canvas id="renderCanvas"></canvas>
     <script>
         var canvas = document.getElementById("renderCanvas");
@@ -50,73 +84,100 @@
             });
         }
 
+        var installButton = document.getElementById("buttonOne");
         var engine = null;
         var scene = null;
         var sceneToRender = null;
-        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
+        var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true, disableWebGL2Support: false }); };
         var createScene = function () {
 
-    var scene = new BABYLON.Scene(engine);
+            var scene = new BABYLON.Scene(engine);
 
-    const lights = {};
-    const env = {};
-    const camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(0), BABYLON.Tools.ToRadians(70), 0.5, new BABYLON.Vector3(0.0, 0.1, 0.0), scene);
-    camera.minZ = 0.01;
-    camera.upperRadiusLimit = 45;
-    camera.lowerRadiusLimit = 15;
-    camera.upperBetaLimit = 1.575;
-    camera.lowerBetaLimit = 0;
-    camera.attachControl(canvas, true);
+            const lights = {};
+            const env = {};
+            const camera = new BABYLON.ArcRotateCamera("camera", BABYLON.Tools.ToRadians(0), BABYLON.Tools.ToRadians(70), 0.5, new BABYLON.Vector3(0.0, 0.1, 0.0), scene);
+            camera.minZ = 0.01;
+            camera.upperRadiusLimit = 45;
+            camera.lowerRadiusLimit = 15;
+            camera.upperBetaLimit = 1.575;
+            camera.lowerBetaLimit = 0;
+            camera.attachControl(canvas, true);
 
-    env.lighting = BABYLON.CubeTexture.CreateFromPrefilteredData("https://patrickryanms.github.io/BabylonJStextures/Demos/sodaBottle/assets/env/hamburg_hbf.env", scene);
-    env.lighting.name = "hamburg_hbf";
-    env.lighting.gammaSpace = false;
-    env.lighting.rotationY = BABYLON.Tools.ToRadians(0);
-    scene.environmentTexture = env.lighting;
+            env.lighting = BABYLON.CubeTexture.CreateFromPrefilteredData("https://patrickryanms.github.io/BabylonJStextures/Demos/sodaBottle/assets/env/hamburg_hbf.env", scene);
+            env.lighting.name = "hamburg_hbf";
+            env.lighting.gammaSpace = false;
+            env.lighting.rotationY = BABYLON.Tools.ToRadians(0);
+            scene.environmentTexture = env.lighting;
 
-    env.skybox = BABYLON.MeshBuilder.CreateSphere("Dome", {slice: 1, diameter: 1024}, scene);
-    env.skyboxMaterial = new BABYLON.PBRMaterial("skyBox", scene);
-    env.skyboxMaterial.backFaceCulling = false;
-    env.skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("https://patrickryanms.github.io/BabylonJStextures/Demos/sodaBottle/assets/skybox/hamburg", scene);
-    env.skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
-    env.skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
-    env.skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-    env.skyboxMaterial.microSurface = 0.35;
-    env.skybox.material = env.skyboxMaterial;
+            env.skybox = BABYLON.MeshBuilder.CreateSphere("Dome", { slice: 1, diameter: 1024 }, scene);
+            env.skyboxMaterial = new BABYLON.PBRMaterial("skyBox", scene);
+            env.skyboxMaterial.backFaceCulling = false;
+            env.skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("https://patrickryanms.github.io/BabylonJStextures/Demos/sodaBottle/assets/skybox/hamburg", scene);
+            env.skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+            env.skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+            env.skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+            env.skyboxMaterial.microSurface = 0.35;
+            env.skybox.material = env.skyboxMaterial;
 
 
-    lights.dirLight = new BABYLON.DirectionalLight("dirLight", new BABYLON.Vector3(0.60, -0.7, 0.63), scene);
-    lights.dirLight.position = new BABYLON.Vector3(-0.05, 0.35, -0.05);
-    lights.dirLight.shadowMaxZ = 0.45;
-    lights.dirLight.intensity = 2.5; 
+            lights.dirLight = new BABYLON.DirectionalLight("dirLight", new BABYLON.Vector3(0.60, -0.7, 0.63), scene);
+            lights.dirLight.position = new BABYLON.Vector3(-0.05, 0.35, -0.05);
+            lights.dirLight.shadowMaxZ = 0.45;
+            lights.dirLight.intensity = 2.5;
 
-    BABYLON.SceneLoader.Append("https://dl.dropbox.com/s/c0ywi6qhzu4deyr/Sofa.glb?dl=0", "Sofa.glb", scene, function (newMeshes) {});
+            BABYLON.SceneLoader.Append("https://dl.dropbox.com/s/c0ywi6qhzu4deyr/Sofa.glb?dl=0", "Sofa.glb", scene, function (newMeshes) { });
 
-    return scene;
-}
-                window.initFunction = async function() {
-                    
-                    
-                    var asyncEngineCreation = async function() {
-                        try {
-                        return createDefaultEngine();
-                        } catch(e) {
-                        console.log("the available createEngine function failed. Creating the default engine instead");
-                        return createDefaultEngine();
-                        }
-                    }
+            return scene;
+        }
+        window.initFunction = async function () {
 
-                    window.engine = await asyncEngineCreation();
-        if (!engine) throw 'engine should not be null.';
-        startRenderLoop(engine, canvas);
-        window.scene = createScene();};
-        initFunction().then(() => {sceneToRender = scene                    
+
+            var asyncEngineCreation = async function () {
+                try {
+                    return createDefaultEngine();
+                } catch (e) {
+                    console.log("the available createEngine function failed. Creating the default engine instead");
+                    return createDefaultEngine();
+                }
+            }
+
+            window.engine = await asyncEngineCreation();
+            if (!engine) throw 'engine should not be null.';
+            startRenderLoop(engine, canvas);
+            window.scene = createScene();
+        };
+        initFunction().then(() => {
+            sceneToRender = scene
         });
 
         // Resize
         window.addEventListener("resize", function () {
             engine.resize();
         });
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            // Show the install button
+        });
+
+        // Install the PWA when the button is clicked
+        installButton.addEventListener('click', (e) => {
+            // Hide the button
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the A2HS prompt');
+                } else {
+                    console.log('User dismissed the A2HS prompt');
+                }
+                deferredPrompt = null;
+            });
+        });
+
     </script>
+
+    <script src="sw.js"></script>
 </body>
+
 </html>
