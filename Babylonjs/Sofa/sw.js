@@ -1,10 +1,10 @@
 // Register a service worker
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+    window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').then(function (registration) {
             // Registration was successful
             console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function(err) {
+        }, function (err) {
             // Registration failed
             console.log('ServiceWorker registration failed: ', err);
         });
@@ -12,17 +12,32 @@ if ('serviceWorker' in navigator) {
 }
 
 // Install event
-self.addEventListener('install', function(event) {
+self.addEventListener('install', function (event) {
     console.log('ServiceWorker installed');
-});
+    event.waitUntil(
+        caches.open('model-cache')
+          .then(function(cache) {
+            return cache.addAll([
+              '/models/Sofa.glb'
+            ]);
+          })
+        );
+    });
 
 // Activate event
-self.addEventListener('activate', function(event) {
+self.addEventListener('activate', function (event) {
     console.log('ServiceWorker activated');
 });
 
 // Fetch event
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', function (event) {
     console.log('ServiceWorker fetching');
-    event.respondWith(fetch(event.request));
+    event.respondWith(
+        caches.match(event.request).then(function (response) {
+            if (response) {
+                return response;
+            }
+            return fetch(event.request);
+        })
+    );
 });

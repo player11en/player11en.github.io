@@ -125,7 +125,37 @@
             lights.dirLight.shadowMaxZ = 0.45;
             lights.dirLight.intensity = 2.5;
 
-            BABYLON.SceneLoader.Append("https://dl.dropbox.com/s/c0ywi6qhzu4deyr/Sofa.glb?dl=0", "Sofa.glb", scene, function (newMeshes) { });
+            if ('caches' in window) {
+                caches.open('model-cache').then(function (cache) {
+                    cache.match('/models/Sofa.glb').then(function (response) {
+                        if (response) {
+                            response.blob().then(function (blob) {
+                                BABYLON.SceneLoader.Append(blob, "Sofa.glb", scene, function (newMeshes) { });
+                            });
+                        } else {
+                            BABYLON.SceneLoader.Append("https://dl.dropbox.com/s/c0ywi6qhzu4deyr/Sofa.glb?dl=0", "Sofa.glb", scene, function (newMeshes) { });
+                        }
+                    });
+                });
+            }
+            
+            // if ('caches' in window) {
+            //     caches.match('/models/Sofa.glb').then(function (response) {
+            //         if (response) {
+            //             return response.blob();
+            //         }
+            //         return fetch('/models/Sofa.glb').then(function (response) {
+            //             return response.blob();
+            //         });
+            //     }).then(function (blob) {
+            //         console.log(URL.createObjectURL(blob));
+            //         BABYLON.SceneLoader.Append(URL.createObjectURL(blob), "Sofa.glb", scene, function (newMeshes) { });
+            //     });
+            // } else {
+            //     BABYLON.SceneLoader.Append("https://dl.dropbox.com/s/c0ywi6qhzu4deyr/Sofa.glb?dl=0", "Sofa.glb", scene, function (newMeshes) { });
+            // }
+
+
 
             return scene;
         }
