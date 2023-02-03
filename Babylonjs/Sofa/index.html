@@ -131,7 +131,8 @@
                         if (response) {
                             response.blob().then(function (blob) {
                                 var url = URL.createObjectURL(blob);
-                                BABYLON.SceneLoader.Append(url, "Sofa.glb", scene, function (newMeshes) { });
+                                BABYLON.SceneLoader.AppendAsync(url, undefined, scene, function (newMeshes) { }, ".glb");
+                                // BABYLON.SceneLoader.Append(url, "", scene, function (newMeshes) { });
                             });
                         } else {
                             BABYLON.SceneLoader.Append("https://dl.dropbox.com/s/c0ywi6qhzu4deyr/Sofa.glb?dl=0", "Sofa.glb", scene, function (newMeshes) { });
