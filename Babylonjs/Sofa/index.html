@@ -74,6 +74,10 @@
     <button class="buttonOne" id="buttonOne"></button>
     <canvas id="renderCanvas"></canvas>
     <script>
+    var APP_PREFIX = 'The Sofa'     // Identifier for this app (this needs to be consistent across every cache update)
+    var VERSION = 'version_01'              // Version of the off-line cache (change this value everytime you want to update cache)
+    var CACHE_NAME = APP_PREFIX + VERSION
+
         // Register a service worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
@@ -139,7 +143,7 @@
             lights.dirLight.intensity = 2.5;
 
             if ('caches' in window) {
-                caches.open('model-cache').then(function (cache) {
+                caches.open(CACHE_NAME).then(function (cache) {
                     cache.match('./models/Sofa.glb').then(function (response) {
                         if (response) {
                             response.blob().then(function (blob) {
