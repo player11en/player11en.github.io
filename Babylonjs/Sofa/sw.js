@@ -1,6 +1,6 @@
 const GHPATH = 'https://player11en.github.io/Babylonjs/Sofa';
 var APP_PREFIX = 'Sofa'
-var VERSION = 'version_1'
+var VERSION = 'version_01'
 const CACHE_NAME = APP_PREFIX + VERSION
 var URLS = [
     `${GHPATH}/`,
@@ -50,4 +50,4 @@ self.addEventListener('activate', function (e) {
             }))
         })
     )
-})
+})  
