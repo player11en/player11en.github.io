@@ -1,8 +1,8 @@
 var APP_PREFIX = 'Sofa'    
-var VERSION = 'version_02'              
+var VERSION = 'version_03'      
+var CACHE_NAME = APP_PREFIX + VERSION        
 var URLS = [    
-    '/Sofa/',
-    '/Sofa/index.html',
+    '/index.html',
     '/sw.js',
     '/images/favicon.ico',
     '/models/Sofa.glb'          
