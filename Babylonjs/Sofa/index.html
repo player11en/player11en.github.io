@@ -21,7 +21,7 @@
     <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
     <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
     <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="./manifest.json">
     <style>
         html,
         body {
@@ -74,15 +74,18 @@
     <button class="buttonOne" id="buttonOne"></button>
     <canvas id="renderCanvas"></canvas>
     <script>
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function () {
-                    navigator.serviceWorker.register('/sw.js').then(function (registration) {
-                        console.log('Service worker registered: ', registration.scope);
-                    }, function (err) {
-                        console.log('Service worker registration failed: ', err);
-                    });
+        // Register a service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('./sw.js').then(function (registration) {
+                    // Registration was successful
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function (err) {
+                    // Registration failed
+                    console.log('ServiceWorker registration failed: ', err);
                 });
-            }
+            });
+        }
 
         var canvas = document.getElementById("renderCanvas");
 
@@ -137,7 +140,7 @@
 
             if ('caches' in window) {
                 caches.open('model-cache').then(function (cache) {
-                    cache.match('/models/Sofa.glb').then(function (response) {
+                    cache.match('./models/Sofa.glb').then(function (response) {
                         if (response) {
                             response.blob().then(function (blob) {
                                 var url = URL.createObjectURL(blob);
@@ -151,7 +154,7 @@
                 });
             }
             BABYLON.SceneLoader.Append("https://dl.dropbox.com/s/c0ywi6qhzu4deyr/Sofa.glb?dl=0", "Sofa.glb", scene, function (newMeshes) { });
-                        
+
             // if ('caches' in window) {
             //     caches.match('/models/Sofa.glb').then(function (response) {
             //         if (response) {
@@ -206,11 +209,11 @@
 
 
 
-        if (window.matchMedia('(display-mode: standalone)').matches) {  
+        if (window.matchMedia('(display-mode: standalone)').matches) {
             installButton.style.display = "none";
-        }  
-        else{
-        // Install the PWA when the button is clicked
+        }
+        else {
+            // Install the PWA when the button is clicked
             installButton.addEventListener('click', (e) => {
                 // Hide the button
                 deferredPrompt.prompt();
@@ -227,7 +230,7 @@
 
     </script>
 
-    <script src="sw.js"></script>
+    <script src="./sw.js"></script>
 </body>
 
 </html>
