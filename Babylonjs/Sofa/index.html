@@ -74,6 +74,8 @@
     <button class="buttonOne" id="buttonOne"></button>
     <canvas id="renderCanvas"></canvas>
     <script>
+        navigator.serviceWorker.register('sw.js')
+
         var canvas = document.getElementById("renderCanvas");
 
         var startRenderLoop = function (engine, canvas) {
