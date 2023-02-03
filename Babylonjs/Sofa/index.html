@@ -67,6 +67,38 @@
             background-color: rgba(153, 51, 51, 0.0);
             outline: none;
         }
+
+        @media only screen and (max-width: 600px) {
+            .buttonOne {
+                position: absolute;
+                bottom: 35px;
+                right: 35px;
+                height: 100px;
+                width: 100px;
+                z-index: 10;
+                background-color: rgba(70, 70, 70, 0.25);
+                background-image: url("https://raw.githubusercontent.com/player11en/player11en.github.io/master/AFrame/Endpraese_2021/assets/images/Texture.png");
+                background-repeat: no-repeat;
+                background-position: center;
+                border: none;
+                outline: none;
+            }
+
+            .buttonOne:hover {
+                transform: scale(1.05);
+                outline: none;
+            }
+
+            .buttonOne:active {
+                background-color: rgba(153, 51, 51, 0.0);
+                outline: none;
+            }
+
+            .buttonOne:focus {
+                background-color: rgba(153, 51, 51, 0.0);
+                outline: none;
+            }
+        }
     </style>
 </head>
 
@@ -74,17 +106,17 @@
     <button class="buttonOne" id="buttonOne"></button>
     <canvas id="renderCanvas"></canvas>
     <script>
-    var APP_PREFIX = 'The Sofa'     // Identifier for this app (this needs to be consistent across every cache update)
-    var VERSION = 'version_01'              // Version of the off-line cache (change this value everytime you want to update cache)
-    var CACHE_NAME = APP_PREFIX + VERSION
-    var deferredPrompt;
+        var APP_PREFIX = 'The Sofa'     // Identifier for this app (this needs to be consistent across every cache update)
+        var VERSION = 'version_01'              // Version of the off-line cache (change this value everytime you want to update cache)
+        var CACHE_NAME = APP_PREFIX + VERSION
+        var deferredPrompt;
 
 
-    if('serviceWorker' in navigator){
-        navigator.serviceWorker.register('https://player11en.github.io/Babylonjs/Sofa/sw.js')
-        .then(reg => console.log('service worker registered'))
-        .catch(err => console.log('service worker not registered', err));
-  }
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('https://player11en.github.io/Babylonjs/Sofa/sw.js')
+                .then(reg => console.log('service worker registered'))
+                .catch(err => console.log('service worker not registered', err));
+        }
 
         // // Register a service worker
         // if ('serviceWorker' in navigator) {
