@@ -80,6 +80,12 @@
     var deferredPrompt;
 
 
+    if('serviceWorker' in navigator){
+        navigator.serviceWorker.register('https://player11en.github.io/Babylonjs/Sofa/sw.js')
+        .then(reg => console.log('service worker registered'))
+        .catch(err => console.log('service worker not registered', err));
+  }
+
         // // Register a service worker
         // if ('serviceWorker' in navigator) {
         //     window.addEventListener('load', function () {
@@ -236,7 +242,7 @@
 
     </script>
 
-    <script src="https://player11en.github.io/Babylonjs/Sofa/sw.js"></script>
+    <!-- <script src="https://player11en.github.io/Babylonjs/Sofa/sw.js"></script> -->
 </body>
 
 </html>
