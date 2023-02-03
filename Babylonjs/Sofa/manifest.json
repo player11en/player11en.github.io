@@ -3,7 +3,7 @@
   "short_name": "Sofa",
   "description": "Basic PWA and Babylonjs",
   "scope": "https://player11en.github.io/Babylonjs/Sofa/",
-  "start_url": "https://player11en.github.io/Babylonjs/Sofa/",
+  "start_url": "https://player11en.github.io/Babylonjs/Sofa/index.html",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "display": "standalone",
