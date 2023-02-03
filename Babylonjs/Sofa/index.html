@@ -81,7 +81,7 @@
 
 
     if('serviceWorker' in navigator){
-        navigator.serviceWorker.register('https://player11en.github.io/Babylonjs/Sofa/sw.js')
+        navigator.serviceWorker.register('https://player11en.github.io/Babylonjs/Sofa/sw.js', scope)
         .then(reg => console.log('service worker registered'))
         .catch(err => console.log('service worker not registered', err));
   }

@@ -1,19 +1,23 @@
 {
-  "name": "The Sofa",
-  "short_name": "MySofa",
-  "start_url": "/index.html",
+  "name": "TheSofa",
+  "short_name": "Sofa",
+  "description": "Basic PWA and Babylonjs",
+  "scope": "https://player11en.github.io/Babylonjs/Sofa/",
+  "start_url": "https://player11en.github.io/Babylonjs/Sofa/",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "display": "standalone",
-  "background_color": "#fff",
-  "theme_color": "#fff",
   "icons": [
     {
-      "src": "images/favicon.ico",
+      "src": "https://player11en.github.io/Babylonjs/Sofa/images/favicon.ico",
+      "type": "image/png",
+      "sizes": "700x700"
+    },
+    {
+      "src": "https://player11en.github.io/Babylonjs/Sofa/images/favicon.ico",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ],
-  "serviceworker": {
-    "src": "./sw.js",
-    "scope": "/"
-  }
+  ]
 }
