@@ -1,5 +1,5 @@
 var APP_PREFIX = 'Sofa'     // Identifier for this app (this needs to be consistent across every cache update)
-var VERSION = 'version_01'              // Version of the off-line cache (change this value everytime you want to update cache)
+var VERSION = 'version_02'              // Version of the off-line cache (change this value everytime you want to update cache)
 var CACHE_NAME = APP_PREFIX + VERSION
 var URLS = [               // Add URL you want to cache in this list.
   '/sw.js',
@@ -11,7 +11,7 @@ self.addEventListener('install', function (e) {
     e.waitUntil(
         caches.open(CACHE_NAME).then(function (cache) {
             console.log('installing cache : ' + CACHE_NAME)
-            return cache.addAll(URLS)
+            // return cache.addAll(URLS)
         })
     )
 })
