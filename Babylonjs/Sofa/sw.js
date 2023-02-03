@@ -18,7 +18,9 @@ self.addEventListener('install', function (event) {
         caches.open('model-cache')
           .then(function(cache) {
             return cache.addAll([
-              '/models/Sofa.glb'
+            '/sw.js',
+            '/images/favicon.ico',
+            '/models/Sofa.glb'
             ]);
           })
         );

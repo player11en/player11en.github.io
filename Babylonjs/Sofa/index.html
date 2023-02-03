@@ -130,7 +130,8 @@
                     cache.match('/models/Sofa.glb').then(function (response) {
                         if (response) {
                             response.blob().then(function (blob) {
-                                BABYLON.SceneLoader.Append(blob, "Sofa.glb", scene, function (newMeshes) { });
+                                var url = URL.createObjectURL(blob);
+                                BABYLON.SceneLoader.Append(url, "Sofa.glb", scene, function (newMeshes) { });
                             });
                         } else {
                             BABYLON.SceneLoader.Append("https://dl.dropbox.com/s/c0ywi6qhzu4deyr/Sofa.glb?dl=0", "Sofa.glb", scene, function (newMeshes) { });
@@ -138,7 +139,8 @@
                     });
                 });
             }
-            
+            BABYLON.SceneLoader.Append("https://dl.dropbox.com/s/c0ywi6qhzu4deyr/Sofa.glb?dl=0", "Sofa.glb", scene, function (newMeshes) { });
+                        
             // if ('caches' in window) {
             //     caches.match('/models/Sofa.glb').then(function (response) {
             //         if (response) {
@@ -191,19 +193,26 @@
             // Show the install button
         });
 
+
+
+        if (window.matchMedia('(display-mode: standalone)').matches) {  
+            installButton.style.display = "none";
+        }  
+        else{
         // Install the PWA when the button is clicked
-        installButton.addEventListener('click', (e) => {
-            // Hide the button
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the A2HS prompt');
-                } else {
-                    console.log('User dismissed the A2HS prompt');
-                }
-                deferredPrompt = null;
+            installButton.addEventListener('click', (e) => {
+                // Hide the button
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the A2HS prompt');
+                    } else {
+                        console.log('User dismissed the A2HS prompt');
+                    }
+                    deferredPrompt = null;
+                });
             });
-        });
+        }
 
     </script>
 
