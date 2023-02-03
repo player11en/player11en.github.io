@@ -131,7 +131,7 @@
             env.skybox = BABYLON.MeshBuilder.CreateSphere("Dome", { slice: 1, diameter: 1024 }, scene);
             env.skyboxMaterial = new BABYLON.PBRMaterial("skyBox", scene);
             env.skyboxMaterial.backFaceCulling = false;
-            env.skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("https://patrickryanms.github.io/BabylonJStextures/Demos/sodaBottle/assets/skybox/hamburg", scene);
+            // env.skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("https://patrickryanms.github.io/BabylonJStextures/Demos/sodaBottle/assets/skybox/hamburg", scene);
             env.skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
             env.skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
             env.skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
