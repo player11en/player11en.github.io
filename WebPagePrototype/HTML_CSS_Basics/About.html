@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Ein Artikel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"
+        integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .gallery__item {
+            margin: auto;
+            /* margin-top: 50px; */
+            max-height: 600px;
+            height: auto;
+            object-fit: contain;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <button id="toTop" class="hide" title="Go to top"><img src="projekte/icons/toTop.png" id="" alt=""></button>
+
+    <header class="header">
+        <div class="videoWrapperProj">
+            <a href="WorkPage.html">
+                <img src="projekte/images/LogoImage.png" class="placeholder" alt="Video placeholder">
+                <video class="projectVide" alt="player11en Studios" id="LogoVideo" width="500" height="250" loop autoplay muted playsinline>
+                    <source src="projekte/videos/Logo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+        </div>
+
+        <div class="navBar">
+            <img src="projekte/icons/navbar.png" id="navbar" alt="">
+            <img src="projekte/icons/close.png" id="closebtn" class="closebtn" alt="">
+        </div>
+        <ul class="main-nav">
+            <li><a href="WorkPage.html">Works</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="index.html">Artworks</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+    </header>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="WorkPage.html">Works</a>
+        <a href="#">About</a>
+        <a href="#">Artworks</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <h2>Like Jack Chan ones asked... </h2>
+    <h1>Who am I</h1>
+
+    <div id="background">
+        <main class="content">
+            <p>Ich bin Zina Ghannadan, ein Programmierer aus Deutschland mit iransischen Wurzeln, der digitale Kunst und neue Technologien miteinander verbindet. <br> Ich habe meinen Bachelor in Computervisualistik und Design an der Hochschule Hamm Lippstadt und anschließend meinen Master in Medieninformatik an der Hochschule Düsseldorf gemacht.</p>
+        </main>
+    </div>
+
+    <h2>Me</h2>
+    <div class="container">
+        <div class="gallery__item">
+                <img src="projekte/images/Me.png" alt="">
+                <div class="transparent-box">
+                </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div id="background">
+        <main class="content">
+            <p>In meiner Karriere habe ich mich in verschiedenen Bereichen weitergebildet, darunter 3D-Modellierung und Animation sowie Programmierung in verschiedenen Sprachen wie Java, JavaScript, Python und C#. Diese Fähigkeiten setze ich ein, um Projekte im Bereich Web, WebGL, Cloud Computing, Python-Anwendungen und Machine Learning, Blockchain und NFT sowie Games und Interactive Experiences in VR und AR zu realisieren. <br>
+                
+                <br>
+                <a target=”_blank”
+                href="WorkPage.html">Hier gehts zu den Projekten</a>
+            </p>
+        </main>
+    </div>
+    <h2>Player Eleven Studios</h2>
+
+    <div id="background">
+        <main class="content">
+            <p>Unter meinem Studio "Player Eleven Studios" habe ich bereits einige Projekte durchgeführt und auch einige eigenständige Forschungsanwendungen entwickelt. Dabei bin ich immer bestrebt, meine Fähigkeiten und mein Wissen in neuen Technologien zu erweitern und sie für sinnvolle Projekte und Anwendungen zu nutzen.
+            <br>
+            <br>
+            Player Eleven Studios wurde als Konzept gegründet, um spielerische Medien zu erstellen und die Freiheit zu haben, eine Vielfalt von Produkten zu entwickeln, ohne sich von Barrieren einschränken zu lassen.
+
+            Der Name "Player Eleven" stammt aus meiner Kindheit im Iran, wo wir noch auf der Sega-Konsole gespielt haben. Die Konsole hatte voreingefügte Spielernamen welche Spieler als "Player 1" und "Player 2" vordefinierte.
+            
+            Als individueller Freigeist wollte ich schon im Kindesalter einen eigenständigen und kreativen Namen, der von der Norm abwich. Deshalb fügte ich eine "1" hinzu. Player Eleven ist ein Überbleibsel einer sorgenfreien und spielerischen Zeit, die ich heute versuche, in Player Eleven Studios weiterzuführen.
+            </p>
+        </main>
+    </div>
+   
+    <footer class="footer" id="footer">
+        <script>
+            $("#footer").load("footer.html"); 
+        </script>
+    </footer>
+    <script src="script/universal.js" charset="utf-8"></script>
+</body>
+
+</html>
