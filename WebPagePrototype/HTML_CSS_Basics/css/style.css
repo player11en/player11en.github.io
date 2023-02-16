@@ -679,7 +679,7 @@ textarea {
   color: var(--greywhite);
   display: inline-block;
   line-height: 0.005px;
-  margin-top: 12px;
+  /* margin-top: 12px; */
 }
 
 .footerText li {
