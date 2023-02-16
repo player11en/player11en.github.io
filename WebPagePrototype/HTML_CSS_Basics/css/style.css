@@ -568,7 +568,7 @@ footer {
   font-weight: 300;
 }
 
-.social-icon,
+/* .social-icon,
 .menu {
   position: relative;
   display: flex;
@@ -593,7 +593,7 @@ footer {
 
 .social-icon__link:hover {
   transform: translateY(-10px);
-}
+} */
 
 .menu__link {
   font-size: 1.2rem;
@@ -673,11 +673,12 @@ footer .rights {
   color: var(--greywhite);
   font-size: 1.5625rem;
   font-weight: normal;
-  line-height: 2em;
+  line-height: 3rem;
   border-radius: 1.6875rem;
   transition: all 0.5s ease;
   margin-right: 0.25rem;
   margin-bottom: 0.25rem;
+  padding:5px 5px 5px 5px;
 }
 
 .rounded-social-buttons .social-button:hover,
