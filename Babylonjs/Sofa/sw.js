@@ -1,30 +1,16 @@
 const GHPATH = 'https://player11en.github.io/Babylonjs/Sofa';
 var APP_PREFIX = 'Sofa'
 var VERSION = 'version_01'
+const OFFLINE_URL = 'offline.html';
 const CACHE_NAME = APP_PREFIX + VERSION
 var URLS = [
-    `${GHPATH}/`,
     `${GHPATH}/index.html`,
+    `${GHPATH}/offline.html`,
     `${GHPATH}/sw.js`,
     `${GHPATH}/images/favicon.ico`,
+    `${GHPATH}/images/Texture.png`,
     `${GHPATH}/models/Sofa.glb`,
 ]
-
-
-self.addEventListener('fetch', function (e) {
-    console.log('Fetch request : ' + e.request.url);
-    e.respondWith(
-        caches.match(e.request).then(function (request) {
-            if (request) {
-                console.log('Responding with cache : ' + e.request.url);
-                return request
-            } else {
-                console.log('File is not cached, fetching : ' + e.request.url);
-                return fetch(e.request)
-            }
-        })
-    )
-})
 
 self.addEventListener('install', function (e) {
     e.waitUntil(
@@ -48,6 +34,21 @@ self.addEventListener('activate', function (e) {
                     return caches.delete(keyList[i])
                 }
             }))
+        })
+    )
+})
+
+self.addEventListener('fetch', function (e) {
+    console.log('Fetch request : ' + e.request.url);
+    e.respondWith(
+        caches.match(e.request).then(function (request) {
+            if (request) {
+                console.log('Responding with cache : ' + e.request.url);
+                return request
+            } else {
+                console.log('File is not cached, fetching : ' + e.request.url);
+                return fetch(e.request)
+            }
         })
     )
 })
