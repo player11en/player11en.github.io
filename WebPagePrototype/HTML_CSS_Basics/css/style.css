@@ -48,14 +48,14 @@ body {
   margin: 0;
   min-height: 100vh;
   background-color: var(--greywhite);
-  color: var(--greywhite);
+  color: var(--blackblueish);
 }
 
 .header {
   display: flex;
   padding-top: .5em;
-  padding-bottom: .5em;
-  background-color: var(--skyblue);
+  padding-bottom: 5.5em;
+  background-color: var(--greywhite);
   border-radius: 5px;
   flex-direction: column;
   align-items: center;
@@ -114,7 +114,7 @@ body {
   width: 100%;
   max-width: 1800px;
   display: flex;
-  background-color: var(--browngrey);
+  background-color: var(--greywhite);
   margin: auto;
 }
 
@@ -124,9 +124,10 @@ main {
 }
 
 p {
-  color: var(--greywhite);
-  font-size: 1.1rem;
-  line-height: 1.7rem;
+  text-align: center;
+  color: var(--blackblueish);
+  font-size: 1.0rem;
+  line-height: 1.25rem;
 }
 
 h1,
@@ -138,6 +139,7 @@ h2 {
   left: 0;
   font-family: 'Comfortaa', sans-serif;
   display: flex;
+  text-align: center;
   align-items: center;
   justify-content: center;
 }
@@ -163,7 +165,7 @@ ul {
 
 .main-nav {
   display: flex;
-  margin-top: 5px;
+  /* margin-top: 5px; */
 }
 
 .logo a,
@@ -171,7 +173,7 @@ ul {
   padding: 10px 15px;
   text-transform: uppercase;
   text-align: center;
-  display: block;
+  /* display: block; */
   color: var(--blackblueish);
 }
 
@@ -236,6 +238,12 @@ ul {
   transition: background-color 0.3s ease;
   pointer-events: none;
 }
+
+.transparent-box p {
+  color: var(--greywhite);
+  text-align: left;
+}
+
 
 #wrapper {
   width: 100%;
@@ -422,7 +430,7 @@ button:hover {
   /* max-width: 700px; */
   text-align: center;
   color: var(--greywhite);
-  margin-top: 15px;
+  /* margin-top: 15px; */
   font-size: 80px;
 }
 
@@ -583,7 +591,7 @@ button:hover {
 }
 
 footer {
-  background: var(--lighterblue);
+  background: var(--greywhite);
   flex: 0 0 auto;
   font: bold 1.5em;
   min-height: 300px;
@@ -592,7 +600,7 @@ footer {
   align-items: center;
   flex-direction: column;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 125px;
 }
 
 .footer p {
@@ -606,6 +614,7 @@ footer {
   width: fit-content;
   font-size: 1rem;
   font-weight: 300;
+  color: var(--blackblueish);
 }
 
 /* .social-icon,
@@ -666,7 +675,7 @@ textarea {
 }
 
 .footerText p {
-  color: var(--greywhite);
+  color: var(--blackblueish);
   margin: 15px 0 10px 0;
   font-size: 18px;
   font-weight: 300;
@@ -676,7 +685,7 @@ textarea {
 }
 
 .footer h3 {
-  color: var(--greywhite);
+  color: var(--blackblueish);
   display: inline-block;
   line-height: 0.005px;
   /* margin-top: 12px; */
@@ -689,7 +698,7 @@ textarea {
 footer .rights {
   font-size: 14px;
   font-weight: 300;
-  color: var(--greywhite);
+  color: var(--blackblueish);
   display: inline-block;
   line-height: 0.05px;
   padding-bottom: 2.5px;
@@ -1026,9 +1035,8 @@ header>a {
     /* max-width: 700px; */
     text-align: center;
     color: var(--greywhite);
-    margin-top: 15px;
-    font-size: 75px;
-    font-size: 14vw;
+    /* margin-top: 15px; */
+    font-size: 12vw;
   }
 
 
@@ -1055,7 +1063,7 @@ header>a {
     position: relative;
     width: 100%;
     padding: 10px 0;
-    margin-top: 50px;
+    /* margin-top: 50px; */
   }
 
   .navBar {
@@ -1082,5 +1090,9 @@ header>a {
     margin-right: auto;
     width: 95%;
     height: 60%;
+  }
+  p {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 }
