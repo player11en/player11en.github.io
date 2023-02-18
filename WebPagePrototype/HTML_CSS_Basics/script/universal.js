@@ -1,8 +1,8 @@
 const sidebarTag = document.querySelector('.sidebar');
 const bodyTag = document.querySelector('body');
 
-document.getElementById("navbar").addEventListener("click", openNav);
-document.getElementById("closebtn").addEventListener("click", closeNav);
+// document.getElementById("navbar").addEventListener("click", openNav);
+// document.getElementById("closebtn").addEventListener("click", closeNav);
 document.getElementById("toTop").addEventListener("click", scrollTop);
 
 
@@ -50,14 +50,14 @@ function scrollTop() {
 }
 
 function openNav() {
-    document.getElementById("navbar").style.display = "none";
+    // document.getElementById("navbar").style.display = "none";
     document.getElementById("closebtn").style.display = "block";
     document.body.style.width = "100% - 250px"
     document.getElementById("mySidebar").style.width = "250px";
 }
 
 function closeNav() {
-    document.getElementById("navbar").style.display = "block";
+    // document.getElementById("navbar").style.display = "block";
     document.getElementById("closebtn").style.display = "none";
     document.getElementById("mySidebar").style.width = "0";
 }

@@ -9,9 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"
-        integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
     <style>
         .gallery {
@@ -30,35 +29,35 @@
     <header class="header">
         <div class="videoWrapperProj">
             <a href="WorkPage.html">
-                <img src="projekte/images/LogoImage.png" class="placeholder" alt="Video placeholder">
+                <img src="projekte/images/LogoImage3.png" class="placeholder" alt="Video placeholder">
                 <video class="projectVide" alt="player11en Studios" id="LogoVideo" width="500" height="250" loop autoplay muted playsinline>
-                    <source src="projekte/videos/Logo.mp4" type="video/mp4">
+                    <source src="projekte/videos/Logo3.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </a>
         </div>
 
-        <div class="navBar">
+        <!-- <div class="navBar">
             <img src="projekte/icons/navbar.png" id="navbar" alt="">
             <img src="projekte/icons/close.png" id="closebtn" class="closebtn" alt="">
-        </div>
+        </div>-->
         <ul class="main-nav">
-            <li><a href="WorkPage.html">Works</a></li>
+            <li><a href="WorkPage.html" class='active-page'>Works</a></li>
             <li><a href="About.html">About</a></li>
             <li><a href="index.html">Artworks</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+            <li>  <a href="Contacts.html">Contact</a></li>
+        </ul> 
 
     </header>
 
-    <div id="mySidebar" class="sidebar">
-        <a href="WorkPage.html">Works</a>
+    <!-- <div id="mySidebar" class="sidebar">
+        <a href="WorkPage.html" class='active-page'>Works</a>
         <a href="About.html">About</a>
         <a href="index.html">Artworks</a>
         <a href="#">Contact</a>
-    </div>
+    </div> -->
 
-    <h2>This page provides some of the works that i have done in different disciplines</h2>
+    <h5>This page provides some of the works that i have done in different disciplines</h5>
 
     <div id="background">
         <main class="content">
@@ -282,6 +281,36 @@
             $("#footer").load("footer.html"); 
         </script>
     </footer>
+    <div class='containerNav'>
+        <div class='frame'>
+            <div class='bar'>
+                <a class='activeP el-1' href="WorkPage.html">
+                    <div class='icon'>
+                        <i class="fa-regular fa-folder-open"></i>
+                    </div>
+                    <p class='label'>Work</p>
+                </a>
+                <a class='els-wrap el-2' href="About.html">
+                    <div class='icon'>
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                    <p class='label'>Profil</p>
+                </a>
+                <a class='els-wrap el-3' href="index.html">
+                    <div class='icon'>
+                        <i class="fa-regular fa-image"></i>
+                    </div>
+                    <p class='label'>Art</p>
+                </a>
+                <a class='els-wrap el-4' href="Contacts.html">
+                    <div class='icon'>
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <p class='label'>Contact</p>
+                </a>
+            </div>
+        </div>
+    </div>
     <script src="script/universal.js" charset="utf-8"></script>
 </body>
 
