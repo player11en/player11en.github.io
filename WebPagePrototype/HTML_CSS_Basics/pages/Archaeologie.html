@@ -9,20 +9,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"
-        integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe"
-        crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .videoWrapper iframe,
         video {
             width: 100%;
-            height: 50%;
-            max-width: 1800px;
+            /* height: 50%;
+            max-width: 1800px; */
             display: block;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 15px;
+            padding:0%;
+        }
+        .videoWrapperProj .project{
+            padding:0%;
+            margin: auto;
+        }
+        .content a{
+            color: var(--blackblueish);
+        }
+               .container{
+            margin-top: 45px;
+            margin-bottom: 45px;
         }
     </style>
 </head>
@@ -33,41 +42,48 @@
     <header class="header">
         <div class="videoWrapperProj">
             <a href="../WorkPage.html">
-                <img src="../projekte/images/LogoImage.png" class="placeholder" alt="Video placeholder">
+                <img src="../projekte/images/LogoImage3.png" class="placeholder" alt="Video placeholder">
                 <video class="projectVide" alt="player11en Studios" id="LogoVideo" width="500" height="250" loop autoplay muted playsinline>
-                    <source src="../projekte/videos/Logo.mp4" type="video/mp4">
+                    <source src="../projekte/videos/Logo3.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </a>
         </div>
 
-        <div class="navBar">
+        <!-- <div class="navBar">
             <img src="../projekte/icons/navbar.png" id="navbar" alt="">
             <img src="../projekte/icons/close.png" id="closebtn" class="closebtn" alt="">
-        </div>
+        </div> -->
         <ul class="main-nav">
-            <li><a href="../WorkPage.html">Works</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Artworks</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+            <li><a href="../WorkPage.html" class='active-page'>Works</a></li>
+            <li><a href="../About.html">About</a></li>
+            <li><a href="../index.html">Artworks</a></li>
+            <li>  <a href="../Contacts.html">Contact</a></li>
+        </ul> 
     </header>
 
-    <div id="mySidebar" class="sidebar">
+    <!-- <div id="mySidebar" class="sidebar">
         <a href="../WorkPage.html">Works</a>
         <a href="#">About</a>
         <a href="../index.html">Artworks</a>
         <a href="#">Contact</a>
-    </div>
+    </div> -->
 
-    <h2>"Park Memories -- A visual storytelling experince"</h2>
+    <h2>"Archäologie der Gegenwart"</h2>
 
     <div id="background">
         <main class="content">
-            <p>"Im Rahmen meines Studiums an der Hochschule Hamm-Lippstadt habe ich an dem Projekt "Archäologie der Gegenwart" mitgearbeitet. Mein Part lag in der Erstellung von 3D-Modellen und der Einrichtung der App und Bildziele. Das Ziel des Projekts war es, den Wandel der Stadt Hamm in den letzten 50 Jahren im virtuellen Raum erlebbar zu machen. Hierzu wurden Exponate in der "Augmented Reality" der Stadt verteilt, um Geschichte und Geschichten im Stadtraum zu erzählen.
-
-                Gemeinsam mit anderen Studenten der Hochschule, dem Team von Froh! und weiteren kreativen Köpfen wurde ein digitaler Stadtrundgang konzipiert, der es den Nutzern ermöglicht, vergangene Ereignisse und Orte der Stadtgeschichte an altbekannten Stellen zu erleben. <br> Zum Beispiel wurde das Innere eines der drei markanten Hochbunker in Hamm sichtbar gemacht. Gebäude, Plätze, Erinnerungen, alte Werbeplakate, die große Brauerei Isenbeck, Gastgeschenke an die Stadt Hamm oder die ehemalige Straßenbahn wurden so wieder oder überhaupt erlebbar gemacht. Wir hatten durch nahezu unbegrenzten Zugang zum Stadtarchiv Hamm die Möglichkeit, wahre Schätze ans Tageslicht zu fördern. <br> Es entstand ein vielversprechender Prototyp, der die Vergangenheit der Stadt auf kreative Art und Weise zum Leben erweckt.
-              </p>
+            <p>
+                Im Rahmen meines Studiums an der Hochschule Hamm-Lippstadt habe ich an dem Projekt "Archäologie der Gegenwart" mitgearbeitet. Mein Part lag in der Erstellung von 3D-Modellen und der Einrichtung der App und Bildziele.
+                Das Ziel des Projekts war es, den Wandel der Stadt Hamm in den letzten 50 Jahren im virtuellen Raum erlebbar zu machen. Hierzu wurden Exponate in der "Augmented Reality" der Stadt verteilt, um Geschichte und Geschichten im Stadtraum zu erzählen.
+                Gemeinsam mit anderen Studenten der Hochschule, dem Team von Froh! und weiteren kreativen Köpfen wurde ein digitaler Stadtrundgang konzipiert, der es den Nutzern ermöglicht, vergangene Ereignisse und Orte der Stadtgeschichte an altbekannten Stellen zu erleben. 
+                <br>
+                <br>
+                Zum Beispiel wurde das Innere eines der drei markanten Hochbunker in Hamm sichtbar gemacht. Gebäude, Plätze, Erinnerungen, alte Werbeplakate, die große Brauerei Isenbeck, Gastgeschenke an die Stadt Hamm oder die ehemalige Straßenbahn wurden so wieder oder überhaupt erlebbar gemacht.
+                Wir hatten durch nahezu unbegrenzten Zugang zum Stadtarchiv Hamm die Möglichkeit, wahre Schätze ans Tageslicht zu fördern.
+                <br>
+                Es entstand ein vielversprechender Prototyp, der die Vergangenheit der Stadt auf kreative Art und Weise zum Leben erweckt.
+            </p>
 
 
         </main>
@@ -84,7 +100,7 @@
         </div>
     </div>
     <div class="videoWrapperProj">
-        <iframe class="project" width="1280" height="1280"
+        <iframe class="projectYoutube"
         src="https://www.youtube.com/embed/RtMGaM0Ry4I" 
         title="Archäologie der Gegenwart Hamm Trailer" 
         frameborder="0" allow="accelerometer; autoplay; clipboard-write;
@@ -92,15 +108,28 @@
     </div>
     <div id="background">
         <main class="content">
-            <p>   Um das Erlebnis für die Nutzer noch attraktiver zu gestalten und sie langfristig an das Projekt zu binden, haben wir in einer Projektarbeit untersucht, wie die Tour mit Spielen und Sammelobjekten erweitert werden kann. Zusätzlich haben wir eine Pop-Up-Ausstellung präsentiert, bei der gefundene Objekte, Zeitzeugenberichte und Videointerviews gezeigt wurden. Mithilfe einer HoloLens konnten die Besucher noch tiefer in die Augmented Reality eintauchen und das Erlebnis auf eine immersive Art und Weise erfahren.<br>
-             
+            <p> 
+                Zusätzlich haben wir eine Pop-Up-Ausstellung präsentiert, bei der gefundene Objekte, Zeitzeugenberichte und Videointerviews gezeigt wurden.
+                Mithilfe einer HoloLens konnten die Besucher noch tiefer in die Augmented Reality eintauchen und das Erlebnis auf eine immersive Art und Weise erfahren.
+                <br>
             </p>
         </main>
     </div>
 
+    <div id="background">
+        <main class="content">
+            <p>
+                Auf Basis dieses Projekts wurde eine Projektarbeit erstellt, um das Erlebnis für die Nutzer noch attraktiver zu gestalten und sie langfristig an das Projekt zu binden.
+                Hierbei konnten die Nutzer spielerisch sammelbare Karten von wichtigen Standorten sammeln und sortieren. Wenn alle Karten gesammelt und richtig sortiert wurden, konnte ein Preis gewonnen werden.
+                Die Spiele, die zur Erfassung der Karten angeboten wurden, umfassten die Möglichkeit, die Karten durch Tippen zu sammeln, Karten über ein Basketball-Spiel zu erhalten oder Karten beim Dosenwerfen zu gewinnen.
+            </p>
+        </main>
+    </div>
+    <br>
+    <br>
     <div class="videoWrapperProj">
-        <video class="project" id="" width="503" height="1280" controls playsinline>
-            <source src="../projekte/videos/ParkVideo.mp4" type="video/mp4">
+        <video class="project" id="" controls playsinline>
+            <source src="../projekte/videos/ARBasketBall.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -110,6 +139,11 @@
             $("#footer").load("../footer.html"); 
         </script>
     </footer>
+    <div id="containerNav" class="containerNav">
+        <script>
+            $("#containerNav").load("../NavMob.html"); 
+        </script>
+    </div>
     <script src="../script/universal.js" charset="utf-8"></script>
 </body>
 

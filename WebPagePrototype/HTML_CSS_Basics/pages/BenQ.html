@@ -9,20 +9,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"
-        integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe"
-        crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .videoWrapper iframe,
         video {
             width: 100%;
-            height: 50%;
-            max-width: 1800px;
+            /* height: 50%;
+            max-width: 1800px; */
             display: block;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 15px;
+            padding: 0%;
+        }
+
+        .videoWrapperProj .project {
+            padding: 0%;
+        }
+
+        .content a {
+            color: var(--blackblueish);
+        }
+
+        .gallery__item>img {
+            height: 100%;
+            object-fit: contain;
+            width: 100%;
+        }
+
+        .container {
+            margin-top: 45px;
+            margin-bottom: 45px;
+        }
+
+        @media only screen and (max-width: 844px) {
+            .gallery__item--lg {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
         }
     </style>
 </head>
@@ -33,59 +59,60 @@
     <header class="header">
         <div class="videoWrapperProj">
             <a href="../WorkPage.html">
-                <img src="../projekte/images/LogoImage.png" class="placeholder" alt="Video placeholder">
-                <video class="projectVide" alt="player11en Studios" id="LogoVideo" width="500" height="250" loop autoplay muted playsinline>
-                    <source src="../projekte/videos/Logo.mp4" type="video/mp4">
+                <img src="../projekte/images/LogoImage3.png" class="placeholder" alt="Video placeholder">
+                <video class="projectVide" alt="player11en Studios" id="LogoVideo" width="500" height="250" loop
+                    autoplay muted playsinline>
+                    <source src="../projekte/videos/Logo3.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </a>
         </div>
 
-        <div class="navBar">
+        <!-- <div class="navBar">
             <img src="../projekte/icons/navbar.png" id="navbar" alt="">
             <img src="../projekte/icons/close.png" id="closebtn" class="closebtn" alt="">
-        </div>
+        </div> -->
         <ul class="main-nav">
-            <li><a href="../WorkPage.html">Works</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Artworks</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="../WorkPage.html" class='active-page'>Works</a></li>
+            <li><a href="../About.html">About</a></li>
+            <li><a href="../index.html">Artworks</a></li>
+            <li> <a href="../Contacts.html">Contact</a></li>
         </ul>
     </header>
-
+    <!-- 
     <div id="mySidebar" class="sidebar">
         <a href="../WorkPage.html">Works</a>
         <a href="#">About</a>
         <a href="../index.html">Artworks</a>
         <a href="#">Contact</a>
-    </div>
+    </div> -->
 
-    <h2>"Art Competition -- Veri Peri"</h2>
+    <h2>"Art Competition -- Very Peri"</h2>
 
     <div id="background">
         <main class="content">
-            <p>"Park Memories -- A visual storytelling experince" <br> is a small webbased storytelling narrative.
-                The WebApplication tells a story about an incident that happend in the park a long time ago. Through
-                notes and other clues the story
-                of the park and the incident is told. The user should be motivated to explore the area. <br>
-                The narrative is still in develeopment.
-                This is a prototypical concept where the key is to test features and create a bigger and more complex
-                world where the user can experience a full story with more interactions and decisions.<br>
-                <br>Test it yourself <br>
-                <a target=”_blank” href="https://player11en.github.io/Babylonjs/Park/">Link to Park</a>
+            <p>
+                Very Peri ist ein Designwettbewerb, der von BenQ, AQColor und Pantone organisiert wurde, um das Farbthema des Jahres, Very Peri, zu feiern.
+                Die Teilnehmer wurden aufgefordert, ein Design zu erstellen, das die Farbe des Jahres auf innovative und kreative Weise interpretiert.
+                <br>
+                <br>
+                Der Wettbewerb ist eine großartige Möglichkeit für Designer und Kreative, ihre Fähigkeiten und Kreativität 
+                zu zeigen und innovative Designkonzepte zu erstellen, die auf den neuesten Farbtrends basieren.
             </p>
         </main>
     </div>
+    <h5>Gewinner des dritten Platzes</h5>
+    <h3>"Dreams of Vinland"</h3>
 
     <div class="container">
         <div class="gallery">
-            <div class="gallery__item gallery__item--lghor">
+            <div class="gallery__item gallery__item--lg">
                 <img src="../projekte/images/BenQBlend.png" href="" alt="">
             </div>
-            <div class="gallery__item gallery__item--lghor">
+            <div class="gallery__item gallery__item--lg">
                 <img src="../projekte/images/BenQMon.png" href="" alt="">
             </div>
-            <div class="gallery__item gallery__item--lghor">
+            <div class="gallery__item gallery__item--lg">
                 <img src="../projekte/images/veryPeri.png" href="" alt="">
             </div>
         </div>
@@ -93,14 +120,18 @@
 
     <div id="background">
         <main class="content">
-            <p>For "Park Memories" we have used the WebGL framework Babylon.js. Babylon.js is a powerful web rendering
-                engine that is developed by microsoft.
-                <br> it has powerful features and a clean and orgaized documentation. Babylon.js is fully Javascript
-                based. <br>
-                The park was created with Blender, before using the model it was been cleaned up and the mesh and
-                polygon count has also been reduced.
-                Using different postprocessing and a self written walking and sprinting script helps the user to freely
-                move and enjoy the small atmosphere
+            <p> 
+                Der dritte Platz des Wettbewerbs wurde einem Design verliehen, das eine surreale Heide in Blender darstellt.
+                Die Modelle wurden in einer Farbwahl gehalten, die an die Farbe Very Peri erinnert, um ein Gefühl von Freiheit 
+                und Wohlgefühl beim Betrachten zu erzeugen und eine fantastische Szenerie zu schaffen. 
+                <br>
+                <br>
+                Vinland ist ein mythisches Land, das den nordischen Sagas zufolge von Wikingern entdeckt wurde.
+                Es wird angenommen, dass es sich um einen Teil des nordamerikanischen Kontinents handelt.
+                Das Konzept von Vinland basiert auf der Vorstellung eines idyllischen Ortes, an dem es weder Krieg noch Hunger gibt und wo Frieden und Fülle herrschen.
+                In den nordischen Sagas wird Vinland als ein Paradies beschrieben, das den Wikingern auf ihren langen Reisen in unbekannte Gebiete als Ziel diente.
+                Es ist ein Ort, an dem die Wikingern frei sein und unabhängig von den Einschränkungen ihres eigenen Landes leben konnten. Vinland hat im Laufe
+                der Zeit eine wichtige Rolle in der nordischen Mythologie und Kultur gespielt und ist ein Symbol für Freiheit, Frieden und Abenteuerlust geworden.
             </p>
         </main>
     </div>
@@ -110,6 +141,11 @@
             $("#footer").load("../footer.html"); 
         </script>
     </footer>
+    <div id="containerNav" class="containerNav">
+        <script>
+            $("#containerNav").load("../NavMob.html"); 
+        </script>
+    </div>
     <script src="../script/universal.js" charset="utf-8"></script>
 </body>
 

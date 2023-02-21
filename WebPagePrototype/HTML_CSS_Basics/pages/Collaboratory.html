@@ -9,20 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"
-        integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe"
-        crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .videoWrapper iframe,
         video {
             width: 100%;
-            /* height: 50%; */
-            /* max-width: 1800px; */
+            /* height: 50%;
+            max-width: 1800px; */
             display: block;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 15px;
+            padding:0%;
+        }
+        .content{
+            text-align: center;
+        }
+        .content a{
+            color: var(--blackblueish);
         }
     </style>
 </head>
@@ -33,44 +37,42 @@
     <header class="header">
         <div class="videoWrapperProj">
             <a href="../WorkPage.html">
-                <img src="../projekte/images/LogoImage.png" class="placeholder" alt="Video placeholder">
+                <img src="../projekte/images/LogoImage3.png" class="placeholder" alt="Video placeholder">
                 <video class="projectVide" alt="player11en Studios" id="LogoVideo" width="500" height="250" loop autoplay muted playsinline>
-                    <source src="../projekte/videos/Logo.mp4" type="video/mp4">
+                    <source src="../projekte/videos/Logo3.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </a>
         </div>
 
-        <div class="navBar">
+        <!-- <div class="navBar">
             <img src="../projekte/icons/navbar.png" id="navbar" alt="">
             <img src="../projekte/icons/close.png" id="closebtn" class="closebtn" alt="">
-        </div>
+        </div> -->
         <ul class="main-nav">
-            <li><a href="../WorkPage.html">Works</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Artworks</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+            <li><a href="../WorkPage.html" class='active-page'>Works</a></li>
+            <li><a href="../About.html">About</a></li>
+            <li><a href="../index.html">Artworks</a></li>
+            <li>  <a href="../Contacts.html">Contact</a></li>
+        </ul> 
     </header>
 
-    <div id="mySidebar" class="sidebar">
+    <!-- <div id="mySidebar" class="sidebar">
         <a href="../WorkPage.html">Works</a>
         <a href="#">About</a>
         <a href="../index.html">Artworks</a>
         <a href="#">Contact</a>
-    </div>
+    </div> -->
 
-    <h2>"Park Memories -- A visual storytelling experince"</h2>
+    <h2>"Collaboratory"</h2>
 
     <div id="background">
         <main class="content">
-            <p>"Park Memories -- A visual storytelling experince" <br> is a small webbased storytelling narrative.
-                The WebApplication tells a story about an incident that happend in the park a long time ago. Through
-                notes and other clues the story
-                of the park and the incident is told. The user should be motivated to explore the area. <br>
-                The narrative is still in develeopment.
-                This is a prototypical concept where the key is to test features and create a bigger and more complex
-                world where the user can experience a full story with more interactions and decisions.<br>
+            <p> 
+                Das Lenbachhaus in München hat mit dem Collaboratory einen digitalen Open Space geschaffen, der analoge und digitale Teile des Museums miteinander verbindet.
+                Besucher können den 3D-Raum im Browser betreten und als farbige Kugel mit physikalischen Eigenschaften interaktive 3D-Elemente erleben. 
+                Über eine Chatfunktion können Benutzer miteinander kommunizieren und gemeinsam Veranstaltungen besuchen. 
+                <br>
                 <br>Test it yourself <br>
                 <a target=”_blank” href="https://collaboratory-lenbachhaus.de/de">Link to Collaboratory</a>
             </p>
@@ -90,7 +92,7 @@
         </div>
     </div>
     <div class="videoWrapperProj">
-        <iframe class="project" width="1280" height="1280"
+        <iframe class="projectYoutube"
          src="https://www.youtube.com/embed/itGuQDSo9Rc?start=1569&end=1700;" 
          title="Launch von 'Digital Crèmbach' im Collaboratory: Spielerische Interaktionen des Kollektiv Crèmbach"
          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
@@ -98,14 +100,20 @@
     </div>
     <div id="background">
         <main class="content">
-            <p>For "Park Memories" we have used the WebGL framework Babylon.js. Babylon.js is a powerful web rendering
-                engine that is developed by microsoft.
-                <br> it has powerful features and a clean and orgaized documentation. Babylon.js is fully Javascript
-                based. <br>
-                The park was created with Blender, before using the model it was been cleaned up and the mesh and
-                polygon count has also been reduced.
-                Using different postprocessing and a self written walking and sprinting script helps the user to freely
-                move and enjoy the small atmosphere
+            <h5><br>Für das Projekt wurde verwendet</h5>
+            <ul id="list">
+                <li>Socket.IO (Echtzeit-Collaboration/Chat)</li>
+                <li>Node.js (Multi-User Server)</li>
+                <li>Enable3D/Ammo.js (Physik-Simulation)</li>
+                <li>ThreeJS (3D Rendering)</li>
+                <li> Vue.js (User Interface)</li>
+                <li> Tween.js (Animation)</li>
+                <li> WebAudioAPI (SoundFX)</li>
+            </ul>  
+            <br>
+            <p> 
+                Das Projekt ist niederschwellig und datenschutzkonform, es werden keine Benutzerdaten gespeichert und kein Login ist nötig. 
+                Das Collaboratory ist Teil des "dive in Programm für digitale Interaktionen" der Kulturstiftung des Bundes und wurde in Zusammenarbeit mit Serve and Volley Studio und dem Lenbachhaus, München umgesetzt.
             </p>
         </main>
     </div>
@@ -115,6 +123,11 @@
             $("#footer").load("../footer.html"); 
         </script>
     </footer>
+    <div id="containerNav" class="containerNav">
+        <script>
+            $("#containerNav").load("../NavMob.html"); 
+        </script>
+    </div>
     <script src="../script/universal.js" charset="utf-8"></script>
 </body>
 
