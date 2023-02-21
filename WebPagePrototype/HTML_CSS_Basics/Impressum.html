@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html translate="no">
+
+<head>
+    <meta charset="utf-8">
+    <title>P1ayer E1even Studios</title>
+    <link rel="icon" href="projekte/icons/favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .gallery__item {
+            margin: auto;
+            /* margin-top: 50px; */
+            max-height: 600px;
+            height: auto;
+            object-fit: contain;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <button id="toTop" class="hide" title="Go to top"><img src="projekte/icons/toTop.png" id="" alt=""></button>
+
+    <header class="header">
+        <div class="videoWrapperProj">
+            <a href="WorkPage.html">
+                <img src="projekte/images/LogoImage3.png" class="placeholder" alt="Video placeholder">
+                <video class="projectVide" alt="player11en Studios" id="LogoVideo" width="500" height="250" loop
+                    autoplay muted playsinline>
+                    <source src="projekte/videos/Logo3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+        </div>
+        <ul class="main-nav">
+            <li><a href="WorkPage.html">Works</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="index.html">Artworks</a></li>
+            <li><a href="Contacts.html">Contact</a></li>
+        </ul>
+    </header>
+    <h2>Impressum</h2>
+
+    <h5>Angaben gem&auml;&szlig; &sect; 5 TMG</h5>
+    <p>Zina Ghannadan<br />
+        Player Eleven Studios<br />
+        Kronenstra&szlig;e 8<br />
+        42285 Wuppertal</p>
+
+    <h5>Kontakt</h5>
+    <p>Telefon: +49 (0) 157 56238932<br />
+        E-Mail: player11en@gmail.com</p>
+
+    <h5>Umsatzsteuer-ID</h5>
+    <p>Umsatzsteuer-Identifikationsnummer gem&auml;&szlig; &sect; 27 a Umsatzsteuergesetz:<br />
+        DE999999999</p>
+
+    <h5>EU-Streitschlichtung</h5>
+    <p>Die Europ&auml;ische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a
+            href="https://ec.europa.eu/consumers/odr/" target="_blank"
+            rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.<br /> Unsere E-Mail-Adresse finden Sie
+        oben im Impressum.</p>
+
+    <h5>Verbraucher&shy;streit&shy;beilegung/Universal&shy;schlichtungs&shy;stelle</h5>
+    <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+        teilzunehmen.</p>
+
+    <p>Quelle: <a href="https://www.e-recht24.de">eRecht24</a></p>
+    <footer class="footer" id="footer">
+        <script>
+            $("#footer").load("footer.html"); 
+        </script>
+    </footer>
+    <div class='containerNav'>
+        <div class='frame'>
+            <div class='bar'>
+                <a class='els-wrap el-1' href="WorkPage.html">
+                    <div class='icon'>
+                        <i class="fa-regular fa-folder-open"></i>
+                    </div>
+                    <p class='label'>Work</p>
+                </a>
+                <a class='els-wrap el-2' href="About.html">
+                    <div class='icon'>
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                    <p class='label'>Profil</p>
+                </a>
+                <a class='els-wrap el-3' href="index.html">
+                    <div class='icon'>
+                        <i class="fa-regular fa-image"></i>
+                    </div>
+                    <p class='label'>Art</p>
+                </a>
+                <a class='els-wrap el-4' href="Contacts.html">
+                    <div class='icon'>
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <p class='label'>Contact</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="script/universal.js" charset="utf-8"></script>
+</body>
+
+</html>

@@ -808,7 +808,7 @@ footer .rights {
 }
 
 .rounded-social-buttons .social-button.renderhub {
-  line-height: 2em;
+  /* line-height: 2em; */
   border-radius: 1.6875rem;
   transition: all 0.5s ease;
   margin-top: 1rem;
@@ -1391,5 +1391,8 @@ header>a {
       font-size: 12px;  
       margin: 0 auto; 
       display: table;
+    }
+    .rounded-social-buttons .social-button {
+      line-height: -50%;
     }
 }
