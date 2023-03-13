@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js"></script> -->
+  <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+  <meta charset="utf-8" />
+
+</head>
+
+<body style='margin : 0px; overflow: hidden;'>
+  <!-- <script src="sketch.js"></script> -->
+  <a-scene id="scene" embedded arjs='trackingMethod: best; debugUIEnabled:false;' vr-mode-ui="enabled: false"
+    renderer="antialias: true; logarithmicDepthBuffer: true; colorManagement: true; sortObjects: true;">
+    <a-marker markerhandler cursor="rayOrigin: mouse" emitevents="true" preset='hiro' type='pattern'>
+      <a-image rotation="90 0 0" scale="2 2 2" src="Page1.png"></a-image>
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>
+
+</html>
