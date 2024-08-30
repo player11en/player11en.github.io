@@ -12,7 +12,6 @@ const loader = new GLTFLoader();
 const startButton = document.getElementById('startButton');
 startButton.addEventListener('click', function () {
     document.getElementById('overlay').style.display = 'none'; // Hide the overlay
-    alignRoadToCamera(); // Align the road when the start button is pressed
     animate();
 }, false);
 
@@ -44,7 +43,7 @@ function init() {
 
     // Load 3D road model immediately
     loader.load(
-        'untitled.glb',
+        'road.glb',
         function (gltf) {
             road = gltf.scene;
             road.position.set(0, 0, 0); // Set initial position
@@ -95,26 +94,24 @@ function init() {
     }
 }
 
-// Function to align the road to the camera's view direction
-function alignRoadToCamera() {
+// Function to rotate the road according to the device orientation
+function rotateRoadWithDeviceOrientation() {
     if (road) {
-        const cameraDirection = new THREE.Vector3();
-        camera.getWorldDirection(cameraDirection);
-        const initialYaw = Math.atan2(cameraDirection.x, cameraDirection.z);
-
-        // Rotate the road model around the Y-axis to align with the camera
-        road.rotation.y = initialYaw;
+        const euler = new THREE.Euler();
+        euler.setFromQuaternion(camera.quaternion, 'YXZ'); // Get Y-axis rotation from camera
+        road.rotation.y = euler.y; // Apply the Y rotation to the road
     }
 }
 
 function updateRoadPosition() {
     if (road && speed > 0) {
-        // Move the road backwards to simulate forward movement
-        road.position.z -= speed;
+        // Move the road forward along the positive Z-axis to simulate running forward
+        road.position.z += speed;
     }
 }
 
 function update() {
+    rotateRoadWithDeviceOrientation();
     updateRoadPosition();
 }
 
@@ -131,6 +128,9 @@ function animate() {
         const quaternion = camera.quaternion;
         const debugElement = document.getElementById('debug');
         debugElement.textContent = `Quaternion:\nX: ${quaternion.x.toFixed(5)}\nY: ${quaternion.y.toFixed(5)}\nZ: ${quaternion.z.toFixed(5)}\nW: ${quaternion.w.toFixed(5)}`;
+
+        // Update road rotation and position
+        update();
     });
 }
 
