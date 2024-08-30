@@ -43,7 +43,7 @@ function init() {
 
     // Load 3D road model immediately
     loader.load(
-        'road.glb',
+        'untitled.glb',
         function (gltf) {
             road = gltf.scene;
             road.position.set(0, 0, 0); // Set initial position
