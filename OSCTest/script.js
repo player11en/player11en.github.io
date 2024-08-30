@@ -107,7 +107,7 @@ function alignRoadToInitialCamera() {
 function updateRoadPosition() {
     if (road && speed > 0) {
         // Move the road forward along the positive Z-axis to simulate running forward
-        road.position.z += speed;
+        road.position.z -= speed;
     }
 }
 
