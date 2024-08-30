@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Shake Controlled Runner with VR, Gyroscope, and Debug</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #debug {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            font-family: monospace;
+            z-index: 100;
+            white-space: pre-wrap;
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: sans-serif;
+            font-size: 20px;
+            text-align: center;
+            z-index: 101;
+        }
+
+        #startButton {
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.167.1/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.167.1/examples/jsm/",
+                "VRButton": "https://cdn.jsdelivr.net/npm/three@0.167.1/examples/jsm/webxr/VRButton.js",
+                "DeviceOrientationControls": "./jsm/controls/DeviceOrientationControls.js",
+                "GLTFLoader": "https://cdn.jsdelivr.net/npm/three@0.167.1/examples/jsm/loaders/GLTFLoader.js"
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div id="overlay">
+        <button id="startButton">Start Demo</button>
+    </div>
+    <div id="debug">Quaternion: </div>
+
+    <!-- Link to the external JavaScript file -->
+    <script type="module" src="script.js"></script>
+
+</body>
+
+</html>

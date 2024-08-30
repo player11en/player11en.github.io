@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shake Controlled Runner with VR, Gyroscope, and Debug</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+        #debug {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            font-family: monospace;
+            z-index: 100;
+            white-space: pre-wrap;
+        }
+        VRButton{
+            position: absolute;
+    bottom: 20px;
+    padding: 12px 6px;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.1);
+    color: rgb(255, 255, 255);
+    font: 13px sans-serif;
+    text-align: center;
+    opacity: 0.5;
+    outline: none;
+    z-index: 999;
+    cursor: pointer;
+    left: calc(50% - 50px);
+    width: 100px;
+        }
+    </style>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.148.0/build/three.module.js",
+                "VRButton": "https://unpkg.com/three@0.148.0/examples/jsm/webxr/VRButton.js"
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div id="debug">Quaternion: </div>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { VRButton } from 'VRButton';
+
+    // Scene setup
+    let scene = new THREE.Scene();
+    let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    let renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.xr.enabled = true; // Enable VR support
+    document.body.appendChild(renderer.domElement);
+
+    // Add VR button to the page
+    document.body.appendChild(VRButton.createButton(renderer));
+
+    // Debug text field
+    const debugElement = document.getElementById('debug');
+
+    // Create a simple plane as the path
+    let geometry = new THREE.PlaneGeometry(10, 1000);
+    let material = new THREE.MeshBasicMaterial({ color: 0x555555, side: THREE.DoubleSide });
+    let plane = new THREE.Mesh(geometry, material);
+    plane.rotation.x = -Math.PI / 2; // Ensure it's flat on the ground
+    plane.position.y = 0; // Ensure the ground is at y = 0
+    scene.add(plane);
+
+    // Add some simple obstacles
+    let obstacles = [];
+    for (let i = 0; i < 10; i++) {
+        let obstacleGeometry = new THREE.BoxGeometry(2, 2, 2);
+        let obstacleMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        let obstacle = new THREE.Mesh(obstacleGeometry, obstacleMaterial);
+        obstacle.position.set(Math.random() * 8 - 4, 1, -i * 50 - 20);
+        obstacles.push(obstacle);
+        scene.add(obstacle);
+    }
+
+    // Camera position
+    camera.position.y = 1.6; // Typical height for VR headset
+
+    let speed = 0;
+    let positionZ = 0;
+
+    // Device motion event listener for speed control
+    window.addEventListener('devicemotion', function(event) {
+        let acceleration = event.acceleration;
+
+        if (acceleration) {
+            // Calculate total shake as the magnitude of the acceleration vector
+            let shake = Math.sqrt(acceleration.x * acceleration.x + acceleration.y * acceleration.y + acceleration.z * acceleration.z);
+
+            // Adjust speed based on the shake intensity
+            speed += shake / 100; // Adjust this factor as needed for appropriate speed
+        }
+    });
+
+    // Device orientation event listener for looking around
+    window.addEventListener('deviceorientation', function(event) {
+        const alpha = THREE.Math.degToRad(event.alpha || 0); // Z-axis
+        const beta = THREE.Math.degToRad(event.beta || 0); // X-axis
+        const gamma = THREE.Math.degToRad(event.gamma || 0); // Y-axis
+
+        // Apply rotation to the camera's quaternion
+        const currentQuaternion = new THREE.Quaternion();
+        const euler = new THREE.Euler(beta, alpha, gamma, 'YXZ');
+        currentQuaternion.setFromEuler(euler);
+
+        // Rotate the camera's current quaternion with the new one
+        camera.quaternion.copy(currentQuaternion);
+
+        // Update debug element with current quaternion values
+        debugElement.textContent = `Quaternion:\nX: ${currentQuaternion.x.toFixed(5)}\nY: ${currentQuaternion.y.toFixed(5)}\nZ: ${currentQuaternion.z.toFixed(5)}\nW: ${currentQuaternion.w.toFixed(5)}`;
+    });
+
+    // Animation loop
+    function animate() {
+        // Move forward
+        positionZ -= speed;
+        plane.position.z = positionZ;
+
+        obstacles.forEach(obstacle => {
+            obstacle.position.z += speed;
+            if (obstacle.position.z > camera.position.z) {
+                obstacle.position.z -= 500;
+            }
+        });
+
+        // Apply friction to gradually reduce speed
+        speed *= 0.9;
+
+        renderer.render(scene, camera);
+    }
+
+    // Start the VR animation loop
+    renderer.setAnimationLoop(animate);
+
+    // Handle window resize and orientation change
+    window.addEventListener('resize', function () {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+</script>
+
+</body>
+</html>
