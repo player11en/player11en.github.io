@@ -12,6 +12,7 @@ const loader = new GLTFLoader();
 const startButton = document.getElementById('startButton');
 startButton.addEventListener('click', function () {
     document.getElementById('overlay').style.display = 'none'; // Hide the overlay
+    alignRoadToInitialCamera(); // Align the road when the start button is pressed
     animate();
 }, false);
 
@@ -94,12 +95,12 @@ function init() {
     }
 }
 
-// Function to rotate the road according to the device orientation
-function rotateRoadWithDeviceOrientation() {
+// Function to set the initial rotation of the road according to the camera's orientation
+function alignRoadToInitialCamera() {
     if (road) {
         const euler = new THREE.Euler();
-        euler.setFromQuaternion(camera.quaternion, 'YXZ'); // Get Y-axis rotation from camera
-        road.rotation.y = euler.y; // Apply the Y rotation to the road
+        euler.setFromQuaternion(camera.quaternion, 'YXZ'); // Get Y-axis rotation from camera's quaternion
+        road.rotation.y = euler.y; // Apply the Y rotation to the road once
     }
 }
 
@@ -111,7 +112,6 @@ function updateRoadPosition() {
 }
 
 function update() {
-    rotateRoadWithDeviceOrientation();
     updateRoadPosition();
 }
 
@@ -129,7 +129,7 @@ function animate() {
         const debugElement = document.getElementById('debug');
         debugElement.textContent = `Quaternion:\nX: ${quaternion.x.toFixed(5)}\nY: ${quaternion.y.toFixed(5)}\nZ: ${quaternion.z.toFixed(5)}\nW: ${quaternion.w.toFixed(5)}`;
 
-        // Update road rotation and position
+        // Update road position (movement only, no further rotation)
         update();
     });
 }
